@@ -21,7 +21,7 @@ window.MathJax = {
 };
 </script>
 <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
-
+  
 <style>
   :root{
     --main:       #2A9D8F;   /* 主色：方框、边框 */
@@ -308,10 +308,46 @@ window.MathJax = {
     table.cmp{ font-size: 13.5px; }
     table.cmp th, table.cmp td{ padding: 6px 8px; }
   }
+  
+/* ===== 返回首页按钮 ===== */
+.back-home{
+  position: fixed;
+  top: 18px;
+  left: 18px;
+  z-index: 999;
+  display: inline-block;
+  padding: 7px 14px;
+  background: #2A9D8F;
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 14px;
+  letter-spacing: 1px;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(42, 157, 143, .28);
+  transition: background .2s ease, transform .2s ease, box-shadow .2s ease;
+}
+
+.back-home:hover{
+  background: #0E6B6B;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(42, 157, 143, .36);
+}
+
+/* 手机端稍微小一点 */
+@media (max-width: 620px){
+  .back-home{
+    top: 12px;
+    left: 12px;
+    font-size: 13px;
+    padding: 6px 11px;
+  }
+}
+  
 </style>
 </head>
 
 <body>
+<a class="back-home" href="index.html">← 返回首页</a>
 <div class="wrap">
 
   <!-- ================= 标题区 ================= -->
