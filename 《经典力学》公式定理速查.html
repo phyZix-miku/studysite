@@ -8,6 +8,41 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
 <link rel="stylesheet" href="https://cdn.staticfile.org/KaTeX/0.16.11/katex.min.css">
 <style>
+
+/* ===== 返回首页按钮 ===== */
+.back-home{
+  position: fixed;
+  top: 18px;
+  left: 18px;
+  z-index: 60;              /* 原 999 → 60，避免浮在弹层之上 */
+  display: inline-block;
+  padding: 7px 14px;
+  background: #2A9D8F;
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 14px;
+  letter-spacing: 1px;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(42, 157, 143, .28);
+  transition: background .2s ease, transform .2s ease, box-shadow .2s ease;
+}
+
+.back-home:hover{
+  background: #0E6B6B;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(42, 157, 143, .36);
+}
+
+/* 手机端稍微小一点 */
+@media (max-width: 620px){
+  .back-home{
+    top: 12px;
+    left: 12px;
+    font-size: 13px;
+    padding: 6px 11px;
+  }
+}
+
 :root{
   --bg:#f4f7f8; --card:#ffffff; --line:#e2eaec; --ink:#22303a; --mut:#67787f;
   --teal:#0e9488; --teal-d:#0b7a70; --teal-bg:#e6f5f3;
@@ -17,7 +52,7 @@ html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--ink);font:16px/1.75 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;-webkit-font-smoothing:antialiased}
 a{color:var(--teal);text-decoration:none}
 /* ---------- 顶栏 ---------- */
-#topbar{position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:14px;padding:12px 22px;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+#topbar{position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:14px;padding:12px 22px 122px;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
 #brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:17px;letter-spacing:.5px;white-space:nowrap}
 #brand svg{flex:none}
 #search{flex:1;max-width:340px;display:flex;align-items:center;gap:8px;background:#eef3f4;border:1px solid transparent;border-radius:999px;padding:7px 14px;transition:.2s}
@@ -328,7 +363,7 @@ body:not(.v-md) #mdview{display:none}
   .card .fxbox .katex{font-size:1em}
   body{padding-bottom:env(safe-area-inset-bottom)}
   #vswitch button{padding:5px 10px;font-size:12.5px}
-  #topbar{padding:9px 12px;gap:8px}
+  #topbar{padding:9px 12px 9px 96px;gap:8px}
   #brand span{display:none}
   #mdbar{top:56px;padding:8px 0}
   .md-unit{padding:6px 16px 24px;margin-bottom:16px;border-radius:13px}
@@ -16513,4 +16548,10 @@ function ftStep(d){
 
 </script>
 </body>
+
+<body data-page-node-id="UBCzZxlQUXDPMnIhOlFQC6">
+  <a class="back-home" href="index.html">← 返回</a>
+
+  <header id="topbar" data-page-node-id="CdtILeSBiC1JXAiGRXWZZO">
+
 </html>
