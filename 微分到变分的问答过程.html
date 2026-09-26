@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>从微分到变分 · 思考流程</title>
+
+<!-- ===== MathJax 配置（LaTeX 渲染） ===== -->
+<script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']]
+    },
+    svg: { fontCache: 'global' },
+    options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'] }
+  };
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+
+<style>
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    padding: 34px 20px 90px;
+    background: #F7FAFA;
+    color: #16302E;
+    font-family: "Times New Roman", "宋体", SimSun, "Songti SC", serif;
+    font-size: 16px;
+    line-height: 1.8;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap { max-width: 900px; margin: 0 auto; }
+
+  h1 {
+    font-size: 26px;
+    font-weight: normal;
+    letter-spacing: 3px;
+    color: #0E6B6B;
+    text-align: center;
+    margin: 0 0 8px;
+  }
+  .subtitle {
+    text-align: center;
+    color: #7B9C99;
+    font-size: 13px;
+    letter-spacing: 2px;
+    margin-bottom: 26px;
+  }
+
+  /* ===== 工具栏 ===== */
+  .toolbar { text-align: center; margin-bottom: 30px; }
+  .toolbar button {
+    font-family: inherit;
+    font-size: 14px;
+    letter-spacing: 2px;
+    color: #0E6B6B;
+    background: #E8F4F3;
+    border: 1px solid #9CCFCA;
+    border-radius: 4px;
+    padding: 7px 22px;
+    cursor: pointer;
+    transition: background .2s, box-shadow .2s;
+  }
+  .toolbar button:hover {
+    background: #D3ECEA;
+    box-shadow: 0 2px 6px rgba(42, 157, 143, .18);
+  }
+
+  /* ===== 思维导图主干 ===== */
+  .flow {
+    position: relative;
+    margin-left: 14px;
+    padding-left: 30px;
+    border-left: 2px solid #B7DCD8;
+  }
+  .node { position: relative; margin-bottom: 14px; }
+  .node::before {
+    content: "";
+    position: absolute;
+    left: -30px;
+    top: 21px;
+    width: 30px;
+    height: 2px;
+    background: #B7DCD8;
+  }
+
+  /* ===== 问题方框 ===== */
+  .q {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #2A9D8F;
+    color: #FFFFFF;
+    padding: 11px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    letter-spacing: .5px;
+    user-select: none;
+    box-shadow: 0 1px 3px rgba(42, 157, 143, .18);
+    transition: background .2s, box-shadow .2s;
+  }
+  .q:hover {
+    background: #22867A;
+    box-shadow: 0 3px 9px rgba(42, 157, 143, .3);
+  }
+  .q.open {
+    background: #0E6B6B;
+    border-radius: 6px 6px 0 0;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, .1) inset;
+  }
+  .q .idx {
+    font-family: "Times New Roman", serif;
+    font-size: 13px;
+    opacity: .72;
+    min-width: 22px;
+  }
+  .q .txt { flex: 1; }
+  .q .arrow {
+    font-size: 12px;
+    opacity: .85;
+    transition: transform .3s ease;
+  }
+  .q.open .arrow { transform: rotate(180deg); }
+
+  /* ===== 答案窗格 ===== */
+  .a {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    background: #F1F8F7;
+    border-left: 3px solid #2A9D8F;
+    border-right: 1px solid #DCEDEB;
+    border-bottom: 1px solid #DCEDEB;
+    border-radius: 0 0 6px 6px;
+    padding: 0 18px;
+    font-size: 15px;
+    color: #1B3836;
+    transition: max-height .45s ease, opacity .3s ease, padding .35s ease;
+  }
+  .a.open {
+    max-height: 6000px;
+    opacity: 1;
+    padding: 14px 18px 18px;
+  }
+
+  .a p { margin: 7px 0; }
+  .a ul { margin: 7px 0; padding-left: 22px; }
+  .a li { margin: 4px 0; }
+
+  .a h4 {
+    color: #0E6B6B;
+    font-size: 15px;
+    font-weight: normal;
+    letter-spacing: 1.5px;
+    margin: 16px 0 6px;
+    padding-left: 9px;
+    border-left: 3px solid #7FC7C0;
+  }
+  .a h4:first-child { margin-top: 4px; }
+
+  .a table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 10px 0;
+    font-size: 14px;
+  }
+  .a th, .a td {
+    border: 1px solid #C3E2DF;
+    padding: 6px 10px;
+    text-align: left;
+    vertical-align: top;
+  }
+  .a th {
+    background: #DFF1EF;
+    color: #0E6B6B;
+    font-weight: normal;
+    letter-spacing: 1px;
+  }
+
+  mjx-container[display="true"] { margin: 10px 0 !important; }
+
+  .foot {
+    text-align: center;
+    margin-top: 44px;
+    color: #8FAEAB;
+    font-size: 12.5px;
+    letter-spacing: 1.5px;
+  }
+</style>
+</head>
+
+<body>
+<div class="wrap">
+
+  <h1>从微分到变分</h1>
+  <div class="subtitle">思 考 流 程 · 点 击 方 框 展 开 回 答</div>
+
+  <div class="toolbar">
+    <button id="allBtn" onclick="toggleAll()">全部展开</button>
+  </div>
+
+  <div class="flow">
+
+    <!-- 01 -->
+    <div class="node">
+      <div class="q" onclick="toggle(this)">
+        <span class="idx">01</span>
+        <span class="txt">微分、导数、$dx$、$\Delta x$ 是什么关系？</span>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="a">
+        <p>$\Delta x$ 是自变量实际增量，$\Delta y=f(x+\Delta x)-f(x)$ 是函数实际增量。</p>
+        $$f'(x)=\lim_{\Delta x\to 0}\frac{\Delta y}{\Delta x}$$
+        $$\Delta y=f'(x)\Delta x+o(\Delta x),\qquad dy=f'(x)\,dx$$
+        <p>一元中取 $dx=\Delta x$，于是 $f'(x)=\dfrac{dy}{dx}$。</p>
+        <p><b>导数</b>是变化率的极限，<b>微分 $dy$</b> 是 $\Delta y$ 的线性主部。</p>
+      </div>
+    </div>
+
+    <!-- 02 -->
+    <div class="node">
+      <div class="q" onclick="toggle(this)">
+        <span class="idx">02</span>
+        <span class="txt">$f(x+dx)$ 怎么表示？</span>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="a">
+        $$f(x+dx)\approx f(x)+f'(x)\,dx=f(x)+df$$
+        <p>严格写法（一阶泰勒展开）：</p>
+        $$f(x+dx)=f(x)+f'(x)\,dx+o(dx)$$
+       <p>或</p>
+        $$f(x+dx) = f(x) + f'(x)dx + \frac{f''(x)}{2!}(dx)^2 + \frac{f'''(x)}{3!}(dx)^3 + \cdots + \frac{f^{(n)}(x)}{n!}(dx)^n + R_n$$
+      </div>
+    </div>
+
+       <!-- 03 -->
+    <div class="node">
+      <div class="q" onclick="toggle(this)">
+        <span class="idx">03</span>
+        <span class="txt">变分也有类似“线性主部”的性质吗？</span>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="a">
+        <p>有，完全平行。</p>
+        $$\Delta J=J[y+\delta y]-J[y]=\delta J+o(\|\delta y\|)$$
+        $$\delta J=\int_a^b\left(\frac{\partial L}{\partial y}\,\delta y+\frac{\partial L}{\partial y'}\,\delta y'\right)dx$$
+        <p>$\delta J$ 是泛函增量的线性主部（类似 $dy$），$\delta y$ 类似 $dx$。令 $\delta J=0$ 即得欧拉–拉格朗日方程。</p>
+      </div>
+    </div>
+
+    <!-- 04 -->
+    <div class="node">
+      <div class="q" onclick="toggle(this)">
+        <span class="idx">04</span>
+        <span class="txt">变分和微分除了变量不同，还有完全不同的地方吗？</span>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="a">
+        <p><b>一句话：微分是自变量变、函数形式不变；变分是自变量不变、函数形式变。</b></p>
+        <ul>
+          <li>$\delta\dfrac{dq}{dt}=\dfrac{d}{dt}\delta q$ —— 两个算符可交换</li>
+          <li>变分通常固定端点：$\delta q(t_1)=\delta q(t_2)=0$</li>
+          <li>变分是无限维空间里的微分</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 05 -->
+    <div class="node">
+      <div class="q" onclick="toggle(this)">
+        <span class="idx">05</span>
+        <span class="txt">两端固定仍有无穷多种变化，那到底在研究什么？</span>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="a">
+        <p>“无穷多种”不是困难，而正是被要求的对象。</p>
+        $$\delta S=0\quad\text{对任意允许的}\ \delta q(t)\ \text{都成立}$$
+        <p>无穷多个条件最终坍缩成一个微分方程：</p>
+        $$\frac{d}{dt}\frac{\partial L}{\partial\dot q}-\frac{\partial L}{\partial q}=0$$
+        <p>于是筛出唯一的真实路径。</p>
+      </div>
+    </div>
+
+    <!-- 06 -->
+    <div class="node">
+      <div class="q" onclick="toggle(this)">
+        <span class="idx">06</span>
+        <span class="txt">“所有微小变化下一阶不变”是什么意思？泛函里的极大极小呢？</span>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="a">
+        <p>“一阶不变”＝一阶项消失，变化从二阶才开始：</p>
+        $$S[q+\delta q]-S[q]=\tfrac12\,\delta^2S+\cdots$$
+        <p>泛函里的极大极小，与函数完全平行：</p>
+        <table>
+          <tr><th>条件</th><th>普通函数</th><th>泛函</th></tr>
+          <tr><td>驻值</td><td>$f'(x)=0$</td><td>$\delta S=0$</td></tr>
+          <tr><td>极小</td><td>$f''(x)\gt 0$</td><td>$\delta^2S\gt 0$</td></tr>
+          <tr><td>极大</td><td>$f''(x)\lt 0$</td><td>$\delta^2S\lt 0$</td></tr>
+          <tr><td>不确定</td><td>$f''(x)=0$</td><td>$\delta^2S=0$</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- 07 -->
+    <div class="node">
+      <div class="q" onclick="toggle(this)">
+        <span class="idx">07</span>
+        <span class="txt">一阶变分为零，物理上是什么意思？</span>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="a">
+        <p>  以自由粒子为例：</p>
+        <p>  自由粒子的作用量为</p>
+        $$S[x]=\int_{t_1}^{t_2}\tfrac12 m\dot x^2\,dt$$
+        <p>给扰动 $x\to x+\delta x$，端点固定，展开后一阶变分为</p>
+        $$\delta S=-\int_{t_1}^{t_2}m\ddot x\,\delta x\,dt$$
+        <p>要求对任意 $\delta x$ 都有 $\delta S=0$，只能是</p>
+        $$m\ddot x=0$$
+        <p>即匀速直线运动。</p>
+        <p><b>物理意义：</b>真实路径是作用量的稳定点。若 $\delta S\neq0$，总存在某个方向能让作用量变小。</p>
+      </div>
+    </div>
+
+    <!-- 08 -->
+    <div class="node">
+      <div class="q" onclick="toggle(this)">
+        <span class="idx">08</span>
+        <span class="txt">一阶变化可正可负，大自然为什么还会往那里走？</span>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="a">
+        <p>关键：$\delta S$ 对扰动是<b>线性</b>的。</p>
+        $$\delta S(-\delta x)=-\delta S(\delta x)$$
+        <p>所以只要 $\delta S\neq0$，就必然存在一个方向使作用量变小——大自然往那个方向走，直到走不动为止。</p>
+        <p>于是真实路径必须满足：<b>没有任何方向能让作用量一阶变小</b>，即</p>
+        $$\delta S=0$$
+      </div>
+    </div>
+
+    <!-- 09 -->
+    <div class="node">
+      <div class="q" onclick="toggle(this)">
+        <span class="idx">09</span>
+        <span class="txt">一阶为零不保证极大极小，为什么能保证“最省事”？</span>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="a">
+        <p>它<b>不保证“最省事”</b>，只保证“稳定”。</p>
+        $$\delta S=0\ \Longleftrightarrow\ \text{满足运动方程（欧拉–拉格朗日）}$$
+        <p>严格的名字是<b>驻定作用量原理</b>（哈密顿原理），不是“最小作用量原理”。</p>
+        <p>大多数经典系统 $L=T-V$，动能对 $\dot q$ 是二次正定的，二阶变分正定，所以恰好是极小值——历史上才被叫作“最小作用量原理”。</p>
+      </div>
+    </div>
+
+    <!-- 10 -->
+    <div class="node">
+      <div class="q" onclick="toggle(this)">
+        <span class="idx">10</span>
+        <span class="txt">极大值稍微扰动不就变了？大自然为什么还往那儿走？</span>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="a">
+        <p><b>因果顺序反了。</b></p>
+        <p>不是“大自然往极大值走”，而是：真实路径由运动方程决定，它恰好满足 $\delta S=0$；至于它是极大、极小还是鞍点，大自然并不关心。</p>
+        <p><b>类比：</b>山顶上的球。它满足受力平衡（一阶不变），但一碰就倒——极大值路径是“不稳定但合法”的驻值路径。</p>
+        <p>实际中，绝大多数经典系统是极小值；极大值或鞍点只在非标准拉格朗日量、约束系统、场论中偶有出现。</p>
+      </div>
+    </div>
+
+    <!-- 11 -->
+    <div class="node">
+      <div class="q" onclick="toggle(this)">
+        <span class="idx">11</span>
+        <span class="txt">有点懂了，首先是这是个自然法则，大自然中所有东西的真实路径都满足变分为零，物理学家为了探索这个真实路径，去设一堆未知数和函数，来使变分为零，然后找出这条真实路径是什么样子的，对吗？</span>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="a">
+        <p>理解基本正确，只需修正一步：不是“随便设未知函数”，而是先写出由系统物理性质决定的拉格朗日量 $L$。</p>
+        $$\text{物理系统}\ \longrightarrow\ L(q,\dot q,t)\ \longrightarrow\ \delta S=0$$
+        $$\longrightarrow\ \frac{d}{dt}\frac{\partial L}{\partial\dot q}-\frac{\partial L}{\partial q}=0\ \longrightarrow\ q(t)$$
+        <p>例：自由粒子 $L=\tfrac12m\dot x^2$；谐振子 $L=\tfrac12m\dot x^2-\tfrac12kx^2$。</p>
+      </div>
+    </div>
+
+    <!-- 12 -->
+    <div class="node">
+      <div class="q" onclick="toggle(this)">
+        <span class="idx">12</span>
+        <span class="txt">拉格朗日和哈密顿当年是怎么发展出这些理论的？</span>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="a">
+
+        <h4>一、前奏：最小作用量的萌芽</h4>
+        <p>1744 年，莫佩尔蒂（Maupertuis）提出模糊的“最小作用量”思想，认为自然界总让某个“作用量”取最小。欧拉随后给出更精确的数学形式，但主要还局限于单个质点的运动。</p>
+
+        <h4>二、拉格朗日（1736–1813）：把力学“分析化”</h4>
+        <ul>
+          <li><b>动机：</b>摆脱牛顿力学繁琐的几何作图与矢量分解，把力学彻底变成纯粹的数学分析。</li>
+          <li><b>工具：</b>发明变分符号 $\delta$，发展变分法。问题设定由此改变——不再“找一条力学曲线”，而是“由变分原理推出运动所满足的微分方程”。</li>
+          <li><b>广义坐标 $q$：</b>可以自动适应各种约束（如珠子沿曲线滑动），极大简化复杂系统。</li>
+          <li><b>1788《分析力学》(<i>Mécanique analytique</i>)：</b>全书“没有一张图”，全部是代数运算，提出拉格朗日方程
+            $$\frac{d}{dt}\frac{\partial L}{\partial\dot q}-\frac{\partial L}{\partial q}=0$$
+          </li>
+          <li>后期他更倾向以<b>虚功原理</b>（虚速度原理）作为力学的基础，认为由此导出拉格朗日方程更直接、更普遍。</li>
+        </ul>
+
+        <h4>三、哈密顿（1805–1865）：从光学到力学</h4>
+        <ul>
+          <li><b>动机：</b>源自几何光学。他发现费马原理（光走极值路径）与最小作用量原理在数学结构上高度相似。</li>
+          <li><b>1833《光与行星的路径》：</b>明确提出光学—力学类比，把这种类比正式应用于力学。</li>
+          <li><b>正则变量：</b>引入广义动量 $p=\partial L/\partial\dot q$，与坐标 $q$ 地位对等，并定义哈密顿函数 $H(p,q,t)$。</li>
+          <li>把 $n$ 个二阶拉格朗日方程改写成 $2n$ 个一阶方程，形式极其对称优美：
+            $$\dot q=\frac{\partial H}{\partial p},\qquad \dot p=-\frac{\partial H}{\partial q}$$
+          </li>
+          <li><b>主函数 $S$：</b>即作用量，满足哈密顿–雅可比方程。解出这个一阶偏微分方程，就能得到整个系统的运动规律。</li>
+        </ul>
+
+        <h4>四、对比</h4>
+        <table>
+          <tr>
+            <th>人物</th><th>核心动机</th><th>关键贡献</th><th>理论特点</th>
+          </tr>
+          <tr>
+            <td>拉格朗日</td>
+            <td>把力学从几何中解放</td>
+            <td>广义坐标、拉格朗日方程、变分法</td>
+            <td>以微分方程为核心，坐标无关，便于处理约束系统</td>
+          </tr>
+          <tr>
+            <td>哈密顿</td>
+            <td>受光学启发，追求统一与对称</td>
+            <td>正则方程、哈密顿函数、H–J 方程</td>
+            <td>以一阶方程组为核心，引入相空间，为量子力学与统计力学奠基</td>
+          </tr>
+        </table>
+
+        <h4>五、一句话收束</h4>
+        <p>拉格朗日把力学变成了<b>分析学</b>，哈密顿把它变成了<b>几何学</b>（相空间几何）。你先前理解的“变分为零”，正是哈密顿原理的核心：它作为一条高度概括的自然法则，取代了牛顿的矢量力学，成为分析力学乃至现代理论物理的基石。</p>
+
+      </div>
+    </div>
+
+  </div>
+
+  <div class="foot">— 思 考 流 程 完 —</div>
+
+</div>
+
+<script>
+  function toggle(el) {
+    const a = el.nextElementSibling;
+    el.classList.toggle('open');
+    a.classList.toggle('open');
+  }
+
+  let allOpen = false;
+  function toggleAll() {
+    allOpen = !allOpen;
+    document.querySelectorAll('.node').forEach(function (n) {
+      n.querySelector('.q').classList.toggle('open', allOpen);
+      n.querySelector('.a').classList.toggle('open', allOpen);
+    });
+    document.getElementById('allBtn').textContent = allOpen ? '全部收起' : '全部展开';
+  }
+</script>
+
+</body>
+</html>

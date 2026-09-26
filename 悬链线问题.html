@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>悬链线 · 思考流程</title>
+
+<!-- ===== MathJax 配置（LaTeX 渲染） ===== -->
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']],
+    processEscapes: true,
+    tags: 'none'
+  },
+  options: {
+    skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+
+<style>
+  :root{
+    --main:       #2A9D8F;   /* 主色：方框、边框 */
+    --main-dark:  #22867A;   /* 悬停 */
+    --deep:       #0E6B6B;   /* 展开/标题 */
+    --pale:       #E8F4F3;   /* 浅底 */
+    --pale-2:     #DFF1EF;   /* 表头 */
+    --panel:      #F1F8F7;   /* 答案底 */
+    --line:       #B7DCD8;   /* 连接线 */
+    --line-soft:  #DCEDEB;   /* 细边框 */
+    --line-tbl:   #C3E2DF;   /* 表格线 */
+    --bg:         #F7FAFA;   /* 页面底 */
+    --text:       #16302E;   /* 正文 */
+    --text-ans:   #1B3836;   /* 答案正文 */
+    --muted:      #7B9C99;   /* 辅助文字 */
+    --foot:       #8FAEAB;   /* 页脚 */
+  }
+
+  *{ box-sizing: border-box; }
+
+  html, body{ margin: 0; padding: 0; background: var(--bg); color: var(--text); }
+
+  body{
+    font-family: "Times New Roman", "SimSun", "宋体", "Songti SC", serif;
+    font-size: 16.5px;
+    line-height: 1.85;
+    padding: 42px 18px 90px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ===== 背景淡纹 ===== */
+  body::before{
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background-image:
+      radial-gradient(circle at 12% 8%, rgba(42,157,143,.05), transparent 42%),
+      radial-gradient(circle at 88% 92%, rgba(42,157,143,.05), transparent 42%);
+    z-index: 0;
+  }
+
+  .wrap{
+    position: relative;
+    z-index: 1;
+    max-width: 880px;
+    margin: 0 auto;
+  }
+
+  /* ===== 标题区 ===== */
+  h1 {
+    font-size: 26px;
+    font-weight: normal;
+    letter-spacing: 3px;
+    color: var(--deep);
+    text-align: center;
+    margin: 0 0 8px;
+  }
+  .subtitle {
+    text-align: center;
+    color: var(--muted);
+    font-size: 13px;
+    letter-spacing: 2px;
+    margin-bottom: 26px;
+  }
+
+  /* ===== 工具栏 ===== */
+  .toolbar { text-align: center; margin-bottom: 30px; }
+  .toolbar button {
+    font-family: inherit;
+    font-size: 14px;
+    letter-spacing: 2px;
+    color: var(--deep);
+    background: var(--pale);
+    border: 1px solid #9CCFCA;
+    border-radius: 4px;
+    padding: 7px 22px;
+    cursor: pointer;
+    transition: background .2s, box-shadow .2s;
+  }
+  .toolbar button:hover {
+    background: #D3ECEA;
+    box-shadow: 0 2px 6px rgba(42, 157, 143, .18);
+  }
+
+  /* ===== 节点方框 ===== */
+  .node{
+    border-radius: 6px;
+    background: var(--panel);
+    box-shadow: 0 1px 3px rgba(42,157,143,.18);
+    overflow: hidden;
+    transition: box-shadow .25s ease;
+  }
+  .node:hover{
+    box-shadow: 0 3px 10px rgba(42,157,143,.28);
+  }
+  .node.open{
+    box-shadow: 0 4px 14px rgba(42,157,143,.26);
+  }
+
+  /* 问题（可点击） */
+  .q{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    padding: 12px 16px;
+    background: var(--main);
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 16.5px;
+    letter-spacing: .5px;
+    cursor: pointer;
+    text-align: left;
+    user-select: none;
+    transition: background .2s, border-radius .2s;
+  }
+  .q:hover{ background: var(--main-dark); }
+  .node.open .q{
+    background: var(--deep);
+    border-radius: 6px 6px 0 0;
+  }
+
+  .idx{
+    flex: 0 0 auto;
+    font-family: "Times New Roman", serif;
+    font-size: 13px;
+    opacity: .72;
+    min-width: 24px;
+  }
+  .qtext{ flex: 1 1 auto; }
+
+  .chev{
+    flex: 0 0 auto;
+    font-size: 12px;
+    opacity: .85;
+    transition: transform .3s ease;
+  }
+  .node.open .chev{ transform: rotate(180deg); }
+
+  /* ===== 答案折叠区 ===== */
+  .ans{
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows .45s cubic-bezier(.4,0,.2,1);
+  }
+  .node.open .ans{ grid-template-rows: 1fr; }
+
+  .ans-clip{ overflow: hidden; }
+
+  .ans-body{
+    padding: 0 18px;
+    border-left: 3px solid var(--main);
+    border-right: 1px solid var(--line-soft);
+    border-bottom: 1px solid var(--line-soft);
+    background: var(--panel);
+    color: var(--text-ans);
+    font-size: 15px;
+    opacity: 0;
+    transition: opacity .3s ease, padding .35s ease;
+  }
+  .node.open .ans-body{
+    opacity: 1;
+    padding: 14px 18px 18px;
+  }
+
+  /* ===== 答案内部排版 ===== */
+  .ans-body h3{
+    color: var(--deep);
+    font-size: 15px;
+    font-weight: normal;
+    letter-spacing: 1.5px;
+    margin: 16px 0 6px;
+    padding-left: 9px;
+    border-left: 3px solid #7FC7C0;
+  }
+  .ans-body h3:first-child{ margin-top: 4px; }
+
+  .ans-body p{ margin: 7px 0; }
+
+  .ans-body ul, .ans-body ol{
+    margin: 7px 0;
+    padding-left: 22px;
+  }
+  .ans-body li{ margin: 4px 0; }
+
+  .step{
+    margin: 12px 0;
+    padding: 10px 14px;
+    background: #E4F2F0;
+    border-left: 3px solid #7FC7C0;
+    border-radius: 0 5px 5px 0;
+  }
+  .step-title{
+    display: block;
+    font-weight: bold;
+    color: var(--deep);
+    margin-bottom: 3px;
+    letter-spacing: .5px;
+  }
+
+  .key{
+    margin: 16px 0 4px;
+    padding: 11px 16px;
+    background: var(--pale-2);
+    border: 1px solid var(--line-tbl);
+    border-radius: 5px;
+    color: var(--deep);
+  }
+
+  .note{
+    font-size: 14px;
+    color: var(--muted);
+  }
+
+  .tag{
+    display: inline-block;
+    padding: 1px 8px;
+    margin-right: 6px;
+    border-radius: 4px;
+    background: var(--pale-2);
+    border: 1px solid var(--line-tbl);
+    color: var(--deep);
+    font-size: 13.5px;
+    letter-spacing: 1px;
+  }
+
+  table.cmp{
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0;
+    font-size: 14px;
+  }
+  table.cmp th, table.cmp td{
+    border: 1px solid var(--line-tbl);
+    padding: 7px 10px;
+    vertical-align: top;
+    text-align: left;
+  }
+  table.cmp th{
+    background: var(--pale-2);
+    color: var(--deep);
+    font-weight: normal;
+    letter-spacing: 1px;
+    white-space: nowrap;
+  }
+
+  /* MathJax 微调 */
+  mjx-container{ font-size: 1.02em !important; }
+  mjx-container[display="true"]{
+    margin: 10px 0 !important;
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+
+  /* ===== 节点之间的箭头 ===== */
+  .arrow{
+    text-align: center;
+    font-size: 20px;
+    color: var(--line);
+    line-height: 1;
+    padding: 10px 0 6px;
+    user-select: none;
+  }
+
+  /* ===== 页脚 ===== */
+  .footer{
+    text-align: center;
+    margin-top: 44px;
+    font-size: 12.5px;
+    letter-spacing: 1.5px;
+    color: var(--foot);
+  }
+
+  /* ===== 响应式 ===== */
+  @media (max-width: 620px){
+    body{ font-size: 15.5px; padding: 26px 12px 60px; }
+    h1{ font-size: 21px; }
+    .q{ font-size: 15.5px; padding: 11px 13px; gap: 10px; }
+    .ans-body{ font-size: 14.5px; }
+    .node.open .ans-body{ padding: 12px 14px 16px; }
+    table.cmp{ font-size: 13.5px; }
+    table.cmp th, table.cmp td{ padding: 6px 8px; }
+  }
+</style>
+</head>
+
+<body>
+<div class="wrap">
+
+  <!-- ================= 标题区 ================= -->
+  <h1>悬链线 · 思考流程</h1>
+  <div class="subtitle">思 考 流 程 · 点 击 方 框 展 开 推 导</div>
+
+  <div class="toolbar">
+    <button id="allBtn" onclick="toggleAll()">全部展开</button>
+  </div>
+
+  <!-- ================= 01 ================= -->
+  <div class="node" id="n1">
+    <button class="q" onclick="toggle('n1')">
+      <span class="idx">01</span>
+      <span class="qtext">悬链线是什么？</span>
+      <span class="chev">▼</span>
+    </button>
+
+    <div class="ans"><div class="ans-clip"><div class="ans-body">
+
+      <h3>定义</h3>
+      <p>
+        一条<strong>均匀</strong>、<strong>柔软</strong>、<strong>不可伸长</strong>的链条（或绳子），
+        两端固定，在<strong>自身重力</strong>作用下自然下垂，达到平衡时形成的曲线，称为<strong>悬链线</strong>
+        （catenary）。
+      </p>
+
+      <h3>数学表达式</h3>
+      <p>取最低点为 $(0,a)$，则悬链线方程为</p>
+      $$y=a\cosh\frac{x}{a}
+        =\frac{a}{2}\left(e^{\,x/a}+e^{\,-x/a}\right)$$
+      <p>其中参数</p>
+      $$a=\frac{T_0}{\rho g}$$
+      <p>
+        $T_0$ 为最低点处的水平张力，$\rho$ 为链条线密度，$g$ 为重力加速度。
+      </p>
+      <p>若把最低点平移到原点，则写成</p>
+      $$y=a\cosh\frac{x}{a}-a$$
+
+      <h3>基本性质</h3>
+      <ul>
+        <li>关于竖直轴（$x=0$）对称；</li>
+        <li>最低点处切线水平；</li>
+        <li>任一点张力方向沿曲线切线，大小 $T=\rho g\,y$（以最低点所在水平线为基准）；</li>
+        <li>小垂度时近似于抛物线，工程中有时用抛物线近似；</li>
+        <li><strong>它本身不是抛物线</strong>——重力沿<strong>弧长</strong>均匀分布，而不是沿水平投影均匀分布。</li>
+      </ul>
+
+      <h3>历史与应用</h3>
+      <ul>
+        <li>伽利略曾误判其为抛物线；1691 年惠更斯、莱布尼茨、约翰·伯努利分别独立解出。</li>
+        <li>应用：悬索桥主缆、高压输电线、晾衣绳、项链；倒置后成为“悬链线拱”（如圣路易斯拱门），在自重下主要承受压力。</li>
+      </ul>
+
+      <div class="key">
+        一句话：悬链线是均匀链条在重力下悬挂的<strong>理想平衡曲线</strong>，数学上是一条<strong>双曲余弦曲线</strong>。
+      </div>
+
+    </div></div></div>
+  </div>
+
+  <div class="arrow">↓</div>
+
+  <!-- ================= 02 ================= -->
+  <div class="node" id="n2">
+    <button class="q" onclick="toggle('n2')">
+      <span class="idx">02</span>
+      <span class="qtext">怎么求得的？——受力平衡法</span>
+      <span class="chev">▼</span>
+    </button>
+
+    <div class="ans"><div class="ans-clip"><div class="ans-body">
+
+      <h3>第 0 步：建模假设</h3>
+      <ul>
+        <li><strong>均匀</strong>：线密度 $\rho$ 为常数；</li>
+        <li><strong>柔软</strong>：不能承受弯矩，任意截面上的张力沿切线方向；</li>
+        <li><strong>不可伸长</strong>：弧长不变；</li>
+        <li><strong>只受重力</strong>：无其他外载。</li>
+      </ul>
+
+      <h3>第 1 步：建立坐标系</h3>
+      <p>
+        取 $x$ 轴水平、$y$ 轴竖直向上；把曲线的最低点放在 $x=0$ 处（其纵坐标暂记为 $a$）。
+        用弧长 $s$ 从最低点起度量。
+      </p>
+
+      <h3>第 2 步：对一段链条作受力分析</h3>
+      <p>
+        取从最低点 $O$ 到任意点 $P(x,y)$ 的一段链条，其弧长为 $s$。它受三个力：
+      </p>
+      <ol>
+        <li>$O$ 端张力 $T_0$，方向<strong>水平</strong>；</li>
+        <li>$P$ 端张力 $T$，方向沿曲线在 $P$ 点的<strong>切线</strong>，与水平方向夹角为 $\theta$；</li>
+        <li>这段链条的重力 $G=\rho g s$，方向<strong>竖直向下</strong>。</li>
+      </ol>
+
+      <h3>第 3 步：列平衡方程</h3>
+      <p>水平方向：</p>
+      $$T\cos\theta=T_0 \tag{1}$$
+      <p>竖直方向：</p>
+      $$T\sin\theta=\rho g s \tag{2}$$
+
+      <h3>第 4 步：消去张力 $T$</h3>
+      <p>$(2)\div(1)$：</p>
+      $$\frac{T\sin\theta}{T\cos\theta}=\tan\theta=\frac{\rho g s}{T_0}$$
+
+      <h3>第 5 步：与曲线斜率联系起来</h3>
+      <p>
+        因为张力沿切线，所以 $\tan\theta$ 就是曲线斜率 $y'=\dfrac{dy}{dx}$。令
+      </p>
+      $$a=\frac{T_0}{\rho g}$$
+      <p>得到关键关系</p>
+      $$\frac{dy}{dx}=\frac{s}{a} \tag{3}$$
+
+      <h3>第 6 步：引入弧长微分关系</h3>
+      $$ds=\sqrt{dx^{2}+dy^{2}}
+        \;\Longrightarrow\;
+        \frac{ds}{dx}=\sqrt{1+\left(\frac{dy}{dx}\right)^{2}}
+        =\sqrt{1+y'^{2}}$$
+
+      <h3>第 7 步：对 $x$ 求导，得到微分方程</h3>
+      <p>把 $(3)$ 式两边对 $x$ 求导：</p>
+      $$y''=\frac{1}{a}\frac{ds}{dx}
+           =\frac{1}{a}\sqrt{1+y'^{2}} \tag{4}$$
+
+      <h3>第 8 步：降阶</h3>
+      <p>令 $p=y'$，则 $(4)$ 变为</p>
+      $$p'=\frac{1}{a}\sqrt{1+p^{2}}$$
+      <p>分离变量：</p>
+      $$\frac{dp}{\sqrt{1+p^{2}}}=\frac{dx}{a} \tag{5}$$
+
+      <h3>第 9 步：第一次积分</h3>
+      <p>利用标准积分</p>
+      $$\int\frac{dp}{\sqrt{1+p^{2}}}=\operatorname{arsinh}p
+        =\ln\!\left(p+\sqrt{1+p^{2}}\right)$$
+      <p>对 $(5)$ 式积分：</p>
+      $$\operatorname{arsinh}p=\frac{x}{a}+C$$
+      <p>
+        最低点取在 $x=0$，该处切线水平，即 $p(0)=y'(0)=0$。
+        代入得 $\operatorname{arsinh}0=0=C$，故 $C=0$：
+      </p>
+      $$p=\sinh\frac{x}{a}
+        \qquad\Longrightarrow\qquad
+        \frac{dy}{dx}=\sinh\frac{x}{a}$$
+
+      <h3>第 10 步：第二次积分</h3>
+      $$y=\int\sinh\frac{x}{a}\,dx=a\cosh\frac{x}{a}+C_1$$
+
+      <h3>第 11 步：定常数</h3>
+      <p>取最低点坐标为 $(0,a)$：</p>
+      $$y(0)=a\cosh 0+C_1=a+C_1=a
+        \;\Longrightarrow\; C_1=0$$
+      <p>于是</p>
+      $$\boxed{\,y=a\cosh\frac{x}{a}\,}$$
+
+      <p>若把最低点取在原点，则 $C_1=-a$：</p>
+      $$\boxed{\,y=a\cosh\frac{x}{a}-a\,}$$
+
+      <div class="key">
+        核心原因：重力沿<strong>弧长</strong>均匀分布（$G=\rho g s$），
+        而不是沿<strong>水平投影</strong>均匀分布。
+        若误设 $G=\rho g x$，同样的推导会得到抛物线
+        $y=\dfrac{\rho g}{2T_0}x^{2}$。
+      </div>
+
+    </div></div></div>
+  </div>
+
+  <div class="arrow">↓</div>
+
+  <!-- ================= 03 ================= -->
+  <div class="node" id="n3">
+    <button class="q" onclick="toggle('n3')">
+      <span class="idx">03</span>
+      <span class="qtext">能用求泛函变分为 0 求出来吗？</span>
+      <span class="chev">▼</span>
+    </button>
+
+    <div class="ans"><div class="ans-clip"><div class="ans-body">
+
+      <h3>核心思想</h3>
+      <p>
+        可以。而且从能量角度看更本质：
+        <strong>悬链线是均匀链条在重力场中总势能最小的曲线</strong>。
+        固定两端、固定绳长，这是一个<strong>带等周约束的变分问题</strong>。
+      </p>
+
+      <h3>第 1 步：写出总重力势能</h3>
+      <p>取 $y$ 轴竖直向上，弧长微元 $ds=\sqrt{1+y'^{2}}\,dx$，则</p>
+      $$U[y]=\rho g\int y\,ds
+             =\rho g\int_{x_1}^{x_2} y\sqrt{1+y'^{2}}\,dx$$
+
+      <h3>第 2 步：写出约束条件（绳长固定）</h3>
+      $$L=\int_{x_1}^{x_2}\sqrt{1+y'^{2}}\,dx=\text{常数}$$
+
+      <h3>第 3 步：引入拉格朗日乘子，构造泛函</h3>
+      <p>把约束用乘子 $\lambda$ 并入泛函，要求</p>
+      $$\Phi[y]=\int_{x_1}^{x_2}\bigl(y+\lambda\bigr)\sqrt{1+y'^{2}}\,dx,
+        \qquad \delta\Phi=0$$
+
+      <h3>第 4 步：使用欧拉–拉格朗日方程</h3>
+      <p>被积函数</p>
+      $$f(y,y')=\bigl(y+\lambda\bigr)\sqrt{1+y'^{2}}$$
+      <p>
+        它<strong>不显含 $x$</strong>，因此可用 Beltrami 恒等式（E–L 方程的第一积分）：
+      </p>
+      $$f-y'\frac{\partial f}{\partial y'}=C \tag{6}$$
+
+      <h3>第 5 步：求偏导数</h3>
+      $$\frac{\partial f}{\partial y'}
+        =\bigl(y+\lambda\bigr)\cdot\frac{y'}{\sqrt{1+y'^{2}}}$$
+
+      <h3>第 6 步：代入恒等式并化简</h3>
+      $$\bigl(y+\lambda\bigr)\sqrt{1+y'^{2}}
+        -\bigl(y+\lambda\bigr)\frac{y'^{2}}{\sqrt{1+y'^{2}}}=C$$
+      <p>提取公因子：</p>
+      $$\bigl(y+\lambda\bigr)
+        \left[\sqrt{1+y'^{2}}-\frac{y'^{2}}{\sqrt{1+y'^{2}}}\right]=C$$
+      <p>括号内通分：</p>
+      $$\sqrt{1+y'^{2}}-\frac{y'^{2}}{\sqrt{1+y'^{2}}}
+        =\frac{\left(1+y'^{2}\right)-y'^{2}}{\sqrt{1+y'^{2}}}
+        =\frac{1}{\sqrt{1+y'^{2}}}$$
+      <p>于是</p>
+      $$\frac{y+\lambda}{\sqrt{1+y'^{2}}}=C \tag{7}$$
+
+      <h3>第 7 步：解出 $y'$</h3>
+      $$\sqrt{1+y'^{2}}=\frac{y+\lambda}{C}$$
+      <p>两边平方：</p>
+      $$1+y'^{2}=\frac{\left(y+\lambda\right)^{2}}{C^{2}}$$
+      $$y'^{2}=\frac{\left(y+\lambda\right)^{2}-C^{2}}{C^{2}}$$
+      $$y'=\pm\frac{\sqrt{\left(y+\lambda\right)^{2}-C^{2}}}{C}
+        \qquad\Longrightarrow\qquad
+        \frac{dy}{dx}
+        =\pm\frac{\sqrt{\left(y+\lambda\right)^{2}-C^{2}}}{C}$$
+
+      <h3>第 8 步：分离变量并积分</h3>
+      $$\frac{dy}{\sqrt{\left(y+\lambda\right)^{2}-C^{2}}}=\pm\frac{dx}{C}$$
+      <p>利用标准积分</p>
+      $$\int\frac{du}{\sqrt{u^{2}-C^{2}}}
+        =\operatorname{arcosh}\frac{u}{C}+\text{const}$$
+      <p>取 $u=y+\lambda$，积分得</p>
+      $$\operatorname{arcosh}\frac{y+\lambda}{C}=\pm\frac{x}{C}+D$$
+
+      <h3>第 9 步：解出 $y$</h3>
+      $$\frac{y+\lambda}{C}
+        =\cosh\!\left(\pm\frac{x}{C}+D\right)$$
+      <p>因为 $\cosh$ 是偶函数，正负号可以吸收进常数 $D$，于是</p>
+      $$y+\lambda=C\cosh\frac{x+D'}{C}$$
+      $$\boxed{\,y=C\cosh\frac{x+D'}{C}-\lambda\,}$$
+
+      <h3>第 10 步：定常数，回到熟悉的形式</h3>
+      <ul>
+        <li>取最低点在 $x=0$，则 $y'(0)=0$；由
+          $y'=\sinh\dfrac{x+D'}{C}$ 得 $D'=0$。</li>
+        <li>于是 $y=C\cosh\dfrac{x}{C}-\lambda$。</li>
+        <li>令最低点纵坐标为 $a$：$y(0)=C-\lambda=a$。</li>
+        <li>最简形式取 $\lambda=0$，则 $C=a$。</li>
+      </ul>
+      $$y=a\cosh\frac{x}{a}$$
+      <p>若要把最低点放到原点 $(0,0)$，取 $C=a,\ \lambda=a$：</p>
+      $$y=a\cosh\frac{x}{a}-a$$
+      <p class="note">
+        其中 $a=\dfrac{T_0}{\rho g}$，与受力平衡法完全一致。
+      </p>
+
+      <div class="key">
+        结论：用「总势能最小 + 绳长固定」的约束变分，
+        令 $\delta I=0$，解欧拉–拉格朗日方程，
+        同样得到悬链线 $y=a\cosh\dfrac{x}{a}$。
+      </div>
+
+    </div></div></div>
+  </div>
+
+  <div class="arrow">↓</div>
+
+  <!-- ================= 04 ================= -->
+  <div class="node" id="n4">
+    <button class="q" onclick="toggle('n4')">
+      <span class="idx">04</span>
+      <span class="qtext">两种方法的对比与总结</span>
+      <span class="chev">▼</span>
+    </button>
+
+    <div class="ans"><div class="ans-clip"><div class="ans-body">
+
+      <h3>方法对比</h3>
+      <table class="cmp">
+        <tr>
+          <th>比较项</th>
+          <th>受力平衡法（02）</th>
+          <th>泛函变分法（03）</th>
+        </tr>
+        <tr>
+          <th>出发点</th>
+          <td>力的平衡（矢量）</td>
+          <td>势能最小（标量）</td>
+        </tr>
+        <tr>
+          <th>核心方程</th>
+          <td>$T\cos\theta=T_0$<br>$T\sin\theta=\rho g s$</td>
+          <td>$\delta\!\int (y+\lambda)\sqrt{1+y'^{2}}dx=0$</td>
+        </tr>
+        <tr>
+          <th>数学工具</th>
+          <td>静力平衡 + 弧长微分关系</td>
+          <td>欧拉–拉格朗日方程 / Beltrami 恒等式</td>
+        </tr>
+        <tr>
+          <th>约束处理</th>
+          <td>隐含在受力分析中</td>
+          <td>显式使用拉格朗日乘子 $\lambda$</td>
+        </tr>
+        <tr>
+          <th>所得结果</th>
+          <td>$y=a\cosh\dfrac{x}{a}$</td>
+          <td>$y=C\cosh\dfrac{x}{C}-\lambda$ ⟶ 同左</td>
+        </tr>
+      </table>
+
+      <h3>两条路径的公共内核</h3>
+      <ol>
+        <li>
+          <span class="tag">几何</span>
+          曲线由弧长参数化，$ds=\sqrt{1+y'^{2}}\,dx$；
+        </li>
+        <li>
+          <span class="tag">物理</span>
+          重力沿弧长均匀分布，$G=\rho g s$；
+        </li>
+        <li>
+          <span class="tag">结果</span>
+          微分方程 $y''=\dfrac{1}{a}\sqrt{1+y'^{2}}$，
+          解为双曲余弦。
+        </li>
+      </ol>
+
+      <h3>为什么不是抛物线？</h3>
+      <p>
+        抛物线对应的是“载荷沿<strong>水平投影</strong>均匀分布”的情形，
+        例如水平悬索桥中把桥面重量简化为沿 $x$ 方向均匀分布：
+      </p>
+      $$G=\rho g x
+        \;\Longrightarrow\;
+        \frac{dy}{dx}=\frac{\rho g x}{T_0}
+        \;\Longrightarrow\;
+        y=\frac{\rho g}{2T_0}x^{2}$$
+      <p>
+        而真实链条每一小段都有自重，重力沿<strong>弧长</strong>分布，
+        所以得到的是 $\cosh$ 而非二次函数。
+        当垂度很小时，$\cosh$ 与抛物线几乎重合，这就是工程近似成立的由来。
+      </p>
+
+      <div class="key">
+        从「受力平衡」到「能量最小」，两种语言描述同一条曲线：
+        $y=a\cosh\dfrac{x}{a}$。
+      </div>
+
+    </div></div></div>
+  </div>
+
+  <div class="footer">悬链线 · 从现象到变分原理</div>
+
+</div>
+
+<script>
+  function toggle(id){
+    var el = document.getElementById(id);
+    if(!el) return;
+    el.classList.toggle('open');
+    /* 展开后让 MathJax 重新排版（若尚未渲染完成） */
+    if(el.classList.contains('open') && window.MathJax && MathJax.typesetPromise){
+      MathJax.typesetPromise([el]).catch(function(){});
+    }
+  }
+
+  /* 全部展开 / 全部收起 */
+  let allOpen = false;
+  function toggleAll() {
+    allOpen = !allOpen;
+    document.querySelectorAll('.node').forEach(function (n) {
+      n.classList.toggle('open', allOpen);
+    });
+    document.getElementById('allBtn').textContent = allOpen ? '全部收起' : '全部展开';
+    /* 展开后让 MathJax 重新排版 */
+    if (allOpen && window.MathJax && MathJax.typesetPromise) {
+      MathJax.typesetPromise(document.querySelectorAll('.node')).catch(function(){});
+    }
+  }
+
+</script>
+</body>
+</html>
