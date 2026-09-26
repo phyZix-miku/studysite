@@ -11,18 +11,16 @@
 
 /* ===== 返回首页按钮 ===== */
 .back-home{
-  position: fixed;
-  top: 18px;
-  left: 18px;
-  z-index: 60;              /* 原 999 → 60，避免浮在弹层之上 */
+  flex: none;                 /* 不被压缩 */
   display: inline-block;
-  padding: 7px 14px;
+  padding: 6px 12px;
   background: #2A9D8F;
-  color: #ffffff;
+  color: #fff;
   text-decoration: none;
-  font-size: 14px;
+  font-size: 13.5px;
   letter-spacing: 1px;
   border-radius: 6px;
+  white-space: nowrap;
   box-shadow: 0 2px 8px rgba(42, 157, 143, .28);
   transition: background .2s ease, transform .2s ease, box-shadow .2s ease;
 }
@@ -33,16 +31,11 @@
   box-shadow: 0 4px 12px rgba(42, 157, 143, .36);
 }
 
-/* 手机端稍微小一点 */
+/* 手机端：只留箭头，省地方 */
 @media (max-width: 620px){
-  .back-home{
-    top: 12px;
-    left: 12px;
-    font-size: 13px;
-    padding: 6px 11px;
-  }
+  .back-home{ padding: 5px 9px; letter-spacing: 0; }
+  .back-home .bh-tx{ display: none; }
 }
-
 :root{
   --bg:#f4f7f8; --card:#ffffff; --line:#e2eaec; --ink:#22303a; --mut:#67787f;
   --teal:#0e9488; --teal-d:#0b7a70; --teal-bg:#e6f5f3;
@@ -52,7 +45,7 @@ html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--ink);font:16px/1.75 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;-webkit-font-smoothing:antialiased}
 a{color:var(--teal);text-decoration:none}
 /* ---------- 顶栏 ---------- */
-#topbar{position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:14px;padding:12px 22px 122px;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+#topbar{position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:14px;padding:12px 22px;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
 #brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:17px;letter-spacing:.5px;white-space:nowrap}
 #brand svg{flex:none}
 #search{flex:1;max-width:340px;display:flex;align-items:center;gap:8px;background:#eef3f4;border:1px solid transparent;border-radius:999px;padding:7px 14px;transition:.2s}
@@ -363,7 +356,7 @@ body:not(.v-md) #mdview{display:none}
   .card .fxbox .katex{font-size:1em}
   body{padding-bottom:env(safe-area-inset-bottom)}
   #vswitch button{padding:5px 10px;font-size:12.5px}
-  #topbar{padding:9px 12px 9px 96px;gap:8px}
+  #topbar{padding:9px 12px;gap:8px}
   #brand span{display:none}
   #mdbar{top:56px;padding:8px 0}
   .md-unit{padding:6px 16px 24px;margin-bottom:16px;border-radius:13px}
@@ -378,7 +371,9 @@ body:not(.v-md) #mdview{display:none}
 </head>
 <body data-page-node-id="UBCzZxlQUXDPMnIhOlFQC6">
 <header id="topbar" data-page-node-id="CdtILeSBiC1JXAiGRXWZZO">
-  <div id="brand" data-page-node-id="EZGlcuQEcWPFHpCxML5RRi">
+    <a class="back-home" href="index.html"><span class="bh-ar">←</span><span class="bh-tx"> 返回</span></a>
+
+<div id="brand" data-page-node-id="EZGlcuQEcWPFHpCxML5RRi">
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" data-page-node-id="wUj3UfKHrKtxTEeJeq3UMZ"><path d="M4 5.5C4 4.7 4.7 4 5.5 4H11v16H5.5C4.7 20 4 19.3 4 18.5v-13Z" fill="#0e9488" data-page-node-id="NYHJwjK4E0yeNfEWUgJ69a"/><path d="M13 4h5.5c.8 0 1.5.7 1.5 1.5v13c0 .8-.7 1.5-1.5 1.5H13V4Z" fill="#7fd0c8" data-page-node-id="uUK75z4rZhe3n3zSryQXsu"/><path d="M8 9h.01M8 12h.01M8 15h.01" stroke="#fff" stroke-width="2" stroke-linecap="round" data-page-node-id="F4RqcRqZEVKxbZOkqIH8JF"/></svg>
     经典力学 · 公式脉络
   </div>
