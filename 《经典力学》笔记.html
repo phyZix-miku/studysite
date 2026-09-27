@@ -1,0 +1,1302 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>《经典力学》摘要</title>
+
+<!-- ==========================================================================
+     ①  页面文字配置（标题、副标题、页脚）
+         直接改下面三行字符串即可，其余不用动。
+     ========================================================================== -->
+<script>
+const PAGE_TITLE    = "《经典力学》摘要";
+const PAGE_SUBTITLE = "Classical Mechanics · 学习笔记";
+const PAGE_FOOTER   = "全文由 notes 数组自动生成";
+</script>
+
+<!-- ==========================================================================
+     ②
+     ================= 在这里添加你的物理笔记 =================
+
+     ★★★ 以后新增/修改笔记，只改下面这个 notes 数组，不要改文件后面的渲染代码 ★★★
+
+     ┌─ 怎么新增【一章】？
+     │   在 notes = [ ... ] 里，用大括号加一个对象，格式：
+     │   {
+     │     chapter: "第三章 刚体转动",
+     │     sections: [ /* 这一章下面各节，见下 */ ]
+     │   },
+     │   放在两个章节对象中间，用逗号隔开即可（最后一章后面不要逗号）。
+     │
+     ├─ 怎么新增【一节】？
+     │   在某一章的 sections: [ ... ] 里，再加一个对象，格式：
+     │   {
+     │     id: "3-2",                      // 全站唯一，用于目录跳转，建议 "章号-节号"
+     │     title: "3.2 转动惯量",           // 会显示成小节标题
+     │     content: String.raw`
+     │       这里写正文，支持 Markdown，也支持 LaTeX 公式。
+     │     `
+     │   },
+     │   同样放在两个小节对象中间，用逗号隔开。
+     │
+     └─ content 里可以写什么？
+        1) 普通段落：直接写文字，空一行就是新段落
+        2) 行内公式：$v=\frac{dx}{dt}$
+        3) 块级公式（单独成行、居中、超长可横向滚动）：
+           $$
+           a=\frac{dv}{dt}=\frac{d^2x}{dt^2}
+           $$
+        4) 列表：- 无序  /  1. 有序
+        5) 加粗 **文字**、斜体 *文字*
+        6) 表格、引用 >、分割线 ---
+        ※ 用 String.raw`...` 包起来，反斜杠 \ 才不会被转义；
+          注意正文里不要出现反引号 ` 和 ${ 这两个符号。
+     ========================================================================== -->
+<script>
+const notes = [
+  {
+    chapter: "第一章 质点运动学",
+    sections: [
+      {
+        id: "1-1",
+        title: "1.1 参考系、质点与运动的描述",
+        content: String.raw`
+**力学**是研究物体机械运动规律的科学。描述任何运动之前，必须先明确两件事：**参考系**与**坐标系**。
+
+#### 一、参考系与坐标系
+
+- **参考系**：被选作参考标准的物体（或物体群）。运动与静止都是相对的，脱离参考系谈运动没有意义。
+- **坐标系**：参考系的数学化表示，常用直角坐标系、自然坐标系、极坐标系。
+- 同一运动在不同参考系中形式不同：地面系中雨滴竖直下落，车厢系中雨滴向后倾斜。
+
+#### 二、质点模型
+
+当物体的**形状与大小**对研究的问题影响可忽略时，可把它抽象为一个具有质量的几何点，称为**质点**。
+
+> 判据：物体各点运动状态差别可忽略，或物体线度远小于运动的空间尺度。
+
+#### 三、位矢与运动方程
+
+设质点在直角坐标系中的位置矢量为 $\vec{r}$，则
+
+$$
+\vec{r}=x\vec{i}+y\vec{j}+z\vec{k}
+$$
+
+其大小为 $r=\left|\vec{r}\right|=\sqrt{x^2+y^2+z^2}$，方向余弦为
+
+$$
+\cos\alpha=\frac{x}{r},\qquad \cos\beta=\frac{y}{r},\qquad \cos\gamma=\frac{z}{r}
+$$
+
+若把坐标表示成时间的函数 $x=x(t),\ y=y(t),\ z=z(t)$，这组方程就称为**运动方程**，它完整地描述了质点的运动。
+
+- 已知运动方程，可以求出轨迹方程（消去 $t$）；
+- 反之，仅知轨迹只能得到运动路径，得不到运动快慢。
+`
+      },
+      {
+        id: "1-2",
+        title: "1.2 位移、速度与加速度",
+        content: String.raw`
+#### 一、位移与路程
+
+**位移**是矢量，只由初末位置决定；**路程**是标量，与路径有关。
+
+$$
+\Delta\vec{r}=\vec{r}(t+\Delta t)-\vec{r}(t)
+$$
+
+一般来说 $\left|\Delta\vec{r}\right|\le\Delta s$，只有在 $\Delta t\to 0$ 的极限下二者微元相等：$\left|d\vec{r}\right|=ds$。
+
+#### 二、速度
+
+| 物理量 | 定义式 | 说明 |
+| --- | --- | --- |
+| 平均速度 | $\bar{\vec{v}}=\dfrac{\Delta\vec{r}}{\Delta t}$ | 矢量，方向同位移 |
+| 瞬时速度 | $\vec{v}=\dfrac{d\vec{r}}{dt}$ | 方向沿轨迹切线 |
+| 平均速率 | $\bar{v}=\dfrac{\Delta s}{\Delta t}$ | 标量 |
+| 瞬时速率 | $v=\dfrac{ds}{dt}=\left|\vec{v}\right|$ | 标量 |
+
+#### 三、加速度
+
+$$
+\vec{a}=\frac{d\vec{v}}{dt}=\frac{d^2\vec{r}}{dt^2}
+$$
+
+在**自然坐标系**中按切向与法向分解：
+
+$$
+\vec{a}=\underbrace{\frac{dv}{dt}\vec{e}_t}_{\text{切向加速度}}+\underbrace{\frac{v^2}{\rho}\vec{e}_n}_{\text{法向加速度}}
+$$
+
+- 切向分量 $a_t=\dfrac{dv}{dt}$ 只改变**速度大小**；
+- 法向分量 $a_n=\dfrac{v^2}{\rho}$ 只改变**速度方向**，$\rho$ 为该点曲率半径。
+
+> 匀速圆周运动是 $a_t=0$、$a_n=\frac{v^2}{R}$ 的典型情形；直线运动则是 $a_n=0$。
+`
+      },
+      {
+        id: "1-3",
+        title: "1.3 两类基本问题与典型运动",
+        content: String.raw`
+#### 一、运动学两类基本问题
+
+1. **第一类**：已知运动方程 $\vec{r}=\vec{r}(t)$，通过求导得速度与加速度。
+2. **第二类**：已知加速度 $\vec{a}=\vec{a}(t)$ 和初始条件，通过积分得 $\vec{v}(t)$ 与 $\vec{r}(t)$。
+
+$$
+\vec{v}=\vec{v}_0+\int_0^t \vec{a}\,\mathrm{d}t,\qquad
+\vec{r}=\vec{r}_0+\int_0^t \vec{v}\,\mathrm{d}t
+$$
+
+#### 二、匀变速直线运动
+
+$$
+v=v_0+at,\qquad x=x_0+v_0t+\tfrac{1}{2}at^2,\qquad v^2-v_0^2=2a(x-x_0)
+$$
+
+#### 三、抛体运动
+
+以初速度 $v_0$、抛射角 $\theta$ 斜抛，取抛出点为原点：
+
+$$
+\begin{cases}
+x=v_0\cos\theta\cdot t\\[4pt]
+y=v_0\sin\theta\cdot t-\dfrac{1}{2}gt^2
+\end{cases}
+$$
+
+消去 $t$ 得轨迹方程 $y=x\tan\theta-\dfrac{gx^2}{2v_0^2\cos^2\theta}$，为一条抛物线。射程与射高分别为
+
+$$
+R=\frac{v_0^2\sin 2\theta}{g},\qquad H=\frac{v_0^2\sin^2\theta}{2g}
+$$
+
+#### 四、圆周运动的角量描述
+
+- 角位置 $\theta$，角速度 $\omega=\dfrac{d\theta}{dt}$，角加速度 $\beta=\dfrac{d\omega}{dt}$；
+- 线量与角量关系：$v=R\omega$，$a_t=R\beta$，$a_n=R\omega^2$；
+- 匀角加速转动：$\omega=\omega_0+\beta t$，$\theta=\omega_0t+\frac{1}{2}\beta t^2$。
+
+> 记忆要点：**平动的公式把 $x\to\theta$、$v\to\omega$、$a\to\beta$ 逐一代换，就得到转动公式。**
+`
+      }
+    ]
+  },
+  {
+    chapter: "第二章 牛顿运动定律",
+    sections: [
+      {
+        id: "2-1",
+        title: "2.1 牛顿三定律",
+        content: String.raw`
+#### 一、三定律的表述
+
+1. **第一定律（惯性定律）**：不受外力的物体保持静止或匀速直线运动状态。它定义了**惯性参考系**。
+2. **第二定律**：$\vec{F}=\dfrac{d\vec{p}}{dt}=m\vec{a}$（当 $m$ 为常量）。
+3. **第三定律**：$\vec{F}_{12}=-\vec{F}_{21}$，作用力与反作用力同性质、等大、反向、共线，但作用在不同物体上。
+
+#### 二、关于第二定律的三点说明
+
+- 它是**瞬时**关系：某时刻的合力决定该时刻的加速度；
+- 它是**矢量**方程，可向坐标轴投影成分量式；
+- 质量是物体**惯性**大小的量度，而非重量的量度。
+
+$$
+\begin{cases}
+F_x=m a_x=m\dfrac{d^2x}{dt^2}\\[6pt]
+F_y=m a_y=m\dfrac{d^2y}{dt^2}\\[6pt]
+F_z=m a_z=m\dfrac{d^2z}{dt^2}
+\end{cases}
+$$
+
+> 常见误区：把"惯性"误解为"物体保持原有运动状态的原因"。惯性是物体的**固有属性**，力才是改变运动状态的原因。
+`
+      },
+      {
+        id: "2-2",
+        title: "2.2 常见力与受力分析",
+        content: String.raw`
+#### 一、力学中常见的几种力
+
+| 力的名称 | 表达式 | 方向 |
+| --- | --- | --- |
+| 重力 | $P=mg$ | 竖直向下 |
+| 弹力（弹簧） | $F=-kx$ | 指向平衡位置 |
+| 滑动摩擦力 | $f=\mu N$ | 沿接触面，与相对运动反向 |
+| 静摩擦力 | $f\le f_{\max}=\mu_s N$ | 由平衡条件决定 |
+| 万有引力 | $F=G\dfrac{m_1m_2}{r^2}$ | 沿两质点连线 |
+
+#### 二、受力分析的规范步骤
+
+1. 明确研究对象，**隔离**该物体；
+2. 先画重力，再找接触力（弹力、摩擦力）；
+3. 按"一重、二弹、三摩擦、四其他"的顺序逐一检查；
+4. 最后画合外力，注意**不要**把"物体施加给别人的力"也画上去。
+
+#### 三、处理连接体问题
+
+对由 $n$ 个物体组成的系统，若各物体加速度相同，可先用整体法求加速度，再用隔离法求内力：
+
+$$
+a=\frac{F_{\text{外}}}{m_1+m_2+\cdots+m_n}
+$$
+
+> 提示：摩擦力的方向由**相对运动（或相对运动趋势）**决定，与物体本身的运动方向没有必然联系。
+`
+      },
+      {
+        id: "2-3",
+        title: "2.3 非惯性系与惯性力",
+        content: String.raw`
+#### 一、惯性系的判定
+
+**惯性系**是牛顿定律成立的参考系。地面系在多数问题中可近似视为惯性系；相对地面做匀速直线运动的参考系也是惯性系。相对惯性系做**加速运动**的参考系称为**非惯性系**。
+
+#### 二、惯性力
+
+在非惯性系中，为使形式上仍可使用牛顿第二定律，引入**惯性力**：
+
+$$
+\vec{F}_{\text{惯}}=-m\vec{a}_0
+$$
+
+其中 $\vec{a}_0$ 为非惯性系相对惯性系的加速度。于是
+
+$$
+\vec{F}_{\text{真}}+\vec{F}_{\text{惯}}=m\vec{a}\ (\text{在非惯性系中})
+$$
+
+- 惯性力**没有施力物体**，不是真实相互作用力，不服从牛顿第三定律；
+- 它是为了在非惯性系中"凑"出牛顿第二定律而引入的**虚拟力**。
+
+#### 三、几种典型惯性力
+
+1. **平动加速系**：$\vec{F}_{\text{惯}}=-m\vec{a}_0$，如加速车厢中物体"后仰"。
+2. **转动参考系（离心惯性力）**：
+
+$$
+F_{\text{离}}=m\omega^2 r
+$$
+
+3. **科里奥利力**（物体在转动系中运动时附加）：
+
+$$
+\vec{F}_C=-2m\,\vec{\omega}\times\vec{v}
+$$
+
+> 应用示例：在地面系用惯性力解释"离心现象"，与在转动系中用牛顿定律求解，结论一致，只是表述框架不同。
+`
+      }
+    ]
+  },
+  {
+    chapter: "第三章 动量、功与能量",
+    sections: [
+      {
+        id: "3-1",
+        title: "3.1 动量定理与动量守恒",
+        content: String.raw`
+#### 一、冲量与动量定理
+
+定义动量 $\vec{p}=m\vec{v}$，冲量 $\vec{I}=\displaystyle\int_{t_1}^{t_2}\vec{F}\,\mathrm{d}t$，则
+
+$$
+\vec{I}=\int_{t_1}^{t_2}\vec{F}\,\mathrm{d}t=\vec{p}_2-\vec{p}_1
+$$
+
+即**合外力的冲量等于动量的增量**。平均力可写为
+
+$$
+\bar{F}=\frac{\vec{p}_2-\vec{p}_1}{t_2-t_1}
+$$
+
+这说明：碰撞时间越短，冲力越大——这正是缓冲装置（安全气囊、跳高垫）的作用原理。
+
+#### 二、动量守恒定律
+
+当系统所受**合外力为零**时，
+
+$$
+\sum_i m_i\vec{v}_i=\text{常量}
+$$
+
+即
+
+$$
+m_1\vec{v}_1+m_2\vec{v}_2=m_1\vec{v}_1'+m_2\vec{v}_2'
+$$
+
+#### 三、使用条件与常见模型
+
+- 条件：$\vec{F}_{\text{外}}=0$；或外力远小于内力（碰撞、爆炸的瞬间近似成立）；
+- 若某方向上合外力为零，则该方向动量分量守恒；
+- 典型模型：完全弹性碰撞、完全非弹性碰撞、爆炸。
+
+| 碰撞类型 | 动量 | 动能 | 恢复系数 |
+| --- | --- | --- | --- |
+| 完全弹性 | 守恒 | 守恒 | $e=1$ |
+| 非完全弹性 | 守恒 | 有损失 | $0<e<1$ |
+| 完全非弹性 | 守恒 | 损失最大 | $e=0$ |
+
+> 一维完全弹性碰撞，两球交换速度的特例发生在 $m_1=m_2$ 时。
+`
+      },
+      {
+        id: "3-2",
+        title: "3.2 功、动能与动能定理",
+        content: String.raw`
+#### 一、功的定义
+
+$$
+W=\int_{a}^{b}\vec{F}\cdot\mathrm{d}\vec{r}=\int_{a}^{b}F\cos\theta\,\mathrm{d}s
+$$
+
+功是**标量**，有正负：$\theta<90^\circ$ 做正功，$\theta=90^\circ$ 不做功，$\theta>90^\circ$ 做负功。
+
+- 功是**过程量**，与路径有关；
+- 保守力（重力、弹力、万有引力）做功与路径无关，只与初末位置有关。
+
+#### 二、功率
+
+$$
+P=\frac{\mathrm{d}W}{\mathrm{d}t}=\vec{F}\cdot\vec{v}
+$$
+
+#### 三、动能定理
+
+$$
+W_{\text{合}}=E_{k2}-E_{k1}=\tfrac{1}{2}mv_2^2-\tfrac{1}{2}mv_1^2
+$$
+
+其中 $E_k=\tfrac{1}{2}mv^2$ 为动能。动能定理对**变力**、**曲线运动**同样成立，这是它相对于牛顿定律的优势。
+
+> 计算要点：$W_{\text{合}}$ 中应包含所有外力做功的代数和，包括摩擦力做的负功。
+`
+      },
+      {
+        id: "3-3",
+        title: "3.3 势能、功能原理与机械能守恒",
+        content: String.raw`
+#### 一、保守力与势能
+
+保守力做功只与位置变化有关，可以引进**势能** $E_p$，满足
+
+$$
+W_{\text{保}}=-\Delta E_p=-(E_{p2}-E_{p1})
+$$
+
+几种常见势能：
+
+| 相互作用 | 势能表达式 | 零势能参考点 |
+| --- | --- | --- |
+| 重力 | $E_p=mgh$ | 任意水平面 |
+| 弹性力 | $E_p=\tfrac{1}{2}kx^2$ | 弹簧原长处 |
+| 万有引力 | $E_p=-G\dfrac{mM}{r}$ | 无穷远处 |
+
+保守力与势能的微分关系：
+
+$$
+\vec{F}=-\nabla E_p=-\left(\frac{\partial E_p}{\partial x}\vec{i}+\frac{\partial E_p}{\partial y}\vec{j}+\frac{\partial E_p}{\partial z}\vec{k}\right)
+$$
+
+#### 二、机械能守恒定律
+
+系统内只有**保守力做功**时，机械能守恒：
+
+$$
+E_k+E_p=\text{常量}
+$$
+
+$$
+\tfrac{1}{2}mv_1^2+E_{p1}=\tfrac{1}{2}mv_2^2+E_{p2}
+$$
+
+#### 三、能量守恒与功能原理
+
+若还有非保守力（如摩擦力）做功，则机械能不守恒，但总能量仍守恒：
+
+$$
+W_{\text{外}}+W_{\text{非保}}=\Delta E
+$$
+
+> 三种解题路线的选择：涉及**时间**优先用动量定理；涉及**位移**优先用动能定理或机械能守恒；涉及**碰撞瞬间**优先用动量守恒。
+`
+      }
+    ]
+  }
+];
+</script>
+
+<!-- ==========================================================================
+     ③  以下为样式与渲染代码，正常情况下不需要修改
+     ========================================================================== -->
+<style>
+:root{
+  --main:       #2A9D8F;   /* 主色：方框、边框 */
+  --main-dark:  #22867A;   /* 悬停 */
+  --deep:       #0E6B6B;   /* 展开/标题 */
+  --pale:       #E8F4F3;   /* 浅底 */
+  --pale-2:     #DFF1EF;   /* 表头 */
+  --panel:      #F1F8F7;   /* 答案底 */
+  --line:       #B7DCD8;   /* 连接线 */
+  --line-soft:  #DCEDEB;   /* 细边框 */
+  --line-tbl:   #C3E2DF;   /* 表格线 */
+  --bg:         #F7FAFA;   /* 页面底 */
+  --text:       #16302E;   /* 正文 */
+  --text-ans:   #1B3836;   /* 答案正文 */
+  --muted:      #7B9C99;   /* 辅助文字 */
+  --foot:       #8FAEAB;   /* 页脚 */
+
+  --side-w: 286px;
+  --radius: 10px;
+}
+
+*,*::before,*::after{ box-sizing:border-box; }
+
+html{ scroll-behavior:smooth; }
+
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:"Times New Roman","SimSun","宋体","Songti SC","STSong",serif;
+  font-size:16.5px;
+  line-height:1.95;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+
+/* ---------- 阅读进度条 ---------- */
+#progress{
+  position:fixed; top:0; left:0; height:3px; width:0;
+  background:var(--main); z-index:80;
+  transition:width .08s linear;
+}
+
+/* ---------- 左侧目录 ---------- */
+#sidebar{
+  position:fixed; top:0; left:0; bottom:0;
+  width:var(--side-w);
+  background:#fff;
+  border-right:1px solid var(--line-soft);
+  display:flex; flex-direction:column;
+  z-index:50;
+}
+.side-head{
+  padding:20px 20px 14px;
+  background:var(--pale);
+  border-bottom:1px solid var(--line-soft);
+}
+.side-title{
+  margin:0 0 3px;
+  font-size:15px; font-weight:bold;
+  color:var(--deep); letter-spacing:.1em;
+}
+.side-sub{
+  font-size:12px; color:var(--muted);
+  letter-spacing:.06em; font-family:"Times New Roman",serif;
+}
+.side-search{ padding:12px 16px 8px; }
+.side-search input{
+  width:100%; padding:7px 10px;
+  font-family:inherit; font-size:13.5px; color:var(--text);
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:6px;
+  outline:none;
+  transition:border-color .15s, box-shadow .15s;
+}
+.side-search input::placeholder{ color:var(--muted); }
+.side-search input:focus{
+  border-color:var(--main);
+  box-shadow:0 0 0 3px rgba(42,157,143,.13);
+}
+.toc-scroll{
+  flex:1; overflow-y:auto;
+  padding:4px 12px 32px;
+  scrollbar-width:thin;
+}
+.toc-ch{ margin:10px 0 6px; }
+.toc-ch-link{
+  display:block;
+  padding:8px 10px;
+  font-size:14.5px; font-weight:bold;
+  color:var(--deep); text-decoration:none;
+  background:var(--pale);
+  border-left:3px solid var(--main);
+  border-radius:0 6px 6px 0;
+  transition:background .15s;
+}
+.toc-ch-link:hover{ background:var(--pale-2); }
+.toc-secs{ list-style:none; margin:4px 0 0; padding:0 0 0 8px; }
+.toc-secs li{ margin:0; }
+.toc-sec-link{
+  display:block;
+  padding:6px 10px 6px 12px;
+  font-size:14px; color:var(--text);
+  text-decoration:none;
+  border-left:2px solid var(--line);
+  border-radius:0 6px 6px 0;
+  transition:background .15s, color .15s, border-color .15s;
+}
+.toc-sec-link:hover{
+  background:var(--pale);
+  border-left-color:var(--main-dark);
+  color:var(--deep);
+}
+.toc-sec-link.active{
+  background:var(--pale-2);
+  border-left-color:var(--deep);
+  color:var(--deep);
+  font-weight:bold;
+}
+#toc-empty{
+  display:none;
+  padding:18px 12px; font-size:13.5px; color:var(--muted); text-align:center;
+}
+
+/* ---------- 移动端顶栏 / 遮罩 ---------- */
+#topbar{
+  display:none;
+  position:sticky; top:0; z-index:45;
+  align-items:center; gap:12px;
+  height:52px; padding:0 14px;
+  background:rgba(232,244,243,.94);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--line);
+}
+#menuBtn{
+  font-family:inherit; font-size:14px; color:var(--deep);
+  background:#fff; border:1px solid var(--line);
+  border-radius:6px; padding:5px 12px; cursor:pointer;
+}
+#menuBtn:hover{ background:var(--pale-2); }
+#topbar-title{
+  font-size:15px; font-weight:bold; color:var(--deep);
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+#overlay{
+  display:none;
+  position:fixed; inset:0; background:rgba(22,48,46,.32); z-index:48;
+}
+#overlay.show{ display:block; }
+
+/* ---------- 右侧正文 ---------- */
+main{ margin-left:var(--side-w); min-height:100vh; }
+.wrap{
+  max-width:920px; margin:0 auto;
+  padding:38px 40px 130px;
+}
+.page-head{
+  padding-bottom:22px; margin-bottom:40px;
+  border-bottom:2px solid var(--line);
+}
+.page-head h1{
+  margin:0 0 8px;
+  font-size:34px; font-weight:bold; letter-spacing:.04em;
+  color:var(--deep);
+}
+.page-head .sub{
+  margin:0;
+  font-size:13.5px; letter-spacing:.16em;
+  color:var(--muted); text-transform:uppercase;
+}
+.loading{
+  padding:40px 0; color:var(--muted); font-size:15px;
+}
+
+.chapter{ margin:0 0 56px; }
+.chapter-head{
+  display:flex; align-items:baseline; gap:12px; flex-wrap:wrap;
+  padding-bottom:12px; margin-bottom:26px;
+  border-bottom:2px solid var(--main);
+}
+.chapter-head h2{
+  margin:0;
+  font-size:24px; font-weight:bold; letter-spacing:.03em;
+  color:var(--deep);
+}
+.chapter-meta{
+  font-size:12.5px; color:var(--muted); letter-spacing:.08em;
+}
+
+.section{
+  background:#fff;
+  border:1px solid var(--line-soft);
+  border-left:4px solid var(--main);
+  border-radius:var(--radius);
+  padding:22px 28px 20px;
+  margin:0 0 22px;
+  box-shadow:0 1px 2px rgba(14,107,107,.045);
+  scroll-margin-top:22px;
+}
+.section-head{
+  padding-bottom:12px; margin-bottom:14px;
+  border-bottom:1px dashed var(--line);
+}
+.section-head h3{
+  position:relative;
+  margin:0; padding-left:16px;
+  font-size:19px; font-weight:bold;
+  color:var(--deep);
+}
+.section-head h3::before{
+  content:"";
+  position:absolute; left:0; top:.62em;
+  width:8px; height:8px;
+  background:var(--main);
+  border-radius:2px;
+}
+
+/* ---------- 正文排版 ---------- */
+.section-body{ color:var(--text); overflow-wrap:break-word; word-break:break-word; }
+.section-body > *:first-child{ margin-top:0; }
+.section-body > *:last-child{ margin-bottom:0; }
+.section-body p{ margin:.72em 0; }
+.section-body h4{
+  margin:1.25em 0 .45em;
+  font-size:16.5px; font-weight:bold;
+  color:var(--deep);
+}
+.section-body h4::before{ content:"◆ "; color:var(--main); font-size:.72em; }
+.section-body h5,.section-body h6{
+  margin:1.1em 0 .4em; font-size:15.5px; color:var(--main-dark);
+}
+.section-body ul,.section-body ol{ margin:.62em 0; padding-left:1.65em; }
+.section-body li{ margin:.26em 0; }
+.section-body li::marker{ color:var(--main); }
+.section-body strong{ color:var(--deep); }
+.section-body em{ color:var(--main-dark); font-style:italic; }
+.section-body a{ color:var(--main-dark); text-decoration-color:var(--line); }
+.section-body blockquote{
+  margin:1em 0; padding:.6em 1.1em;
+  background:var(--pale);
+  border-left:3px solid var(--main);
+  border-radius:0 8px 8px 0;
+  color:var(--text-ans);
+}
+.section-body blockquote p{ margin:.28em 0; }
+.section-body code{
+  padding:1px 5px;
+  font-family:Consolas,"Courier New","SimSun",monospace;
+  font-size:.88em; color:var(--deep);
+  background:var(--panel);
+  border:1px solid var(--line-soft);
+  border-radius:4px;
+}
+.section-body pre{
+  margin:1em 0; padding:12px 14px;
+  background:var(--panel);
+  border:1px solid var(--line-soft);
+  border-radius:8px;
+  overflow-x:auto;
+}
+.section-body pre code{ padding:0; background:none; border:none; }
+.section-body hr{ border:none; border-top:1px dashed var(--line); margin:1.5em 0; }
+.section-body img{ max-width:100%; height:auto; }
+
+.table-wrap{ margin:1em 0; overflow-x:auto; }
+.section-body table{
+  border-collapse:collapse; width:100%;
+  font-size:15px;
+}
+.section-body th,.section-body td{
+  border:1px solid var(--line-tbl);
+  padding:7px 11px; text-align:left;
+  vertical-align:middle;
+}
+.section-body th{ background:var(--pale-2); color:var(--deep); font-weight:bold; }
+.section-body tbody tr:nth-child(even) td{ background:#FBFDFD; }
+
+/* ---------- 公式：过长可横向滚动，不撑破版面 ---------- */
+.katex{ font-size:1.05em; }
+.katex-display{
+  margin:1.05em 0;
+  padding:6px 2px;
+  overflow-x:auto;
+  overflow-y:hidden;
+}
+/* 选择器带 .section-body 前缀，是为了压过 KaTeX 自带样式（它在本文件之后加载），
+   min-width:100% 让公式短时居中、长时从最左侧开始，横向滚动时左侧不会被裁掉。 */
+.section-body .katex-display > .katex{
+  display:inline-block;
+  min-width:100%;
+  text-align:center;
+}
+.math-fallback{
+  font-family:Consolas,"Courier New",monospace;
+  font-size:.9em; color:var(--deep);
+  background:var(--panel);
+  border:1px dashed var(--line);
+  border-radius:6px;
+  padding:1px 6px;
+}
+.math-fallback.block{
+  display:block; margin:1em 0; padding:10px 14px;
+  overflow-x:auto; white-space:pre;
+}
+#cdn-warn{
+  display:none;
+  margin:0 0 26px; padding:12px 16px;
+  font-size:14px; color:var(--text-ans);
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-left:4px solid var(--main);
+  border-radius:0 8px 8px 0;
+}
+
+/* ---------- 页脚 / 返回顶部 ---------- */
+.page-foot{
+  margin-top:20px; padding-top:20px;
+  border-top:1px solid var(--line-soft);
+  font-size:13.5px; color:var(--foot);
+  letter-spacing:.06em; text-align:center;
+}
+#toTop{
+  position:fixed; right:26px; bottom:26px; z-index:60;
+  width:46px; height:46px;
+  display:flex; align-items:center; justify-content:center;
+  font-family:inherit; font-size:13px; line-height:1.1;
+  color:#fff; background:var(--main);
+  border:none; border-radius:50%;
+  cursor:pointer;
+  box-shadow:0 4px 12px rgba(14,107,107,.22);
+  opacity:0; pointer-events:none;
+  transition:opacity .22s, background .18s, transform .18s;
+}
+#toTop.show{ opacity:1; pointer-events:auto; }
+#toTop:hover{ background:var(--main-dark); transform:translateY(-2px); }
+
+/* ---------- 滚动条美化 ---------- */
+.toc-scroll::-webkit-scrollbar,
+.katex-display::-webkit-scrollbar,
+.table-wrap::-webkit-scrollbar,
+.section-body pre::-webkit-scrollbar{ height:6px; width:6px; }
+.toc-scroll::-webkit-scrollbar-thumb,
+.katex-display::-webkit-scrollbar-thumb,
+.table-wrap::-webkit-scrollbar-thumb,
+.section-body pre::-webkit-scrollbar-thumb{
+  background:var(--line); border-radius:3px;
+}
+.toc-scroll::-webkit-scrollbar-track{ background:transparent; }
+
+/* ---------- 移动端 ---------- */
+@media (max-width:980px){
+  #topbar{ display:flex; }
+  #sidebar{
+    width:300px;
+    transform:translateX(-100%);
+    transition:transform .28s ease;
+    box-shadow:0 0 24px rgba(14,107,107,.16);
+    z-index:52;
+  }
+  #sidebar.open{ transform:translateX(0); }
+  main{ margin-left:0; }
+  .wrap{ padding:22px 18px 120px; }
+  .page-head h1{ font-size:26px; }
+  .section{ padding:18px 18px 16px; }
+  .section-head h3{ font-size:17.5px; }
+  .section{ scroll-margin-top:66px; }
+  #toTop{ right:16px; bottom:16px; width:42px; height:42px; font-size:12px; }
+}
+
+/* ---------- 打印 ---------- */
+@media print{
+  #sidebar,#topbar,#toTop,#progress,#overlay{ display:none !important; }
+  main{ margin-left:0; }
+  .wrap{ max-width:none; padding:0; }
+  .section{ break-inside:avoid; box-shadow:none; }
+  body{ background:#fff; }
+}
+</style>
+</head>
+
+<body>
+<div id="progress"></div>
+
+<!-- 移动端顶栏 -->
+<div id="topbar">
+  <button id="menuBtn" type="button">目录</button>
+  <span id="topbar-title"></span>
+</div>
+<div id="overlay"></div>
+
+<!-- 左侧目录（自动生成） -->
+<aside id="sidebar">
+  <div class="side-head">
+    <p class="side-title" id="side-title"></p>
+    <p class="side-sub" id="side-sub"></p>
+  </div>
+  <div class="side-search">
+    <input id="tocSearch" type="search" placeholder="搜索小节…" autocomplete="off">
+  </div>
+  <nav class="toc-scroll">
+    <div id="toc-list"></div>
+    <p id="toc-empty">没有匹配的小节</p>
+  </nav>
+</aside>
+
+<!-- 右侧正文（自动生成） -->
+<main>
+  <div class="wrap">
+    <header class="page-head">
+      <h1 id="page-title"></h1>
+      <p class="sub" id="page-sub"></p>
+    </header>
+    <div id="cdn-warn"></div>
+    <div id="notes-root"><p class="loading">正在加载公式与 Markdown 渲染引擎…</p></div>
+    <footer class="page-foot" id="page-foot"></footer>
+  </div>
+</main>
+
+<button id="toTop" type="button">顶部</button>
+
+<script>
+/* ==========================================================================
+   以下为渲染代码，正常情况下不需要修改。
+   逻辑：加载 marked + KaTeX → 遍历 notes → 生成章节/小节/目录 → 绑定交互
+   ========================================================================== */
+(function () {
+  'use strict';
+
+  /* ---------------- 0. 渲染引擎依赖（多个 CDN 依次回退） ---------------- */
+  var CDN = {
+    katexCss: [
+      'https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css',
+      'https://unpkg.com/katex@0.16.9/dist/katex.min.css',
+      'https://lib.baomitu.com/KaTeX/0.16.9/katex.min.css',
+      'https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css'
+    ],
+    katexJs: [
+      'https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js',
+      'https://unpkg.com/katex@0.16.9/dist/katex.min.js',
+      'https://lib.baomitu.com/KaTeX/0.16.9/katex.min.js',
+      'https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js'
+    ],
+    markedJs: [
+      'https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js',
+      'https://unpkg.com/marked@12.0.2/marked.min.js',
+      'https://lib.baomitu.com/marked/12.0.2/marked.min.js',
+      'https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js'
+    ]
+  };
+
+  var state = { katex: false, marked: false };
+
+  // 依次尝试 CDN，全部失败则 reject
+  function loadAsset(urls, isCss) {
+    return new Promise(function (resolve, reject) {
+      var i = 0;
+      (function next() {
+        if (i >= urls.length) { reject(new Error('asset failed')); return; }
+        var url = urls[i++];
+        var el;
+        if (isCss) {
+          el = document.createElement('link');
+          el.rel = 'stylesheet';
+          el.href = url;
+        } else {
+          el = document.createElement('script');
+          el.src = url;
+          el.async = false;
+        }
+        el.onload = function () { resolve(url); };
+        el.onerror = function () {
+          if (el.parentNode) { el.parentNode.removeChild(el); }
+          next();
+        };
+        document.head.appendChild(el);
+      })();
+    });
+  }
+
+  function race(promise, ms) {
+    return Promise.race([
+      promise,
+      new Promise(function (_, rej) { setTimeout(function () { rej(new Error('timeout')); }, ms); })
+    ]);
+  }
+
+  /* ---------------- 1. 基础工具 ---------------- */
+  function escapeHtml(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+
+  // 把源码切成「行」「块」，供 Markdown 兜底解析使用
+  function splitLines(src) { return String(src).replace(/\r\n?/g, '\n').split('\n'); }
+
+  /* ---------------- 2. 保护代码块（避免代码里的 $ 被当成公式） ---------------- */
+  function protectCode(src, store) {
+    // 围栏代码块 ```lang ... ```
+    src = src.replace(/```([^\n`]*)\n?([\s\S]*?)```/g, function (_, lang, body) {
+      store.push({ lang: String(lang).trim(), body: body });
+      return '@@CODE' + (store.length - 1) + '@@';
+    });
+    // 行内代码 `...`
+    src = src.replace(/`([^`\n]+)`/g, function (_, body) {
+      store.push({ lang: null, body: body });
+      return '@@CODE' + (store.length - 1) + '@@';
+    });
+    return src;
+  }
+
+  /* ---------------- 3. 抽取公式（先抽出来，避免 Markdown 破坏 LaTeX） ---------------- */
+  function extractMath(src, store) {
+    // 块级 $$ ... $$（允许跨行）
+    src = src.replace(/\$\$([\s\S]+?)\$\$/g, function (_, tex) {
+      store.push({ tex: tex, display: true });
+      return '@@MATH' + (store.length - 1) + '@@';
+    });
+    // 行内 $ ... $（不跨行；前面是反斜杠的 \$ 不触发）
+    src = src.replace(/(^|[^\\$])\$([^\n$]+?)\$/g, function (_, pre, tex) {
+      store.push({ tex: tex, display: false });
+      return pre + '@@MATH' + (store.length - 1) + '@@';
+    });
+    return src;
+  }
+
+  // 渲染单条公式；KaTeX 不可用时降级为原始 LaTeX 文本
+  function renderMath(tex, display) {
+    if (state.katex && typeof katex !== 'undefined') {
+      try {
+        return katex.renderToString(tex, {
+          displayMode: !!display,
+          throwOnError: false,
+          strict: false,
+          output: 'htmlAndMathml'
+        });
+      } catch (e) { /* 降级 */ }
+    }
+    var raw = (display ? '$$' : '$') + String(tex).trim() + (display ? '$$' : '$');
+    return display
+      ? '<div class="math-fallback block">' + escapeHtml(raw) + '</div>'
+      : '<span class="math-fallback">' + escapeHtml(raw) + '</span>';
+  }
+
+  /* ---------------- 4. Markdown 兜底解析（CDN 不可用时也能读） ---------------- */
+  function miniInline(s) {
+    return s
+      .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+      .replace(/(^|[^*])\*([^*]+)\*/g, '$1<em>$2</em>');
+  }
+  function miniMarkdown(src) {
+    var lines = splitLines(src);
+    var html = '', listType = null, buf = [];
+    function flushP() { if (buf.length) { html += '<p>' + buf.join('<br>') + '</p>'; buf = []; } }
+    function closeList() { if (listType) { html += '</' + listType + '>'; listType = null; } }
+    lines.forEach(function (raw) {
+      var line = raw.trim(), m;
+      if (!line) { flushP(); closeList(); return; }
+      if ((m = line.match(/^(#{1,6})\s+(.*)$/))) {
+        flushP(); closeList();
+        var lv = Math.min(m[1].length + 2, 6);
+        html += '<h' + lv + '>' + miniInline(m[2]) + '</h' + lv + '>';
+        return;
+      }
+      if (/^(-{3,}|\*{3,}|_{3,})$/.test(line)) { flushP(); closeList(); html += '<hr>'; return; }
+      if ((m = line.match(/^[-*+]\s+(.*)$/))) {
+        flushP();
+        if (listType !== 'ul') { closeList(); html += '<ul>'; listType = 'ul'; }
+        html += '<li>' + miniInline(m[1]) + '</li>';
+        return;
+      }
+      if ((m = line.match(/^\d+[.)]\s+(.*)$/))) {
+        flushP();
+        if (listType !== 'ol') { closeList(); html += '<ol>'; listType = 'ol'; }
+        html += '<li>' + miniInline(m[1]) + '</li>';
+        return;
+      }
+      if ((m = line.match(/^>\s?(.*)$/))) {
+        flushP(); closeList();
+        html += '<blockquote><p>' + miniInline(m[1]) + '</p></blockquote>';
+        return;
+      }
+      closeList();
+      buf.push(miniInline(line));
+    });
+    flushP(); closeList();
+    return html;
+  }
+
+  /* ---------------- 5. 单节内容渲染：Markdown → 公式 → 还原代码 ---------------- */
+  function renderContent(src) {
+    src = String(src == null ? '' : src);
+
+    var codeStore = [], mathStore = [];
+    src = protectCode(src, codeStore);
+    src = extractMath(src, mathStore);
+
+    // Markdown 解析
+    var html;
+    if (state.marked && typeof marked !== 'undefined') {
+      try {
+        html = String(marked.parse(src, { gfm: true, breaks: true }));
+      } catch (e) {
+        html = miniMarkdown(src);
+      }
+    } else {
+      html = miniMarkdown(src);
+    }
+
+    // 独占一段的块级公式 / 代码块：把外层 <p> 去掉，避免嵌套异常
+    html = html.replace(/<p>\s*@@MATH(\d+)@@\s*<\/p>/g, function (_, i) {
+      return mathStore[+i] && mathStore[+i].display ? '\n@@MATH' + i + '@@\n' : '<p>@@MATH' + i + '@@</p>';
+    });
+    html = html.replace(/<p>\s*@@CODE(\d+)@@\s*<\/p>/g, function (_, i) {
+      return codeStore[+i] && codeStore[+i].lang !== null ? '\n@@CODE' + i + '@@\n' : '<p>@@CODE' + i + '@@</p>';
+    });
+
+    // 公式先还原，代码后还原（顺序反了会让代码里的占位符被误替换）
+    html = html.replace(/@@MATH(\d+)@@/g, function (_, i) {
+      var it = mathStore[+i];
+      return it ? renderMath(it.tex, it.display) : '';
+    });
+    html = html.replace(/@@CODE(\d+)@@/g, function (_, i) {
+      var it = codeStore[+i];
+      if (!it) { return ''; }
+      if (it.lang === null) { return '<code>' + escapeHtml(it.body) + '</code>'; }
+      var cls = it.lang ? ' class="lang-' + escapeHtml(it.lang) + '"' : '';
+      return '<pre><code' + cls + '>' + escapeHtml(String(it.body).replace(/\n$/, '')) + '</code></pre>';
+    });
+
+    // 表格加一层横向滚动容器
+    html = html.replace(/<table>/g, '<div class="table-wrap"><table>')
+               .replace(/<\/table>/g, '</table></div>');
+
+    return html;
+  }
+
+  /* ---------------- 6. 生成整站内容 + 目录 ---------------- */
+  var tocLinks = [], sectionEls = [];
+
+  function buildNotes() {
+    var root = document.getElementById('notes-root');
+    var tocList = document.getElementById('toc-list');
+    var chapters = Array.isArray(notes) ? notes : [];
+
+    var html = [], toc = [], secTotal = 0;
+
+    chapters.forEach(function (ch, ci) {
+      var chId = 'ch-' + (ch.id || (ci + 1));
+      var secs = Array.isArray(ch.sections) ? ch.sections : [];
+
+      html.push('<section class="chapter" id="' + chId + '">');
+      html.push(
+        '<div class="chapter-head">' +
+          '<h2>' + escapeHtml(ch.chapter) + '</h2>' +
+          '<span class="chapter-meta">' + secs.length + ' 节</span>' +
+        '</div>'
+      );
+
+      toc.push('<div class="toc-ch">');
+      toc.push('<a class="toc-ch-link" href="#' + chId + '" data-target="' + chId + '">' + escapeHtml(ch.chapter) + '</a>');
+      toc.push('<ul class="toc-secs">');
+
+      secs.forEach(function (sec, si) {
+        var sid = 'sec-' + (sec.id || ((ci + 1) + '-' + (si + 1)));
+        secTotal++;
+
+        html.push('<article class="section" id="' + sid + '">');
+        html.push('<div class="section-head"><h3>' + escapeHtml(sec.title) + '</h3></div>');
+        html.push('<div class="section-body">' + renderContent(sec.content) + '</div>');
+        html.push('</article>');
+
+        toc.push(
+          '<li><a class="toc-sec-link" href="#' + sid + '" data-target="' + sid + '">' +
+          escapeHtml(sec.title) + '</a></li>'
+        );
+      });
+
+      toc.push('</ul></div>');
+      html.push('</section>');
+    });
+
+    root.innerHTML = html.join('');
+    tocList.innerHTML = toc.join('');
+
+    // 缓存节点，供滚动高亮使用
+    tocLinks = Array.prototype.slice.call(document.querySelectorAll('#toc-list a[data-target]'));
+    sectionEls = Array.prototype.slice.call(document.querySelectorAll('.section, .chapter'));
+
+    // 页脚统计
+    var foot = document.getElementById('page-foot');
+    foot.textContent = chapters.length + ' 章 · ' + secTotal + ' 节' + (PAGE_FOOTER ? '　|　' + PAGE_FOOTER : '');
+
+    bindTocClicks();
+    updateActive();
+  }
+
+  /* ---------------- 7. 交互：目录点击 / 高亮 / 返回顶部 / 搜索 ---------------- */
+  function bindTocClicks() {
+    tocLinks.forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        var target = a.getAttribute('data-target');
+        var el = document.getElementById(target);
+        if (!el) { return; }
+        e.preventDefault();
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        if (history.replaceState) { history.replaceState(null, '', '#' + target); }
+        setActive(target, true);
+        closeSidebar();
+      });
+    });
+  }
+
+  function setActive(id, scrollIntoViewInToc) {
+    tocLinks.forEach(function (a) {
+      var on = a.getAttribute('data-target') === id;
+      a.classList.toggle('active', on);
+      if (on && scrollIntoViewInToc && a.scrollIntoView) {
+        a.scrollIntoView({ block: 'nearest' });
+      }
+    });
+  }
+
+  function updateActive() {
+    if (!sectionEls.length) { return; }
+    var offset = window.innerWidth <= 980 ? 96 : 28;
+    var current = sectionEls[0].id;
+    for (var i = 0; i < sectionEls.length; i++) {
+      if (sectionEls[i].getBoundingClientRect().top - offset <= 0) { current = sectionEls[i].id; }
+      else { break; }
+    }
+    // 优先高亮小节（若当前是章节标题，取其后第一个小节）
+    var cur = document.getElementById(current);
+    if (cur && cur.classList.contains('chapter')) {
+      var next = cur.querySelector('.section');
+      if (next) { current = next.id; }
+    }
+    setActive(current, false);
+  }
+
+  function onScroll() {
+    var y = window.pageYOffset || document.documentElement.scrollTop || 0;
+    var doc = document.documentElement;
+    var max = (doc.scrollHeight - window.innerHeight);
+    document.getElementById('progress').style.width = (max > 0 ? (y / max) * 100 : 0) + '%';
+    document.getElementById('toTop').classList.toggle('show', y > 420);
+    updateActive();
+  }
+
+  function closeSidebar() {
+    document.getElementById('sidebar').classList.remove('open');
+    document.getElementById('overlay').classList.remove('show');
+  }
+  function openSidebar() {
+    document.getElementById('sidebar').classList.add('open');
+    document.getElementById('overlay').classList.add('show');
+  }
+
+  function bindUI() {
+    document.getElementById('toTop').addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    document.getElementById('menuBtn').addEventListener('click', function () {
+      var open = document.getElementById('sidebar').classList.contains('open');
+      open ? closeSidebar() : openSidebar();
+    });
+    document.getElementById('overlay').addEventListener('click', closeSidebar);
+
+    window.addEventListener('resize', function () {
+      if (window.innerWidth > 980) { closeSidebar(); }
+    });
+
+    // 目录搜索：过滤左侧小节条目
+    var search = document.getElementById('tocSearch');
+    search.addEventListener('input', function () {
+      var q = search.value.trim().toLowerCase();
+      var total = 0;
+      Array.prototype.forEach.call(document.querySelectorAll('#toc-list .toc-ch'), function (group) {
+        var shown = 0;
+        Array.prototype.forEach.call(group.querySelectorAll('li'), function (li) {
+          var hit = !q || li.textContent.toLowerCase().indexOf(q) >= 0;
+          li.style.display = hit ? '' : 'none';
+          if (hit) { shown++; }
+        });
+        var chHit = !q || group.querySelector('.toc-ch-link').textContent.toLowerCase().indexOf(q) >= 0;
+        var show = !q || shown > 0 || chHit;
+        group.style.display = show ? '' : 'none';
+        total += shown;
+      });
+      document.getElementById('toc-empty').style.display = (q && total === 0) ? 'block' : 'none';
+    });
+
+    window.addEventListener('scroll', function () {
+      if (window.requestAnimationFrame) { window.requestAnimationFrame(onScroll); }
+      else { onScroll(); }
+    }, { passive: true });
+
+    window.addEventListener('hashchange', function () {
+      var id = location.hash.replace('#', '');
+      if (id && document.getElementById(id)) { setActive(id, true); }
+    });
+  }
+
+  /* ---------------- 8. 启动 ---------------- */
+  function renderAll() {
+    // 页头文字
+    document.title = PAGE_TITLE;
+    document.getElementById('page-title').textContent = PAGE_TITLE;
+    document.getElementById('page-sub').textContent = PAGE_SUBTITLE;
+    document.getElementById('side-title').textContent = PAGE_TITLE;
+    document.getElementById('side-sub').textContent = PAGE_SUBTITLE;
+    document.getElementById('topbar-title').textContent = PAGE_TITLE;
+
+    buildNotes();
+
+    // CDN 加载失败提示
+    var warn = document.getElementById('cdn-warn');
+    if (!state.marked || !state.katex) {
+      var miss = [];
+      if (!state.marked) { miss.push('Markdown'); }
+      if (!state.katex) { miss.push('公式'); }
+      warn.innerHTML = '未能加载 ' + miss.join(' 与 ') +
+        ' 渲染引擎（可能是当前网络无法访问 CDN）。页面内容仍可阅读，' +
+        '公式将显示为原始 LaTeX 代码。联网后刷新页面即可正常渲染。';
+      warn.style.display = 'block';
+    }
+
+    onScroll();
+  }
+
+  function boot() {
+    var css = loadAsset(CDN.katexCss, true).catch(function () {});
+    var jsKatex = loadAsset(CDN.katexJs, false)
+      .then(function () { state.katex = (typeof katex !== 'undefined'); })
+      .catch(function () { state.katex = false; });
+    var jsMarked = loadAsset(CDN.markedJs, false)
+      .then(function () { state.marked = (typeof marked !== 'undefined'); })
+      .catch(function () { state.marked = false; });
+
+    var rendered = false;
+    function firstRender() {
+      if (rendered) { return; }
+      rendered = true;
+      renderAll();
+    }
+
+    // 最多等 5 秒；超时先用降级方案渲染，保证打开即有内容
+    setTimeout(firstRender, 5000);
+
+    Promise.all([css, jsKatex, jsMarked]).then(function () {
+      if (rendered) {
+        // 引擎姗姗来迟：重绘一次，把公式升级为 KaTeX
+        if (state.katex || state.marked) { renderAll(); }
+      } else {
+        firstRender();
+      }
+    });
+  }
+
+  bindUI();
+  boot();
+})();
+</script>
+</body>
+</html>
