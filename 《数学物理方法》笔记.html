@@ -67,7 +67,7 @@ const notes = [
         content: String.raw`
 课程：数学物理方法，教材：《数学物理方法》（第四版）姚端正 周国全 贾俊基编著，老师：周国全。
 
-$此笔记仅供参考，若有错误恳请各位大佬指正，谢谢！$
+此笔记仅供参考，若有错误恳请各位大佬指正，谢谢！
 `
       },
       {
@@ -76,15 +76,15 @@ $此笔记仅供参考，若有错误恳请各位大佬指正，谢谢！$
         content: String.raw`
 1.复数的四种表示形式
 
-1)代数形式： $\${\large z=x+iy\in \mathbb{C},\hspace{1em}x,y\in \mathbb{R}}\hspace{1em}\left(1.1.1\right)$$
+1)代数形式： $\${\large z=x+iy\in \mathbb{C},\hspace{1em}x,y\in \mathbb{R}}\tag{1.1.1}$$
 
 共轭复数(**Complex Conjugate**)，
 
-$x+iy$与$x-iy$互为共轭复数 ，常在复数上加一 $\bar{ }\left($bar,$读作拔$\right)$ 表示该复数的共轭复数。 \${\large \bar{z}=x-iy}$ .我们惊喜的发现 $\${\large z+\bar{z}=2x,z-\bar{z}=2iy}$$于是有 $x={\large \frac{z+\bar{z}}{2}},y={\large \frac{z-\bar{z}}{2i}}$ ,所以我们可以在复平面上用z表示一些方程，比如：直线、椭圆 $$l:ax+by=c\Rightarrow$$ $$a {\large \frac{(z + \bar{z})}{2}} + b {\large \frac{(z - \bar{z})}{2i}} = c$$
+$x+iy与x-iy互为共轭复数$ ，常在复数上加一 $\bar{ }\left(bar,读作拔\right)$ 表示该复数的共轭复数。 \${\large \bar{z}=x-iy}$ .我们惊喜的发现 \${\large z+\bar{z}=2x,z-\bar{z}=2iy}$于是有 $x={\large \frac{z+\bar{z}}{2}},y={\large \frac{z-\bar{z}}{2i}}$ ,所以我们可以在复平面上用z表示一些方程，比如：直线、椭圆 $l:ax+by=c\Rightarrow$ $a {\large \frac{(z + \bar{z})}{2}} + b {\large \frac{(z - \bar{z})}{2i}} = c$
 
 复数的模(**Modulus**)为 $|z|=\sqrt{x^{2}+y^{2}}$ .
 
-2)几何形式：在复平面(**Complex Plane**)中，每个复数都对应一个点,故可以用原点到某点 $P\left( x,y \right)$ 的平面向量来表示一个复数，即 $\${\large z=}\vec{OP}{\normalsize  =\left( x,y \right)}\hspace{1em}\left(1.1.2\right)$$称 $\vec{OP}$ 为复向量(**Complex Vector**);
+2)几何形式：在复平面(**Complex Plane**)中，每个复数都对应一个点,故可以用原点到某点 $P\left( x,y \right)$ 的平面向量来表示一个复数，即 $\${\large z=}\vec{OP}{\normalsize  =\left( x,y \right)}\tag{1.1.2}$$称 $\vec{OP}$ 为复向量(**Complex Vector**);
 
 3)三角形式，由而可知复数可以表示为一个向量，我们给这个向量标上长度与方向，用角度来描述方向，得到 $\begin{cases} 	\left|\vec{OP}\right|=\rho= \left| z \right|=\sqrt{x^{2}+y^{2}}\\ 	{\large z}的辐角\left(Argument\right)=Argz=\theta \end{cases}$ ，
 
@@ -92,17 +92,19 @@ $x+iy$与$x-iy$互为共轭复数 ，常在复数上加一 $\bar{ }\left($bar,$�
 
 那么 $P$ 点两坐标为 $\begin{cases}        x=\rho\cos\theta\\        y=\rho\sin\theta    \end{cases}$ ,并有 $\tan\theta=\frac{y}{x}\left(x\ne0\right)$ ,
 
-所以有 $\${\large z=\rho \cos \theta + i \rho \sin \theta}$ \${\large =\rho\left( \cos\theta+i\sin\theta \right)}\hspace{1em}\left(1.1.3\right)$ 另外，由于任一非零复数的辐角可以有无穷多个（都是加上 $2k\pi$ ），为方便计算，我们把它们的辐角用一个限定在区间 $\left( -\pi,\pi\right]$ 内的角来代表，或者说这个东西才是辐角最主要的部分，称之为辐角的主值，或主值辐角(**Principal Argument**),用 $argz$ 来表示，于是有 $$Argz=argz+2k\pi,\hspace{2em}k\in \mathbb{Z}$$
+所以有 \${\large z=\rho \cos \theta + i \rho \sin \theta}$
 
-注意，当$z=0$时,其模为0，其辐角无定义。
+$\${\large =\rho\left( \cos\theta+i\sin\theta \right)}\tag{1.1.3}$$ 另外，由于任一非零复数的辐角可以有无穷多个（都是加上 $2k\pi$ ），为方便计算，我们把它们的辐角用一个限定在区间 $\left( -\pi,\pi\right]$ 内的角来代表，或者说这个东西才是辐角最主要的部分，称之为辐角的主值，或主值辐角(**Principal Argument**),用 $argz$ 来表示，于是有 $Argz=argz+2k\pi,\hspace{2em}k\in \mathbb{Z}$
 
-$argz\in\left( -\pi,\pi\right]$ 与 $\arctan{\large \frac{y}{x}}\in\left(-\frac{\pi}{2},\frac{\pi}{2}\right)$ 有如下关系 $\${\large \begin{align} argz\\ {\scriptsize\left(z\ne0\right)} \end{align} =\begin{cases}        \arctan{\large \frac{y}{x}},\hspace{2.5em}{z\small 在第一象限}\\       \arctan{\large \frac{y}{x}}+\pi,\hspace{0.2em}{z\small 在第二象限}\\        \arctan{\large \frac{y}{x}}-\pi,\hspace{0.3em}{z\small 在第三象限}\\       \arctan{\large \frac{y}{x}},\hspace{2.5em}{z\small 在第四象限}\\    \end{cases}}$$
+注意，当 $z=0$ 时，其模为 $0$，其辐角无定义。
+
+$argz\in\left( -\pi,\pi\right]$ 与 $\arctan{\large \frac{y}{x}}\in\left(-\frac{\pi}{2},\frac{\pi}{2}\right)$ 有如下关系 $\${\large \begin{align} argz\\ {\scriptsize\left(z\ne0\right)} \end{align} =\begin{cases}        \arctan{\large \frac{y}{x}},\hspace{2.5em}\\       \arctan{\large \frac{y}{x}}+\pi,\hspace{0.2em}\\        \arctan{\large \frac{y}{x}}-\pi,\hspace{0.3em}\\       \arctan{\large \frac{y}{x}},\hspace{2.5em}\\    \end{cases}}$$（以上四行依次为 $z$ 在第一、二、三、四象限）
 
   
 
-4)指数形式：在表示复数 $z$ 这之前我们需要知道[欧拉公式](**Euler's formula**)：
+4)指数形式：在表示复数 $z$ 这之前我们需要知道欧拉公式(**Euler's formula**)：
 
-\${\large e^{ix}=\cos x+i\sin x}$ 。（推导方法自行查阅），惊讶的发现和上面三角形式有相似之处,于是 \${\large z=\rho\left( \cos\theta+i\sin\theta \right)=\rho e^{i\theta}}$ ,最终得到 $\${\large z=\rho e^{i\theta}}\hspace{1em}\left(1.1.4\right)$$
+\${\large e^{ix}=\cos x+i\sin x}$ 。（推导方法自行查阅），惊讶的发现和上面三角形式有相似之处,于是 \${\large z=\rho\left( \cos\theta+i\sin\theta \right)=\rho e^{i\theta}}$ ,最终得到 $\${\large z=\rho e^{i\theta}}\tag{1.1.4}$$
 
 常见转换也要记住： $e^{i\pi}=-1,e^{-i\pi}=-1,e^{i\frac{\pi}{2}}=i,e^{-i\frac{\pi}{2}}=-i$
 
@@ -117,15 +119,13 @@ $argz\in\left( -\pi,\pi\right]$ 与 $\arctan{\large \frac{y}{x}}\in\left(-\frac{
 
 **例题** 在复数域(**the complex field**)中计算 $\sqrt[3]{-8}$ .
 
-**解：**\$ \sqrt[3]{-8}=\left|\sqrt[3] {-8} \right| e^{i\frac{arg\left(-8\right)+2k\pi}{3}}$ \${\large =2e^{i\frac{\pi+2k\pi}{3}}},k=0,1,2$
+**解**：\${\large \sqrt[3]{-8}=\left|\sqrt[3] {-8} \right|{\large e^{i\frac{arg\left(-8\right)+2k\pi}{3}}}}$ \${\large =2e^{i\frac{\pi+2k\pi}{3}}},k=0,1,2$
 
-$当k=0时,\sqrt[3]{-8}=2e^{i\frac{\pi}{3}}=1+i\sqrt{3;}$ 
-$当k=1时,\sqrt[3]{-8}=2e^{i\pi}=-2$ 
-$当k=0时,\sqrt[3]{-8}=2e^{i\frac{5\pi}{3}}=1-i\sqrt{3;}$
+$当k=0时,\sqrt[3]{-8}=2e^{i\frac{\pi}{3}}=1+i\sqrt{3;}$ $当k=1时,\sqrt[3]{-8}=2e^{i\pi}=-2$ $当k=0时,\sqrt[3]{-8}=2e^{i\frac{5\pi}{3}}=1-i\sqrt{3;}$
 
-**如何判断$argz$的大小**？应该是把-8这个复数放到复平面上，然后看复向量与实正半轴的夹角;
+**如何判断argz的大小**？应该是把-8这个复数放到复平面上，然后看复向量与实正半轴的夹角;
 
-**如何判断$k$的取值**？原则一：周期性，k每加m，主值辐角就加2π, 则k取m个值，取哪几个无所谓，简而言之就是看指数的分母；
+**如何判断k的取值**？原则一：周期性，k每加m，主值辐角就加2π, 则k取m个值，取哪几个无所谓，简而言之就是看指数的分母；
 
 原则二：看根的个数，根据代数学基本定理，n次方程在复数范围内恰好有n个不同的根，本题本质上是求解 $x^{3}=-8$ 这个方程的根。
 
@@ -146,15 +146,15 @@ $当k=0时,\sqrt[3]{-8}=2e^{i\frac{5\pi}{3}}=1-i\sqrt{3;}$
 
 复变函数的严格定义这里不给出。只用知道啥是复变函数就行了，说白了就是两个二元实变函数的组合，高等数学的相关定理大部分依旧适用。
 
-$\${\large \begin{aligned} f(z) & = u(x, y) + i v(x, y) \\ &= u + i v \in \mathbb{C}，\quad u,v\in \mathbb{R} \end{aligned}}$$ 这里举例常见复变函数： $\${\large f(z) = z^3 = x^3 - 3xy^2 + i(3x^2y - y^3) }$$ $\${\large f(z) = z^2 = x^2 - y^2 + 2xyi}$$
+$\${\large \begin{aligned} f(z) & = u(x, y) + i v(x, y) \\ &= u + i v \in \mathbb{C},\quad u,v\in \mathbb{R} \end{aligned}}$$ 这里举例常见复变函数： \${\large f(z) = z^3 = x^3 - 3xy^2 + i(3x^2y - y^3) }$ \${\large f(z) = z^2 = x^2 - y^2 + 2xyi}$
 
-$\${\large f(z) = \frac{1}{z} = \frac{x}{x^2+y^2} - i \frac{y}{x^2+y^2}}$$ $\${\large f(z) = a_n z^n + a_{n-1} z^{n-1} + \cdots + a_1 z + a_0}$$ $\${\large f(z) = e^z = e^x (\cos y + i \sin y)}$$ 2.区域(**domain)**的概念
+\${\large f(z) = \frac{1}{z} = \frac{x}{x^2+y^2} - i \frac{y}{x^2+y^2}}$ \${\large f(z) = a_n z^n + a_{n-1} z^{n-1} + \cdots + a_1 z + a_0}$ \${\large f(z) = e^z = e^x (\cos y + i \sin y)}$ 2.区域(**domain**)的概念
 
 在解析函数论中，函数的定义域不是一般的点集，而是满足一定特殊条件的点集，叫做区域（记作 $D$ ）.要了解什么是区域就要先了解以下概念：
 
 1）邻域(**Neighborhood**)：以 $z_0$为圆心，以 $\epsilon$ 为半径的圆为点$z_0$的$\epsilon$ -邻域；
 
-2）内点(**interior point)**：若 $z_0\in D$且是 $D$ 的内点，则总存在 $z_0$的$\epsilon$ 邻域，使 $\left| z-z_0 \right|<\epsilon$ 的圆内诸点也是D的内点;
+2）内点(**interior point**)：若 $z_0\in D$且是 $D$ 的内点，则总存在 $z_0$的$\epsilon$ 邻域，使 $\left| z-z_0 \right|<\epsilon$ 的圆内诸点也是D的内点;
 
 3）区域：由内点构成的点集*(笑)；*
 
@@ -189,7 +189,7 @@ $故f(z)在原点无确定的极限，从而在原点$ $不连续.$
 
 复变函数求导法则与实变函数一致。
 
-**2.[柯西-黎曼条件](https://zhida.zhihu.com/search?content_id=283159195&content_type=Article&match_order=1&q=%E6%9F%AF%E8%A5%BF-%E9%BB%8E%E6%9B%BC%E6%9D%A1%E4%BB%B6&zhida_source=entity)**
+**2.柯西-黎曼条件**
 
 设 $f(z)=u(x,y)+iv(x,y)$ ,若 $f'(z) = \lim_{\Delta z \to 0} \frac{\Delta f}{\Delta z} = \lim_{\substack{\Delta x \to 0 \\ \Delta y \to 0}} \frac{\Delta u + i\Delta v}{\Delta x + i\Delta y}$， $f'(z)$ 存在且唯一，并且与 $\Delta x ,\Delta y\to 0$ 的方式无关，则：
 
@@ -225,13 +225,13 @@ $\Rightarrow\frac{df}{dz} = \frac{\partial u}{\partial x} - i \frac{\partial u}{
 
 > “大量的复变函数不可导、不解析，满足C-R条件的复变函数是高贵的、优雅的、具有高度协同性的函数。“
 
-解析函数 $f(z)=u(x,y)+iv(x,y)$ 的实部 $u(x,y)$ 和虚部 $v(x,y)$ 均满足齐次**拉普拉斯方程(Laplace's equation)**，称为调和函数(**harmonic function)**。(详细定义见书上P13)
+解析函数 $f(z)=u(x,y)+iv(x,y)$ 的实部 $u(x,y)$ 和虚部 $v(x,y)$ 均满足齐次**拉普拉斯方程(Laplace's equation)**，称为调和函数(**harmonic function**)。(详细定义见书上P13)
 
-二维拉普拉斯方程(**two-dimensional Laplace's equation**)： $$\nabla^2 u(x,y) = \frac{\partial^2 u}{\partial x^2} + \frac{\partial^2 u}{\partial y^2} = 0$$ (或记作 $\Delta u(x,y)=0$ )；
+二维拉普拉斯方程(**two-dimensional Laplace's equation**)： $\nabla^2 u(x,y) = \frac{\partial^2 u}{\partial x^2} + \frac{\partial^2 u}{\partial y^2} = 0$ (或记作 $\Delta u(x,y)=0$ )；
 
-$$\nabla^2 v(x,y) = \frac{\partial^2 v}{\partial x^2} + \frac{\partial^2 v}{\partial y^2} = 0$$ (或记作 $\Delta v(x,y)=0$ ).
+$\nabla^2 v(x,y) = \frac{\partial^2 v}{\partial x^2} + \frac{\partial^2 v}{\partial y^2} = 0$ (或记作 $\Delta v(x,y)=0$ ).
 
-> 小知识！二维拉普拉斯算子(**two-dimensional Laplace operator或2D Laplacian)**定义为 $\Delta =\nabla^2 = \frac{\partial^2}{\partial x^2} + \frac{\partial^2}{\partial y^2} = \nabla_2^2 = \Delta_2 = \nabla \cdot \nabla$  
+> 小知识！二维拉普拉斯算子(**two-dimensional Laplace operator或2D Laplacian**)定义为 $\Delta =\nabla^2 = \frac{\partial^2}{\partial x^2} + \frac{\partial^2}{\partial y^2} = \nabla_2^2 = \Delta_2 = \nabla \cdot \nabla$  
 > $\mathbf{\nabla }= \left( \frac{\partial}{\partial x}\mathbf{i} + \frac{\partial}{\partial y}\mathbf{j} \right) \quad \text{gradient 梯度}$ (电磁学里应该都学了吧)  
 > 证明：1）下面证明解析函数的 $u,v$ 是调和函数(用C-R条件)：  
 > $$\frac{\partial u}{\partial x} = \frac{\partial v}{\partial y} \; \implies \; \frac{\partial^2 u}{\partial x^2} = \frac{\partial^2 v}{\partial y \partial x}$$ $$\frac{\partial u}{\partial y} = -\frac{\partial v}{\partial x} \; \implies \; \frac{\partial^2 u}{\partial y^2} = -\frac{\partial^2 v}{\partial x \partial y}$$ $$\frac{\partial^2 u}{\partial x^2} + \frac{\partial^2 u}{\partial y^2} = \frac{\partial^2 v}{\partial y \partial x} - \frac{\partial^2 v}{\partial x \partial y} = 0$$*(这里混合偏导数可以交换求导数序。)*  
@@ -244,21 +244,21 @@ $\frac{\partial^2 u}{\partial x^2} + \frac{\partial^2 u}{\partial y^2} = -\varph
 
 物理学里面, 解析函数的理论在平面场问题中有重要应用，许多平面场都满足上述几个方程.
 
-比如一个在z方向上不变的静电场，可以退化为二维静电场（或称平面静电场），那就可以用一个解析函数来表示这个静电场，分别用实部和虚部表示电场分布和电势分布。对一个无源场，电势和电场强度满足拉普拉斯方程，对于有源场，满足泊松方程。 $$\nabla \cdot E = \frac{1}{\varepsilon_0} \rho \quad E = -\nabla U$$
+比如一个在z方向上不变的静电场，可以退化为二维静电场（或称平面静电场），那就可以用一个解析函数来表示这个静电场，分别用实部和虚部表示电场分布和电势分布。对一个无源场，电势和电场强度满足拉普拉斯方程，对于有源场，满足泊松方程。 $\nabla \cdot E = \frac{1}{\varepsilon_0} \rho \quad E = -\nabla U$
 
-$$\nabla^2 U= -\frac{1}{\varepsilon_0} \rho \quad$$
+$\nabla^2 U= -\frac{1}{\varepsilon_0} \rho \quad$
 
-$$\text{有电荷} \rightarrow \text{Poisson Eq}$$ $$\text{无电荷} \rightarrow \text{Laplace Eq}$$电场线族和电势线族也是处处相互正交，所以常常用解析函数来描绘平面静电场.
+有电荷 $\rightarrow$ Poisson Eq，无电荷 $\rightarrow$ Laplace Eq。电场线族和电势线族也是处处相互正交，所以常常用解析函数来描绘平面静电场.
 
 前面引用了周老师课上的话：“解析函数是高贵的、优雅的、具有高度协同性的函数。”具体表现在解析函数的实部和虚部是通过C-R条件联系着的，因此，只要知道实部就能求出虚部，知道虚部就能求出实部。以下列出两种方法：
 
 已知解析函数 $f(z)=u+iv$ 的实部 $u$ ，求 $v$
 
-法(1)全微分法： 已知 $u=u(x,y), \frac{\partial u}{\partial x}, \frac{\partial u}{\partial y}$ ,可求 $dv = \frac{\partial v}{\partial x} dx + \frac{\partial v}{\partial y} dy$ ，根据C-R条件得 $dv= -\frac{\partial u}{\partial y} dx + \frac{\partial u}{\partial x} dy$ $(= P dx + Q dy$ 满足 $\frac{\partial Q}{\partial x} = -\frac{\partial P}{\partial y}，$ 所以积分与路径无关)，得 $$v = \int_L\left( -\frac{\partial u}{\partial y} dx + \frac{\partial u}{\partial x} dy \right) + C \quad (1.3.1)$$
+法(1)全微分法： 已知 $u=u(x,y), \frac{\partial u}{\partial x}, \frac{\partial u}{\partial y}$ ,可求 $dv = \frac{\partial v}{\partial x} dx + \frac{\partial v}{\partial y} dy$ ，根据C-R条件得 $dv= -\frac{\partial u}{\partial y} dx + \frac{\partial u}{\partial x} dy$ $(= P dx + Q dy$ 满足 $\frac{\partial Q}{\partial x} = -\frac{\partial P}{\partial y}，$ 所以积分与路径无关)，得 $$v = \int_L\left( -\frac{\partial u}{\partial y} dx + \frac{\partial u}{\partial x} dy \right) + C\tag{1.3.1}$$
 
 法(2)偏导数的偏积分（更常用）：已知 $u=u(x,y), \frac{\partial u}{\partial x}, \frac{\partial u}{\partial y}$ ,
 
-由 $\frac{\partial v}{\partial y} = \frac{\partial u}{\partial x}$，对 $y$ 偏积分可以得到 $$v (x,y)= \int \frac{\partial u}{\partial x} dy + \varphi(x)\quad(1.3.2)$$这里的 $\varphi(x)$ 是 $x$ 的函数，所以对 $y$ 求偏导的时候等于0，上式两边对 $y$ 求偏导可以还原成 $\frac{\partial v}{\partial y} = \frac{\partial u}{\partial x}$ .式(1.3.2)中， $\int \frac{\partial u}{\partial x} dy$ 可求， $\varphi(x)$待定；然后式(1.3.2)两边对 $x$ 求偏导，可得到 $$\frac{\partial v}{\partial x} = \frac{\partial}{\partial x} \int \frac{\partial u}{\partial x} dy + \varphi'(x)=-\frac{\partial u}{\partial y} \quad (1.3.3)$$式(1.3.3)中， $\frac{\partial}{\partial x} \int \frac{\partial u}{\partial x} dy$ 仍可求， $-\frac{\partial u}{\partial y}$ 已知，于是我们得到 $\varphi'(x)$ ，积分得到 $\varphi(x)$ ，最后代入式(1.3.2)得到$v$.
+由 $\frac{\partial v}{\partial y} = \frac{\partial u}{\partial x}$，对 $y$ 偏积分可以得到 $$v (x,y)= \int \frac{\partial u}{\partial x} dy + \varphi(x)\tag{1.3.2}$$这里的 $\varphi(x)$ 是 $x$ 的函数，所以对 $y$ 求偏导的时候等于0，上式两边对 $y$ 求偏导可以还原成 $\frac{\partial v}{\partial y} = \frac{\partial u}{\partial x}$ .式(1.3.2)中， $\int \frac{\partial u}{\partial x} dy$ 可求， $\varphi(x)$待定；然后式(1.3.2)两边对 $x$ 求偏导，可得到 $$\frac{\partial v}{\partial x} = \frac{\partial}{\partial x} \int \frac{\partial u}{\partial x} dy + \varphi'(x)=-\frac{\partial u}{\partial y}\tag{1.3.3}$$式(1.3.3)中， $\frac{\partial}{\partial x} \int \frac{\partial u}{\partial x} dy$ 仍可求， $-\frac{\partial u}{\partial y}$ 已知，于是我们得到 $\varphi'(x)$ ，积分得到 $\varphi(x)$ ，最后代入式(1.3.2)得到$v$.
 
 当然还有其他方法，瞪眼法，直接得到实部或者虚部是什么简单解析函数的实部或虚部，比如 $- \frac{y}{x^2+y^2}$ 是 $f(z)=\frac{1}{z}$ 的虚部,etc.
 
@@ -267,11 +267,11 @@ $$\text{有电荷} \rightarrow \text{Poisson Eq}$$ $$\text{无电荷} \rightarro
 
 $解 \quad \frac{\partial u}{\partial x} = 3x^2 - 3y^2, \quad \frac{\partial u}{\partial y} = -6xy$
 
-由(1.3.1)式有 $$v = \int 6xy\,dx + (3x^2 - 3y^2)\,dy + C$$ $$\quad = \int d(3x^2y - y^3) + C$$ $$\quad = 3x^2y - y^3 + C$$
+由(1.3.1)式有 $v = \int 6xy\,dx + (3x^2 - 3y^2)\,dy + C$ $\quad = \int d(3x^2y - y^3) + C$ $\quad = 3x^2y - y^3 + C$
 
 > 也可由(1.3.2)式和(1.3.3)式得
 
-$$v = \int (3x^2 - 3y^2)\,dy + \varphi(x) = 3x^2y - y^3 + \varphi(x)$$ $$\frac{\partial v}{\partial x} = 6xy + \varphi'(x) = -\frac{\partial u}{\partial y} = 6xy$$
+$v = \int (3x^2 - 3y^2)\,dy + \varphi(x) = 3x^2y - y^3 + \varphi(x)$ $\frac{\partial v}{\partial x} = 6xy + \varphi'(x) = -\frac{\partial u}{\partial y} = 6xy$
 
 > 所以$\hspace{1em} \varphi'(x) = 0, \quad \varphi(x) = C$ ,  
 > 于是 $\hspace{1em} v = 3x^2y - y^3 + C$ ,
@@ -299,33 +299,33 @@ $f(z)=z^n,\quad n\in \mathbb Z$
 
 > 衍生函数：(1)多项式函数(**polynomial** **func.**)
 
-$$f(z)=P_n(z)= a_{n}z^{n}+a_{n-1}z^{n-1}+...+a_{1}z+a_{0}$$
+$f(z)=P_n(z)= a_{n}z^{n}+a_{n-1}z^{n-1}+...+a_{1}z+a_{0}$
 
 > (2)有理分式函数(**rational fraction func.**)
 
-$$f(z)=\frac{P_n(z)}{Q_m(z)},\quad m>n,\quad m,n\in \mathbb N$$
+$f(z)=\frac{P_n(z)}{Q_m(z)},\quad m>n,\quad m,n\in \mathbb N$
 
 2.指数函数(**exponential function**)
 
-$\${\large f(z) = e^z \overset{\text{def.}}{=} e^{x+iy} }$$ $\${\large = e^x e^{iy} = e^x(\cos y + i\sin y)}$$由于 $e^{i2k\pi} = 1,(k \in \mathbb{Z})$ 所以 $e^z$ 为以 $2\pi i$ 为周期的函数.
+\${\large f(z) = e^z \overset{\text{def.}}{=} e^{x+iy} }$ \${\large = e^x e^{iy} = e^x(\cos y + i\sin y)}$由于 $e^{i2k\pi} = 1,(k \in \mathbb{Z})$ 所以 $e^z$ 为以 $2\pi i$ 为周期的函数.
 
 3.三角函数(**trigonometric func.**)
 
-$$f(z) = \sin z = \frac{e^{iz} - e^{-iz}}{2i};$$ $$f(z) = \cos z = \frac{e^{iz} + e^{-iz}}{2}.$$仍有 $\sin^2 z + \cos^2 z \equiv 1，$ 仍以 $2\pi$ 为周期，但不一定 $-1\le\sin z \le 1, -1\le\cos z \le 1 .$
+$f(z) = \sin z = \frac{e^{iz} - e^{-iz}}{2i};$ $f(z) = \cos z = \frac{e^{iz} + e^{-iz}}{2}.$仍有 $\sin^2 z + \cos^2 z \equiv 1，$ 仍以 $2\pi$ 为周期，但不一定 $-1\le\sin z \le 1, -1\le\cos z \le 1 .$
 
-例如： $$\cos i = \frac{e^{-1} + e^1}{2}=\frac{0.368+2.718}{2}=1.543 > 1$$
+例如： $\cos i = \frac{e^{-1} + e^1}{2}=\frac{0.368+2.718}{2}=1.543 > 1$
 
 其他三角函数公式仍成立，详见书P17
 
 其他三角函数：
 
-$$\tan z = \frac{\sin z}{\cos z} , \quad \cot z = \frac{\cos z}{\sin z};$$ $$\sec z = \frac{1}{\cos z} , \quad \csc z = \frac{1}{\sin z};$$
+$\tan z = \frac{\sin z}{\cos z} , \quad \cot z = \frac{\cos z}{\sin z};$ $\sec z = \frac{1}{\cos z} , \quad \csc z = \frac{1}{\sin z};$
 
 4.双曲函数(**hyperbolic func.**)
 
-$$\operatorname{sh} z = \frac{e^z - e^{-z}}{2} , \quad \operatorname{ch} z = \frac{e^z + e^{-z}}{2}$$
+$\operatorname{sh} z = \frac{e^z - e^{-z}}{2} , \quad \operatorname{ch} z = \frac{e^z + e^{-z}}{2}$
 
-$$\tanh z = \frac{\operatorname{sh} z}{\operatorname{ch} z} , \quad \coth z = \frac{\operatorname{ch} z}{\operatorname{sh} z};$$ $$\operatorname{sech} z = \frac{1}{\operatorname{ch} z} , \quad \operatorname{csch} z = \frac{1}{\operatorname{sh} z}.$$
+$$\tanh z = \frac{\operatorname{sh} z}{\operatorname{ch} z} , \quad \coth z = \frac{\operatorname{ch} z}{\operatorname{sh} z};$$ $\operatorname{sech} z = \frac{1}{\operatorname{ch} z} , \quad \operatorname{csch} z = \frac{1}{\operatorname{sh} z}.$
 
 > 做题小技巧： $\cos{(iz)}=\operatorname {ch} {z}$ , $\cosh^2 z=1+\sinh^2z$ .
 
@@ -341,9 +341,9 @@ $f(z) = \sqrt[n]{z},\quad n=2,3,...$
 
 ![左多值，右多叶](images/006.webp)
 
-(1)多值函数，就是说一个 $z$ 对应多个函数，上面说过任一非零复数的辐角可以有无穷多个（都是加上 $2k\pi$ ），也就是 $$z=\rho e^{i\theta}=\rho e^{i\theta+2k\pi}$$
+(1)多值函数，就是说一个 $z$ 对应多个函数，上面说过任一非零复数的辐角可以有无穷多个（都是加上 $2k\pi$ ），也就是 $z=\rho e^{i\theta}=\rho e^{i\theta+2k\pi}$
 
-但是在经过一套映射后，得出来的函数值不同，就像 $$f(z) = \sqrt{z-2}= \sqrt{\rho e^{i\theta}}$$ $$=\sqrt{\rho e^{i\theta+2k\pi}}=\sqrt{\rho}e^{i\frac{\theta+2k\pi}{2}},k=0,1$$当 $k=0,f_1(z) =\sqrt{\rho}e^{i\frac{\theta}{2}}$
+但是在经过一套映射后，得出来的函数值不同，就像 $f(z) = \sqrt{z-2}= \sqrt{\rho e^{i\theta}}$ $=\sqrt{\rho e^{i\theta+2k\pi}}=\sqrt{\rho}e^{i\frac{\theta+2k\pi}{2}},k=0,1$当 $k=0,f_1(z) =\sqrt{\rho}e^{i\frac{\theta}{2}}$
 
 这是一支(**branch**)函数;
 
@@ -359,7 +359,7 @@ $f(z) = \sqrt[n]{z},\quad n=2,3,...$
 
 ![](images/007.png)
 
-自变量 $z$ 是在复平面上“[狼奔豕突](https://zhida.zhihu.com/search?content_id=283159195&content_type=Article&match_order=1&q=%E7%8B%BC%E5%A5%94%E8%B1%95%E7%AA%81&zhida_source=entity)”(不同于一元实函数的x在x轴上变化)，我们随意选取一个起点，也就是图中的 $z$ ，在起点的时候， $z-2=\rho e^{i\theta}$ ，这时对应的函数值是其中一支: $f_1(z) =\sqrt{\rho}e^{i\frac{\theta}{2}};$
+自变量 $z$ 是在复平面上“狼奔豕突”(不同于一元实函数的x在x轴上变化)，我们随意选取一个起点，也就是图中的 $z$ ，在起点的时候， $z-2=\rho e^{i\theta}$ ，这时对应的函数值是其中一支: $f_1(z) =\sqrt{\rho}e^{i\frac{\theta}{2}};$
 
 然后 $z$ 开始狼奔豕突，如果它的轨迹绕过了点（2,0），是不是这个 $z-2$ 的矢量转了一圈？那就意味着 $z-2$ 辐角加了 $2\pi$ ，变成了 $\rho e^{i({\theta+2\pi})}$ ，这时对应的函数值跳到了另一支: $f_2(z)=-\sqrt{\rho}e^{i\frac{\theta}{2}}$
 
@@ -373,15 +373,15 @@ $f(z) = \sqrt[n]{z},\quad n=2,3,...$
 
 包围**所有支点**，若函数值跳到了另一支，那么无穷远点也是支点，反之则不是。
 
-> 例1： $$f(z) = \sqrt[3]{(z-a)(z-b)}, \quad (a \neq b, a, b \in \mathbb{R})$$ 的支点有 $(a,0)(b,0)$ 和无穷远点。  
+> 例1： $f(z) = \sqrt[3]{(z-a)(z-b)}, \quad (a \neq b, a, b \in \mathbb{R})$ 的支点有 $(a,0)(b,0)$ 和无穷远点。  
 > 解 设： $z - a = \rho_1 e^{i\theta_1};$ $z - b = \rho_2 e^{i\theta_2}$  
 > 所以有
 
-$$(z-a)(z-b) = \rho_1 \rho_2 e^{i(\theta_1 + \theta_2)}$$
+$(z-a)(z-b) = \rho_1 \rho_2 e^{i(\theta_1 + \theta_2)}$
 
 > 所以有
 
-$$f(z) = \sqrt[3]{\rho_1 \rho_2 e^{i(\theta_1 + \theta_2)}}$$ $$= (\rho_1 \rho_2)^{\frac{1}{3}} e^{i \frac{\theta_1 + \theta_2 + 2k\pi}{3}},\quad k = 0, 1, 2$$ $$= \begin{cases} f_1(z) = (\rho_1 \rho_2)^{\frac{1}{3}} e^{i \frac{\theta_1 + \theta_2}{3}}, \hspace{2.7em} C1\\ f_2(z) = (\rho_1 \rho_2)^{\frac{1}{3}} e^{i \frac{\theta_1 + \theta_2}{3}} e^{i \frac{2\pi}{3}}, \quad C2\\ f_3(z) = (\rho_1 \rho_2)^{\frac{1}{3}} e^{i \frac{\theta_1 + \theta_2}{3}} e^{i \frac{4\pi}{3}},\quad C3 \end{cases}$$
+$f(z) = \sqrt[3]{\rho_1 \rho_2 e^{i(\theta_1 + \theta_2)}}$ $= (\rho_1 \rho_2)^{\frac{1}{3}} e^{i \frac{\theta_1 + \theta_2 + 2k\pi}{3}},\quad k = 0, 1, 2$ $$= \begin{cases} f_1(z) = (\rho_1 \rho_2)^{\frac{1}{3}} e^{i \frac{\theta_1 + \theta_2}{3}}, \hspace{2.7em} C1\\ f_2(z) = (\rho_1 \rho_2)^{\frac{1}{3}} e^{i \frac{\theta_1 + \theta_2}{3}} e^{i \frac{2\pi}{3}}, \quad C2\\ f_3(z) = (\rho_1 \rho_2)^{\frac{1}{3}} e^{i \frac{\theta_1 + \theta_2}{3}} e^{i \frac{4\pi}{3}},\quad C3 \end{cases}$$
 
 ![](images/008.jpg)
 
@@ -390,9 +390,9 @@ $$f(z) = \sqrt[3]{\rho_1 \rho_2 e^{i(\theta_1 + \theta_2)}}$$ $$= (\rho_1 \rho_2
 > 笔者在写作业的时候被题目困住了，思索良久，结合上课内容总结出解根式函数的一般步骤，不保证正确性和严谨性；  
 > 以作业题为例，判断下列函数是单值的还是多值的，若是多值的，是几值？其支点是什么?  
 > (1) $z+\sqrt{z-1};$ (2) $\sqrt[3]{z^2-4}+\sqrt{z^2-1};$  
-> 解 ：(1)设 $z=\rho_1e^{i\theta_1}$ , $z-1=\rho_2e^{i\theta_2}$ ,所以上面的函数表示为 $$f(z)=\rho_1e^{i(\theta_1+2k\pi)}+{\rho_2}^{\frac{1}{2}}e^{\frac{i((\theta_2+2k\pi)}{2}};$$  
+> 解 ：(1)设 $z=\rho_1e^{i\theta_1}$ , $z-1=\rho_2e^{i\theta_2}$ ,所以上面的函数表示为 $f(z)=\rho_1e^{i(\theta_1+2k\pi)}+{\rho_2}^{\frac{1}{2}}e^{\frac{i((\theta_2+2k\pi)}{2}};$  
 > 然后取不同的 $k$ 看函数会有几个不同的值，显然这题取 $k=0,1$ ，所以函数有两个值；前面k加一，其实就是z绕着某店转了一圈，这题是z绕着z=2转了一圈，使得函数值变化（或者z也绕了z=0转了一圈，但是对函数值没影响，所以z=0不是支点），所以支点为z=2，然后再判断无穷远点是不是支点，显然是。  
-> (2)和上面一样设 $z-2=\rho_1e^{i\theta_1};$ $z+2=\rho_2e^{i\theta_2};$ $z-1=\rho_3e^{i\theta_3};$ $z+1=\rho_4e^{i\theta_4}$ ,所以函数表示为 $$f(z)=\sqrt[3]{\rho_1\rho_2e^{i(\theta_1+\theta_2)}}+\sqrt{\rho_3\rho_4e^{i(\theta_3+\theta_4)}}$$ $$=(\rho_1\rho_2)^\frac{1}{3}e^{i\frac{(\theta_1+\theta_2+2k_1\pi)}{3}}+\frac{\rho_3\rho_4}{2}e^{i\frac{(\theta_3+\theta_4+2k_2\pi)}{2}},$$ $$k_1=0,1,2;k_2=0,1$$  
+> (2)和上面一样设 $z-2=\rho_1e^{i\theta_1};$ $z+2=\rho_2e^{i\theta_2};$ $z-1=\rho_3e^{i\theta_3};$ $z+1=\rho_4e^{i\theta_4}$ ,所以函数表示为 $f(z)=\sqrt[3]{\rho_1\rho_2e^{i(\theta_1+\theta_2)}}+\sqrt{\rho_3\rho_4e^{i(\theta_3+\theta_4)}}$ $$=(\rho_1\rho_2)^\frac{1}{3}e^{i\frac{(\theta_1+\theta_2+2k_1\pi)}{3}}+\frac{\rho_3\rho_4}{2}e^{i\frac{(\theta_3+\theta_4+2k_2\pi)}{2}},$$ $k_1=0,1,2;k_2=0,1$  
 > 排列组合得 $f(z)$ 有六个不同的值，所以是六值，支点判断和上题一样。
 
 下面介绍支割线：
@@ -403,17 +403,17 @@ $$f(z) = \sqrt[3]{\rho_1 \rho_2 e^{i(\theta_1 + \theta_2)}}$$ $$= (\rho_1 \rho_2
 
 > 黎曼面不讲，自行翻阅课本P20。
 
-6.对数函数(**logarithmic function)**
+6.对数函数(**logarithmic function**)
 
 $f(z) = \mathrm{Ln}\,z , \quad z=0, \infty$ 是两个支点。
 
-设 $$z-0=\rho e^{i\theta} = \rho e^{i(\theta+2k\pi)} , \quad k \in \mathbb{Z}$$
+设 $z-0=\rho e^{i\theta} = \rho e^{i(\theta+2k\pi)} , \quad k \in \mathbb{Z}$
 
-$$f(z) = \ln(\rho e^{i(\theta+2k\pi)}) = |\ln\rho| + i(\theta+2k\pi) ,$$
+$f(z) = \ln(\rho e^{i(\theta+2k\pi)}) = |\ln\rho| + i(\theta+2k\pi) ,$
 
-或表示为 $$\mathrm{Ln} \,(\rho e^{i(\theta+2k\pi)}) = |\ln\rho| + i(\theta+2k\pi) ,$$
+或表示为 $\mathrm{Ln} \,(\rho e^{i(\theta+2k\pi)}) = |\ln\rho| + i(\theta+2k\pi) ,$
 
-$$k=0, \pm 1, \pm2, \dots$$
+$k=0, \pm 1, \pm2, \dots$
 
 $k$ 不同，虚部 $\theta +2k\pi$ 不同，所以 $f(z)$ 有无穷多个支。
 
@@ -423,7 +423,7 @@ $k$ 不同，虚部 $\theta +2k\pi$ 不同，所以 $f(z)$ 有无穷多个支。
 
 $f(z)=z^s,\quad s\in \mathbb{C}$
 
-可以表示为 $f(z)=e^{s\ln{z}}$ (因为 $\ln{z}$ 具有[多值性](https://zhida.zhihu.com/search?content_id=283159195&content_type=Article&match_order=1&q=%E5%A4%9A%E5%80%BC%E6%80%A7&zhida_source=entity)，所以 $e^{s\ln{z}}$ 也可能有多值性，所以一定要规定 $\ln{z}$ 在哪个支上，需要做支割线)
+可以表示为 $f(z)=e^{s\ln{z}}$ (因为 $\ln{z}$ 具有多值性，所以 $e^{s\ln{z}}$ 也可能有多值性，所以一定要规定 $\ln{z}$ 在哪个支上，需要做支割线)
 
 上面 $s,\ln {z}$ 都是复数，最终也能用一个复数 $a+ib$ 表示，即 $e^{a+ib}$ ,所以不管多复杂的幂函数，都能变成 $e^{a+ib}=e^a(\cos{b}+i\sin{b})$
 
@@ -447,7 +447,7 @@ $f(z)=z^s,\quad s\in \mathbb{C}$
 
 > 例1 问函数 $w=z^2$ 将 $z$ 平面的直线 $y=x$ 变成了 $w$ 平面的何种图形？  
 > 解 $w=z^2=(x+iy)(x+iy)=x^2-y^2+i2xy$  
-> 所以 $$u=x^2-y^2, \quad v=2xy$$ 当 $y=x$ 时 $$u=0, v=2x^2 \geqslant 0, \quad -\infty < x < \infty$$ 故 $w=z^2$ 将 $z$ 平面的直线 $y=x$ 变成了 $w$ 平面上半虚轴。
+> 所以 $u=x^2-y^2, \quad v=2xy$ 当 $y=x$ 时 $u=0, v=2x^2 \geqslant 0, \quad -\infty < x < \infty$ 故 $w=z^2$ 将 $z$ 平面的直线 $y=x$ 变成了 $w$ 平面上半虚轴。
 
 ![](images/011.png)
 
@@ -457,23 +457,23 @@ $f(z)=z^s,\quad s\in \mathbb{C}$
 
 1.单叶变换(**Univalent Transformation**)
 
-我们感兴趣的是 $z$ 与$w$构成的一一对应的变换。也就是函数不能是多值也不能是多叶，那就需要 $x$ 和 $y$ 作为 $u$ 与 $v$ 的单值函数，由高数知识(方程组情形下的[隐函数存在定理](https://zhida.zhihu.com/search?content_id=283159195&content_type=Article&match_order=1&q=%E9%9A%90%E5%87%BD%E6%95%B0%E5%AD%98%E5%9C%A8%E5%AE%9A%E7%90%86&zhida_source=entity))可知，允许这样的条件是 $w=u(x,y)+iv(x,y)$ 的雅可比(**Jacobi**)行列式不等于零: $$J = {\large \begin{vmatrix} \frac{\partial u}{\partial x} & \frac{\partial u}{\partial y} \\ \frac{\partial v}{\partial x} & \frac{\partial v}{\partial y} \end{vmatrix}}\ne0$$设 $w=f(z)$ 在区域 $\sigma$ 中解析，则由 C-R 条件和解析函数的微商公式有 $$J = {\large \begin{vmatrix} \frac{\partial u}{\partial x} & \frac{\partial u}{\partial y} \\ \frac{\partial v}{\partial x} & \frac{\partial v}{\partial y} \end{vmatrix}} = \frac{\partial u}{\partial x}\frac{\partial v}{\partial y} - \frac{\partial v}{\partial x}\frac{\partial u}{\partial y}$$ $$= \left(\frac{\partial u}{\partial x}\right)^2 + \left(\frac{\partial u}{\partial y}\right)^2= \left| \frac{\partial u}{\partial x} - i\frac{\partial u}{\partial y} \right|^2 = |f'(z)|^2 \neq 0$$由此可见，若 $w=f(z)$ 是区域 $\sigma$ 中的解析函数，且 $f′(z)\ne 0(z\in \sigma)$ 则变换 $w=f(z)$ 在区域 $\sigma$ 上构成一一对应的变换，并称这变换为域$\sigma$上的单叶变换.
+我们感兴趣的是 $z$ 与$w$构成的一一对应的变换。也就是函数不能是多值也不能是多叶，那就需要 $x$ 和 $y$ 作为 $u$ 与 $v$ 的单值函数，由高数知识(方程组情形下的隐函数存在定理)可知，允许这样的条件是 $w=u(x,y)+iv(x,y)$ 的雅可比(**Jacobi**)行列式不等于零: $$J = {\large \begin{vmatrix} \frac{\partial u}{\partial x} & \frac{\partial u}{\partial y} \\ \frac{\partial v}{\partial x} & \frac{\partial v}{\partial y} \end{vmatrix}}\ne0$$设 $w=f(z)$ 在区域 $\sigma$ 中解析，则由 C-R 条件和解析函数的微商公式有 $$J = {\large \begin{vmatrix} \frac{\partial u}{\partial x} & \frac{\partial u}{\partial y} \\ \frac{\partial v}{\partial x} & \frac{\partial v}{\partial y} \end{vmatrix}} = \frac{\partial u}{\partial x}\frac{\partial v}{\partial y} - \frac{\partial v}{\partial x}\frac{\partial u}{\partial y}$$ $$= \left(\frac{\partial u}{\partial x}\right)^2 + \left(\frac{\partial u}{\partial y}\right)^2= \left| \frac{\partial u}{\partial x} - i\frac{\partial u}{\partial y} \right|^2 = |f'(z)|^2 \neq 0$$由此可见，若 $w=f(z)$ 是区域 $\sigma$ 中的解析函数，且 $f′(z)\ne 0(z\in \sigma)$ 则变换 $w=f(z)$ 在区域 $\sigma$ 上构成一一对应的变换，并称这变换为域$\sigma$上的单叶变换.
 
 2\. 导数的几何意义
 
 ![](images/012.png)
 
-设 $w=f(z)$ 在 $z$ 点解析，且 $f'(z_0) \neq 0$ ，则当 $z_0$ 在 $z$ 平面沿一曲线 $l_1$ 运动到 $z_0+\Delta z$ 点，相应的 $w_0$ 也将在 $w$ 平面沿着一条相应的曲线 $l_1'$ ，运动到$w_0+\Delta w$点(如图)，且 $$f'(z_0) = \lim_{\Delta z \to 0} \frac{\Delta w}{\Delta z}$$导数 $f'(z_0)$ 显然也是一个复数，即有$$f'(z_0) = \lim_{\Delta z \to 0} \frac{|\Delta w|}{|\Delta z|} \frac{e^{i \arg \Delta w}}{e^{i \arg \Delta z}}$$ $$= \lim_{\Delta z \to 0} \left| \frac{\Delta w}{\Delta z} \right| \cdot \lim_{\Delta z \to 0} e^{i(\arg \Delta w - \arg \Delta z)}$$所以有$$\begin{cases}|f'(z_0)| = \lim_{\Delta z \to 0} \left| \frac{\Delta w}{\Delta z} \right|\\ \arg f'(z_0) = \lim_{\Delta z \to 0} (\arg \Delta w - \arg \Delta z) = \theta_1' - \theta_1 \end{cases}$$
+设 $w=f(z)$ 在 $z$ 点解析，且 $f'(z_0) \neq 0$ ，则当 $z_0$ 在 $z$ 平面沿一曲线 $l_1$ 运动到 $z_0+\Delta z$ 点，相应的 $w_0$ 也将在 $w$ 平面沿着一条相应的曲线 $l_1'$ ，运动到$w_0+\Delta w$点(如图)，且 $f'(z_0) = \lim_{\Delta z \to 0} \frac{\Delta w}{\Delta z}$导数 $f'(z_0)$ 显然也是一个复数，即有$f'(z_0) = \lim_{\Delta z \to 0} \frac{|\Delta w|}{|\Delta z|} \frac{e^{i \arg \Delta w}}{e^{i \arg \Delta z}}$ $$= \lim_{\Delta z \to 0} \left| \frac{\Delta w}{\Delta z} \right| \cdot \lim_{\Delta z \to 0} e^{i(\arg \Delta w - \arg \Delta z)}$$所以有$$\begin{cases}|f'(z_0)| = \lim_{\Delta z \to 0} \left| \frac{\Delta w}{\Delta z} \right|\\ \arg f'(z_0) = \lim_{\Delta z \to 0} (\arg \Delta w - \arg \Delta z) = \theta_1' - \theta_1 \end{cases}$$
 
 $\Delta z$ 和$\Delta w$本质都是复向量，那么上面的等式非常好理解， $\theta_1$ 是 $l_1$ 在点 $z_0$ 的切线的方向，$\theta_1'$ 是 $l_1'$ 在点 $w_0$ 的切线的方向，上式可看出，导数的辐角 $\arg{f'(z_0)}$ 为过 $z_0$ 点的曲线的切线经变换后的转动角，称做变换 $w=f(z)$ 在 $z_0$ 点的**旋转角**，其值与$\theta_1$无关.类似的有导数的模为微线元的长度之比，称做变换 $w=f(z)$ 在 $z_0$ 点的长度**伸缩比**或**放大系数**.
 
 > 这里依旧说一下我的理解：导数 $f'(z)$ ，它其实是 $z$ 附近的微小向量和 $z$ 被变换成的 $w$ 附近的微小向量的系数，这个系数包含了这个向量被变换后要转的角度和要伸缩的倍数，也就是旋转角和伸缩比，这两个量都被包含在一个式子里。
 
-3.[保角变换](https://zhida.zhihu.com/search?content_id=283159195&content_type=Article&match_order=1&q=%E4%BF%9D%E8%A7%92%E5%8F%98%E6%8D%A2&zhida_source=entity)(**conformal transformation**)
+3.保角变换(**conformal transformation**)
 
 ![](images/013.jpg)
 
-如图所示，设过$z_0$点另有一条曲线 $l_2$ ，它在$z_0$点的切线方向为 $\theta_2$ ，则经过变换 $w=f(z)$ 后在$w$平面相应的也有过 $w_0$ 的另一条曲线 $l'2$ .设它在$w_0$点的切线方向为 $\theta'_2$ ，则由导数的几何意义知 $$\theta_2' - \theta_2 = \arg f'(z_0)$$又 $$\theta_1' - \theta_1 = \arg f'(z_0)$$所以 $$\theta_2' - \theta_2 = \theta_1' - \theta_1$$ 得到$$\theta_2' - \theta_1' = \theta_2 - \theta_1$$这说明曲线$l_1$和$l_2$在 $z_0$ 点的夹角 $\theta_2-\theta_1$ ，经变换后其大小和转向均未发生改变.(因为 $f'(z)$ 在有定义的各点都唯一)
+如图所示，设过$z_0$点另有一条曲线 $l_2$ ，它在$z_0$点的切线方向为 $\theta_2$ ，则经过变换 $w=f(z)$ 后在$w$平面相应的也有过 $w_0$ 的另一条曲线 $l'2$ .设它在$w_0$点的切线方向为 $\theta'_2$ ，则由导数的几何意义知 $\theta_2' - \theta_2 = \arg f'(z_0)$又 $\theta_1' - \theta_1 = \arg f'(z_0)$所以 $\theta_2' - \theta_2 = \theta_1' - \theta_1$ 得到$\theta_2' - \theta_1' = \theta_2 - \theta_1$这说明曲线$l_1$和$l_2$在 $z_0$ 点的夹角 $\theta_2-\theta_1$ ，经变换后其大小和转向均未发生改变.(因为 $f'(z)$ 在有定义的各点都唯一)
 
 我们称这种使通过已知点的任意两条曲线间的夹角的大小及方向保持不变的变换 $w=f(z)$ ，为该点的**保角变换**.
 
@@ -491,31 +491,31 @@ $\Delta z$ 和$\Delta w$本质都是复向量，那么上面的等式非常好�
 
 4.保角变换的性质
 
-在保角变换下，二维拉普拉斯方程、泊松方程和[亥姆霍兹方程](https://zhida.zhihu.com/search?content_id=283159195&content_type=Article&match_order=1&q=%E4%BA%A5%E5%A7%86%E9%9C%8D%E5%85%B9%E6%96%B9%E7%A8%8B&zhida_source=entity)均具有不变性。
+在保角变换下，二维拉普拉斯方程、泊松方程和亥姆霍兹方程均具有不变性。
 
 事实上，若$w=f(z)=\xi(x,y)+i\eta(x,y)$在某区域$\sigma$内解析，且 $w=f'(z)\neq 0$，则由上可知，$w=f(z)$ 在$\sigma$内实现保角变换. 于是，实二元函数$u(x,y)$在此变换下变为$u(\xi,\eta)$且经此变换后有
 
-$$u_x = u_\xi \xi_x + u_\eta \eta_x, \quad u_y = u_\xi \xi_y + u_\eta \eta_y$$ 复合函数求导链式法则$$u_{xx} = u_{\xi\xi} \xi_x^2 + 2u_{\xi\eta} \xi_x \eta_x + u_{\eta\eta} \eta_x^2 + u_\xi \xi_{xx} + u_\eta \eta_{xx}$$ $$u_{yy} = u_{\xi\xi} \xi_y^2 + 2u_{\xi\eta} \xi_y \eta_y + u_{\eta\eta} \eta_y^2 + u_\xi \xi_{yy} + u_\eta \eta_{yy}$$ 所以
+$u_x = u_\xi \xi_x + u_\eta \eta_x, \quad u_y = u_\xi \xi_y + u_\eta \eta_y$ 复合函数求导链式法则$u_{xx} = u_{\xi\xi} \xi_x^2 + 2u_{\xi\eta} \xi_x \eta_x + u_{\eta\eta} \eta_x^2 + u_\xi \xi_{xx} + u_\eta \eta_{xx}$ $u_{yy} = u_{\xi\xi} \xi_y^2 + 2u_{\xi\eta} \xi_y \eta_y + u_{\eta\eta} \eta_y^2 + u_\xi \xi_{yy} + u_\eta \eta_{yy}$ 所以
 
-$$u_{xx} + u_{yy} = u_{\xi\xi}(\xi_x^2 + \xi_y^2) + 2u_{\xi\eta}(\xi_x \eta_x + \xi_y \eta_y)$$ $$+ u_{\eta\eta}(\eta_x^2 + \eta_y^2)+ u_\xi(\xi_{xx} + \xi_{yy})$$ $$+ u_\eta(\eta_{xx} + \eta_{yy})\hspace{5em} (1.5.1)$$
+$u_{xx} + u_{yy} = u_{\xi\xi}(\xi_x^2 + \xi_y^2) + 2u_{\xi\eta}(\xi_x \eta_x + \xi_y \eta_y)$ $+ u_{\eta\eta}(\eta_x^2 + \eta_y^2)+ u_\xi(\xi_{xx} + \xi_{yy})$ $$+ u_\eta(\eta_{xx} + \eta_{yy})\tag{1.5.1}$$
 
 而由 C-R 条件有
 
-$$\xi_x = \eta_y, \quad \eta_x = -\xi_y$$从而有 $$\xi_x \eta_x + \xi_y \eta_y = \xi_x \eta_x - \eta_x \xi_x = 0$$C-R条件两个等式两边分别对 $x，y$ 求导，可得$$\xi_{xx} + \xi_{yy} = \eta_{xx} + \eta_{yy} = 0$$根据前面雅可比行列式那里有
+$\xi_x = \eta_y, \quad \eta_x = -\xi_y$从而有 $\xi_x \eta_x + \xi_y \eta_y = \xi_x \eta_x - \eta_x \xi_x = 0$C-R条件两个等式两边分别对 $x，y$ 求导，可得$\xi_{xx} + \xi_{yy} = \eta_{xx} + \eta_{yy} = 0$根据前面雅可比行列式那里有
 
-$$\xi_x^2 + \xi_y^2 = \eta_x^2 + \eta_y^2 = |f'(z)|^2$$将这些结果一并代入式(1.5.1)便有
+$\xi_x^2 + \xi_y^2 = \eta_x^2 + \eta_y^2 = |f'(z)|^2$将这些结果一并代入式(1.5.1)便有
 
-$$u_{xx} + u_{yy} = (u_{\xi\xi} + u_{\eta\eta}) |f'(z)|^2\quad (1.5.2)$$代入拉普拉斯方程，则有
+$$u_{xx} + u_{yy} = (u_{\xi\xi} + u_{\eta\eta}) |f'(z)|^2\tag{1.5.2}$$代入拉普拉斯方程，则有
 
-$$u_{xx} + u_{yy} = 0=(u_{\xi\xi} + u_{\eta\eta}) |f'(z)|^2$$因为 $|f'(z)|\ne 0$ ,于是有 $$u_{\xi\xi} + u_{\eta\eta} = 0$$即拉普拉斯方程在保角变换下仍变为新坐标平面 $w$ 中的拉普拉斯方程.
+$u_{xx} + u_{yy} = 0=(u_{\xi\xi} + u_{\eta\eta}) |f'(z)|^2$因为 $|f'(z)|\ne 0$ ,于是有 $u_{\xi\xi} + u_{\eta\eta} = 0$即拉普拉斯方程在保角变换下仍变为新坐标平面 $w$ 中的拉普拉斯方程.
 
-同样，将式(1.5.2)代入泊松方程 $$u_{xx} + u_{yy} = -\varphi(x,y)$$便有
+同样，将式(1.5.2)代入泊松方程 $u_{xx} + u_{yy} = -\varphi(x,y)$便有
 
-$$u_{\xi\xi} + u_{\eta\eta} = -\frac{\varphi(\xi,\eta)}{|f'(z)|^2}$$即泊松方程在保角变换下仍变为新坐标平面 $w$ 中的泊松方程.
+$u_{\xi\xi} + u_{\eta\eta} = -\frac{\varphi(\xi,\eta)}{|f'(z)|^2}$即泊松方程在保角变换下仍变为新坐标平面 $w$ 中的泊松方程.
 
 同样，将式(1.5.2)代入亥姆霍兹方程 ，得到
 
-$$u_{\xi\xi} + u_{\eta\eta}+ \frac{\lambda u}{|f'(z)|^2} = 0$$
+$u_{\xi\xi} + u_{\eta\eta}+ \frac{\lambda u}{|f'(z)|^2} = 0$
 
 > （提示：$z=x+iy原坐标平面;$ $w=\xi+i\eta新坐标平面$ ）
 
@@ -525,15 +525,15 @@ $$u_{\xi\xi} + u_{\eta\eta}+ \frac{\lambda u}{|f'(z)|^2} = 0$$
 > 解 由于问题的对称性，只考虑如图所示 $z$ 平面的第一象限情况.  
 > 为使边界形状简化，选变换(还记得例题1吗？)
 
-$$w=z^2$$
+$w=z^2$
 
 > 则图中的直角区域变成了图中$w$平面的上半平面，而在实轴 $\eta=0$ 上其电势为 $v_0$ . 且有$\eta=$常数；而电场线则平行于虚轴，且有$\xi=$ 常数. 回到$z$平面，由$w=z^2$有
 
-$$\xi + i\eta = (x+iy)^2 = x^2 - y^2 + i2xy$$
+$\xi + i\eta = (x+iy)^2 = x^2 - y^2 + i2xy$
 
 > 所以等势线和电场线的方程分别为
 
-$$\eta = 2xy = \text{常数}$$ $$\xi = x^2 - y^2 = \text{常数}$$
+$\eta = 2xy = C$（常数） $\xi = x^2 - y^2 = C$（常数）
 
 > 这是$z$平面中的两族互相正交的双曲线(坐标轴旋转 $45°$ ,详见理论力学笔记导学)，分别用实线和虚线在图中画出.
 
