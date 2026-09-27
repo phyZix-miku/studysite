@@ -546,7 +546,250 @@ $\eta = 2xy = C$（常数） $\xi = x^2 - y^2 = C$（常数）
 `
       }
     ]
+  },
+  {
+    chapter: "第二章 解析函数积分",
+    sections: [
+      {
+        id: "2-1",
+        title: "2.1复变函数的积分",
+        content: String.raw`
+1.复变函数积分和莱布尼兹对积分的定义一致
+
+> 1)在复平面上有一段曲线，将其 $n$ 等分，每段段点取 $z_{k-1},z_k$  
+> 2)在每个曲线段的中点依次取点 $\eta_k$ , $\eta_k\in[z_{k-1},z_k]$ .  
+> 3)求和 $S= \sum_{k=1}^n f(\eta_k) \Delta z_k$  
+> 4)取极限 $\int_l f(z) \, dz=  \lim_{ n \to \infty \\ \Delta z_k \to 0} f(x) \sum_{k=1}^n f(\eta_k) \Delta z_k$
+
+![图2.1](images/001.png)
+
+2.复积分存在的条件及计算方法
+
+对 $f(z)=u+iv,dz=dx+idy$ ,
+
+有 $\int_lf(z)\,dz=\int_{l}\,(udx-vdy)+i\int_l(\,udy+vdx)$
+复积分 $\int_lf(z)\,dz$ 存在的条件和两个实线积分 $\int_{l}\,(udx-vdy)$ 与 $\int_l(\,udy+vdx)$ 存在的条件相同。显然复积分可以化为两个实积分来计算。下面给出三个书上例题：
+
+> **例1**  计算 $\int_l \operatorname{Rez} dz$ 其中 $l$ 如图2.2所示分别为：(1) 连接 $O$ 点到$2+i$点的直线段；(2) 连接$O$点到 22 再到$2+i$的折线.
+
+![图2.2](images/002.png)
+
+> **解**  $\int_l \operatorname{Rez} dz = \int_l x(dx + i dy)$  
+> (1)此时 $x=2y, \,y:0\to 1$ ,
+> 故 $\int_l \operatorname{Rez} dz = \int_{OA} x(dx + i dy)$ $= \int_0^1 2y(2+i) dy = 2+i$
+> (2)在 $OB$ 上， $y=0, \,x: 0 \to 2$ ;在 $BA$ 上， $x=2, \,y: 0 \to 1$ .
+> 故 $\int_l \operatorname{Rez} dz = \int_{OB} x(dx + i dy) + \int_{BA} x(dx + i dy)$ $= \int_0^2 x dx + i \int_0^1 2 dy = 2 + 2i$
+
+由此看出，积分路径不同，有些函数的积分的结果也不同。  
+>   
+> **例2**  计算 $\int_l z^2 dz$ ，其中 $l$ 是与上例相同的两条路径.
+
+> **解**  $z^2 = x^2 - y^2 + i2xy,$ ，故 $\int_l z^2 dz = \int_l (x^2 - y^2) dx - 2xy dy$ $+ i \int_l 2xy dx + (x^2 - y^2) dy$
+> (1) $\int_l z^2 dz = \int_0^1 [2(4y^2 - y^2) - 4y^2] dy$ $+ i \int_0^1 [8y^2 + (4y^2 - y^2)] dy = \frac{2}{3} + \frac{11}{3}i$
+> (2) $\int_l z^2 dz = \int_{OB} z^2 dz + \int_{BA} z^2 dz$ $= \int_0^2 x^2 dx + \int_0^1 (-4y) dy + i \int_0^1 (4 - y^2) dy$ $= \frac{2}{3} + \frac{11}{3}i$
+
+可以看出，积分路径不同，有些函数的积分的结果相同，为什么详见数物笔记（1）1.3  
+> **例3**  (这个例题的结论很有用，需要记住)  
+> 计算
+> $$\oint_l \frac{dz}{(z-a)^n}，l:\left| z-a \right|=r$$  
+> **解**  在 $l$ 上， $z-a=re^{i\theta}(0<\theta\leqslant 2\pi),$ 对两边求导，得 $dz=ire^{i\theta}d\theta$
+> (1)当 $n$ 为不等于一的整数时，有
+> $$\oint_l \frac{dz}{(z-a)^n} = \int_0^{2\pi} \frac{ire^{i\theta}}{r^n e^{in\theta}} d\theta = i\,{r^{1-n}} \int_0^{2\pi} e^{i(1-n)\theta} d\theta = 0$$
+> (2)当 $n=1$ 时，有
+> $$\oint_l \frac{dz}{z-a} = \int_0^{2\pi} \frac{ire^{i\theta}}{re^{i\theta}} d\theta = 2\pi i$$
+
+3.复积分的性质
+
+和曲线积分相似，详见书P32
+`
+      },
+      {
+        id: "2-2",
+        title: "2.2柯西定理(**Cauchy's theorem**)",
+        content: String.raw`
+1.单连通区域的柯西定理
+
+在单连通区域 $\sigma$ 解析的 $f(z)$ 在 $\sigma$ 内一个围道 $l$ 上积分等于零。
+
+$\oint_lf(z)=0$ 
+> **证** $$\oint_l f(z)dz = \oint_l (udx - vdy) + i \oint_l (udy + vdx)$$
+$$= \iint\limits_\Sigma\left( -\frac{\partial v}{\partial x} - \frac{\partial u}{\partial y} \right) dxdy + i \iint\limits_\Sigma\left( \frac{\partial u}{\partial x} - \frac{\partial v}{\partial y} \right) dxdy = 0$$
+
+> **注**：结合格林公式和C-R条件， $\Sigma$ 是以 $l$ 为边界的单连通区域；
+
+2.柯西定理的推论
+
+1)$f(z)$ 在其单连通区域 $\sigma$ 内解析，则其积分与路径无关
+> $$\oint_lf(z)=\int_{l_1} f(z)\,dz+\int_{-l_2}f(z)\,dz =\int_{l_1} f(z)\,dz-\int_{l_2}f(z)\,dz=0$$
+> 得
+> $$\int_{l_1} f(z)\,dz=\int_{l_2}f(z)\,dz$$
+![图 2.3](images/003.png)
+
+2)$f(z)$ 在其解析单连通区域 $\sigma$ 内存在一个不定积分的原函数
+
+$$\int f(z)\,dz=F(z)\Leftrightarrow F'(z)=f(z) \int z^n dz = \frac{1}{n+1} z^{n+1} + C, \quad n \neq -1$$
+
+> $\int \cos x dx =\sin x+C$
+> $\int \sin x dx=-\cos x +C$ 
+> $\int e^x dx=e^x+C$
+
+3.复连通区域的柯西定理
+
+函数 $f(z)$ 在复连通区域 $\sigma$ 内解析，有 $\bar{\sigma}=\sigma +L+\mathop{\Sigma}\limits_{k=1}^{n}l_k$ ,其中 $l_k$ 包围了奇点。则复连通区域柯西定理：
+
+![](images/004.png)
+
+或
+$$\oint_L f(z) dz = \sum_{k=1}^n \oint_{l_k} f(z) dz$$
+> **注**：以后沿围道的积分尽量看图确定方向。这里没箭头的代表沿逆时针，箭头如上图的沿顺时针。
+
+![图2.4](images/005.png)
+
+> **证**： 如图2.5，在区域上剪 $n$ 刀（做割线），使 $\sigma$ 外和 $\sigma$ 包围的的洞连通，这样就把复连通区域变成了单连通区域(更准确地说，这里加的割线是人为的，是为了构造一个单连通区域，使得割线一来一回贡献为零方便计算，而不是把复连通区域变成单连通区域)。这样边界相对区域 $\sigma$ 都变成了逆时针的走向。而多出来的这几条线加起来都等于零。
+
+![图2.5](images/006.png)
+
+> 再运用单连通区域柯西定理，得到复连通区域的柯西定理。  
+> **应用**：  
+> (1)计算 $\oint_l \frac{dz}{(z-a)^n} ,n\in\mathbb{Z}$  
+> **解**   $$\oint_l \frac{dz}{(z-a)^n} =\oint_{C_r:|z-a|=r} \frac{dz}{(z-a)^n}$$
+ $$=\begin{cases} 2\pi i,\quad n=1\\ 0,\qquad n\ne1 \end{cases}$$  
+> (2)计算 $\oint_l \frac{dz}{z^2-1} \quad(l:|z=0|=a>2)$  
+> 解：在两个奇点处做两个小圆(以后都用 $C$ 来代指圆周，角标一般为半径,这里至两个不同的圆周)互不交叠：
+
+![图2.6](images/007.jpg)
+
+> 由复连通区域柯西定理$\oint_l \frac{dz}{z^2-1} = \oint_{C_1} \frac{dz}{z^2-1} + \oint_{C_2} \frac{dz}{z^2-1}$
+> 又$\frac{1}{z^2-1} = \frac{1}{2} \left( \frac{1}{z-1} - \frac{1}{z+1} \right)$  
+> 结合单连通区域柯西定理和2.2.2例3得$$\oint_{C_1} \frac{dz}{z^2-1} = \frac{1}{2} \left( \oint_{C_1} \frac{1}{z-1} - \oint_{C_1} \frac{1}{z+1} \right) = \frac{1}{2} (2\pi i - 0) = \pi i$$ $\oint_{C_2} \frac{dz}{z^2-1} = \frac{1}{2} \left( \oint_{C_2} \frac{1}{z-1} - \oint_{C_2} \frac{1}{z+1} \right) = -\pi i$  
+> 所以有$\oint_l \frac{dz}{z^2-1} = 0$  
+> (3)计算 $\oint_l \frac{2z^2 - 15z + 30}{z^3 - 10z^2 + 32z - 32} dz \quad (l: |z|=3)$  
+> **解**   因式分解得
+> $$\oint_l \frac{2(z-4)^2 + (z-2)}{(z-4)^2(z-2)} dz = \oint_l \frac{2}{z-2} dz + \oint_l \frac{1}{(z-4)^2} dz = 2 \cdot 2\pi i + 0 = 4\pi i$$
+
+2026.9.20
+`
+      },
+      {
+        id: "2-3",
+        title: "2.3柯西积分公式(**Cauchy's integral formula**)",
+        content: String.raw`
+1.柯西积分公式
+
+若 $f(z)$ 在区域 $\sigma$ 内解析，在 $\bar{\sigma}=\sigma+l$ 上连续， $a$ 为 $\sigma$ 的内点，则有 
+
+$$\oint_l \frac{f(z)}{z-a}dz =2\pi if(a)\Leftrightarrow f(a)=\frac{1}{2\pi i}\oint_l \frac{f(z)}{z-a} dz$$
+
+> **证**:  $\frac{f(z)}{z-a}$ 在 $l$ 与 $C_\rho$间处处解析，运用复连通区域柯西定理，得  
+> $$\oint_l \frac{f(z)}{z-a} dz = \oint_{C_\rho} \frac{f(z)}{z-a} dz$$ 
+> 将右式分子减 $f(a)$加 $f(a)$ ，得到  
+> $$\oint_{C_\rho} \frac{f(z)-f(a)}{z-a} dz + \oint_{C_\rho} \frac{f(a)}{z-a} dz$$  
+> 发现式子右边等于 $2\pi i f(a)$ ，所以只需证 $\oint_{C_\rho} \frac{f(z)-f(a)}{z-a} dz =0$  
+> 由 $f(z)$ 的连续性知， $\rho\to0\Rightarrow z\to a$ 对任意的 $\varepsilon <0$ ,总有 $\left| f(z)-f(a) \right|<\varepsilon$ .  
+> 所以取 $\rho \to 0$ ,（简单点说就是当圆的半径$\rho$ 趋于 0, 点z趋于点a，他们的函数值之差就趋于零，只不过为了数学严谨性不能直接等于0，要等于一个足够小的值。）便有  
+> $$\left| \oint_{C_\rho} \frac{f(z)-f(a)}{z-a} dz \right| \le \oint_{C_\rho} \frac{|f(z)-f(a)|}{|z-a|} |dz|< 2\pi \rho \frac{\varepsilon}{\rho} = 2\pi \varepsilon \to 0$$
+柯西积分公式的更一般的形式,把 $a$ 换成 $z$ ，把 $z$ 换成 $\zeta$ ，得到
+
+$$f(z)=\frac{1}{2\pi i}\oint_l \frac{f(\zeta)}{\zeta-z} d\zeta$$
+
+这个公式的意义在于：一个解析函数$f(z)$在区域$\sigma$内的值由它在该区域边界上的值$f(\zeta)$所确定.
+
+推广到复连通区域，有
+
+$$f(z) = \frac{1}{2\pi i} \oint_l \frac{f(\zeta)}{\zeta - z} d\zeta + \frac{1}{2\pi i} \sum_{k=1}^n \oint_{l_k} \frac{f(\zeta)}{\zeta - z} d\zeta$$情况同图2.4.
+
+2.柯西积分公式的推论
+
+1)若 $f(z)$ 在区域 $\sigma$ 内解析，在 $\bar{\sigma}=\sigma+l$ 上连续，则 $f(z)$ 在 $\sigma$ 内任意阶可导，其公式为
+
+$$f^{(n)}(z) = \frac{n!}{2\pi i} \oint_l \frac{f(\zeta)}{(\zeta - z)^{n+1}} d\zeta, \quad n = 1, 2, \cdots$$
+
+> **证明**： 当前情况下，一个无穷级数的求和若一致收敛，则对 $\zeta$ 变量的积分和对 $z$ 变量的求导能够交换次序(详细证明请看书).  
+> $f^{(n)}(z) = \frac{1}{2\pi i} \oint_l (\frac{1}{\zeta - z})_z^{(n)} f(\zeta)d\zeta$ $=\frac{n!}{2\pi i} \oint_l \frac{f(\zeta)}{(\zeta - z)^{n+1}} d\zeta, \quad n = 1, 2, \cdots$
+
+不过这个公式的意义不是用来求 $f(z)$ 的 $n$ 阶导的，而是要化为下面这个公式
+
+$$\oint_l \frac{f(\zeta)}{(\zeta - z)^{n}} d= \frac{(n-1)!}{2\pi i}f^{(n-1)}(z) \zeta, \quad n = 1, 2, \cdots$$
+
+这是用来求复杂函数的积分的.
+> 条件是 $f(z),f(\zeta)$ 在 $\sigma$ 内可导， $z$ 在围道 $l$ 内
+
+2)若 $l$ 是属于 $\sigma$ 的一条不封闭曲线， $z\in \sigma$ 不在 $l$ 上,则有
+
+$$\frac{1}{2\pi i} \int_l \frac{f(\zeta)}{\zeta - z} d\zeta  =\varphi(z) \neq f(z)$$
+
+这种积分叫做柯西型积分.
+
+3)柯西不等式
+
+设$l$为以$z$为中心的圆 $|ζ−z|=R$ ，$f(z)$ 在$|\zeta − z|<R$内解析，在 $|\zeta−z|⩽R$ 上连续，且对于 $\zeta \in l$ 有 $|f(\zeta)|⩽M$ ，则
+
+$|f^{(n)}(z)| \leqslant \frac{n!M}{R^n}$
+
+4)刘维尔定理(**Liouville's theorem**)
+
+若 $f(z)$ 在复平面上解析，且 $z \to \infty$ 时， $f(z)$ 有上界： $|f(z)| \leqslant M ,$  
+则 $f(z)$ 必为常数.
+
+5)模数原理(**Maximum Modulus Principle**)
+
+$f(z)$ 在 $\sigma$ 内解析，在 $\bar{\sigma} = \sigma + l$ 上连续，则 $|f(z)|$ 必在 $l$ 上取得最大值.
+
+6)中值（平均值）定理(**Mean Value Theorem**)
+
+若 $f(z)$ 在 $|z-a|<R$ 内解析，在 $|z-a|=R$ 上连续，则 $f(z)$ 在圆心 $a$ 点  
+的值等于它在圆周上的算术平均值
+
+$f(a) = \frac{1}{2\pi} \int_0^{2\pi} f(a+Re^{i\theta})d\theta$
+
+7)摩勒纳定理(**Morera's theorem**)
+
+若 $f(z)$ 在区域 $\sigma$ 内连续，且对 $\sigma$ 内任意围线 $l$ ，都有 $\oint_l f(z)dz=0，$ 则 $f(z)$ 在 $\sigma$ 内解析.
+
+> 注：以上推论证明自行查阅书P40-44  
+> 小知识！围道，围线，**contour/closed contour.**
+
+第二章知识点到这里就结束了，下面做一道例题，是书上的习题2.3的第7题
+
+T7:证明
+
+$$\int_0^{2\pi} e^{\rho \cos\varphi} \cos(\rho \sin\varphi - n\varphi) d\varphi = \frac{2\pi \rho^n}{n!} \;(n \in \mathbb{N})$$ 证:看到了e和三角函数还有 $\rho$ ，化为复指数形式，令 $z = \rho \cos\varphi + i\rho \sin\varphi = \rho e^{i\varphi}, \quad \varphi \in [0, 2\pi]$
+
+构造函数，运用柯西积分公式推论高阶导数公式
+
+$$\frac{n!}{2\pi i} \oint_{|z|=\rho} \frac{e^z}{(z-0)^{n+1}} dz = \left.(e^z)^{(n)}\right|_{z=0} = 1$$
+
+又 $dz = \rho i e^{i\varphi} d\varphi = iz d\varphi$,所以原式左边化为 
+
+$$\frac{n!}{2\pi i} i \int_0^{2\pi} \frac{e^z}{z^n} d\varphi = \frac{n!}{2\pi} \int_0^{2\pi} \frac{e^{\rho \cos\varphi} \cdot e^{i\rho \sin\varphi}}{\rho^n e^{in\varphi}} d\varphi $$
+
+$$= \frac{n!}{2\pi \rho^n} \int_0^{2\pi} e^{\rho \cos\varphi} \cdot e^{i(\rho \sin\varphi - n\varphi)} d\varphi$$
+
+发现被积函数都是以 $2\pi$ 为周期的周期函数，根据高数知识，积分上下限可以任意平移，变成
+
+$$= \frac{n!}{2\pi \rho^n} \int_{-\pi}^{\pi} e^{\rho \cos\varphi} \cdot [\cos(\rho \sin\varphi - n\varphi)+ i \sin(\rho \sin\varphi - n\varphi)] d\varphi$$ 
+
+分析函数奇偶性，得到
+$$=\frac{n!}{2\pi \rho^n}\int_{-\pi}^{\pi} e^{\rho \cos\varphi} \cos(\rho \sin\varphi - n\varphi) d\varphi =1$$
+
+所以
+$$\int_0^{2\pi} e^{\rho \cos\varphi} \cos(\rho \sin\varphi - n\varphi) d\varphi = \frac{2\pi \rho^n}{n!}$$
+
+剩下偶函数，还可得
+$$\int_0^{\pi} e^{\rho \cos\varphi} \cos(\rho \sin\varphi - n\varphi) d\varphi = \frac{\pi \rho^n}{n!}$$
+
+（其实还有第八题，但是我没听懂，附上板书，日后解决了再写。）
+
+![周老师的字力透板背，入木三分](images/008.png)
+
+***谢谢你看到这里orz***
+
+2026.9.21
+`
+      }
+    ]
   }
+
 ];
 </script>
 
