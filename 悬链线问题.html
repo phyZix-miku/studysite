@@ -279,14 +279,16 @@ window.MathJax = {
     overflow-y: hidden;
   }
 
-  /* ===== 思维导图主干（左侧梯状连接） ===== */
+    /* ===== 思维导图主干（阶梯连接，去掉首尾线头） ===== */
   .flow {
     position: relative;
     margin-left: 14px;
     padding-left: 30px;
-    border-left: 2px solid var(--line);
+    /* 去掉贯穿整条主干的 border-left */
   }
   .node { position: relative; margin-bottom: 14px; overflow: visible; }
+
+  /* 水平小横线：从主干连到节点方框 */
   .node::before {
     content: "";
     position: absolute;
@@ -296,8 +298,19 @@ window.MathJax = {
     height: 2px;
     background: var(--line);
   }
-  .node.open .ans-body { border-radius: 0 0 6px 6px; }
 
+  /* 竖直连接线：只在相邻节点之间画一段 */
+  .node:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    left: -30px;
+    top: 21px;
+    width: 2px;
+    height: calc(100% + 14px); /* 节点高度 + 下间距，正好连到下一个节点 */
+    background: var(--line);
+  }
+
+  .node.open .ans-body { border-radius: 0 0 6px 6px; }
   /* ===== 页脚 ===== */
   .footer{
     text-align: center;
@@ -318,34 +331,45 @@ window.MathJax = {
     table.cmp th, table.cmp td{ padding: 6px 8px; }
   }
 
-  /* ===== 返回按钮（左上角） ===== */
-  .back-btn {
-    position: fixed;
-    top: 14px;
-    left: 16px;
-    z-index: 20;
-    font-family: inherit;
-    font-size: 14px;
-    letter-spacing: 1px;
-    color: var(--deep);
-    background: var(--pale);
-    border: 1px solid #9CCFCA;
-    border-radius: 4px;
-    padding: 6px 14px;
-    text-decoration: none;
-    cursor: pointer;
-    transition: background .2s, box-shadow .2s;
+/* ===== 返回首页按钮 ===== */
+.back-home{
+  position: fixed;
+  top: 18px;
+  left: 18px;
+  z-index: 999;
+  display: inline-block;
+  padding: 7px 14px;
+  background: #2A9D8F;
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 14px;
+  letter-spacing: 1px;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(42, 157, 143, .28);
+  transition: background .2s ease, transform .2s ease, box-shadow .2s ease;
+}
+
+.back-home:hover{
+  background: #0E6B6B;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(42, 157, 143, .36);
+}
+
+/* 手机端稍微小一点 */
+@media (max-width: 620px){
+  .back-home{
+    top: 12px;
+    left: 12px;
+    font-size: 13px;
+    padding: 6px 11px;
   }
-  .back-btn:hover {
-    background: #D3ECEA;
-    box-shadow: 0 2px 6px rgba(42, 157, 143, .18);
-  }
+}
 </style>
 </head>
 
 <body>
 
-<a class="back-btn" href="javascript:history.back()" title="返回">← 返回</a>
+<a class="back-home" href="index.html">← 返回</a>
 
 <div class="wrap">
 
