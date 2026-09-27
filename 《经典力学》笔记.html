@@ -811,11 +811,51 @@ main{ margin-left:var(--side-w); min-height:100vh; }
   .section{ break-inside:avoid; box-shadow:none; }
   body{ background:#fff; }
 }
+
+/* ===== 返回首页按钮（左上角） ===== */
+.back-home{
+  position: fixed;
+  top: 18px;
+  left: 18px;
+  z-index: 51;                /* 高于侧栏(50)，低于移动端抽屉展开(52) */
+  display: inline-block;
+  padding: 7px 14px;
+  background: #2A9D8F;
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 14px;
+  letter-spacing: 1px;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(42, 157, 143, .28);
+  transition: background .2s ease, transform .2s ease, box-shadow .2s ease;
+}
+.back-home:hover{
+  background: #0E6B6B;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(42, 157, 143, .36);
+}
+
+/* 桌面端：目录标题下移，避免被按钮压住 */
+.side-head{ padding-top: 58px; }
+
+@media (max-width: 980px){
+  .back-home{
+    top: 11px;
+    left: 12px;
+    font-size: 13px;
+    padding: 6px 11px;
+  }
+  /* 移动端顶栏给按钮让出位置 */
+  #topbar{ padding-left: 92px; }
+}
+
 </style>
 </head>
 
 <body>
 <div id="progress"></div>
+
+<a class="back-home" href="index.html">← 返回</a>
 
 <!-- 移动端顶栏 -->
 <div id="topbar">
