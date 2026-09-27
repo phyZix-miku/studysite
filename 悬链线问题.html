@@ -317,10 +317,36 @@ window.MathJax = {
     table.cmp{ font-size: 13.5px; }
     table.cmp th, table.cmp td{ padding: 6px 8px; }
   }
+
+  /* ===== 返回按钮（左上角） ===== */
+  .back-btn {
+    position: fixed;
+    top: 14px;
+    left: 16px;
+    z-index: 20;
+    font-family: inherit;
+    font-size: 14px;
+    letter-spacing: 1px;
+    color: var(--deep);
+    background: var(--pale);
+    border: 1px solid #9CCFCA;
+    border-radius: 4px;
+    padding: 6px 14px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background .2s, box-shadow .2s;
+  }
+  .back-btn:hover {
+    background: #D3ECEA;
+    box-shadow: 0 2px 6px rgba(42, 157, 143, .18);
+  }
 </style>
 </head>
 
 <body>
+
+<a class="back-btn" href="javascript:history.back()" title="返回">← 返回</a>
+
 <div class="wrap">
 
   <!-- ================= 标题区 ================= -->
