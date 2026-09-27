@@ -21,7 +21,7 @@ window.MathJax = {
 };
 </script>
 <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
-  
+
 <style>
   :root{
     --main:       #2A9D8F;   /* 主色：方框、边框 */
@@ -279,15 +279,24 @@ window.MathJax = {
     overflow-y: hidden;
   }
 
-  /* ===== 节点之间的箭头 ===== */
-  .arrow{
-    text-align: center;
-    font-size: 20px;
-    color: var(--line);
-    line-height: 1;
-    padding: 10px 0 6px;
-    user-select: none;
+  /* ===== 思维导图主干（左侧梯状连接） ===== */
+  .flow {
+    position: relative;
+    margin-left: 14px;
+    padding-left: 30px;
+    border-left: 2px solid var(--line);
   }
+  .node { position: relative; margin-bottom: 14px; overflow: visible; }
+  .node::before {
+    content: "";
+    position: absolute;
+    left: -30px;
+    top: 21px;
+    width: 30px;
+    height: 2px;
+    background: var(--line);
+  }
+  .node.open .ans-body { border-radius: 0 0 6px 6px; }
 
   /* ===== 页脚 ===== */
   .footer{
@@ -308,46 +317,10 @@ window.MathJax = {
     table.cmp{ font-size: 13.5px; }
     table.cmp th, table.cmp td{ padding: 6px 8px; }
   }
-  
-/* ===== 返回首页按钮 ===== */
-.back-home{
-  position: fixed;
-  top: 18px;
-  left: 18px;
-  z-index: 999;
-  display: inline-block;
-  padding: 7px 14px;
-  background: #2A9D8F;
-  color: #ffffff;
-  text-decoration: none;
-  font-size: 14px;
-  letter-spacing: 1px;
-  border-radius: 6px;
-  box-shadow: 0 2px 8px rgba(42, 157, 143, .28);
-  transition: background .2s ease, transform .2s ease, box-shadow .2s ease;
-}
-
-.back-home:hover{
-  background: #0E6B6B;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(42, 157, 143, .36);
-}
-
-/* 手机端稍微小一点 */
-@media (max-width: 620px){
-  .back-home{
-    top: 12px;
-    left: 12px;
-    font-size: 13px;
-    padding: 6px 11px;
-  }
-}
-  
 </style>
 </head>
 
 <body>
-<a class="back-home" href="index.html">← 返回</a>
 <div class="wrap">
 
   <!-- ================= 标题区 ================= -->
@@ -357,6 +330,8 @@ window.MathJax = {
   <div class="toolbar">
     <button id="allBtn" onclick="toggleAll()">全部展开</button>
   </div>
+
+  <div class="flow">
 
   <!-- ================= 01 ================= -->
   <div class="node" id="n1">
@@ -409,7 +384,7 @@ window.MathJax = {
     </div></div></div>
   </div>
 
-  <div class="arrow">↓</div>
+
 
   <!-- ================= 02 ================= -->
   <div class="node" id="n2">
@@ -517,7 +492,7 @@ window.MathJax = {
     </div></div></div>
   </div>
 
-  <div class="arrow">↓</div>
+
 
   <!-- ================= 03 ================= -->
   <div class="node" id="n3">
@@ -623,7 +598,7 @@ window.MathJax = {
     </div></div></div>
   </div>
 
-  <div class="arrow">↓</div>
+
 
   <!-- ================= 04 ================= -->
   <div class="node" id="n4">
@@ -708,6 +683,8 @@ window.MathJax = {
       </div>
 
     </div></div></div>
+  </div>
+
   </div>
 
   <div class="footer">悬链线 · 从现象到变分原理</div>
