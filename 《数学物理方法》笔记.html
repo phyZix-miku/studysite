@@ -65,9 +65,9 @@ const notes = [
         id: "1-0",
         title: "序 · 课程与教材信息",
         content: String.raw`
-课程：[数学物理方法](https://zhida.zhihu.com/search?content_id=283159195&content_type=Article&match_order=1&q=%E6%95%B0%E5%AD%A6%E7%89%A9%E7%90%86%E6%96%B9%E6%B3%95&zhida_source=entity)，教材：《数学物理方法》（第四版）[姚端正](https://zhida.zhihu.com/search?content_id=283159195&content_type=Article&match_order=1&q=%E5%A7%9A%E7%AB%AF%E6%AD%A3&zhida_source=entity) 周国全 贾俊基编著，老师：周国全。
+课程：数学物理方法，教材：《数学物理方法》（第四版）姚端正 周国全 贾俊基编著，老师：周国全。
 
-此笔记仅供参考，若有错误恳请各位大佬指正，谢谢！
+$此笔记仅供参考，若有错误恳请各位大佬指正，谢谢！$
 `
       },
       {
@@ -80,7 +80,7 @@ const notes = [
 
 共轭复数(**Complex Conjugate**)，
 
-$x+iy与x-iy互为共轭复数$ ，常在复数上加一 $\bar{ }\left(bar,读作拔\right)$ 表示该复数的共轭复数。 \${\large \bar{z}=x-iy}$ .我们惊喜的发现 $\${\large z+\bar{z}=2x,z-\bar{z}=2iy}$$于是有 $x={\large \frac{z+\bar{z}}{2}},y={\large \frac{z-\bar{z}}{2i}}$ ,所以我们可以在复平面上用z表示一些方程，比如：直线、椭圆 $$l:ax+by=c\Rightarrow$$ $$a {\large \frac{(z + \bar{z})}{2}} + b {\large \frac{(z - \bar{z})}{2i}} = c$$
+$x+iy$与$x-iy$互为共轭复数 ，常在复数上加一 $\bar{ }\left($bar,$读作拔$\right)$ 表示该复数的共轭复数。 \${\large \bar{z}=x-iy}$ .我们惊喜的发现 $\${\large z+\bar{z}=2x,z-\bar{z}=2iy}$$于是有 $x={\large \frac{z+\bar{z}}{2}},y={\large \frac{z-\bar{z}}{2i}}$ ,所以我们可以在复平面上用z表示一些方程，比如：直线、椭圆 $$l:ax+by=c\Rightarrow$$ $$a {\large \frac{(z + \bar{z})}{2}} + b {\large \frac{(z - \bar{z})}{2i}} = c$$
 
 复数的模(**Modulus**)为 $|z|=\sqrt{x^{2}+y^{2}}$ .
 
@@ -92,17 +92,15 @@ $x+iy与x-iy互为共轭复数$ ，常在复数上加一 $\bar{ }\left(bar,读�
 
 那么 $P$ 点两坐标为 $\begin{cases}        x=\rho\cos\theta\\        y=\rho\sin\theta    \end{cases}$ ,并有 $\tan\theta=\frac{y}{x}\left(x\ne0\right)$ ,
 
-所以有 $\${\large z=\rho \cos \theta + i \rho \sin \theta}$$
+所以有 $\${\large z=\rho \cos \theta + i \rho \sin \theta}$ \${\large =\rho\left( \cos\theta+i\sin\theta \right)}\hspace{1em}\left(1.1.3\right)$ 另外，由于任一非零复数的辐角可以有无穷多个（都是加上 $2k\pi$ ），为方便计算，我们把它们的辐角用一个限定在区间 $\left( -\pi,\pi\right]$ 内的角来代表，或者说这个东西才是辐角最主要的部分，称之为辐角的主值，或主值辐角(**Principal Argument**),用 $argz$ 来表示，于是有 $$Argz=argz+2k\pi,\hspace{2em}k\in \mathbb{Z}$$
 
-$\${\large =\rho\left( \cos\theta+i\sin\theta \right)}\hspace{1em}\left(1.1.3\right)$$ 另外，由于任一非零复数的辐角可以有无穷多个（都是加上 $2k\pi$ ），为方便计算，我们把它们的辐角用一个限定在区间 $\left( -\pi,\pi\right]$ 内的角来代表，或者说这个东西才是辐角最主要的部分，称之为辐角的主值，或主值辐角(**Principal Argument**),用 $argz$ 来表示，于是有 $$Argz=argz+2k\pi,\hspace{2em}k\in \mathbb{Z}$$
-
-$$\mathbf{ 注意，当 z=0 时,其模为0，其辐角无定义}。$$
+注意，当$z=0$时,其模为0，其辐角无定义。
 
 $argz\in\left( -\pi,\pi\right]$ 与 $\arctan{\large \frac{y}{x}}\in\left(-\frac{\pi}{2},\frac{\pi}{2}\right)$ 有如下关系 $\${\large \begin{align} argz\\ {\scriptsize\left(z\ne0\right)} \end{align} =\begin{cases}        \arctan{\large \frac{y}{x}},\hspace{2.5em}{z\small 在第一象限}\\       \arctan{\large \frac{y}{x}}+\pi,\hspace{0.2em}{z\small 在第二象限}\\        \arctan{\large \frac{y}{x}}-\pi,\hspace{0.3em}{z\small 在第三象限}\\       \arctan{\large \frac{y}{x}},\hspace{2.5em}{z\small 在第四象限}\\    \end{cases}}$$
 
   
 
-4)指数形式：在表示复数 $z$ 这之前我们需要知道[欧拉公式](https://zhida.zhihu.com/search?content_id=283159195&content_type=Article&match_order=1&q=%E6%AC%A7%E6%8B%89%E5%85%AC%E5%BC%8F&zhida_source=entity)(**Euler's formula**)：
+4)指数形式：在表示复数 $z$ 这之前我们需要知道[欧拉公式](**Euler's formula**)：
 
 \${\large e^{ix}=\cos x+i\sin x}$ 。（推导方法自行查阅），惊讶的发现和上面三角形式有相似之处,于是 \${\large z=\rho\left( \cos\theta+i\sin\theta \right)=\rho e^{i\theta}}$ ,最终得到 $\${\large z=\rho e^{i\theta}}\hspace{1em}\left(1.1.4\right)$$
 
@@ -119,17 +117,19 @@ $argz\in\left( -\pi,\pi\right]$ 与 $\arctan{\large \frac{y}{x}}\in\left(-\frac{
 
 **例题** 在复数域(**the complex field**)中计算 $\sqrt[3]{-8}$ .
 
-**解：**\${\large \sqrt[3]{-8}=\left|\sqrt[3] {-8} \right|{\large e^{i\frac{arg\left(-8\right)+2k\pi}{3}}}}$ \${\large =2e^{i\frac{\pi+2k\pi}{3}}},k=0,1,2$
+**解：**\$ \sqrt[3]{-8}=\left|\sqrt[3] {-8} \right| e^{i\frac{arg\left(-8\right)+2k\pi}{3}}$ \${\large =2e^{i\frac{\pi+2k\pi}{3}}},k=0,1,2$
 
-$当k=0时,\sqrt[3]{-8}=2e^{i\frac{\pi}{3}}=1+i\sqrt{3;}$ $当k=1时,\sqrt[3]{-8}=2e^{i\pi}=-2$ $当k=0时,\sqrt[3]{-8}=2e^{i\frac{5\pi}{3}}=1-i\sqrt{3;}$
+$当k=0时,\sqrt[3]{-8}=2e^{i\frac{\pi}{3}}=1+i\sqrt{3;}$ 
+$当k=1时,\sqrt[3]{-8}=2e^{i\pi}=-2$ 
+$当k=0时,\sqrt[3]{-8}=2e^{i\frac{5\pi}{3}}=1-i\sqrt{3;}$
 
-**如何判断argz的大小？**应该是把-8这个复数放到复平面上，然后看复向量与实正半轴的夹角;
+**如何判断$argz$的大小**？应该是把-8这个复数放到复平面上，然后看复向量与实正半轴的夹角;
 
-**如何判断k的取值？**原则一：周期性，k每加m，主值辐角就加2π, 则k取m个值，取哪几个无所谓，简而言之就是看指数的分母；
+**如何判断$k$的取值**？原则一：周期性，k每加m，主值辐角就加2π, 则k取m个值，取哪几个无所谓，简而言之就是看指数的分母；
 
-原则二：看根的个数，根据[代数学基本定理](https://zhida.zhihu.com/search?content_id=283159195&content_type=Article&match_order=1&q=%E4%BB%A3%E6%95%B0%E5%AD%A6%E5%9F%BA%E6%9C%AC%E5%AE%9A%E7%90%86&zhida_source=entity)，n次方程在复数范围内恰好有n个不同的根，本题本质上是求解 $x^{3}=-8$ 这个方程的根。
+原则二：看根的个数，根据代数学基本定理，n次方程在复数范围内恰好有n个不同的根，本题本质上是求解 $x^{3}=-8$ 这个方程的根。
 
-**几何解释：**在 $\rho$ 为半径的圆上， $n$ 个根的分布是圆上正 $n$ 边形的顶点，其中一个点与原点的连线与实正半轴的夹角为 $argz$ .
+**几何解释**：在 $\rho$ 为半径的圆上， $n$ 个根的分布是圆上正 $n$ 边形的顶点，其中一个点与原点的连线与实正半轴的夹角为 $argz$ .
 
 ![](images/003.jpg)
 
