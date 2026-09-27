@@ -521,17 +521,43 @@ body{
 }
 .toc-ch{ margin:10px 0 6px; }
 .toc-ch-link{
-  display:block;
+  display:flex;
+  align-items:center;
+  gap:6px;
   padding:8px 10px;
   font-size:14.5px; font-weight:bold;
   color:var(--deep); text-decoration:none;
   background:var(--pale);
   border-left:3px solid var(--main);
   border-radius:0 6px 6px 0;
+  cursor:pointer;
+  user-select:none;
   transition:background .15s;
 }
 .toc-ch-link:hover{ background:var(--pale-2); }
-.toc-secs{ list-style:none; margin:4px 0 0; padding:0 0 0 8px; }
+.toc-ch-text{ flex:1 1 auto; }
+
+.toc-arrow{
+  flex:0 0 auto;
+  font-size:10px;
+  color:var(--main-dark);
+  transition:transform .22s ease;
+}
+.toc-ch.open .toc-arrow{ transform:rotate(90deg); }
+
+/* 小节默认收起 */
+.toc-secs{
+  list-style:none;
+  margin:0;
+  padding:0 0 0 8px;
+  max-height:0;
+  overflow:hidden;
+  transition:max-height .3s ease, margin .3s ease;
+}
+.toc-ch.open .toc-secs{
+  max-height:2000px;   /* 足够容纳本章所有小节 */
+  margin:4px 0 0;
+}
 .toc-secs li{ margin:0; }
 .toc-sec-link{
   display:block;
@@ -1112,7 +1138,8 @@ main{ margin-left:var(--side-w); min-height:100vh; }
   }
 
   /* ---------------- 6. 生成整站内容 + 目录 ---------------- */
-  var tocLinks = [], sectionEls = [];
+var tocLinks = [], sectionEls = [];
+var lastActiveChapter = null;   // 记录上一次展开的章节 id
 
   function buildNotes() {
     var root = document.getElementById('notes-root');
@@ -1133,9 +1160,14 @@ main{ margin-left:var(--side-w); min-height:100vh; }
         '</div>'
       );
 
-      toc.push('<div class="toc-ch">');
-      toc.push('<a class="toc-ch-link" href="#' + chId + '" data-target="' + chId + '">' + escapeHtml(ch.chapter) + '</a>');
-      toc.push('<ul class="toc-secs">');
+toc.push('<div class="toc-ch" data-ch="' + chId + '">');
+toc.push(
+  '<a class="toc-ch-link" href="#' + chId + '" data-target="' + chId + '" data-ch="' + chId + '">' +
+    '<span class="toc-arrow">▶</span>' +
+    '<span class="toc-ch-text">' + escapeHtml(ch.chapter) + '</span>' +
+  '</a>'
+);
+toc.push('<ul class="toc-secs">');
 
       secs.forEach(function (sec, si) {
         var sid = 'sec-' + (sec.id || ((ci + 1) + '-' + (si + 1)));
@@ -1172,20 +1204,41 @@ main{ margin-left:var(--side-w); min-height:100vh; }
   }
 
   /* ---------------- 7. 交互：目录点击 / 高亮 / 返回顶部 / 搜索 ---------------- */
-  function bindTocClicks() {
-    tocLinks.forEach(function (a) {
-      a.addEventListener('click', function (e) {
-        var target = a.getAttribute('data-target');
-        var el = document.getElementById(target);
-        if (!el) { return; }
-        e.preventDefault();
-        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+function bindTocClicks() {
+  tocLinks.forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      var target = a.getAttribute('data-target');
+      var el = document.getElementById(target);
+      if (!el) { return; }
+      e.preventDefault();
+
+      var chId = a.getAttribute('data-ch');
+
+      /* —— 章节链接：切换展开，展开时顺便滚到本章 —— */
+      if (chId) {
+        var tocCh = document.querySelector('#toc-list .toc-ch[data-ch="' + chId + '"]');
+        if (tocCh) {
+          var wasOpen = tocCh.classList.contains('open');
+          tocCh.classList.toggle('open', !wasOpen);
+          if (!wasOpen) {
+            el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            lastActiveChapter = chId;
+          }
+        }
         if (history.replaceState) { history.replaceState(null, '', '#' + target); }
         setActive(target, true);
         closeSidebar();
-      });
+        return;
+      }
+
+      /* —— 小节链接：正常滚动 —— */
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      if (history.replaceState) { history.replaceState(null, '', '#' + target); }
+      setActive(target, true);
+      closeSidebar();
     });
-  }
+  });
+}
 
   function setActive(id, scrollIntoViewInToc) {
     tocLinks.forEach(function (a) {
@@ -1197,22 +1250,39 @@ main{ margin-left:var(--side-w); min-height:100vh; }
     });
   }
 
-  function updateActive() {
-    if (!sectionEls.length) { return; }
-    var offset = window.innerWidth <= 980 ? 96 : 28;
-    var current = sectionEls[0].id;
-    for (var i = 0; i < sectionEls.length; i++) {
-      if (sectionEls[i].getBoundingClientRect().top - offset <= 0) { current = sectionEls[i].id; }
-      else { break; }
-    }
-    // 优先高亮小节（若当前是章节标题，取其后第一个小节）
-    var cur = document.getElementById(current);
-    if (cur && cur.classList.contains('chapter')) {
-      var next = cur.querySelector('.section');
-      if (next) { current = next.id; }
-    }
-    setActive(current, false);
+ function updateActive() {
+  if (!sectionEls.length) { return; }
+  var offset = window.innerWidth <= 980 ? 96 : 28;
+  var current = sectionEls[0].id;
+  for (var i = 0; i < sectionEls.length; i++) {
+    if (sectionEls[i].getBoundingClientRect().top - offset <= 0) { current = sectionEls[i].id; }
+    else { break; }
   }
+  // 若当前是章节标题，取其后第一个小节
+  var cur = document.getElementById(current);
+  if (cur && cur.classList.contains('chapter')) {
+    var next = cur.querySelector('.section');
+    if (next) { current = next.id; }
+  }
+  setActive(current, false);
+
+  /* —— 自动展开当前小节所属章节 —— */
+  var curSec = document.getElementById(current);
+  if (curSec && curSec.classList) {
+    var chEl = curSec.closest ? curSec.closest('.chapter') : null;
+    if (chEl && chEl.id !== lastActiveChapter) {
+      lastActiveChapter = chEl.id;
+      var tocChs = document.querySelectorAll('#toc-list .toc-ch');
+      var activeTocCh = document.querySelector('#toc-list .toc-ch[data-ch="' + chEl.id + '"]');
+      if (activeTocCh) {
+        Array.prototype.forEach.call(tocChs, function (c) {
+          c.classList.toggle('open', c === activeTocCh);
+        });
+      }
+    }
+  }
+}
+
 
   function onScroll() {
     var y = window.pageYOffset || document.documentElement.scrollTop || 0;
@@ -1259,10 +1329,14 @@ main{ margin-left:var(--side-w); min-height:100vh; }
           li.style.display = hit ? '' : 'none';
           if (hit) { shown++; }
         });
-        var chHit = !q || group.querySelector('.toc-ch-link').textContent.toLowerCase().indexOf(q) >= 0;
-        var show = !q || shown > 0 || chHit;
-        group.style.display = show ? '' : 'none';
-        total += shown;
+var chHit = !q || group.querySelector('.toc-ch-link').textContent.toLowerCase().indexOf(q) >= 0;
+var show = !q || shown > 0 || chHit;
+group.style.display = show ? '' : 'none';
+/* 搜索时把命中的章节自动展开 */
+if (q && show && (shown > 0 || chHit)) {
+  group.classList.add('open');
+}
+total += shown;
       });
       document.getElementById('toc-empty').style.display = (q && total === 0) ? 'block' : 'none';
     });
