@@ -788,6 +788,377 @@ $$\int_0^{\pi} e^{\rho \cos\varphi} \cos(\rho \sin\varphi - n\varphi) d\varphi =
 `
       }
     ]
+  },
+  {
+    chapter: "第三章 复变函数级数",
+    sections: [
+      {
+        id: "3-1",
+        title: "3.1 复级数",
+        content: String.raw`
+**1.复数项级数**
+
+无穷求和
+
+$f_1 + f_2 + \cdots + f_k + \cdots = \sum_{k=1}^{\infty} f_k$
+
+部分和
+
+$F_n = f_1 + f_2 + \cdots + f_n = \sum_{k=1}^{n} f_k$
+
+若 $\lim_{n \to \infty} F_n = F$，则 $\displaystyle\sum_{k=1}^{\infty} f_k$ 收敛于 $F = u + iv$
+
+$f_k = u_k + iv_k \quad \lim_{n \to \infty} \sum_{k=1}^{n} f_k$ $= \lim_{n \to \infty} \sum_{k=1}^{n} u_k + i \lim_{n \to \infty} \sum_{k=1}^{n} v_k = u + iv$
+
+$\Rightarrow    \begin {cases} \displaystyle\lim_{n \to \infty} \displaystyle\sum_{k=1}^{n} u_k = u  \\     \displaystyle\lim_{n \to \infty}        \displaystyle\sum_{k=1}^{n} v_k = v     \end{cases}$
+
+**2.判别法：**
+
+1)达朗贝&#x5C14;**（d'Alembert）**&#x6BD4;值判别&#x6CD5;**：** 对于 $\displaystyle\sum_{k=1}^{\infty} f_k$，若 $\lim_{k \to \infty} \left| \frac{f_{k+1}}{f_k} \right| =l$
+
+则当
+
+- $l<1$ 时， $\displaystyle\sum_{k=1}^{\infty} f_k$ 收敛且绝对收敛
+- $l>1$ 时，$\displaystyle\sum_{k=1}^{\infty} f_k$ 发散
+- $l= 1$ 时，无法判断敛散性，需用更高级有效的判别法（一般是高斯判别法）
+
+2)柯西根值判别法：对于 $\displaystyle\sum_{k=1}^{\infty} f_k$，若
+
+$\lim_{k \to \infty} \sqrt[k]{|f_k|} = r$
+
+则当：
+
+- $r < 1$，绝对收敛
+- $r > 1$，发散
+- $r = 1$，无法确定敛散性
+
+交错级数(**alternating series**): $\displaystyle\sum_{k=1}^{\infty} (-1)^{k+1} f_k$
+
+收敛条件：$\lim_{k \to \infty} f_k = 0$ [莱布尼兹判别法(**Leibniz test**)]
+
+> 小知识！ $\lim_{k\to \infty}(1+\frac{1}{2}+\cdots +\frac{1}{n}-\ln n)=\gamma \approx 0.577215,$ $\gamma$ 为欧拉常数
+
+3)高斯判别法(**Gauss test**)
+
+若 $\frac{f_k}{f_{k+1}} = 1 + \frac{\mu}{k} + o\left(\frac{1}{k^\lambda}\right),\:\lambda>1$
+
+> 式中 $o\left(\frac{1}{k^\lambda}\right)$ 是高阶无穷小量.
+
+则当 $\operatorname{Re}\mu > 1$时，$\displaystyle\sum_{k=1}^{\infty} f_k$ 绝对收敛；
+
+当 $\operatorname{Re}\mu \le 1$时，$\displaystyle\sum_{k=1}^{\infty} f_k$ 发散.
+
+**证：**
+
+$\left| \frac{f_k}{f_{k+1}} \right| = \sqrt{\left(1 + \frac{\mu}{k}\right)\left(1 + \frac{\bar{\mu}}{k}\right)}$
+
+$= \sqrt{1 + \frac{\mu + \bar{\mu}}{k} + \left(\frac{\mu \bar{\mu}}{k^2}\right)}_{\text{(高阶舍去)}}$
+
+$= \left(1 + \frac{2\operatorname{Re}\mu}{k}\right)^{\frac{1}{2}} = 1 + \frac{1}{2} \cdot \frac{2\operatorname{Re}\mu}{k} = 1 + \frac{\operatorname{Re}\mu}{k}$
+
+> 展开后取一阶近似得上式
+
+那么为什么这样之后就能判定敛散性呢？还记得高数的 $p^-$ 级数吗？
+
+$\sum_{k=1}^{\infty} \frac{1}{k^p}=1+\frac{1}{2^p}+\frac{1}{3^p}+\cdots+\frac{1}{k^p}+\cdots$
+
+$1 + \frac{\operatorname{Re}\mu}{k}$ 就是和 $p^-$ 级数的判定条件比较的。
+
+$\frac{f_k}{f_{k+1}} = \left(1 + \frac{1}{k}\right)^p = 1 + \frac{p}{k}$
+
+$\mathbf{p^-}$ **级数判断：**
+
+- $p > 1$，收敛
+- $p \le 1$，发散
+
+**3.复变函数项级数**
+
+每项均为复变函数的无穷级数
+
+$\sum_{k=1}^{\infty} f_k(z)=f_1(z)+\cdots +f_k(z)+\cdots, \; z \in \sigma$
+
+一致收敛性：
+
+若区域 $\sigma$ 上有一个函数 $F(z)$，对 $\forall \varepsilon > 0$，$\exists$ 与 $z \in \sigma$ 无关的正整数 $N$，使得当 $n > N$ 时，对一切 $z \in \sigma$，均满足
+
+$|F(z) - F_n(z)| < \varepsilon$
+
+则称 $\displaystyle\sum_{k=1}^{\infty} f_k(z)$ 一致收敛于 $F(z)$.
+
+> $F(z)=\displaystyle\sum_{k=1}^{\infty} f_k(z)$ , $F_n(z) = \displaystyle\sum_{k=1}^{n} f_k(z)$ .  
+> 所以不严谨地说，若这个无穷级数的总和减去前n项的和的绝对值趋于零，那么这个级数就是一致收敛的.
+
+由一致收敛得来的性质和判别法
+
+1)逐项可积性
+
+$\int_0^z \sum_{k=1}^{\infty} f_k(z) dz = \sum_{k=1}^{\infty} \int_0^z f_k(z) dz$
+
+> 只要一致收敛，就可以交换求和与积分的次序。
+
+2)逐项可导性—魏尔斯特拉斯(**Weierstrass)**&#x5B9A;理
+
+$\frac{d}{dz} \left( \sum_{k=1}^{\infty} f_k(z) \right) = \sum_{k=1}^{\infty} f_k'(z)$
+
+更进一步： $\frac{d^n}{dz^n} \left( \sum_{k=1}^{\infty} f_k(z) \right) = \sum_{k=1}^{\infty} f_k^{(n)}(z)$
+
+> 只要一致收敛，就可以交换任意阶求导与积分的次序。
+
+1. $M$ 判别法
+
+对于 $\displaystyle\sum_{k=1}^{\infty}f_k(z), z \in \sigma$，若对一切 $z \in \sigma$ 均有 $|f_k(z)| \le M_k$
+
+且 $\displaystyle\sum_{k=1}^{\infty}M_k$ 绝对收敛，则 $\displaystyle\sum_{k=1}^{\infty} f_k(z)$ 在 $\sigma$ 内绝对且一致收敛。
+`
+      },
+      {
+        id: "3-2",
+        title: "3.2 幂级数 (Power series)",
+        content: String.raw`
+形如
+
+$\sum_{k=0}^{\infty} a_k (z-b)^k = a_0 + a_1(z-b) + a_2(z-b)^2$
+
+$+ \cdots + a_k(z-b)^k + \cdots$
+
+**1.幂级数的收敛性**
+
+阿贝尔 (**Abel**) 定理
+
+若 $\displaystyle\sum_{k=0}^{\infty}a_k (z-b)^k$ 在 $z=z_0$ 处收敛，则 $\displaystyle\sum_{k=0}^{\infty} a_k (z-b)^k$ 亦必在
+
+$|z-b| < \rho = |z_0-b|$
+
+的圆内处处收敛。
+
+**推论：** 若 $\displaystyle\sum_{k=0}^{\infty}a_k (z-b)^k$ 在 $z=z_0$ 处发散，则其必在
+
+$|z-b| > \rho = |z_0-b|$
+
+的圆外处处发散。
+
+**2.收敛圆和收敛半径**
+
+对于幂级数 $\displaystyle\sum_{k=0}^{\infty}a_k (z-b)^k$
+
+由比值判别法和阿贝尔定理,当
+
+$\lim_{k \to \infty} \left| \frac{f_{k+1}}{f_k} \right| = \lim_{k \to \infty} \left| \frac{a_{k+1}}{a_k} \right| \cdot |z-b| < 1$
+
+时幂级数收敛
+
+亦即 $|z-b| < \lim_{k \to \infty} \left| \frac{a_k}{a_{k+1}} \right| = R$
+
+即$\displaystyle\sum_{k=0}^{\infty}a_k (z-b)^k$在 $|z-b| < R$ 的圆内绝对且一致收敛
+
+$|z-b|=R$ 是收敛圆，$R$ 是收敛半径
+
+对于上面的幂级数，收敛半径也可由根值判别法得来, $R = \lim_{k \to \infty} \frac{1}{\sqrt[k]{|a_k|}}$
+`
+      },
+      {
+        id: "3-3",
+        title: "3.3泰勒级数(Taylor series)",
+        content: String.raw`
+**1.设 $f(z)$ 在以 $b$ 点为中心的单连通圆形区域 $\sigma：|z-b|<R$ 内解析，则 $f(z)$ 在 $\sigma$ 内可展开为形如**
+
+$f(z) = \sum_{k=0}^{\infty} a_k (z-b)^k$
+
+**的泰勒级数.**
+
+**其中 $a_k = \frac{1}{k!} f^{(k)}(b), \quad k=0,1,2,\dots$称为泰勒系数，且此展开是唯一的。**
+
+**证：**&#x8BBE; $z$ 为圆 $|z-b|=R$ 内的任一取定的点，则总有一个圆 $l$：$|\zeta-b|=\rho(0<\rho<R)$，使 $z$ 含在 $l$ 内(见图 3.1). 由柯西公式有
+
+$f(z) = \frac{1}{2\pi i} \oint_l \frac{f(\xi)}{\xi - z} d\xi$
+
+![图3.1](images/015.jpg)
+
+下面就是酣畅淋漓的推导了，可以将 $\frac{1}{\xi - z}$ 写成
+
+$\frac{1}{\xi - z} = \frac{1}{\xi - b - (z - b)} = \frac{1}{\xi - b} \cdot \frac{1}{1 - \left( \frac{z - b}{\xi - b} \right)}$ 再利用几何级数恒等式 $\frac{1}{1-x} = \sum_{k=0}^{\infty} x^k$
+
+$\frac{1}{1 - \left(\frac{z-b}{\xi-b}\right)} = \sum_{k=0}^{\infty} \left(\frac{z-b}{\xi-b}\right)^k$
+
+$\Rightarrow f(z) = \frac{1}{2\pi i} \oint_l \sum_{k=0}^{\infty} \frac{(z-b)^k}{(\xi-b)^{k+1}} f(\xi) d\xi$
+
+$= \frac{1}{2\pi i} \oint_l \sum_{k=0}^{\infty} \frac{f(\xi)}{(\xi-b)^{k+1}} d\xi (z-b)^k$
+
+$= \sum_{k=0}^{\infty} \left[ \frac{1}{2\pi i} \oint_l \frac{f(\xi)}{(\xi-b)^{k+1}} d\xi \right] (z-b)^k$
+
+> 熟悉吗，其中有部分就是第二章的柯西积分公式推论，解析函数任意阶导数公式
+
+$= \sum_{k=0}^{\infty} \frac{1}{k!} \left[ \frac{k!}{2\pi i} \oint_l \frac{f(\xi)}{(\xi-b)^{k+1}} d\xi \right] (z-b)^k$
+
+$= \sum_{k=0}^{\infty} \frac{f^{(k)}(b)}{k!} (z-b)^k$
+
+这个就是泰勒级数。
+
+**2**.**判断泰勒级数的收敛半径** $R$
+
+将$f(z)$ 的圆域边界逐渐扩大到离 $b$ 点最近的奇点 $a$，而其内没有奇点，那么这个圆的半径就是泰勒级数的收敛半径 $R$
+
+$R = |a - b|$
+
+![图3.2](images/016.jpg)
+
+2026.9.24
+`
+      },
+      {
+        id: "3-4",
+        title: "3.4 洛朗级数（Laurent series）",
+        content: String.raw`
+上节泰勒级数解决了单连通圆域内解析函数展开问题，但我们还需要研究包含奇点的区域的函数展开，所以下面介绍洛朗级数展开：
+
+具有正负幂次的幂级数，形如
+
+$\sum_{k=-\infty}^{+\infty} C_k (z-b)^k = \cdots + \frac{C_{-n}}{(z-b)^n} + \cdots  + \frac{C_{-1}}{z-b}$
+
+$+ C_0 + C_1(z-b) + \cdots + C_n(z-b)^n + \cdots$
+
+的级数为**洛朗级数**，它是泰勒级数的推广。
+
+- 上式 $\displaystyle\sum_{k=1}^{\infty} \frac{C_{-k}}{(z-b)^k}$ 部分为其主要部分(**principal part**);
+- $\displaystyle\sum_{k=0}^{\infty} C_k (z-b)^k$ 部分为其正规部分(**regular part**).
+
+可以看出，正规部分形似泰勒级数，描述了函数”正常”的解析，但主部引入了奇点，这就是洛朗级数所要解决的问题：绕开奇点看看函数是怎么展开的。
+
+**1.一般情况下函数在整个复平面的展开**
+
+$f(z)$ 以 $b$ 点为中心，在 $b$ 点的邻域级数展开（在 $b$ 点级数展开）：
+
+1)设 $b$ 不为奇&#x70B9;**。**
+
+以 $b$ 为中心，将所有奇点标出，设为 $b_1, b_2, \dots$
+
+作圆 $|l_i - b| = |b_i-b|=r_i,\ i = 1, 2, \dots$；如图3.3,使得每个圆上至少有一个奇点；每个奇点都落在圆上
+
+![图3.3，用](images/017.jpg)
+
+那么 $f(z)$ 在 $|z-b| < r_1$ 的单连通区域内解析，且存在一个唯一的泰勒展开
+
+而 $f(z)$ 在 $r_i < |z-b| < r_{i+1},\ i = 1, 2, \dots$ 的环域内解析，且存在一个唯一的**洛**朗级数展开（每个环域有唯一一个独特的）
+
+所以洛朗级数展开的几何图像就很清楚了，它是 $f(z)$ 在环域的展开，这就能够绕开奇点去研究函数的性质了。
+
+2)设 $b$ 为奇点，则以 $b$ 为圆心，作一个小圆，半径为 $\rho$ ，如图3.4，则在环域 $\rho < |z-b| < r_1$ 内存在唯一一个洛朗级数展开
+
+![图3.4](images/018.jpg)
+
+关于无穷远点的展开：
+
+- 若无穷远点为奇点，则 $b_k$ 与 $\infty$ 点之间环域内存在唯一一个洛朗级数展开
+- 若无穷远点为解析点，则 $f(z)$ 在该点能展开成关于 $\dfrac{1}{z}$ 的泰勒级数。
+
+> **该怎么展开？**  
+> (1)令 $\zeta = \dfrac{1}{z}$，得到 $g(\zeta) = f\!\left(\dfrac{1}{z}\right)$  
+> (2)对 $g(\zeta)$ 在 $\zeta = 0$ 处进行洛朗展开：$g(\zeta) = \displaystyle\sum_{k=-\infty}^{+\infty} C_k (\zeta - 0)^k$  
+> (3)再将 $\zeta = \dfrac{1}{z}$ 代回去：$f(z) = g\!\left(\dfrac{1}{z}\right) = \displaystyle\sum_{k=-\infty}^{+\infty} C_k\, z^{-k}$  
+> 由于无穷远点是正常点，所以正次幂部分的所有项的系数为 $0$(不然就是无穷大，那么无穷远点就不会是解析点了)，最终能得到关于 $\dfrac{1}{z}$ 的泰勒级数：  
+> $f(z) = C_0 + \frac{C_1}{z} + \frac{C_2}{z^2} + \cdots$
+
+下面给出常见展开：
+
+$\frac{1}{1+z} = \sum_{k=0}^{\infty} (-1)^k z^k, \qquad |z| < 1$
+
+$\frac{1}{1-z} = \sum_{k=0}^{\infty} z^k, \qquad |z| < 1$
+
+$(1+z)^{\alpha} = 1^{\alpha}[1+ \sum_{k=1}^{\infty} \frac{\alpha(\alpha-1)\cdots(\alpha-k+1)}{k!}\, z^k], \;|z| < 1$
+
+> 这里要规定 $1^{\alpha}$在哪一支上（因为$1^{\alpha}$后面是单值的，而等式左边若为根式函数，常常是多值的，详见数物笔记一）
+
+$e^z = \sum_{k=0}^{\infty} \frac{z^k}{k!}, \qquad |z| < \infty$
+
+$\sin z = \sum_{k=0}^{\infty} \frac{(-1)^k}{(2k+1)!}\, z^{2k+1} = z - \frac{1}{6}z^3 + \cdots, \; |z| < +\infty$
+
+$\cos z = \sum_{k=0}^{\infty} \frac{(-1)^k}{(2k)!}\, z^{2k} = 1 - \frac{1}{2}z^2 + \cdots, \; |z| < \infty$
+
+$\ln(1+z) = \sum_{k=1}^{\infty} \frac{(-1)^{k-1}}{k}\, z^k, \qquad |z| < 1$
+
+$\ln(1-z) = -\sum_{k=1}^{\infty} \frac{z^k}{k}, \qquad |z| < 1$
+
+> 对数展开可以由 $\dfrac{1}{1+z}$ 和 $\dfrac{1}{1-z}$ 推导得来：  
+> 由于 $\dfrac{d}{dz}\ln(1+z) = \dfrac{1}{1+z}$  
+> 所以  
+> $\ln(1+z) = \int \left( \sum_{k=0}^{\infty} (-1)^k z^k \right) dz = \sum_{k=0}^{\infty} (-1)^k \frac{z^{k+1}}{k+1} + C$  
+> 令 $z = 0$，得 $C = 0$  
+> 最终得  
+> $\ln(1+z) = \sum_{k=1}^{\infty} \frac{(-1)^{k-1}}{k}\, z^k, \qquad |z| < 1$  
+> $\ln(1-z)$ 同理。
+
+**2.洛朗级数收敛性定理**
+
+定理：洛朗级数在收敛环域 $r < |z-b| < R$ 内是解析函数，并在任意较小的同心闭环域 $r' \le |z-b| \le R'$（$r < r' < R' < R$）上一致收敛。如图3.5
+
+
+![图3.5](images/019.jpg)
+
+> **证** 对于正则部分  
+> $$\sum_{k=0}^{\infty} C_k (z-b)^k$$  
+> 为泰勒级数,其收敛半径  
+> $$R = \lim_{k \to \infty} \left| \frac{C_k}{C_{k+1}} \right|$$  
+> 当 $|z-b| < R$ ，正则部分收敛 ，即在某个大圆以内收敛，且在较小的闭圆 $|z-b| \le R'\,$ 上一致收敛。  
+> 对于主要部分  
+> $$\sum_{k=-1}^{-\infty} C_k (z-b)^k = \sum_{n=1}^{\infty} \frac{C_{-n}}{(z-b)^n}$$  
+> 令 $\dfrac{1}{z-b} = t$，原式 $= \displaystyle\sum_{n=1}^{\infty} C_{-n}\, t^n$，令 $C_{-n} = a_n$  
+> 其收敛半径 $\zeta = \displaystyle\lim_{n \to \infty} \left| \frac{a_{n}}{a_{n+1}} \right|$  
+> 当 $|t| < \zeta$，主部收敛，即 $|z-b| > \dfrac{1}{\zeta} = r$  
+> 即在某个小圆以外收敛，且在较大的闭圆 $|z-b| \ge r'$ 上一致收敛。  
+> 综上所述，仅当 $r < R$ 时，级数 $\displaystyle\sum_{k=0}^{\infty} C_k (z-b)^k$ 和 $\displaystyle\sum_{k=1}^{\infty} C_{-k} (z-b)^{-k}$ 有共同的收敛区域 $r < |z-b| < R$ 及共同的一致收敛的闭环域 $r' \le |z-b| \le R'$，故定理得证。
+
+为什么要强调一致收敛？是因为一致收敛有"lovely"的性质，它具备逐项可积性和逐项可导性，详见第3.1节末尾部分。
+
+下面来做两道书上的例题(P55 T7、8)：
+
+> **例T7** 求和：$S(z) = \displaystyle\sum_{n=1}^{\infty} z^n n^2,\ |z|<1$　（1982 年 CUSPEA 试题）  
+> **解**：令  
+> $$F(z) = \sum_{n=0}^{\infty} z^n, \qquad |z|<1$$  
+> 由于这个级数是一致收敛的，对两边求导得  
+> $$F'(z) = \sum_{n=0}^{\infty} n z^{n-1}, \qquad |z|<1$$  
+> 发现已经有一点像题式了，两边乘 $z$  
+> $$zF'(z) = \sum_{n=0}^{\infty} n z^{n}, \qquad |z|<1$$  
+> 再求一次导  
+> $$\left(zF'(z)\right)' = \sum_{n=0}^{\infty} n^2 z^{n-1}, \qquad |z|<1$$  
+> 再乘 $z$ ，就能得到题给式子，于是  
+> $$z\left(zF'(z)\right)' = \sum_{n=1}^{\infty} n^2 z^{n} = S(z)$$  
+> 由几何级数恒等式 $\frac{1}{1-x} = \displaystyle\sum_{k=0}^{\infty} x^k$ 得  
+> $$F(z) = \sum_{n=0}^{\infty} z^n = \frac{1}{1-z}$$  
+> 代入求导，最终得到  
+> $$S(z) = \frac{z(1+z)}{(1-z)^3}, \qquad |z|<1$$  
+> **例T8** 求下列级数的和： $$S = \sum_{n=2}^{\infty} \frac{e^{-nt}}{n^2-1}, \qquad t>0$$ （加州理工学院研究生入学试题）  
+> **解**  
+> 看到熟悉的式子，裂项  
+> $$\frac{1}{n^2-1} = \frac{1}{2}\left(\frac{1}{n-1} - \frac{1}{n+1}\right)$$  
+> 则  
+> $$S = \frac{1}{2}\left(\sum_{n=2}^{\infty} \frac{e^{-nt}}{n-1} - \sum_{n=2}^{\infty} \frac{e^{-nt}}{n+1}\right)$$ 积分有  
+> 有  
+> $$\int_t^{\infty} e^{-nt'}\, dt' = -\frac{1}{n}e^{-nt}$$  
+> 所以有  
+> $$\int_t^{\infty} e^{-(n+1)t'}\, dt' = \frac{e^{-(n+1)t}}{n+1}$$  
+> $$\int_t^{\infty} e^{-(n-1)t'}\, dt' = \frac{e^{-(n-1)t}}{n-1}$$  
+> 则令  
+> $$e^{-nt} = e^{-(n-1)t}\cdot e^{-t}$$  
+> $$e^{-nt} = e^{-(n+1)t}\cdot e^{t}$$  
+> 则 $S$ 写为  
+> $$S = \frac{1}{2} ( e^{-t}\;\sum_{n=2}^{\infty} \int_t^{\infty} e^{-(n-1)t'}\, dt'- e^t\sum_{n=2}^{\infty}\int_t^{\infty} e^{-(n+1)t'}\, dt'$$  
+> 交换积分求和次序  
+> $$S = \frac{1}{2} ( e^{-t} \int_t^{\infty}\sum_{n=2}^{\infty} e^{-(n-1)t'}\, dt'- e^t\int_t^{\infty} \sum_{n=2}^{\infty}e^{-(n+1)t'}\, dt'$$  
+> 惊喜的发现式中求和部分是公比为 $e$ 的等比级数，所以得  
+> $$\sum_{n=2}^{\infty} e^{-(n-1)t'}=e^{-t'} + e^{-2t'} + \dots = \frac{e^{-t'}}{1-e^{-t'}}$$  
+> $$\sum_{n=2}^{\infty} e^{-(n+1)t'}=e^{-3t'} + e^{-4t'} + \dots = \frac{e^{-3t'}}{1-e^{-t'}}$$  
+> 代入上式求导得  
+> $$S = \frac{1}{2} [ -e^{-t} \ln(1-e^{-t})$$ $$- e^{t}\left( -\frac{1}{2}e^{-2t} - e^{-t} - \ln(1-e^{-t}) \right) ]$$  
+> 整理得  
+> $$S = \frac{1}{2} + \frac{1}{4}e^{-t} + \frac{e^t - e^{-t}}{2} \ln(1-e^{-t})$$  
+> 也可写成  
+> $$S = \frac{1}{2} + \frac{1}{4}e^{-t} + \sinh(t) \ln(1-e^{-t})$$  
+> (有点难。。。)
+
+2026.9.29
+`
+      }
+    ]
   }
 
 ];
