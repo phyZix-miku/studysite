@@ -800,47 +800,51 @@ $$\int_0^{\pi} e^{\rho \cos\varphi} \cos(\rho \sin\varphi - n\varphi) d\varphi =
 
 无穷求和
 
-$f_1 + f_2 + \cdots + f_k + \cdots = \sum_{k=1}^{\infty} f_k$
+$$f_1 + f_2 + \cdots + f_k + \cdots = \sum_{k=1}^{\infty} f_k$$
+
+  
 
 部分和
 
-$F_n = f_1 + f_2 + \cdots + f_n = \sum_{k=1}^{n} f_k$
+$$F_n = f_1 + f_2 + \cdots + f_n = \sum_{k=1}^{n} f_k$$
+
+  
 
 若 $\lim_{n \to \infty} F_n = F$，则 $\displaystyle\sum_{k=1}^{\infty} f_k$ 收敛于 $F = u + iv$
 
-$f_k = u_k + iv_k \quad \lim_{n \to \infty} \sum_{k=1}^{n} f_k$ $= \lim_{n \to \infty} \sum_{k=1}^{n} u_k + i \lim_{n \to \infty} \sum_{k=1}^{n} v_k = u + iv$
+$$f_k = u_k + iv_k \quad \lim_{n \to \infty} \sum_{k=1}^{n} f_k$$ $$= \lim_{n \to \infty} \sum_{k=1}^{n} u_k + i \lim_{n \to \infty} \sum_{k=1}^{n} v_k = u + iv$$
 
-$\Rightarrow    \begin {cases} \displaystyle\lim_{n \to \infty} \displaystyle\sum_{k=1}^{n} u_k = u  \\     \displaystyle\lim_{n \to \infty}        \displaystyle\sum_{k=1}^{n} v_k = v     \end{cases}$
+$$\Rightarrow    \begin {cases} \displaystyle\lim_{n \to \infty} \displaystyle\sum_{k=1}^{n} u_k = u  \\     \displaystyle\lim_{n \to \infty}        \displaystyle\sum_{k=1}^{n} v_k = v     \end{cases}$$
 
 **2.判别法：**
 
-1)达朗贝&#x5C14;**（d'Alembert）**&#x6BD4;值判别&#x6CD5;**：** 对于 $\displaystyle\sum_{k=1}^{\infty} f_k$，若 $\lim_{k \to \infty} \left| \frac{f_{k+1}}{f_k} \right| =l$
+1)达朗贝尔**（d'Alembert）**比值判别法**：** 对于 $\displaystyle\sum_{k=1}^{\infty} f_k$，若 $$\lim_{k \to \infty} \left| \frac{f_{k+1}}{f_k} \right| =l$$
 
 则当
 
-- $l<1$ 时， $\displaystyle\sum_{k=1}^{\infty} f_k$ 收敛且绝对收敛
-- $l>1$ 时，$\displaystyle\sum_{k=1}^{\infty} f_k$ 发散
-- $l= 1$ 时，无法判断敛散性，需用更高级有效的判别法（一般是高斯判别法）
+-   $l<1$ 时， $\displaystyle\sum_{k=1}^{\infty} f_k$ 收敛且绝对收敛
+-   $l>1$ 时，$\displaystyle\sum_{k=1}^{\infty} f_k$ 发散
+-   $l= 1$ 时，无法判断敛散性，需用更高级有效的判别法（一般是高斯判别法）
 
 2)柯西根值判别法：对于 $\displaystyle\sum_{k=1}^{\infty} f_k$，若
 
-$\lim_{k \to \infty} \sqrt[k]{|f_k|} = r$
+$$\lim_{k \to \infty} \sqrt[k]{|f_k|} = r$$
 
 则当：
 
-- $r < 1$，绝对收敛
-- $r > 1$，发散
-- $r = 1$，无法确定敛散性
+-   $r < 1$，绝对收敛
+-   $r > 1$，发散
+-   $r = 1$，无法确定敛散性
 
 交错级数(**alternating series**): $\displaystyle\sum_{k=1}^{\infty} (-1)^{k+1} f_k$
 
-收敛条件：$\lim_{k \to \infty} f_k = 0$ [莱布尼兹判别法(**Leibniz test**)]
+收敛条件：$\lim_{k \to \infty} f_k = 0$ \[莱布尼兹判别法(**Leibniz test**)\]
 
 > 小知识！ $\lim_{k\to \infty}(1+\frac{1}{2}+\cdots +\frac{1}{n}-\ln n)=\gamma \approx 0.577215,$ $\gamma$ 为欧拉常数
 
 3)高斯判别法(**Gauss test**)
 
-若 $\frac{f_k}{f_{k+1}} = 1 + \frac{\mu}{k} + o\left(\frac{1}{k^\lambda}\right),\:\lambda>1$
+若 $$\frac{f_k}{f_{k+1}} = 1 + \frac{\mu}{k} + o\left(\frac{1}{k^\lambda}\right),\:\lambda>1$$
 
 > 式中 $o\left(\frac{1}{k^\lambda}\right)$ 是高阶无穷小量.
 
@@ -850,38 +854,40 @@ $\lim_{k \to \infty} \sqrt[k]{|f_k|} = r$
 
 **证：**
 
-$\left| \frac{f_k}{f_{k+1}} \right| = \sqrt{\left(1 + \frac{\mu}{k}\right)\left(1 + \frac{\bar{\mu}}{k}\right)}$
+$$\left| \frac{f_k}{f_{k+1}} \right| = \sqrt{\left(1 + \frac{\mu}{k}\right)\left(1 + \frac{\bar{\mu}}{k}\right)}$$
 
-$= \sqrt{1 + \frac{\mu + \bar{\mu}}{k} + \left(\frac{\mu \bar{\mu}}{k^2}\right)}_{\text{(高阶舍去)}}$
+$$= \sqrt{1 + \frac{\mu + \bar{\mu}}{k} + \left(\frac{\mu \bar{\mu}}{k^2}\right)}_{\text{(高阶舍去)}}$$
 
-$= \left(1 + \frac{2\operatorname{Re}\mu}{k}\right)^{\frac{1}{2}} = 1 + \frac{1}{2} \cdot \frac{2\operatorname{Re}\mu}{k} = 1 + \frac{\operatorname{Re}\mu}{k}$
+$$= \left(1 + \frac{2\operatorname{Re}\mu}{k}\right)^{\frac{1}{2}} = 1 + \frac{1}{2} \cdot \frac{2\operatorname{Re}\mu}{k} = 1 + \frac{\operatorname{Re}\mu}{k}$$
 
 > 展开后取一阶近似得上式
 
 那么为什么这样之后就能判定敛散性呢？还记得高数的 $p^-$ 级数吗？
 
-$\sum_{k=1}^{\infty} \frac{1}{k^p}=1+\frac{1}{2^p}+\frac{1}{3^p}+\cdots+\frac{1}{k^p}+\cdots$
+$$\sum_{k=1}^{\infty} \frac{1}{k^p}=1+\frac{1}{2^p}+\frac{1}{3^p}+\cdots+\frac{1}{k^p}+\cdots$$
 
 $1 + \frac{\operatorname{Re}\mu}{k}$ 就是和 $p^-$ 级数的判定条件比较的。
 
-$\frac{f_k}{f_{k+1}} = \left(1 + \frac{1}{k}\right)^p = 1 + \frac{p}{k}$
+$$\frac{f_k}{f_{k+1}} = \left(1 + \frac{1}{k}\right)^p = 1 + \frac{p}{k}$$
 
 $\mathbf{p^-}$ **级数判断：**
 
-- $p > 1$，收敛
-- $p \le 1$，发散
+-   $p > 1$，收敛
+-   $p \le 1$，发散
 
 **3.复变函数项级数**
 
 每项均为复变函数的无穷级数
 
-$\sum_{k=1}^{\infty} f_k(z)=f_1(z)+\cdots +f_k(z)+\cdots, \; z \in \sigma$
+$$\sum_{k=1}^{\infty} f_k(z)=f_1(z)+\cdots +f_k(z)+\cdots, \; z \in \sigma$$
 
 一致收敛性：
 
 若区域 $\sigma$ 上有一个函数 $F(z)$，对 $\forall \varepsilon > 0$，$\exists$ 与 $z \in \sigma$ 无关的正整数 $N$，使得当 $n > N$ 时，对一切 $z \in \sigma$，均满足
 
-$|F(z) - F_n(z)| < \varepsilon$
+$$|F(z) - F_n(z)| < \varepsilon$$
+
+  
 
 则称 $\displaystyle\sum_{k=1}^{\infty} f_k(z)$ 一致收敛于 $F(z)$.
 
@@ -892,19 +898,21 @@ $|F(z) - F_n(z)| < \varepsilon$
 
 1)逐项可积性
 
-$\int_0^z \sum_{k=1}^{\infty} f_k(z) dz = \sum_{k=1}^{\infty} \int_0^z f_k(z) dz$
+$$\int_0^z \sum_{k=1}^{\infty} f_k(z) dz = \sum_{k=1}^{\infty} \int_0^z f_k(z) dz$$
+
+  
 
 > 只要一致收敛，就可以交换求和与积分的次序。
 
-2)逐项可导性—魏尔斯特拉斯(**Weierstrass)**&#x5B9A;理
+2)逐项可导性—魏尔斯特拉斯(**Weierstrass)**定理
 
-$\frac{d}{dz} \left( \sum_{k=1}^{\infty} f_k(z) \right) = \sum_{k=1}^{\infty} f_k'(z)$
+$$\frac{d}{dz} \left( \sum_{k=1}^{\infty} f_k(z) \right) = \sum_{k=1}^{\infty} f_k'(z)$$
 
-更进一步： $\frac{d^n}{dz^n} \left( \sum_{k=1}^{\infty} f_k(z) \right) = \sum_{k=1}^{\infty} f_k^{(n)}(z)$
+更进一步： $$\frac{d^n}{dz^n} \left( \sum_{k=1}^{\infty} f_k(z) \right) = \sum_{k=1}^{\infty} f_k^{(n)}(z)$$
 
 > 只要一致收敛，就可以交换任意阶求导与积分的次序。
 
-1. $M$ 判别法
+3) $M$ 判别法
 
 对于 $\displaystyle\sum_{k=1}^{\infty}f_k(z), z \in \sigma$，若对一切 $z \in \sigma$ 均有 $|f_k(z)| \le M_k$
 
@@ -917,9 +925,9 @@ $\frac{d}{dz} \left( \sum_{k=1}^{\infty} f_k(z) \right) = \sum_{k=1}^{\infty} f_
         content: String.raw`
 形如
 
-$\sum_{k=0}^{\infty} a_k (z-b)^k = a_0 + a_1(z-b) + a_2(z-b)^2$
+$$\sum_{k=0}^{\infty} a_k (z-b)^k = a_0 + a_1(z-b) + a_2(z-b)^2$$
 
-$+ \cdots + a_k(z-b)^k + \cdots$
+$$+ \cdots + a_k(z-b)^k + \cdots$$
 
 **1.幂级数的收敛性**
 
@@ -927,13 +935,13 @@ $+ \cdots + a_k(z-b)^k + \cdots$
 
 若 $\displaystyle\sum_{k=0}^{\infty}a_k (z-b)^k$ 在 $z=z_0$ 处收敛，则 $\displaystyle\sum_{k=0}^{\infty} a_k (z-b)^k$ 亦必在
 
-$|z-b| < \rho = |z_0-b|$
+$$|z-b| < \rho = |z_0-b|$$
 
 的圆内处处收敛。
 
 **推论：** 若 $\displaystyle\sum_{k=0}^{\infty}a_k (z-b)^k$ 在 $z=z_0$ 处发散，则其必在
 
-$|z-b| > \rho = |z_0-b|$
+$$|z-b| > \rho = |z_0-b|$$
 
 的圆外处处发散。
 
@@ -943,7 +951,7 @@ $|z-b| > \rho = |z_0-b|$
 
 由比值判别法和阿贝尔定理,当
 
-$\lim_{k \to \infty} \left| \frac{f_{k+1}}{f_k} \right| = \lim_{k \to \infty} \left| \frac{a_{k+1}}{a_k} \right| \cdot |z-b| < 1$
+$$\lim_{k \to \infty} \left| \frac{f_{k+1}}{f_k} \right| = \lim_{k \to \infty} \left| \frac{a_{k+1}}{a_k} \right| \cdot |z-b| < 1$$
 
 时幂级数收敛
 
@@ -953,7 +961,7 @@ $\lim_{k \to \infty} \left| \frac{f_{k+1}}{f_k} \right| = \lim_{k \to \infty} \l
 
 $|z-b|=R$ 是收敛圆，$R$ 是收敛半径
 
-对于上面的幂级数，收敛半径也可由根值判别法得来, $R = \lim_{k \to \infty} \frac{1}{\sqrt[k]{|a_k|}}$
+对于上面的幂级数，收敛半径也可由根值判别法得来, $$R = \lim_{k \to \infty} \frac{1}{\sqrt[k]{|a_k|}}$$
 `
       },
       {
@@ -962,35 +970,37 @@ $|z-b|=R$ 是收敛圆，$R$ 是收敛半径
         content: String.raw`
 **1.设 $f(z)$ 在以 $b$ 点为中心的单连通圆形区域 $\sigma：|z-b|<R$ 内解析，则 $f(z)$ 在 $\sigma$ 内可展开为形如**
 
-$f(z) = \sum_{k=0}^{\infty} a_k (z-b)^k$
+$$f(z) = \sum_{k=0}^{\infty} a_k (z-b)^k$$
+
+  
 
 **的泰勒级数.**
 
 **其中 $a_k = \frac{1}{k!} f^{(k)}(b), \quad k=0,1,2,\dots$称为泰勒系数，且此展开是唯一的。**
 
-**证：**&#x8BBE; $z$ 为圆 $|z-b|=R$ 内的任一取定的点，则总有一个圆 $l$：$|\zeta-b|=\rho(0<\rho<R)$，使 $z$ 含在 $l$ 内(见图 3.1). 由柯西公式有
+**证：**设 $z$ 为圆 $|z-b|=R$ 内的任一取定的点，则总有一个圆 $l$：$|\zeta-b|=\rho(0<\rho<R)$，使 $z$ 含在 $l$ 内(见图 3.1). 由柯西公式有
 
-$f(z) = \frac{1}{2\pi i} \oint_l \frac{f(\xi)}{\xi - z} d\xi$
+$$f(z) = \frac{1}{2\pi i} \oint_l \frac{f(\zeta)}{\zeta - z} d\zeta$$
 
 ![图3.1](images/015.jpg)
 
 下面就是酣畅淋漓的推导了，可以将 $\frac{1}{\xi - z}$ 写成
 
-$\frac{1}{\xi - z} = \frac{1}{\xi - b - (z - b)} = \frac{1}{\xi - b} \cdot \frac{1}{1 - \left( \frac{z - b}{\xi - b} \right)}$ 再利用几何级数恒等式 $\frac{1}{1-x} = \sum_{k=0}^{\infty} x^k$
+$$\frac{1}{\zeta - z} = \frac{1}{\zeta- b - (z - b)} = \frac{1}{\zeta - b} \cdot \frac{1}{1 - \left( \frac{z - b}{\zeta - b} \right)}$$ 再利用几何级数恒等式(恒等式成立的条件是 $|x|<1$ ) $$\frac{1}{1-x} = \sum_{k=0}^{\infty} x^k$$
 
-$\frac{1}{1 - \left(\frac{z-b}{\xi-b}\right)} = \sum_{k=0}^{\infty} \left(\frac{z-b}{\xi-b}\right)^k$
+$$\frac{1}{1 - \left(\frac{z-b}{\zeta-b}\right)} = \sum_{k=0}^{\infty} \left(\frac{z-b}{\zeta-b}\right)^k$$
 
-$\Rightarrow f(z) = \frac{1}{2\pi i} \oint_l \sum_{k=0}^{\infty} \frac{(z-b)^k}{(\xi-b)^{k+1}} f(\xi) d\xi$
+$$\Rightarrow f(z) = \frac{1}{2\pi i} \oint_l \sum_{k=0}^{\infty} \frac{(z-b)^k}{(\zeta-b)^{k+1}} f(\zeta) d\zeta$$
 
-$= \frac{1}{2\pi i} \oint_l \sum_{k=0}^{\infty} \frac{f(\xi)}{(\xi-b)^{k+1}} d\xi (z-b)^k$
+$$= \frac{1}{2\pi i} \oint_l \sum_{k=0}^{\infty} \frac{f(\zeta)}{(\zeta-b)^{k+1}} d\zeta (z-b)^k$$
 
-$= \sum_{k=0}^{\infty} \left[ \frac{1}{2\pi i} \oint_l \frac{f(\xi)}{(\xi-b)^{k+1}} d\xi \right] (z-b)^k$
+$$= \sum_{k=0}^{\infty} \left[ \frac{1}{2\pi i} \oint_l \frac{f(\zeta)}{(\zeta-b)^{k+1}} d\zeta\right] (z-b)^k$$
 
 > 熟悉吗，其中有部分就是第二章的柯西积分公式推论，解析函数任意阶导数公式
 
-$= \sum_{k=0}^{\infty} \frac{1}{k!} \left[ \frac{k!}{2\pi i} \oint_l \frac{f(\xi)}{(\xi-b)^{k+1}} d\xi \right] (z-b)^k$
+$$= \sum_{k=0}^{\infty} \frac{1}{k!} \left[ \frac{k!}{2\pi i} \oint_l \frac{f(\zeta)}{(\zeta-b)^{k+1}} d\zeta \right] (z-b)^k$$
 
-$= \sum_{k=0}^{\infty} \frac{f^{(k)}(b)}{k!} (z-b)^k$
+$$= \sum_{k=0}^{\infty} \frac{f^{(k)}(b)}{k!} (z-b)^k$$
 
 这个就是泰勒级数。
 
@@ -998,7 +1008,7 @@ $= \sum_{k=0}^{\infty} \frac{f^{(k)}(b)}{k!} (z-b)^k$
 
 将$f(z)$ 的圆域边界逐渐扩大到离 $b$ 点最近的奇点 $a$，而其内没有奇点，那么这个圆的半径就是泰勒级数的收敛半径 $R$
 
-$R = |a - b|$
+$$R = |a - b|$$
 
 ![图3.2](images/016.jpg)
 
@@ -1013,14 +1023,14 @@ $R = |a - b|$
 
 具有正负幂次的幂级数，形如
 
-$\sum_{k=-\infty}^{+\infty} C_k (z-b)^k = \cdots + \frac{C_{-n}}{(z-b)^n} + \cdots  + \frac{C_{-1}}{z-b}$
+$$\sum_{k=-\infty}^{+\infty} C_k (z-b)^k = \cdots + \frac{C_{-n}}{(z-b)^n} + \cdots  + \frac{C_{-1}}{z-b}$$
 
-$+ C_0 + C_1(z-b) + \cdots + C_n(z-b)^n + \cdots$
+$$+ C_0 + C_1(z-b) + \cdots + C_n(z-b)^n + \cdots$$
 
 的级数为**洛朗级数**，它是泰勒级数的推广。
 
-- 上式 $\displaystyle\sum_{k=1}^{\infty} \frac{C_{-k}}{(z-b)^k}$ 部分为其主要部分(**principal part**);
-- $\displaystyle\sum_{k=0}^{\infty} C_k (z-b)^k$ 部分为其正规部分(**regular part**).
+-   上式 $\displaystyle\sum_{k=1}^{\infty} \frac{C_{-k}}{(z-b)^k}$ 部分为其主要部分(**principal part**);
+-   $\displaystyle\sum_{k=0}^{\infty} C_k (z-b)^k$ 部分为其正规部分(**regular part**).
 
 可以看出，正规部分形似泰勒级数，描述了函数”正常”的解析，但主部引入了奇点，这就是洛朗级数所要解决的问题：绕开奇点看看函数是怎么展开的。
 
@@ -1028,7 +1038,7 @@ $+ C_0 + C_1(z-b) + \cdots + C_n(z-b)^n + \cdots$
 
 $f(z)$ 以 $b$ 点为中心，在 $b$ 点的邻域级数展开（在 $b$ 点级数展开）：
 
-1)设 $b$ 不为奇&#x70B9;**。**
+1)设 $b$ 不为奇点**。**
 
 以 $b$ 为中心，将所有奇点标出，设为 $b_1, b_2, \dots$
 
@@ -1048,49 +1058,50 @@ $f(z)$ 以 $b$ 点为中心，在 $b$ 点的邻域级数展开（在 $b$ 点级�
 
 关于无穷远点的展开：
 
-- 若无穷远点为奇点，则 $b_k$ 与 $\infty$ 点之间环域内存在唯一一个洛朗级数展开
-- 若无穷远点为解析点，则 $f(z)$ 在该点能展开成关于 $\dfrac{1}{z}$ 的泰勒级数。
+-   若无穷远点为奇点，则 $b_k$ 与 $\infty$ 点之间环域内存在唯一一个洛朗级数展开
+-   若无穷远点为解析点，则 $f(z)$ 在该点能展开成关于 $\dfrac{1}{z}$ 的泰勒级数。
 
 > **该怎么展开？**  
 > (1)令 $\zeta = \dfrac{1}{z}$，得到 $g(\zeta) = f\!\left(\dfrac{1}{z}\right)$  
 > (2)对 $g(\zeta)$ 在 $\zeta = 0$ 处进行洛朗展开：$g(\zeta) = \displaystyle\sum_{k=-\infty}^{+\infty} C_k (\zeta - 0)^k$  
 > (3)再将 $\zeta = \dfrac{1}{z}$ 代回去：$f(z) = g\!\left(\dfrac{1}{z}\right) = \displaystyle\sum_{k=-\infty}^{+\infty} C_k\, z^{-k}$  
 > 由于无穷远点是正常点，所以正次幂部分的所有项的系数为 $0$(不然就是无穷大，那么无穷远点就不会是解析点了)，最终能得到关于 $\dfrac{1}{z}$ 的泰勒级数：  
-> $f(z) = C_0 + \frac{C_1}{z} + \frac{C_2}{z^2} + \cdots$
+> $$f(z) = C_0 + \frac{C_1}{z} + \frac{C_2}{z^2} + \cdots$$
 
-下面给出常见展开：
+下面给出常见展开（都很重要，需要牢记）：
 
-$\frac{1}{1+z} = \sum_{k=0}^{\infty} (-1)^k z^k, \qquad |z| < 1$
+$$\frac{1}{1+z} = \sum_{k=0}^{\infty} (-1)^k z^k, \qquad |z| < 1$$
 
-$\frac{1}{1-z} = \sum_{k=0}^{\infty} z^k, \qquad |z| < 1$
+$$\frac{1}{1-z} = \sum_{k=0}^{\infty} z^k, \qquad |z| < 1$$
 
-$(1+z)^{\alpha} = 1^{\alpha}[1+ \sum_{k=1}^{\infty} \frac{\alpha(\alpha-1)\cdots(\alpha-k+1)}{k!}\, z^k], \;|z| < 1$
+$$(1+z)^{\alpha} = 1^{\alpha}[1+ \sum_{k=1}^{\infty} \frac{\alpha(\alpha-1)\cdots(\alpha-k+1)}{k!}\, z^k], \;|z| < 1$$
 
 > 这里要规定 $1^{\alpha}$在哪一支上（因为$1^{\alpha}$后面是单值的，而等式左边若为根式函数，常常是多值的，详见数物笔记一）
 
-$e^z = \sum_{k=0}^{\infty} \frac{z^k}{k!}, \qquad |z| < \infty$
+$$e^z = \sum_{k=0}^{\infty} \frac{z^k}{k!}, \qquad |z| < \infty$$
 
-$\sin z = \sum_{k=0}^{\infty} \frac{(-1)^k}{(2k+1)!}\, z^{2k+1} = z - \frac{1}{6}z^3 + \cdots, \; |z| < +\infty$
+$$\sin z = \sum_{k=0}^{\infty} \frac{(-1)^k}{(2k+1)!}\, z^{2k+1} = z - \frac{1}{6}z^3 + \cdots, \; |z| < +\infty$$
 
-$\cos z = \sum_{k=0}^{\infty} \frac{(-1)^k}{(2k)!}\, z^{2k} = 1 - \frac{1}{2}z^2 + \cdots, \; |z| < \infty$
+  
 
-$\ln(1+z) = \sum_{k=1}^{\infty} \frac{(-1)^{k-1}}{k}\, z^k, \qquad |z| < 1$
+$$\cos z = \sum_{k=0}^{\infty} \frac{(-1)^k}{(2k)!}\, z^{2k} = 1 - \frac{1}{2}z^2 + \cdots, \; |z| < \infty$$
 
-$\ln(1-z) = -\sum_{k=1}^{\infty} \frac{z^k}{k}, \qquad |z| < 1$
+$$\ln(1+z) = \sum_{k=1}^{\infty} \frac{(-1)^{k-1}}{k}\, z^k, \qquad |z| < 1$$
+
+$$\ln(1-z) = -\sum_{k=1}^{\infty} \frac{z^k}{k}, \qquad |z| < 1$$
 
 > 对数展开可以由 $\dfrac{1}{1+z}$ 和 $\dfrac{1}{1-z}$ 推导得来：  
 > 由于 $\dfrac{d}{dz}\ln(1+z) = \dfrac{1}{1+z}$  
 > 所以  
-> $\ln(1+z) = \int \left( \sum_{k=0}^{\infty} (-1)^k z^k \right) dz = \sum_{k=0}^{\infty} (-1)^k \frac{z^{k+1}}{k+1} + C$  
+> $$\ln(1+z) = \int \left( \sum_{k=0}^{\infty} (-1)^k z^k \right) dz = \sum_{k=0}^{\infty} (-1)^k \frac{z^{k+1}}{k+1} + C$$  
 > 令 $z = 0$，得 $C = 0$  
 > 最终得  
-> $\ln(1+z) = \sum_{k=1}^{\infty} \frac{(-1)^{k-1}}{k}\, z^k, \qquad |z| < 1$  
+> $$\ln(1+z) = \sum_{k=1}^{\infty} \frac{(-1)^{k-1}}{k}\, z^k, \qquad |z| < 1$$  
 > $\ln(1-z)$ 同理。
 
 **2.洛朗级数收敛性定理**
 
 定理：洛朗级数在收敛环域 $r < |z-b| < R$ 内是解析函数，并在任意较小的同心闭环域 $r' \le |z-b| \le R'$（$r < r' < R' < R$）上一致收敛。如图3.5
-
 
 ![图3.5](images/019.jpg)
 
@@ -1154,8 +1165,206 @@ $\ln(1-z) = -\sum_{k=1}^{\infty} \frac{z^k}{k}, \qquad |z| < 1$
 > 也可写成  
 > $$S = \frac{1}{2} + \frac{1}{4}e^{-t} + \sinh(t) \ln(1-e^{-t})$$  
 > (有点难。。。)
+`
+      },
+      {
+        id: "3-5",
+        title: "3、洛朗定理",
+        content: String.raw`
+函数 $f(z)$ 在其收敛环域内存在唯一的洛朗级数展开
 
-2026.9.29
+$$f(z) = \sum_{k=-\infty}^{\infty} C_k (z-b)^k$$
+
+其中
+
+$$C_k = \frac{1}{2\pi i} \oint_l \frac{f(\zeta)}{(\zeta-b)^{k+1}}\, d\zeta, \quad l:\ r < |z-b| < R$$
+
+称为洛朗系数。
+
+**证**
+
+如图3.6，在环域内取 $l_1:|\zeta-b|=R'<R$ , $l_2:|\zeta-b|=r'>r$ . $z$ 在环域 $r'<|z-b|<R'$ 内。
+
+![图3.6](images/020.jpg)
+
+由复连通区域柯西公式有
+
+$$f(z) = \frac{1}{2\pi i} \oint_{l_1} \frac{f(\zeta)}{\zeta - z}\, d\zeta - \frac{1}{2\pi i} \oint_{l_2} \frac{f(\zeta)}{\zeta - z}\, d\zeta$$
+
+上式第一个积分可写为（详见第 3 节对泰勒定理的证明）
+
+$$\frac{1}{2\pi i} \oint_{l_1} \frac{f(\zeta)}{\zeta - z}\, d\zeta = \sum_{k=0}^{\infty} \frac{1}{2\pi i} \oint_{l_1} \frac{f(\zeta)}{(\zeta-b)^{k+1}}\, d\zeta \cdot (z-b)^k$$
+
+对于第二个积分，我们同样要用到几何级数恒等式。我们需要让 $\left| \dfrac{\zeta-b}{z-b} \right| < 1$，谁大谁提出来，所以写为
+
+$$-\frac{1}{\zeta - z} = -\frac{1}{\zeta - b - (z-b)} = \frac{1}{z-b} \cdot \frac{1}{1 - \dfrac{\zeta-b}{z-b}}$$
+
+$$= \frac{1}{z-b} \sum_{k=0}^{\infty} \left( \frac{\zeta-b}{z-b} \right)^k$$
+
+故有
+
+$$-\frac{1}{2\pi i} \oint_{l_2} \frac{f(\zeta)}{\zeta - z}\, d\zeta = -\sum_{k=0}^{\infty} \frac{1}{2\pi i} \oint_{l_2} \frac{f(\zeta)}{(\zeta-b)^{-k}}\, d\zeta \cdot (z-b)^{-(k+1)}$$
+
+  
+
+令 $-(k+1) = s$，则 $k = -s-1$，故
+
+$$-\frac{1}{2\pi i} \oint_{l_2} \frac{f(\zeta)}{\zeta - z}\, d\zeta = \sum_{s=-1}^{-\infty} \frac{1}{2\pi i} \oint_{l_2} \frac{f(\zeta)}{(\zeta-b)^{s+1}}\, d\zeta \cdot (z-b)^s$$
+
+全部代入，得
+
+$$f(z) = \sum_{k=0}^{\infty} \frac{1}{2\pi i} \oint_{l_1} \frac{f(\zeta)}{(\zeta-b)^{k+1}}\, d\zeta \cdot (z-b)^k$$
+
+$$+ \sum_{k=-\infty}^{-1} \frac{1}{2\pi i} \oint_{l_2} \frac{f(\zeta)}{(\zeta-b)^{k+1}}\, d\zeta \cdot (z-b)^k$$
+
+又作圆 $l:|\zeta-b|=\rho,r'<\rho<R'.$ 由复连通区域柯西定理，得
+
+$$\oint_{l_1} \frac{f(\zeta)}{(\zeta-b)^{k+1}}\, d\zeta = \oint_l \frac{f(\zeta)}{(\zeta-b)^{k+1}}\, d\zeta$$
+
+$$\oint_{l_2} \frac{f(\zeta)}{(\zeta-b)^{k+1}}\, d\zeta = \oint_l \frac{f(\zeta)}{(\zeta-b)^{k+1}}\, d\zeta$$
+
+代入 $f(z)$ 即得洛朗级数表达式。
+
+需要注意的是，洛朗系数公式不等于泰勒系数公式
+
+$$C_k \neq \frac{f^{(k)}(b)}{k!}$$
+
+因为导数公式成立的条件是 $f(z)$ 在 $l$ 内解析，而洛朗级数讨论的都是包含奇点的函数。
+
+（唯一性证明略，见书P58）
+`
+      },
+      {
+        id: "3-6",
+        title: "4.柯西乘积(Cauchy product)",
+        content: String.raw`
+两个绝对收敛的级数，其积可重排
+
+$$\sum_{k=0}^{\infty} a_k \cdot \sum_{\ell=0}^{\infty} b_\ell = \sum_{n=0}^{\infty} c_n$$
+
+其中
+
+$$c_n = \sum_{k=0}^{n} a_k b_{n-k} \quad (\text{共 } n+1 \text{ 项})$$
+
+  
+
+$$\sum_{k=0}^{\infty} a_k (z-b)^k \cdot \sum_{\ell=0}^{\infty} b_\ell (z-b)^\ell = \sum_{n=0}^{\infty} c_n (z-b)^n$$
+
+可排成如下表
+
+![图3.7](images/021.jpg)
+
+$c_n$ 为从左上到到右下第 $n+1$ 条对角线上元素之和，自行验证.
+`
+      },
+      {
+        id: "3-7",
+        title: "5.洛朗级数若干例题",
+        content: String.raw`
+**例 1**
+
+$$f(z) = \frac{1}{(z-a)(z-b)}, \quad a \neq b \neq 0, \; |a| < |b|$$ 以 $z=0$ 为中心展开。
+
+**解** （没说展开成什么级数）
+
+目的：展开成形如$\displaystyle\sum_{k=-\infty}^{\infty} C_k (z-0)^k$ 的级数
+
+裂项得
+
+$$f(z) = \left( \frac{1}{z-a} - \frac{1}{z-b} \right) \frac{1}{a-b}$$
+
+在 $|z|>|b|$ 区域，展开成洛朗级数：
+
+发现有熟悉的式子，运用几何级数恒等式(谁大把谁提出来)：
+
+$$\frac{1}{z-a} = \frac{1}{z} \cdot \frac{1}{1-\dfrac{a}{z}} = \frac{1}{z} \sum_{k=0}^{\infty} \left( \frac{a}{z} \right)^k$$
+
+  
+
+$$\frac{1}{z-b} = \frac{1}{z} \cdot \frac{1}{1-\dfrac{b}{z}} = \frac{1}{z} \sum_{k=0}^{\infty} \left( \frac{b}{z} \right)^k$$
+
+$$\therefore\ f(z) = \left( \sum_{k=0}^{\infty} \frac{a^k}{z^{k+1}} - \sum_{k=0}^{\infty} \frac{b^k}{z^{k+1}} \right) \frac{1}{a-b} =$$
+
+在 $|a|<|z|<|b|$ 区域，展开成洛朗级数：
+
+$$\frac{1}{z-b} = -\frac{1}{b} \cdot \frac{1}{1-\dfrac{z}{b}} = \cdots$$
+
+在 $|z|<|a|$ 区域，展开成泰勒级数 $\cdots$
+
+> 见图3.8。
+
+![图3.8，两个洛朗级数不一样，0不为奇点](images/022.jpg)
+
+> 手段是利用已有的公式，牢记前面3.4.1的各个常见展开
+
+**例 2**
+
+$\sin\left( \dfrac{z}{z-1} \right)$ 在 $z=1$ 处展开
+
+**解**
+
+$$\sin\left( \frac{z}{z-1} \right) = \sin\left( 1 + \frac{1}{z-1} \right)$$
+
+$$= \sin 1 \cos\left( \frac{1}{z-1} \right) + \cos 1 \sin\left( \frac{1}{z-1} \right)$$
+
+已经是 $(z-1)$ 了，所以可直接用 $\sin z$ 的展开公式.
+
+**例3**
+
+$f(z)=e^{z+\frac{1}{z}}$ 在 $z=0$ 处， $0<|z|<+\infty$
+
+**解**
+
+$$e^{z+\frac{1}{z}}=e^z \cdot e^{\frac{1}{z}} = \sum_{k=0}^{\infty} \frac{z^k}{k!} \cdot \sum_{l=0}^{\infty} \frac{z^{-l}}{l!}$$ 再利用柯西乘积表得出最终结果 $$e^{z+\frac{1}{z}} = \sum_{n=-\infty}^{\infty} \left( \sum_{k=0}^{\infty} \frac{1}{k! \cdot (|n|+k)!} \right) z^n$$ 相同方法的还有如下两道书上例题
+
+P60T1(4):在指定环域内展开为洛朗级数$$\sin z \sin{\frac{1}{z}},0<|z|<\infty$$
+
+P61T2(6)：在给定邻域，将函数展开为洛朗级数，并确定展开式成立的区域
+
+$$e^{\frac{1}{2}(z-\frac{a^2}{z})},z=0$$
+
+**例4** 试证 $$\mathrm{ch}(z+\frac{1}{z})=C_0+\sum_{k=1}^{\infty}C_k(z^k+z^{-k})$$ 其中 $$C_k=\frac{1}{2\pi}\int_0^{2\pi}\cos{k\varphi}\,\mathrm{ch}{(2\cos{\varphi})}\mathrm{d}\varphi.$$
+
+这道题是书上P60例3，方法是直接使用 $C_k$ 的公式，然后求环路积分，这种方法是走投无路才使用的。详见书。
+`
+      },
+      {
+        id: "3-8",
+        title: "3.5单值函数的孤立奇点",
+        content: String.raw`
+$f(z)$ 在奇点 $b$ 外，若存在 $0 < |z-b| < \varepsilon$ 内 $f(z)$ 处处解析（去心，$z \neq b$），则 $b$ 为 $f(z)$ 的孤立奇点。
+
+> 若在 $z=b$ 的无论多小邻域内，总有除 $z=b$ 以外的奇点，则称 $z=b$ 为 $f(z)$ 的非孤立奇点（见书P61 下例）。另有例子：  
+> $z=0$ 是 $f(z)=\left(e^{\frac{1}{z^2}}+1\right)^{-1}$ 的非孤立奇点 $\Rightarrow$  
+> $e^{\frac{1}{z^2}} + 1 = 0$  
+> $e^{\frac{1}{z^2}} = e^{(2k+1)i\pi} = -1, \qquad \frac{1}{z_k^2} = (2k+1)i\pi$  
+> $z_k = \frac{1}{\sqrt{(2k+1)i\pi}} \ \xrightarrow{\ k \to \infty\ } \ 0$
+
+$f(z)$ 的孤立奇点 $b$ 有以下分类：$\begin{cases} pole　极点\\ essential\quad singularity　本性奇点 \end{cases}$
+
+若 $f(z)$ 在 $b$ 点的主要部分有无限项负幂，即
+
+$f(z) = e^{\frac{1}{z}} = \displaystyle\sum_{k=0}^{\infty} \frac{1}{k!\, z^k}$
+
+有无穷项负幂，所以$z=0$ 为其本性奇点。
+
+判断$b$ 是 $f(z)$ 的 $m$ 阶极点：
+
+1.  $f(z) = \dfrac{\varphi(z)}{(z-b)^m}$，而 $\varphi(z) \neq 0$
+2.  $b$ 是 $\dfrac{1}{f(z)}$ 的 $m$ 重零根
+3.  $f(z) = \dfrac{C_m}{(z-b)^m} + \cdots + \dfrac{C_{-1}}{z-b} + C_0 + C_k (z-b)^k + \cdots$
+
+$(z-b)^m f(z)$ 是个Taylor 级数。
+
+例：
+
+$$f(z) = \frac{z^2+2}{(z-1)^2}= \frac{C_1}{(z-1)^2} + C_0 + C_k (z-1)^k, \quad k \ge 1$$
+
+$z=1$ 是二阶极点
+
+***谢谢你看到这里orz***
+
+2026.10.10
 `
       }
     ]
