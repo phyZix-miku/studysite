@@ -251,180 +251,111 @@ $$
 # 双摆问题（Double Pendulum）
 
 > 本文件由手写推导笔记整理而成，按原稿顺序完整保留全部推导步骤、符号定义与结论。手写连笔或难以辨认之处，均在正文中以"**注**"标明推断依据。
-
 ---
 
-## 1. 物理模型与坐标系设定
+* * *
 
-1. 两根轻质刚性摆线，摆长分别为 $l_1$、$l_2$；末端质点质量分别为 $m_1$、$m_2$；重力加速度 $g$ 竖直向下。
-2. 建立笛卡尔坐标系（**注**：原稿此处有一行小字括注，字迹较小，按上下文推断为"建立笛卡尔坐标系"）：原点取悬点，$x$ 轴水平向右，$y$ 轴竖直向下。
-3. 角度定义：$\theta_1$ 为摆线 $l_1$ 与竖直向下方向（$y$ 轴）的夹角；$\theta_2$ 为摆线 $l_2$ 与过 $m_1$ 的竖直线的夹角。
+### 1\. 物理模型与坐标系设定
 
-   **注**：角度基准未在原稿中显式说明，由坐标定义式 $x_i = l_i\sin\theta_i$、$y_i = l_i\cos\theta_i$ 反推而得（$y$ 轴向下，故 $\theta_i=0$ 对应竖直下垂位置）。
+1.  两根轻质刚性摆线，摆长分别为 $l_1$、$l_2$；末端质点质量分别为 $m_1$、$m_2$；重力加速度 $g$ 竖直向下。
+2.  建立笛卡尔坐标系：原点取悬点，$x$ 轴水平向右，$y$ 轴竖直向下。
+3.  角度定义：$\theta_1$ 为摆线 $l_1$ 与竖直向下方向的夹角；$\theta_2$ 为摆线 $l_2$ 与过 $m_1$ 的竖直线的夹角。
 
-两质点的直角坐标（原稿）：
+两质点的直角坐标：
 
-$$
-\begin{cases}
-x_1 = l_1\sin\theta_1 \\
-y_1 = l_1\cos\theta_1
-\end{cases}
-\qquad\Longrightarrow\qquad
-\begin{cases}
-x_2 = l_1\sin\theta_1 + l_2\sin\theta_2 \\
-y_2 = l_1\cos\theta_1 + l_2\cos\theta_2
-\end{cases}
-$$
+$$\begin{cases} x_1 = l_1\sin\theta_1 \\ y_1 = l_1\cos\theta_1 \end{cases}; \qquad \begin{cases} x_2 = l_1\sin\theta_1 + l_2\sin\theta_2 \\ y_2 = l_1\cos\theta_1 + l_2\cos\theta_2 \end{cases}$$
 
+### 示意图
 
----
+坐标系 $x$（水平向右）、$y$（竖直向下）取于悬点；$\theta_1$、$\theta_2$ 分别为两段摆线与竖直方向的夹角，$m_1$、$m_2$ 为两质点。
 
-## 2. 拉格朗日函数的构造
+![](images/1.jpg)
+
+* * *
+
+### 2\. [拉格朗日函数](https://zhida.zhihu.com/search?content_id=284563820&content_type=Article&match_order=1&q=%E6%8B%89%E6%A0%BC%E6%9C%97%E6%97%A5%E5%87%BD%E6%95%B0&zhida_source=entity)的构造
 
 原稿从 $T-V$ 出发：
 
-$$
-\mathscr{L} = T - V = T_1 + T_2 - V_1 - V_2
-$$
+$$L= T - V = T_1 + T_2 - V_1 - V_2$$
 
 由于 $y$ 轴竖直向下，取 $V_i = -m_i g\,y_i$，故 $-V_i = m_i g\,y_i$，即
 
-$$
-\mathscr{L} = \frac{1}{2}m_1 v_1^2 + \frac{1}{2}m_2 v_2^2 + m_1 g\,l_1\cos\theta_1 + m_2 g\left(l_1\cos\theta_1 + l_2\cos\theta_2\right)
-$$
+$$L= \frac{1}{2}m_1 v_1^2 + \frac{1}{2}m_2 v_2^2 + m_1 g\,l_1\cos\theta_1$$
+
+$$+ m_2 g\left(l_1\cos\theta_1 + l_2\cos\theta_2\right)$$
 
 其中两质点的速度平方分别定义为
 
-$$
-v_1^2 = \dot{x}_1^2 + \dot{y}_1^2,
-\qquad
-v_2^2 = \dot{x}_2^2 + \dot{y}_2^2
-$$
+$$v_1^2 = \dot{x}_1^2 + \dot{y}_1^2, \qquad v_2^2 = \dot{x}_2^2 + \dot{y}_2^2$$
 
----
+* * *
 
-## 3. 速度分量（对坐标求时间导数）
+### 3\. 速度分量（对坐标求时间导数）
 
 对质点 1：
 
-$$
-\begin{cases}
-\dot{x}_1 = l_1\dot{\theta}_1\cos\theta_1 \\
-\dot{y}_1 = l_1\dot{\theta}_1\left(-\sin\theta_1\right) = -l_1\dot{\theta}_1\sin\theta_1
-\end{cases}
-$$
+$$\begin{cases} \dot{x}_1 = l_1\dot{\theta}_1\cos\theta_1 \\ \dot{y}_1 = l_1\dot{\theta}_1\left(-\sin\theta_1\right) = -l_1\dot{\theta}_1\sin\theta_1 \end{cases}$$
 
 对质点 2：
 
-$$
-\begin{cases}
-\dot{x}_2 = l_1\dot{\theta}_1\cos\theta_1 + l_2\dot{\theta}_2\cos\theta_2 \\
-\dot{y}_2 = -l_1\dot{\theta}_1\sin\theta_1 - l_2\dot{\theta}_2\sin\theta_2
-\end{cases}
-$$
+$$\begin{cases} \dot{x}_2 = l_1\dot{\theta}_1\cos\theta_1 + l_2\dot{\theta}_2\cos\theta_2 \\ \dot{y}_2 = -l_1\dot{\theta}_1\sin\theta_1 - l_2\dot{\theta}_2\sin\theta_2 \end{cases}$$
 
----
+* * *
 
-## 4. 速度平方
+### 4\. 速度平方
 
-$$
-\therefore\quad
-v_1^2 = l_1^2\dot{\theta}_1^{\,2}
-$$
+$$v_1^2 = l_1^2\dot{\theta}_1^{\,2}$$
 
-$$
-v_2^2 = l_1^2\dot{\theta}_1^{\,2} + l_2^2\dot{\theta}_2^{\,2} + 2l_1 l_2\dot{\theta}_1\dot{\theta}_2\cos(\theta_1 - \theta_2)
-$$
+$$v_2^2 = l_1^2\dot{\theta}_1^{\,2} + l_2^2\dot{\theta}_2^{\,2} + 2l_1 l_2\dot{\theta}_1\dot{\theta}_2\cos(\theta_1 - \theta_2)$$
 
----
+* * *
 
-## 5. 代入得拉格朗日函数
+### 5\. 代入得拉格朗日函数
 
 将第 4 节结果代入第 2 节，得
 
-$$
-\mathscr{L} = \frac{1}{2}(m_1 + m_2)\,l_1^2\dot{\theta}_1^{\,2} + \frac{1}{2}m_2 l_2^2\dot{\theta}_2^{\,2} + m_2 l_1 l_2\,\dot{\theta}_1\dot{\theta}_2\cos(\theta_1 - \theta_2)
-+ (m_1 + m_2)\,g\,l_1\cos\theta_1 + m_2 g\,l_2\cos\theta_2
-$$
+$$L= \frac{1}{2}(m_1 + m_2)\,l_1^2\dot{\theta}_1^{\,2} + \frac{1}{2}m_2 l_2^2\dot{\theta}_2^{\,2}$$
 
----
+$$+ m_2 l_1 l_2\,\dot{\theta}_1\dot{\theta}_2\cos(\theta_1 - \theta_2)$$ $$+ (m_1 + m_2)\,g\,l_1\cos\theta_1 + m_2 g\,l_2\cos\theta_2$$
 
-## 6. 根据欧拉–拉格朗日方程求偏导数
+* * *
+
+6\. 根据欧拉–拉格朗日方程求偏导数
 
 欧拉–拉格朗日方程为
 
-$$
-\frac{d}{dt}\frac{\partial\mathscr{L}}{\partial\dot{\theta}_i} - \frac{\partial\mathscr{L}}{\partial\theta_i} = 0
-$$
+$$\frac{d}{dt}\frac{\partial L}{\partial\dot{\theta}_i} - \frac{\partial L}{\partial\theta_i} = 0$$
 
 所需的四个偏导数（原稿逐项给出）：
 
-$$
-\frac{\partial\mathscr{L}}{\partial\dot{\theta}_1} = (m_1 + m_2)\,l_1^2\dot{\theta}_1 + m_2 l_1 l_2\,\dot{\theta}_2\cos(\theta_1 - \theta_2)
-$$
+$$\frac{\partial L}{\partial\dot{\theta}_1} = (m_1 + m_2)\,l_1^2\dot{\theta}_1 + m_2 l_1 l_2\,\dot{\theta}_2\cos(\theta_1 - \theta_2)$$
 
-$$
-\frac{\partial\mathscr{L}}{\partial\theta_1} = -m_2 l_1 l_2\,\dot{\theta}_1\dot{\theta}_2\sin(\theta_1 - \theta_2) - (m_1 + m_2)\,g\,l_1\sin\theta_1
-$$
+$$\frac{\partial L }{\partial\theta_1} = -m_2 l_1 l_2\,\dot{\theta}_1\dot{\theta}_2\sin(\theta_1 - \theta_2) - (m_1 + m_2)\,g\,l_1\sin\theta_1$$
 
-$$
-\frac{\partial\mathscr{L}}{\partial\dot{\theta}_2} = m_2 l_2^2\dot{\theta}_2 + m_2 l_1 l_2\,\dot{\theta}_1\cos(\theta_1 - \theta_2)
-$$
+$$\frac{\partial L}{\partial\dot{\theta}_2} = m_2 l_2^2\dot{\theta}_2 + m_2 l_1 l_2\,\dot{\theta}_1\cos(\theta_1 - \theta_2)$$
 
-$$
-\frac{\partial\mathscr{L}}{\partial\theta_2} = m_2 l_1 l_2\,\dot{\theta}_1\dot{\theta}_2\sin(\theta_1 - \theta_2) - m_2 g\,l_2\sin\theta_2
-$$
+$$\frac{\partial L}{\partial\theta_2} = m_2 l_1 l_2\,\dot{\theta}_1\dot{\theta}_2\sin(\theta_1 - \theta_2) - m_2 g\,l_2\sin\theta_2$$
 
-**注**：原稿在 $\partial\mathscr{L}/\partial\dot\theta_1$ 一行之前有两三个被划掉的字（涂改痕迹），不影响推导内容，整理时略去。
+* * *
 
----
-
-## 7. 代入得运动方程
+### 7\. 代入得运动方程
 
 将第 6 节偏导数代入欧拉–拉格朗日方程，整理得两个耦合的运动方程：
 
-$$
-(m_1 + m_2)\,l_1\ddot{\theta}_1 + m_2 l_2\cos(\theta_1 - \theta_2)\,\ddot{\theta}_2 + m_2 l_2\,\dot{\theta}_2^{\,2}\sin(\theta_1 - \theta_2) + (m_1 + m_2)\,g\sin\theta_1 = 0
-$$
+$$(m_1 + m_2)\,l_1\ddot{\theta}_1 + m_2 l_2\cos(\theta_1 - \theta_2)\,\ddot{\theta}_2$$
 
-$$
-l_1\cos(\theta_1 - \theta_2)\,\ddot{\theta}_1 + l_2\ddot{\theta}_2 - l_1\dot{\theta}_1^{\,2}\sin(\theta_1 - \theta_2) + g\sin\theta_2 = 0
-$$
+$$+ m_2 l_2\,\dot{\theta}_2^{\,2}\sin(\theta_1 - \theta_2) + (m_1 + m_2)\,g\sin\theta_1 = 0$$
 
-**注**：第一式相当于完整方程
-$(m_1+m_2)l_1^2\ddot\theta_1 + m_2l_1l_2\cos(\theta_1-\theta_2)\ddot\theta_2 + m_2l_1l_2\dot\theta_2^{\,2}\sin(\theta_1-\theta_2) + (m_1+m_2)gl_1\sin\theta_1 = 0$
-整体除以 $l_1$ 后的形式；原稿两式均已作此约化（第二式为完整方程除以 $l_2$）。
+$$l_1\cos(\theta_1 - \theta_2)\,\ddot{\theta}_1 + l_2\ddot{\theta}_2 - l_1\dot{\theta}_1^{\,2}\sin(\theta_1 - \theta_2) + g\sin\theta_2 = 0$$
 
----
+  
 
-## 8. 写成矩阵形式
+* * *
 
-$$
-\begin{pmatrix}
-(m_1 + m_2)\,l_1 & m_2 l_2\cos(\theta_1 - \theta_2) \\
-l_1\cos(\theta_1 - \theta_2) & l_2
-\end{pmatrix}
-\begin{pmatrix}
-\ddot{\theta}_1 \\
-\ddot{\theta}_2
-\end{pmatrix}
-=
-\begin{pmatrix}
--\,m_2 l_2\,\dot{\theta}_2^{\,2}\sin(\theta_1 - \theta_2) - (m_1 + m_2)\,g\sin\theta_1 \\[4pt]
-l_1\dot{\theta}_1^{\,2}\sin(\theta_1 - \theta_2) - g\sin\theta_2
-\end{pmatrix}
-$$
+### 8\. 结论小结
 
-**注**：原稿矩阵两行的标度不一致（第一行系数对应第 7 节第一式，即已除以 $l_1$；第二行对应第二式），此为原稿原样保留的结果。若需两行量纲一致，可将第一行同乘 $l_1$。
-
----
-
-## 9. 结论小结
-
-1. 双摆有两个自由度 $(\theta_1, \theta_2)$，拉格朗日函数为第 5 节所示；系统是两个非线性耦合的二阶方程（第 7 节）。
-2. 运动方程已写成质量矩阵形式（第 8 节），给定初始条件后即可数值求解 $\theta_1(t)$、$\theta_2(t)$。
-3. 角度基准：$\theta_i$ 均以竖直向下方向为零点（由坐标定义 $x_i=l_i\sin\theta_i$、$y_i=l_i\cos\theta_i$ 确定）。
-
+双摆有两个自由度 $(\theta_1, \theta_2)$，拉格朗日函数为第 5 节所示；系统是两个非线性耦合的二阶方程（第 7 节）。
 `
   },
   {
