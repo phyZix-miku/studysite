@@ -60,7 +60,7 @@ const notes = [
     content: String.raw`
 # 有心力场：由哈密顿原理导出动力学方程
 ---
-> 本文件由手写推导笔记整理而成，按原稿顺序完整保留全部推导步骤、符号定义与结论。手写连笔或难以辨认之处，均在正文中以"**注**"标明推断依据。
+> 本文件由手写推导笔记整理而成，按原稿顺序完整保留全部推导步骤、符号定义与结论。
 ---
 ## 1. 问题
 
@@ -250,7 +250,7 @@ $$
 
 # 双摆问题（Double Pendulum）
 
-> 本文件由手写推导笔记整理而成，按原稿顺序完整保留全部推导步骤、符号定义与结论。手写连笔或难以辨认之处，均在正文中以"**注**"标明推断依据。
+> 本文件由手写推导笔记整理而成，按原稿顺序完整保留全部推导步骤、符号定义与结论。
 ---
 
 * * *
@@ -273,7 +273,7 @@ $$\begin{cases} x_1 = l_1\sin\theta_1 \\ y_1 = l_1\cos\theta_1 \end{cases}; \qqu
 
 * * *
 
-### 2\. [拉格朗日函数](https://zhida.zhihu.com/search?content_id=284563820&content_type=Article&match_order=1&q=%E6%8B%89%E6%A0%BC%E6%9C%97%E6%97%A5%E5%87%BD%E6%95%B0&zhida_source=entity)的构造
+### 2\. 拉格朗日函数的构造
 
 原稿从 $T-V$ 出发：
 
@@ -363,163 +363,117 @@ $$l_1\cos(\theta_1 - \theta_2)\,\ddot{\theta}_1 + l_2\ddot{\theta}_2 - l_1\dot{\
     content: String.raw`
 # 球面摆问题（Spherical Pendulum）
 
-> 本文件由手写推导笔记整理而成，按原稿顺序完整保留全部推导步骤、符号定义与结论。手写连笔或难以辨认之处，均在正文中以"**注**"标明推断依据。
+> 本文件由手写推导笔记整理而成，按原稿顺序完整保留全部推导步骤、符号定义与结论。
 
 ---
 
-## 1. 物理模型与坐标系设定
+* * *
 
-1. 摆锤质量为 $m$，摆长为 $l$（轻质摆线），摆锤被约束在以悬点（原点）为中心、半径 $l$ 的球面上运动。
-2. 重力加速度 $g$ 方向竖直向下，$z$ 轴竖直向上。
-3. 采用球坐标 $(\theta, \varphi)$ 描述摆锤位置：$\theta$ 为摆线与 $z$ 轴正方向之间的夹角，$\varphi$ 为摆锤在水平面内投影的方位角（见俯视图）。
+### 1\. 物理模型与坐标系设定
 
-摆锤的直角坐标由球坐标表示（原稿）：
+1.  摆锤质量为 $m$，摆长为 $l$（轻杆），摆锤被约束在以悬点（原点）为中心、半径 $l$ 的球面上运动。
+2.  重力加速度 $g$ 方向竖直向下，$z$ 轴竖直向上。
+3.  采用球坐标 $(\theta, \varphi)$ 描述摆锤位置：$\theta$ 为摆线与 $z$ 轴正方向之间的夹角，$\varphi$ 为摆锤在水平面内投影的方位角（见俯视图）。
 
-$$
-\begin{cases}
-x = l\sin\theta\cos\varphi \\
-y = l\sin\theta\sin\varphi \\
-z = l\cos\theta
-\end{cases}
-$$
+摆锤的直角坐标由球坐标表示：
 
-**注**：原稿未显式写出势能表达式。由 $\mathscr{L}=T-V=T+mgl\cos\theta$ 可反推原稿的符号约定为 $V=-mgz=-mgl\cos\theta$（$z$ 轴向上），此时稳定平衡位置位于 $\theta=\pi$（最低点）。
+$$\begin{cases} x = l\sin\theta\cos\varphi \\ y = l\sin\theta\sin\varphi \\ z = l\cos\theta \end{cases}$$
 
----
+### 示意图
 
-## 2. 拉格朗日函数的构造
+下图为三维视角：球面为摆锤可达曲面，标出 $z$ 轴、$g$、摆长 $l$、极角 $\theta$、方位角 $\varphi$ 与摆锤 $m$；右图为俯视图：水平面内 $x$、$y$ 轴与方位角 $\varphi$。
 
-原稿从 $T-V$ 出发：
+![](images/2.jpg)
 
-$$
-\mathscr{L} = T - V = \frac{1}{2}mv^2 + mgl\cos\theta
-$$
+* * *
+
+**2\. [拉格朗日函数](https://zhida.zhihu.com/search?content_id=284567165&content_type=Article&match_order=1&q=%E6%8B%89%E6%A0%BC%E6%9C%97%E6%97%A5%E5%87%BD%E6%95%B0&zhida_source=entity)的构造**
+
+从 $T-V$ 出发：
+
+$$L = T - V = \frac{1}{2}mv^2 + mgl\cos\theta$$
 
 其中速度平方为
 
-$$
-v^2 = \dot{x}^2 + \dot{y}^2 + \dot{z}^2
-$$
+$$v^2 = \dot{x}^2 + \dot{y}^2 + \dot{z}^2$$
 
----
+* * *
 
-## 3. 速度分量（对坐标变换求时间导数）
+### 3\. 速度分量（对坐标变换求时间导数）
 
 对第 1 节的坐标变换求导：
 
-$$
-\begin{cases}
-\dot{x} = l\left(\dot{\theta}\cos\theta\cos\varphi - \dot{\varphi}\sin\theta\sin\varphi\right) \\[4pt]
-\dot{y} = l\left(\dot{\theta}\cos\theta\sin\varphi + \dot{\varphi}\sin\theta\cos\varphi\right) \\[4pt]
-\dot{z} = -l\,\dot{\theta}\sin\theta
-\end{cases}
-$$
+$$\begin{cases} \dot{x} = l\left(\dot{\theta}\cos\theta\cos\varphi - \dot{\varphi}\sin\theta\sin\varphi\right) \\[4pt] \dot{y} = l\left(\dot{\theta}\cos\theta\sin\varphi + \dot{\varphi}\sin\theta\cos\varphi\right) \\[4pt] \dot{z} = -l\,\dot{\theta}\sin\theta \end{cases}$$
 
-**注**：原稿 $\dot{y}$ 一行中第二项的点号连笔不清（近似写作 $\varphi\sin\theta\cos\varphi$），按链式法则 $\dot{y}=\dfrac{d}{dt}\left(l\sin\theta\sin\varphi\right)$ 推断应为 $\dot{\varphi}\sin\theta\cos\varphi$。
+* * *
 
----
-
-## 4. 代入化简得拉格朗日函数
+### 4\. 代入化简得拉格朗日函数
 
 将速度分量代入 $v^2$（交叉项 $\sin\varphi\cos\varphi$ 相互抵消）：
 
-$$
-\therefore\quad
-\mathscr{L} = \frac{1}{2}ml^2\left(\dot{\theta}^2 + \dot{\varphi}^{\,2}\sin^2\theta\right) + mgl\cos\theta
-$$
+$$L= \frac{1}{2}ml^2\left(\dot{\theta}^2 + \dot{\varphi}^{\,2}\sin^2\theta\right) + mgl\cos\theta$$
 
-**注**：原稿由速度分量直接给出上式，未列出 $v^2=l^2(\dot\theta^2+\dot\varphi^2\sin^2\theta)$ 的中间步骤，此处按原稿结论保留。
+* * *
 
----
-
-## 5. 拉格朗日方程所需的偏导数
+### 5\. 拉格朗日方程所需的偏导数
 
 对 $\theta$ 与 $\dot{\theta}$：
 
-$$
-\frac{\partial\mathscr{L}}{\partial\dot{\theta}} = ml^2\dot{\theta},
-\qquad
-\frac{\partial\mathscr{L}}{\partial\theta} = ml^2\sin\theta\cos\theta\,\dot{\varphi}^{\,2} - mgl\sin\theta
-$$
+$$\frac{\partial L}{\partial\dot{\theta}} = ml^2\dot{\theta}, \quad \frac{\partial L}{\partial\theta} = ml^2\sin\theta\cos\theta\,\dot{\varphi}^{\,2} - mgl\sin\theta$$
 
 对 $\varphi$ 与 $\dot{\varphi}$：
 
-$$
-\frac{\partial\mathscr{L}}{\partial\dot{\varphi}} = ml^2\sin^2\theta\,\dot{\varphi},
-\qquad
-\frac{\partial\mathscr{L}}{\partial\varphi} = 0
-$$
+$$\frac{\partial L}{\partial\dot{\varphi}} = ml^2\sin^2\theta\,\dot{\varphi}, \quad \frac{\partial L}{\partial\varphi} = 0$$
 
----
+* * *
 
-## 6. 代入欧拉–拉格朗日方程
+### 6\. 代入欧拉–拉格朗日方程
 
 欧拉–拉格朗日方程为
 
-$$
-\frac{d}{dt}\frac{\partial\mathscr{L}}{\partial\dot{q}_i} - \frac{\partial\mathscr{L}}{\partial q_i} = 0
-$$
+$$\frac{d}{dt}\frac{\partial L}{\partial\dot{q}_i} - \frac{\partial L}{\partial q_i} = 0$$
 
-代入第 5 节各偏导数，得到两个运动方程：
+代入第 5 节各偏导数，**得到两个运动方程：**
 
-$$
-\ddot{\theta} = \sin\theta\cos\theta\,\dot{\varphi}^{\,2} - \frac{g}{l}\sin\theta
-$$
+$$\ddot{\theta} = \dot{\varphi}^{\,2}\sin\theta\cos\theta- \frac{g}{l}\sin\theta$$
 
-$$
-\ddot{\varphi} = -2\cot\theta\,\dot{\theta}\,\dot{\varphi}
-$$
+$$\ddot{\varphi} =-2 \,\dot{\theta}\dot{\varphi}\cot\theta$$
 
-**注**：第二式即 $\dfrac{d}{dt}\left(ml^2\sin^2\theta\,\dot\varphi\right)=0$ 展开化简后的结果，原稿直接给出最终形式。
+* * *
 
----
-
-## 7. 守恒量
+### 7\. 守恒量
 
 ### 7.1 方位角方向的角动量守恒
 
-由于 $\mathscr{L}$ 不显含 $\varphi$（$\varphi$ 为循环坐标），方位角 $\varphi$ 方向的角动量守恒：
+由于 $L$ 不显含 $\varphi$（$\varphi$ 为循环坐标），方位角 $\varphi$ 方向的角动量守恒：
 
-$$
-\sin^2\theta\,\dot{\varphi} = h = \text{常数}
-$$
-
-**注**：完整守恒量为 $L_z = ml^2\sin^2\theta\,\dot\varphi$；原稿约去常数因子 $ml^2$ 后将其记作 $h$。
+$$\dot\varphi\sin^2\theta=h=常数$$
 
 ### 7.2 能量守恒
 
-$$
-E = T + V = \frac{1}{2}ml^2\left(\dot{\theta}^2 + \sin^2\theta\,\dot{\varphi}^{\,2}\right) - mgl\cos\theta
-$$
+$$E = T + V = \frac{1}{2}ml^2\left(\dot{\theta}^2 + \,\dot{\varphi}^{\,2}\sin^2\theta\right) - mgl\cos\theta$$
 
----
+* * *
 
-## 8. 化为单一变量的方程
+### 8\. 化为单一变量的方程
 
 由角动量守恒解出
 
-$$
-\dot{\varphi} = \frac{h}{\sin^2\theta}
-$$
+$$\dot{\varphi} = \frac{h}{\sin^2\theta}$$
 
 代入 $\theta$ 的运动方程，得
 
-$$
-\ddot{\theta} = \frac{h^2\cos\theta}{\sin^3\theta} - \frac{g}{l}\sin\theta
-$$
+$$\ddot{\theta} = \frac{h^2\cos\theta}{\sin^3\theta} - \frac{g}{l}\sin\theta$$
 
-**注**：原稿该式分母的幂次笔迹近似 $\sin^3\theta$；由 $\sin\theta\cos\theta\cdot\dot\varphi^{\,2}=\sin\theta\cos\theta\cdot\dfrac{h^2}{\sin^4\theta}=\dfrac{h^2\cos\theta}{\sin^3\theta}$ 核实为三次方，推断无误。
+* * *
 
----
+### 9\. 小结
 
-## 9. 结论小结
+球面摆有两个自由度 $(\theta, \varphi)$，运动方程为 $\ddot{\theta} = \sin\theta\cos\theta\,\dot\varphi^{\,2} - \dfrac{g}{l}\sin\theta$ 与 $\ddot{\varphi} = -2\cot\theta\,\dot\theta\,\dot\varphi$
 
-1. 球面摆有两个自由度 $(\theta, \varphi)$，运动方程为
-   $\ddot{\theta} = \sin\theta\cos\theta\,\dot\varphi^{\,2} - \dfrac{g}{l}\sin\theta$ 与
-   $\ddot{\varphi} = -2\cot\theta\,\dot\theta\,\dot\varphi$。
-2. 系统存在两个守恒量：方位角方向角动量 $\sin^2\theta\,\dot\varphi = h$ 与总机械能 $E$。
-3. 利用守恒量消去 $\dot\varphi$ 后，问题约化为关于 $\theta$ 的一维有效势运动：
-   $\ddot{\theta} = \dfrac{h^2\cos\theta}{\sin^3\theta} - \dfrac{g}{l}\sin\theta$。
+系统存在两个守恒量：方位角方向角动量 $\sin^2\theta\,\dot\varphi = h$ 与总机械能 $E$
+
+利用守恒量消去 $\dot\varphi$ 后，问题约化为关于 $\theta$ 的一维有效势运动： $\ddot{\theta} = \dfrac{h^2\cos\theta}{\sin^3\theta} - \dfrac{g}{l}\sin\theta$
 `
   }
 ];
