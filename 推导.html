@@ -11,7 +11,7 @@
      ========================================================================== -->
 <script>
 const PAGE_TITLE    = "物理模型推导";
-const PAGE_SUBTITLE = "physical model derivation;
+const PAGE_SUBTITLE = "physical model derivation";
 const PAGE_FOOTER   = "全文由 notes 数组自动生成";
 </script>
 
@@ -57,11 +57,7 @@ const PAGE_FOOTER   = "全文由 notes 数组自动生成";
 const notes = [
   {
     chapter: "二维平面内有心力场中粒子运动方程推导",
-    sections: [
-      {
-        id: "1-1",
-        title: "二维平面内有心力场中粒子运动方程推导",
-        content: String.raw`
+    content: String.raw`
 # 有心力场：由哈密顿原理导出动力学方程
 ---
 > 本文件由手写推导笔记整理而成，按原稿顺序完整保留全部推导步骤、符号定义与结论。手写连笔或难以辨认之处，均在正文中以"**注**"标明推断依据。
@@ -156,18 +152,11 @@ m\ddot{r} - m r \dot{\theta}^2 + \dfrac{\partial V(r)}{\partial r} = 0 \\[8pt]
 m r^2 \ddot{\theta} = 0
 \end{cases}
 $$
-`  
-
+`
   },
-]
-}，
   {
     chapter: "旋转系下自由粒子运动方程推导",
-    sections: [
-      {
-        id: "2-1",
-        title: "旋转系下自由粒子运动方程推导",
-        content: String.raw`
+    content: String.raw`
 
 # 旋转参考系中的自由粒子
 ---
@@ -254,16 +243,10 @@ $$
 \boxed{\ \ddot{Y} + 2\omega \dot{X} - \omega^2 Y = 0\ }
 $$
 `
-  }
-]
-},
+  },
   {
     chapter: "双摆",
-    sections: [
-      {
-        id: "3-1",
-        title: "双摆",
-        content: String.raw`
+    content: String.raw`
 
 # 双摆问题（Double Pendulum）
 
@@ -443,16 +426,10 @@ $$
 3. 角度基准：$\theta_i$ 均以竖直向下方向为零点（由坐标定义 $x_i=l_i\sin\theta_i$、$y_i=l_i\cos\theta_i$ 确定）。
 
 `
-      }
-    ]
   },
- {
+  {
     chapter: "球面摆",
-    sections: [
-      {
-        id: "4-1",
-        title: "球面摆",
-        content: String.raw`
+    content: String.raw`
 # 球面摆问题（Spherical Pendulum）
 
 > 本文件由手写推导笔记整理而成，按原稿顺序完整保留全部推导步骤、符号定义与结论。手写连笔或难以辨认之处，均在正文中以"**注**"标明推断依据。
@@ -613,8 +590,6 @@ $$
 3. 利用守恒量消去 $\dot\varphi$ 后，问题约化为关于 $\theta$ 的一维有效势运动：
    $\ddot{\theta} = \dfrac{h^2\cos\theta}{\sin^3\theta} - \dfrac{g}{l}\sin\theta$。
 `
-      }
-    ]
   }
 ];
 </script>
@@ -913,6 +888,38 @@ main{ margin-left:var(--side-w); min-height:100vh; }
 .section-body hr{ border:none; border-top:1px dashed var(--line); margin:1.5em 0; }
 .section-body img{ max-width:100%; height:auto; }
 
+/* ---------- 没有小节的章节：正文直接铺在章节里 ---------- */
+.chapter-body{
+  background:#fff;
+  border:1px solid var(--line-soft);
+  border-left:4px solid var(--main);
+  border-radius:var(--radius);
+  padding:22px 28px 20px;
+  box-shadow:0 1px 2px rgba(14,107,107,.045);
+}
+/* 正文里的 # / ## / ### 标题（marked 渲染成 h1/h2/h3） */
+.section-body h1{
+  margin:0 0 .6em;
+  font-size:21px; font-weight:bold; letter-spacing:.02em;
+  color:var(--deep);
+}
+.section-body h2{
+  position:relative;
+  margin:1.5em 0 .5em; padding-left:15px;
+  font-size:17.5px; font-weight:bold; color:var(--deep);
+}
+.section-body h2::before{
+  content:"";
+  position:absolute; left:0; top:.58em;
+  width:7px; height:7px;
+  background:var(--main);
+  border-radius:2px;
+}
+.section-body h3{
+  margin:1.2em 0 .45em;
+  font-size:16px; font-weight:bold; color:var(--main-dark);
+}
+
 .table-wrap{ margin:1em 0; overflow-x:auto; }
 .section-body table{
   border-collapse:collapse; width:100%;
@@ -1023,7 +1030,7 @@ main{ margin-left:var(--side-w); min-height:100vh; }
   #sidebar,#topbar,#toTop,#progress,#overlay{ display:none !important; }
   main{ margin-left:0; }
   .wrap{ max-width:none; padding:0; }
-  .section{ break-inside:avoid; box-shadow:none; }
+  .section,.chapter-body{ break-inside:avoid; box-shadow:none; }
   body{ background:#fff; }
 }
 
@@ -1086,7 +1093,7 @@ main{ margin-left:var(--side-w); min-height:100vh; }
     <p class="side-sub" id="side-sub"></p>
   </div>
   <div class="side-search">
-    <input id="tocSearch" type="search" placeholder="搜索小节…" autocomplete="off">
+    <input id="tocSearch" type="search" placeholder="搜索章节…" autocomplete="off">
   </div>
   <nav class="toc-scroll">
     <div id="toc-list"></div>
@@ -1340,19 +1347,23 @@ var lastActiveChapter = null;   // 记录上一次展开的章节 id
     chapters.forEach(function (ch, ci) {
       var chId = 'ch-' + (ch.id || (ci + 1));
       var secs = Array.isArray(ch.sections) ? ch.sections : [];
+      var chBody = (ch.content == null) ? '' : String(ch.content);
 
       html.push('<section class="chapter" id="' + chId + '">');
       html.push(
         '<div class="chapter-head">' +
           '<h2>' + escapeHtml(ch.chapter) + '</h2>' +
-          '<span class="chapter-meta">' + secs.length + ' 节</span>' +
+          (secs.length ? '<span class="chapter-meta">' + secs.length + ' 节</span>' : '') +
         '</div>'
       );
+      if (chBody) {
+        html.push('<div class="chapter-body section-body">' + renderContent(chBody) + '</div>');
+      }
 
-toc.push('<div class="toc-ch" data-ch="' + chId + '">');
+toc.push('<div class="toc-ch' + (secs.length ? '' : ' no-secs') + '" data-ch="' + chId + '">');
 toc.push(
   '<a class="toc-ch-link" href="#' + chId + '" data-target="' + chId + '" data-ch="' + chId + '">' +
-    '<span class="toc-arrow">▶</span>' +
+    (secs.length ? '<span class="toc-arrow">▶</span>' : '') +
     '<span class="toc-ch-text">' + escapeHtml(ch.chapter) + '</span>' +
   '</a>'
 );
@@ -1386,7 +1397,7 @@ toc.push('<ul class="toc-secs">');
 
     // 页脚统计
     var foot = document.getElementById('page-foot');
-    foot.textContent = chapters.length + ' 章 · ' + secTotal + ' 节' + (PAGE_FOOTER ? '　|　' + PAGE_FOOTER : '');
+    foot.textContent = chapters.length + ' 章' + (secTotal ? ' · ' + secTotal + ' 节' : '') + (PAGE_FOOTER ? '　|　' + PAGE_FOOTER : '');
 
     bindTocClicks();
     updateActive();
@@ -1407,11 +1418,17 @@ function bindTocClicks() {
       if (chId) {
         var tocCh = document.querySelector('#toc-list .toc-ch[data-ch="' + chId + '"]');
         if (tocCh) {
-          var wasOpen = tocCh.classList.contains('open');
-          tocCh.classList.toggle('open', !wasOpen);
-          if (!wasOpen) {
+          if (tocCh.classList.contains('no-secs')) {
+            /* 本章没有小节：直接滚到本章，不做展开/收起 */
             el.scrollIntoView({ behavior: 'smooth', block: 'start' });
             lastActiveChapter = chId;
+          } else {
+            var wasOpen = tocCh.classList.contains('open');
+            tocCh.classList.toggle('open', !wasOpen);
+            if (!wasOpen) {
+              el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              lastActiveChapter = chId;
+            }
           }
         }
         if (history.replaceState) { history.replaceState(null, '', '#' + target); }
