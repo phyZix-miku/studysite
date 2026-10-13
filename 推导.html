@@ -1,0 +1,1605 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>各个模型推导</title>
+
+<!-- ==========================================================================
+     ①  页面文字配置（标题、副标题、页脚）
+         直接改下面三行字符串即可，其余不用动。
+     ========================================================================== -->
+<script>
+const PAGE_TITLE    = "物理模型推导";
+const PAGE_SUBTITLE = "physical model derivation;
+const PAGE_FOOTER   = "全文由 notes 数组自动生成";
+</script>
+
+<!-- ==========================================================================
+     ②
+     ================= 在这里添加你的物理笔记 =================
+
+     ★★★ 以后新增/修改笔记，只改下面这个 notes 数组，不要改文件后面的渲染代码 ★★★
+
+     ┌─ 怎么新增【一章】？
+     │   在 notes = [ ... ] 里，用大括号加一个对象，格式：
+     │   {
+     │     chapter: "第三章 刚体转动",
+     │     sections: [ /* 这一章下面各节，见下 */ ]
+     │   },
+     │   放在两个章节对象中间，用逗号隔开即可（最后一章后面不要逗号）。
+     │
+     ├─ 怎么新增【一节】？
+     │   在某一章的 sections: [ ... ] 里，再加一个对象，格式：
+     │   {
+     │     id: "3-2",                      // 全站唯一，用于目录跳转，建议 "章号-节号"
+     │     title: "3.2 转动惯量",           // 会显示成小节标题
+     │     content: String.raw`
+     │       这里写正文，支持 Markdown，也支持 LaTeX 公式。
+     │     `
+     │   },
+     │   同样放在两个小节对象中间，用逗号隔开。
+     │
+     └─ content 里可以写什么？
+        1) 普通段落：直接写文字，空一行就是新段落
+        2) 行内公式：$v=\frac{dx}{dt}$
+        3) 块级公式（单独成行、居中、超长可横向滚动）：
+           $$
+           a=\frac{dv}{dt}=\frac{d^2x}{dt^2}
+           $$
+        4) 列表：- 无序  /  1. 有序
+        5) 加粗 **文字**、斜体 *文字*
+        6) 表格、引用 >、分割线 ---
+        ※ 用 String.raw`...` 包起来，反斜杠 \ 才不会被转义；
+          注意正文里不要出现反引号 ` 和 ${ 这两个符号。
+     ========================================================================== -->
+<script>
+const notes = [
+  {
+    chapter: "二维平面内有心力场中粒子运动方程推导",
+    sections: [
+      {
+        id: "1-1",
+        title: "二维平面内有心力场中粒子运动方程推导",
+        content: String.raw`
+# 有心力场：由哈密顿原理导出动力学方程
+---
+> 本文件由手写推导笔记整理而成，按原稿顺序完整保留全部推导步骤、符号定义与结论。手写连笔或难以辨认之处，均在正文中以"**注**"标明推断依据。
+---
+## 1. 问题
+
+质量 $m$ 的质点，在平面内受有心力场 $V(r)$ 的作用，从哈密顿原理出发，导出动力学方程。
+## (2,3和4可以省略)
+## 2. 哈密顿原理
+
+$$
+\delta S = 0 = \delta \int_{t_1}^{t_2} L(q, \dot{q}, t)\, dt
+= \int_{t_1}^{t_2} \left( \frac{\partial L}{\partial q}\, \delta q + \frac{\partial L}{\partial \dot{q}}\, \delta \dot{q} \right) dt
+$$
+
+## 3. 分部积分与变分、微分交换次序
+
+利用分部积分
+
+$$
+mn = \int m\, dn + \int n\, dm
+$$
+
+和变分、微分交换次序，可以把
+
+$$
+\int_{t_1}^{t_2} \frac{\partial L}{\partial \dot{q}}\, \delta\left( \frac{dq}{dt} \right)
+$$
+
+化为
+
+$$
+\int_{t_1}^{t_2} \frac{\partial L}{\partial \dot{q}}\, \frac{d}{dt}(\delta q)
+= \left[ \frac{\partial L}{\partial \dot{q}} \cdot \delta q \right]_{t_1}^{t_2}
+- \int_{t_1}^{t_2} \delta q \cdot \frac{d}{dt}\left( \frac{\partial L}{\partial \dot{q}} \right)
+$$
+
+
+## 4. 代入化简
+
+代入，得
+
+$$
+\int_{t_1}^{t_2} \left[ \frac{\partial L}{\partial q}\, \delta q - \delta q\, \frac{d}{dt}\left( \frac{\partial L}{\partial \dot{q}} \right) \right] dt
++ \left[ \frac{\partial L}{\partial \dot{q}} \cdot \delta q \right]_{t_1}^{t_2} = 0
+$$
+
+起点 $t_1$ 与终点 $t_2$ 不变，$\delta q\big|_{t_1} = 0$，$\delta q\big|_{t_2} = 0$，所以
+
+$$
+\int_{t_1}^{t_2} \left[ \frac{\partial L}{\partial q} - \frac{d}{dt}\left( \frac{\partial L}{\partial \dot{q}} \right) \right] \delta q\, dt = 0
+$$
+
+即
+
+$$
+\frac{\partial L}{\partial q} - \frac{d}{dt}\left( \frac{\partial L}{\partial \dot{q}} \right) = 0
+\qquad \text{①}
+$$
+
+## 5. 取广义坐标 $(r, \theta)$
+
+$$
+L = T - V = \frac{1}{2} m v^2 - V(r)
+$$
+
+$$
+\begin{cases}
+x = r\cos\theta \\
+y = r\sin\theta
+\end{cases}
+\;\Rightarrow\;
+\begin{cases}
+\dot{x} = \dot{r}\cos\theta - r\dot{\theta}\sin\theta \\
+\dot{y} = \dot{r}\sin\theta + r\dot{\theta}\cos\theta
+\end{cases}
+$$
+
+则 $v^2 = \dot{x}^2 + \dot{y}^2$，代入 $L$ 得
+
+$$
+L = \frac{1}{2} m \left( \dot{r}^2 + r^2 \dot{\theta}^2 \right) - V(r)
+$$
+
+## 6. 运动方程
+
+代入式 ①，得
+
+$$
+\begin{cases}
+m\ddot{r} - m r \dot{\theta}^2 + \dfrac{\partial V(r)}{\partial r} = 0 \\[8pt]
+m r^2 \ddot{\theta} = 0
+\end{cases}
+$$
+`  
+
+  },
+]
+}，
+  {
+    chapter: "旋转系下自由粒子运动方程推导",
+    sections: [
+      {
+        id: "2-1",
+        title: "旋转系下自由粒子运动方程推导",
+        content: String.raw`
+
+# 旋转参考系中的自由粒子
+---
+> 本文件由手写推导笔记整理而成，按原稿顺序完整保留全部推导步骤、符号定义与结论。手写连笔或难以辨认之处，均在正文中以"**注**"标明推断依据。
+---
+## 1. 问题设定
+
+  设观测者 A 对于一个惯性系，坐标用 $(x, y)$ 表示。
+
+  观测者 B 所在参考系相对于 A 以恒定角速度 $\omega$ 绕 $z$ 轴转动，坐标用 $(X, Y)$ 表示。
+
+A 看到粒子做匀速直线运动，问 B 如何描述此粒子运动。
+
+（原稿配图：$x$–$y$ 直角坐标系，$X$ 轴相对 $x$ 轴转过 $\omega t$ 角，图中标出 $\omega t$、$X$ 轴与 $Y$ 轴。）
+
+## 2. 坐标系变换
+
+设 $t=0$ 时刻 $(x, y)$ 与 $(X, Y)$ 重合，坐标系变换
+
+$$
+\begin{cases}
+x = X\cos\omega t - Y\sin\omega t \\
+y = X\sin\omega t + Y\cos\omega t
+\end{cases}
+$$
+
+## 3. 两边对时间求导
+
+$$
+\begin{cases}
+\dot{x} = (\dot{X} - \omega Y)\cos\omega t - (\dot{Y} + \omega X)\sin\omega t \\
+\dot{y} = (\dot{X} - \omega Y)\sin\omega t + (\dot{Y} + \omega X)\cos\omega t
+\end{cases}
+$$
+
+## 4. 拉格朗日量
+
+惯性系中自由粒子拉氏量
+
+$$
+L_A = \frac{1}{2} m \left( \dot{x}^2 + \dot{y}^2 \right)
+$$
+
+上两式代入，得
+
+$$
+L_B = \frac{1}{2} m \left( \dot{X}^2 + \dot{Y}^2 \right) + m\omega \left( X\dot{Y} - \dot{X} Y \right) + \frac{1}{2} m \omega^2 \left( X^2 + Y^2 \right)
+$$
+
+## 5. 用 E-L 方程求运动方程
+
+$$
+\frac{d}{dt} \frac{\partial L_B}{\partial \dot{Q}_i} - \frac{\partial L_B}{\partial Q_i} = 0
+, \qquad Q_1 = X,\ Q_2 = Y
+$$
+
+对 $X$：
+
+$$
+\frac{\partial L_B}{\partial \dot{X}} = m\dot{X} - m\omega Y
+, \qquad
+\frac{d}{dt} \frac{\partial L_B}{\partial \dot{X}} = m\ddot{X} - m\omega \dot{Y}
+$$
+
+$$
+\frac{\partial L_B}{\partial X} = m\omega \dot{Y} + m\omega^2 X
+$$
+
+## 6. 运动方程
+
+代入 E-L 方程，得
+
+$$
+m\ddot{X} - m\omega \dot{Y} - \left( m\omega \dot{Y} + m\omega^2 X \right) = 0
+$$
+
+$$
+\boxed{\ \ddot{X} - 2\omega \dot{Y} - \omega^2 X = 0\ }
+$$
+
+同理，对 $Y$：
+
+$$
+\boxed{\ \ddot{Y} + 2\omega \dot{X} - \omega^2 Y = 0\ }
+$$
+`
+  }
+]
+},
+  {
+    chapter: "双摆",
+    sections: [
+      {
+        id: "3-1",
+        title: "双摆",
+        content: String.raw`
+
+# 双摆问题（Double Pendulum）
+
+> 本文件由手写推导笔记整理而成，按原稿顺序完整保留全部推导步骤、符号定义与结论。手写连笔或难以辨认之处，均在正文中以"**注**"标明推断依据。
+
+---
+
+## 1. 物理模型与坐标系设定
+
+1. 两根轻质刚性摆线，摆长分别为 $l_1$、$l_2$；末端质点质量分别为 $m_1$、$m_2$；重力加速度 $g$ 竖直向下。
+2. 建立笛卡尔坐标系（**注**：原稿此处有一行小字括注，字迹较小，按上下文推断为"建立笛卡尔坐标系"）：原点取悬点，$x$ 轴水平向右，$y$ 轴竖直向下。
+3. 角度定义：$\theta_1$ 为摆线 $l_1$ 与竖直向下方向（$y$ 轴）的夹角；$\theta_2$ 为摆线 $l_2$ 与过 $m_1$ 的竖直线的夹角。
+
+   **注**：角度基准未在原稿中显式说明，由坐标定义式 $x_i = l_i\sin\theta_i$、$y_i = l_i\cos\theta_i$ 反推而得（$y$ 轴向下，故 $\theta_i=0$ 对应竖直下垂位置）。
+
+两质点的直角坐标（原稿）：
+
+$$
+\begin{cases}
+x_1 = l_1\sin\theta_1 \\
+y_1 = l_1\cos\theta_1
+\end{cases}
+\qquad\Longrightarrow\qquad
+\begin{cases}
+x_2 = l_1\sin\theta_1 + l_2\sin\theta_2 \\
+y_2 = l_1\cos\theta_1 + l_2\cos\theta_2
+\end{cases}
+$$
+
+
+---
+
+## 2. 拉格朗日函数的构造
+
+原稿从 $T-V$ 出发：
+
+$$
+\mathscr{L} = T - V = T_1 + T_2 - V_1 - V_2
+$$
+
+由于 $y$ 轴竖直向下，取 $V_i = -m_i g\,y_i$，故 $-V_i = m_i g\,y_i$，即
+
+$$
+\mathscr{L} = \frac{1}{2}m_1 v_1^2 + \frac{1}{2}m_2 v_2^2 + m_1 g\,l_1\cos\theta_1 + m_2 g\left(l_1\cos\theta_1 + l_2\cos\theta_2\right)
+$$
+
+其中两质点的速度平方分别定义为
+
+$$
+v_1^2 = \dot{x}_1^2 + \dot{y}_1^2,
+\qquad
+v_2^2 = \dot{x}_2^2 + \dot{y}_2^2
+$$
+
+---
+
+## 3. 速度分量（对坐标求时间导数）
+
+对质点 1：
+
+$$
+\begin{cases}
+\dot{x}_1 = l_1\dot{\theta}_1\cos\theta_1 \\
+\dot{y}_1 = l_1\dot{\theta}_1\left(-\sin\theta_1\right) = -l_1\dot{\theta}_1\sin\theta_1
+\end{cases}
+$$
+
+对质点 2：
+
+$$
+\begin{cases}
+\dot{x}_2 = l_1\dot{\theta}_1\cos\theta_1 + l_2\dot{\theta}_2\cos\theta_2 \\
+\dot{y}_2 = -l_1\dot{\theta}_1\sin\theta_1 - l_2\dot{\theta}_2\sin\theta_2
+\end{cases}
+$$
+
+---
+
+## 4. 速度平方
+
+$$
+\therefore\quad
+v_1^2 = l_1^2\dot{\theta}_1^{\,2}
+$$
+
+$$
+v_2^2 = l_1^2\dot{\theta}_1^{\,2} + l_2^2\dot{\theta}_2^{\,2} + 2l_1 l_2\dot{\theta}_1\dot{\theta}_2\cos(\theta_1 - \theta_2)
+$$
+
+---
+
+## 5. 代入得拉格朗日函数
+
+将第 4 节结果代入第 2 节，得
+
+$$
+\mathscr{L} = \frac{1}{2}(m_1 + m_2)\,l_1^2\dot{\theta}_1^{\,2} + \frac{1}{2}m_2 l_2^2\dot{\theta}_2^{\,2} + m_2 l_1 l_2\,\dot{\theta}_1\dot{\theta}_2\cos(\theta_1 - \theta_2)
++ (m_1 + m_2)\,g\,l_1\cos\theta_1 + m_2 g\,l_2\cos\theta_2
+$$
+
+---
+
+## 6. 根据欧拉–拉格朗日方程求偏导数
+
+欧拉–拉格朗日方程为
+
+$$
+\frac{d}{dt}\frac{\partial\mathscr{L}}{\partial\dot{\theta}_i} - \frac{\partial\mathscr{L}}{\partial\theta_i} = 0
+$$
+
+所需的四个偏导数（原稿逐项给出）：
+
+$$
+\frac{\partial\mathscr{L}}{\partial\dot{\theta}_1} = (m_1 + m_2)\,l_1^2\dot{\theta}_1 + m_2 l_1 l_2\,\dot{\theta}_2\cos(\theta_1 - \theta_2)
+$$
+
+$$
+\frac{\partial\mathscr{L}}{\partial\theta_1} = -m_2 l_1 l_2\,\dot{\theta}_1\dot{\theta}_2\sin(\theta_1 - \theta_2) - (m_1 + m_2)\,g\,l_1\sin\theta_1
+$$
+
+$$
+\frac{\partial\mathscr{L}}{\partial\dot{\theta}_2} = m_2 l_2^2\dot{\theta}_2 + m_2 l_1 l_2\,\dot{\theta}_1\cos(\theta_1 - \theta_2)
+$$
+
+$$
+\frac{\partial\mathscr{L}}{\partial\theta_2} = m_2 l_1 l_2\,\dot{\theta}_1\dot{\theta}_2\sin(\theta_1 - \theta_2) - m_2 g\,l_2\sin\theta_2
+$$
+
+**注**：原稿在 $\partial\mathscr{L}/\partial\dot\theta_1$ 一行之前有两三个被划掉的字（涂改痕迹），不影响推导内容，整理时略去。
+
+---
+
+## 7. 代入得运动方程
+
+将第 6 节偏导数代入欧拉–拉格朗日方程，整理得两个耦合的运动方程：
+
+$$
+(m_1 + m_2)\,l_1\ddot{\theta}_1 + m_2 l_2\cos(\theta_1 - \theta_2)\,\ddot{\theta}_2 + m_2 l_2\,\dot{\theta}_2^{\,2}\sin(\theta_1 - \theta_2) + (m_1 + m_2)\,g\sin\theta_1 = 0
+$$
+
+$$
+l_1\cos(\theta_1 - \theta_2)\,\ddot{\theta}_1 + l_2\ddot{\theta}_2 - l_1\dot{\theta}_1^{\,2}\sin(\theta_1 - \theta_2) + g\sin\theta_2 = 0
+$$
+
+**注**：第一式相当于完整方程
+$(m_1+m_2)l_1^2\ddot\theta_1 + m_2l_1l_2\cos(\theta_1-\theta_2)\ddot\theta_2 + m_2l_1l_2\dot\theta_2^{\,2}\sin(\theta_1-\theta_2) + (m_1+m_2)gl_1\sin\theta_1 = 0$
+整体除以 $l_1$ 后的形式；原稿两式均已作此约化（第二式为完整方程除以 $l_2$）。
+
+---
+
+## 8. 写成矩阵形式
+
+$$
+\begin{pmatrix}
+(m_1 + m_2)\,l_1 & m_2 l_2\cos(\theta_1 - \theta_2) \\
+l_1\cos(\theta_1 - \theta_2) & l_2
+\end{pmatrix}
+\begin{pmatrix}
+\ddot{\theta}_1 \\
+\ddot{\theta}_2
+\end{pmatrix}
+=
+\begin{pmatrix}
+-\,m_2 l_2\,\dot{\theta}_2^{\,2}\sin(\theta_1 - \theta_2) - (m_1 + m_2)\,g\sin\theta_1 \\[4pt]
+l_1\dot{\theta}_1^{\,2}\sin(\theta_1 - \theta_2) - g\sin\theta_2
+\end{pmatrix}
+$$
+
+**注**：原稿矩阵两行的标度不一致（第一行系数对应第 7 节第一式，即已除以 $l_1$；第二行对应第二式），此为原稿原样保留的结果。若需两行量纲一致，可将第一行同乘 $l_1$。
+
+---
+
+## 9. 结论小结
+
+1. 双摆有两个自由度 $(\theta_1, \theta_2)$，拉格朗日函数为第 5 节所示；系统是两个非线性耦合的二阶方程（第 7 节）。
+2. 运动方程已写成质量矩阵形式（第 8 节），给定初始条件后即可数值求解 $\theta_1(t)$、$\theta_2(t)$。
+3. 角度基准：$\theta_i$ 均以竖直向下方向为零点（由坐标定义 $x_i=l_i\sin\theta_i$、$y_i=l_i\cos\theta_i$ 确定）。
+
+`
+      }
+    ]
+  },
+ {
+    chapter: "球面摆",
+    sections: [
+      {
+        id: "4-1",
+        title: "球面摆",
+        content: String.raw`
+# 球面摆问题（Spherical Pendulum）
+
+> 本文件由手写推导笔记整理而成，按原稿顺序完整保留全部推导步骤、符号定义与结论。手写连笔或难以辨认之处，均在正文中以"**注**"标明推断依据。
+
+---
+
+## 1. 物理模型与坐标系设定
+
+1. 摆锤质量为 $m$，摆长为 $l$（轻质摆线），摆锤被约束在以悬点（原点）为中心、半径 $l$ 的球面上运动。
+2. 重力加速度 $g$ 方向竖直向下，$z$ 轴竖直向上。
+3. 采用球坐标 $(\theta, \varphi)$ 描述摆锤位置：$\theta$ 为摆线与 $z$ 轴正方向之间的夹角，$\varphi$ 为摆锤在水平面内投影的方位角（见俯视图）。
+
+摆锤的直角坐标由球坐标表示（原稿）：
+
+$$
+\begin{cases}
+x = l\sin\theta\cos\varphi \\
+y = l\sin\theta\sin\varphi \\
+z = l\cos\theta
+\end{cases}
+$$
+
+**注**：原稿未显式写出势能表达式。由 $\mathscr{L}=T-V=T+mgl\cos\theta$ 可反推原稿的符号约定为 $V=-mgz=-mgl\cos\theta$（$z$ 轴向上），此时稳定平衡位置位于 $\theta=\pi$（最低点）。
+
+---
+
+## 2. 拉格朗日函数的构造
+
+原稿从 $T-V$ 出发：
+
+$$
+\mathscr{L} = T - V = \frac{1}{2}mv^2 + mgl\cos\theta
+$$
+
+其中速度平方为
+
+$$
+v^2 = \dot{x}^2 + \dot{y}^2 + \dot{z}^2
+$$
+
+---
+
+## 3. 速度分量（对坐标变换求时间导数）
+
+对第 1 节的坐标变换求导：
+
+$$
+\begin{cases}
+\dot{x} = l\left(\dot{\theta}\cos\theta\cos\varphi - \dot{\varphi}\sin\theta\sin\varphi\right) \\[4pt]
+\dot{y} = l\left(\dot{\theta}\cos\theta\sin\varphi + \dot{\varphi}\sin\theta\cos\varphi\right) \\[4pt]
+\dot{z} = -l\,\dot{\theta}\sin\theta
+\end{cases}
+$$
+
+**注**：原稿 $\dot{y}$ 一行中第二项的点号连笔不清（近似写作 $\varphi\sin\theta\cos\varphi$），按链式法则 $\dot{y}=\dfrac{d}{dt}\left(l\sin\theta\sin\varphi\right)$ 推断应为 $\dot{\varphi}\sin\theta\cos\varphi$。
+
+---
+
+## 4. 代入化简得拉格朗日函数
+
+将速度分量代入 $v^2$（交叉项 $\sin\varphi\cos\varphi$ 相互抵消）：
+
+$$
+\therefore\quad
+\mathscr{L} = \frac{1}{2}ml^2\left(\dot{\theta}^2 + \dot{\varphi}^{\,2}\sin^2\theta\right) + mgl\cos\theta
+$$
+
+**注**：原稿由速度分量直接给出上式，未列出 $v^2=l^2(\dot\theta^2+\dot\varphi^2\sin^2\theta)$ 的中间步骤，此处按原稿结论保留。
+
+---
+
+## 5. 拉格朗日方程所需的偏导数
+
+对 $\theta$ 与 $\dot{\theta}$：
+
+$$
+\frac{\partial\mathscr{L}}{\partial\dot{\theta}} = ml^2\dot{\theta},
+\qquad
+\frac{\partial\mathscr{L}}{\partial\theta} = ml^2\sin\theta\cos\theta\,\dot{\varphi}^{\,2} - mgl\sin\theta
+$$
+
+对 $\varphi$ 与 $\dot{\varphi}$：
+
+$$
+\frac{\partial\mathscr{L}}{\partial\dot{\varphi}} = ml^2\sin^2\theta\,\dot{\varphi},
+\qquad
+\frac{\partial\mathscr{L}}{\partial\varphi} = 0
+$$
+
+---
+
+## 6. 代入欧拉–拉格朗日方程
+
+欧拉–拉格朗日方程为
+
+$$
+\frac{d}{dt}\frac{\partial\mathscr{L}}{\partial\dot{q}_i} - \frac{\partial\mathscr{L}}{\partial q_i} = 0
+$$
+
+代入第 5 节各偏导数，得到两个运动方程：
+
+$$
+\ddot{\theta} = \sin\theta\cos\theta\,\dot{\varphi}^{\,2} - \frac{g}{l}\sin\theta
+$$
+
+$$
+\ddot{\varphi} = -2\cot\theta\,\dot{\theta}\,\dot{\varphi}
+$$
+
+**注**：第二式即 $\dfrac{d}{dt}\left(ml^2\sin^2\theta\,\dot\varphi\right)=0$ 展开化简后的结果，原稿直接给出最终形式。
+
+---
+
+## 7. 守恒量
+
+### 7.1 方位角方向的角动量守恒
+
+由于 $\mathscr{L}$ 不显含 $\varphi$（$\varphi$ 为循环坐标），方位角 $\varphi$ 方向的角动量守恒：
+
+$$
+\sin^2\theta\,\dot{\varphi} = h = \text{常数}
+$$
+
+**注**：完整守恒量为 $L_z = ml^2\sin^2\theta\,\dot\varphi$；原稿约去常数因子 $ml^2$ 后将其记作 $h$。
+
+### 7.2 能量守恒
+
+$$
+E = T + V = \frac{1}{2}ml^2\left(\dot{\theta}^2 + \sin^2\theta\,\dot{\varphi}^{\,2}\right) - mgl\cos\theta
+$$
+
+---
+
+## 8. 化为单一变量的方程
+
+由角动量守恒解出
+
+$$
+\dot{\varphi} = \frac{h}{\sin^2\theta}
+$$
+
+代入 $\theta$ 的运动方程，得
+
+$$
+\ddot{\theta} = \frac{h^2\cos\theta}{\sin^3\theta} - \frac{g}{l}\sin\theta
+$$
+
+**注**：原稿该式分母的幂次笔迹近似 $\sin^3\theta$；由 $\sin\theta\cos\theta\cdot\dot\varphi^{\,2}=\sin\theta\cos\theta\cdot\dfrac{h^2}{\sin^4\theta}=\dfrac{h^2\cos\theta}{\sin^3\theta}$ 核实为三次方，推断无误。
+
+---
+
+## 9. 结论小结
+
+1. 球面摆有两个自由度 $(\theta, \varphi)$，运动方程为
+   $\ddot{\theta} = \sin\theta\cos\theta\,\dot\varphi^{\,2} - \dfrac{g}{l}\sin\theta$ 与
+   $\ddot{\varphi} = -2\cot\theta\,\dot\theta\,\dot\varphi$。
+2. 系统存在两个守恒量：方位角方向角动量 $\sin^2\theta\,\dot\varphi = h$ 与总机械能 $E$。
+3. 利用守恒量消去 $\dot\varphi$ 后，问题约化为关于 $\theta$ 的一维有效势运动：
+   $\ddot{\theta} = \dfrac{h^2\cos\theta}{\sin^3\theta} - \dfrac{g}{l}\sin\theta$。
+`
+      }
+    ]
+  }
+];
+</script>
+
+<!-- ==========================================================================
+     ③  以下为样式与渲染代码，正常情况下不需要修改
+     ========================================================================== -->
+<style>
+:root{
+  --main:       #2A9D8F;   /* 主色：方框、边框 */
+  --main-dark:  #22867A;   /* 悬停 */
+  --deep:       #0E6B6B;   /* 展开/标题 */
+  --pale:       #E8F4F3;   /* 浅底 */
+  --pale-2:     #DFF1EF;   /* 表头 */
+  --panel:      #F1F8F7;   /* 答案底 */
+  --line:       #B7DCD8;   /* 连接线 */
+  --line-soft:  #DCEDEB;   /* 细边框 */
+  --line-tbl:   #C3E2DF;   /* 表格线 */
+  --bg:         #F7FAFA;   /* 页面底 */
+  --text:       #16302E;   /* 正文 */
+  --text-ans:   #1B3836;   /* 答案正文 */
+  --muted:      #7B9C99;   /* 辅助文字 */
+  --foot:       #8FAEAB;   /* 页脚 */
+
+  --side-w: 286px;
+  --radius: 10px;
+}
+
+*,*::before,*::after{ box-sizing:border-box; }
+
+html{ scroll-behavior:smooth; }
+
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:"Times New Roman","SimSun","宋体","Songti SC","STSong",serif;
+  font-size:16.5px;
+  line-height:1.95;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+
+/* ---------- 阅读进度条 ---------- */
+#progress{
+  position:fixed; top:0; left:0; height:3px; width:0;
+  background:var(--main); z-index:80;
+  transition:width .08s linear;
+}
+
+/* ---------- 左侧目录 ---------- */
+#sidebar{
+  position:fixed; top:0; left:0; bottom:0;
+  width:var(--side-w);
+  background:#fff;
+  border-right:1px solid var(--line-soft);
+  display:flex; flex-direction:column;
+  z-index:50;
+}
+.side-head{
+  padding:20px 20px 14px;
+  background:var(--pale);
+  border-bottom:1px solid var(--line-soft);
+}
+.side-title{
+  margin:0 0 3px;
+  font-size:15px; font-weight:bold;
+  color:var(--deep); letter-spacing:.1em;
+}
+.side-sub{
+  font-size:12px; color:var(--muted);
+  letter-spacing:.06em; font-family:"Times New Roman",serif;
+}
+.side-search{ padding:12px 16px 8px; }
+.side-search input{
+  width:100%; padding:7px 10px;
+  font-family:inherit; font-size:13.5px; color:var(--text);
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:6px;
+  outline:none;
+  transition:border-color .15s, box-shadow .15s;
+}
+.side-search input::placeholder{ color:var(--muted); }
+.side-search input:focus{
+  border-color:var(--main);
+  box-shadow:0 0 0 3px rgba(42,157,143,.13);
+}
+.toc-scroll{
+  flex:1; overflow-y:auto;
+  padding:4px 12px 32px;
+  scrollbar-width:thin;
+}
+.toc-ch{ margin:10px 0 6px; }
+.toc-ch-link{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  padding:8px 10px;
+  font-size:14.5px; font-weight:bold;
+  color:var(--deep); text-decoration:none;
+  background:var(--pale);
+  border-left:3px solid var(--main);
+  border-radius:0 6px 6px 0;
+  cursor:pointer;
+  user-select:none;
+  transition:background .15s;
+}
+.toc-ch-link:hover{ background:var(--pale-2); }
+.toc-ch-text{ flex:1 1 auto; }
+
+.toc-arrow{
+  flex:0 0 auto;
+  font-size:10px;
+  color:var(--main-dark);
+  transition:transform .22s ease;
+}
+.toc-ch.open .toc-arrow{ transform:rotate(90deg); }
+
+/* 小节默认收起 */
+.toc-secs{
+  list-style:none;
+  margin:0;
+  padding:0 0 0 8px;
+  max-height:0;
+  overflow:hidden;
+  transition:max-height .3s ease, margin .3s ease;
+}
+.toc-ch.open .toc-secs{
+  max-height:2000px;   /* 足够容纳本章所有小节 */
+  margin:4px 0 0;
+}
+.toc-secs li{ margin:0; }
+.toc-sec-link{
+  display:block;
+  padding:6px 10px 6px 12px;
+  font-size:14px; color:var(--text);
+  text-decoration:none;
+  border-left:2px solid var(--line);
+  border-radius:0 6px 6px 0;
+  transition:background .15s, color .15s, border-color .15s;
+}
+.toc-sec-link:hover{
+  background:var(--pale);
+  border-left-color:var(--main-dark);
+  color:var(--deep);
+}
+.toc-sec-link.active{
+  background:var(--pale-2);
+  border-left-color:var(--deep);
+  color:var(--deep);
+  font-weight:bold;
+}
+#toc-empty{
+  display:none;
+  padding:18px 12px; font-size:13.5px; color:var(--muted); text-align:center;
+}
+
+/* ---------- 移动端顶栏 / 遮罩 ---------- */
+#topbar{
+  display:none;
+  position:sticky; top:0; z-index:45;
+  align-items:center; gap:12px;
+  height:52px; padding:0 14px;
+  background:rgba(232,244,243,.94);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--line);
+}
+#menuBtn{
+  font-family:inherit; font-size:14px; color:var(--deep);
+  background:#fff; border:1px solid var(--line);
+  border-radius:6px; padding:5px 12px; cursor:pointer;
+}
+#menuBtn:hover{ background:var(--pale-2); }
+#topbar-title{
+  font-size:15px; font-weight:bold; color:var(--deep);
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+#overlay{
+  display:none;
+  position:fixed; inset:0; background:rgba(22,48,46,.32); z-index:48;
+}
+#overlay.show{ display:block; }
+
+/* ---------- 右侧正文 ---------- */
+main{ margin-left:var(--side-w); min-height:100vh; }
+.wrap{
+  max-width:920px; margin:0 auto;
+  padding:38px 40px 130px;
+}
+.page-head{
+  padding-bottom:22px; margin-bottom:40px;
+  border-bottom:2px solid var(--line);
+}
+.page-head h1{
+  margin:0 0 8px;
+  font-size:34px; font-weight:bold; letter-spacing:.04em;
+  color:var(--deep);
+}
+.page-head .sub{
+  margin:0;
+  font-size:13.5px; letter-spacing:.16em;
+  color:var(--muted); text-transform:uppercase;
+}
+.loading{
+  padding:40px 0; color:var(--muted); font-size:15px;
+}
+
+.chapter{ margin:0 0 56px; }
+.chapter-head{
+  display:flex; align-items:baseline; gap:12px; flex-wrap:wrap;
+  padding-bottom:12px; margin-bottom:26px;
+  border-bottom:2px solid var(--main);
+}
+.chapter-head h2{
+  margin:0;
+  font-size:24px; font-weight:bold; letter-spacing:.03em;
+  color:var(--deep);
+}
+.chapter-meta{
+  font-size:12.5px; color:var(--muted); letter-spacing:.08em;
+}
+
+.section{
+  background:#fff;
+  border:1px solid var(--line-soft);
+  border-left:4px solid var(--main);
+  border-radius:var(--radius);
+  padding:22px 28px 20px;
+  margin:0 0 22px;
+  box-shadow:0 1px 2px rgba(14,107,107,.045);
+  scroll-margin-top:22px;
+}
+.section-head{
+  padding-bottom:12px; margin-bottom:14px;
+  border-bottom:1px dashed var(--line);
+}
+.section-head h3{
+  position:relative;
+  margin:0; padding-left:16px;
+  font-size:19px; font-weight:bold;
+  color:var(--deep);
+}
+.section-head h3::before{
+  content:"";
+  position:absolute; left:0; top:.62em;
+  width:8px; height:8px;
+  background:var(--main);
+  border-radius:2px;
+}
+
+/* ---------- 正文排版 ---------- */
+.section-body{ color:var(--text); overflow-wrap:break-word; word-break:break-word; }
+.section-body > *:first-child{ margin-top:0; }
+.section-body > *:last-child{ margin-bottom:0; }
+.section-body p{ margin:.72em 0; }
+.section-body h4{
+  margin:1.25em 0 .45em;
+  font-size:16.5px; font-weight:bold;
+  color:var(--deep);
+}
+.section-body h4::before{ content:"◆ "; color:var(--main); font-size:.72em; }
+.section-body h5,.section-body h6{
+  margin:1.1em 0 .4em; font-size:15.5px; color:var(--main-dark);
+}
+.section-body ul,.section-body ol{ margin:.62em 0; padding-left:1.65em; }
+.section-body li{ margin:.26em 0; }
+.section-body li::marker{ color:var(--main); }
+.section-body strong{ color:var(--deep); }
+.section-body em{ color:var(--main-dark); font-style:italic; }
+.section-body a{ color:var(--main-dark); text-decoration-color:var(--line); }
+.section-body blockquote{
+  margin:1em 0; padding:.6em 1.1em;
+  background:var(--pale);
+  border-left:3px solid var(--main);
+  border-radius:0 8px 8px 0;
+  color:var(--text-ans);
+}
+.section-body blockquote p{ margin:.28em 0; }
+.section-body code{
+  padding:1px 5px;
+  font-family:Consolas,"Courier New","SimSun",monospace;
+  font-size:.88em; color:var(--deep);
+  background:var(--panel);
+  border:1px solid var(--line-soft);
+  border-radius:4px;
+}
+.section-body pre{
+  margin:1em 0; padding:12px 14px;
+  background:var(--panel);
+  border:1px solid var(--line-soft);
+  border-radius:8px;
+  overflow-x:auto;
+}
+.section-body pre code{ padding:0; background:none; border:none; }
+.section-body hr{ border:none; border-top:1px dashed var(--line); margin:1.5em 0; }
+.section-body img{ max-width:100%; height:auto; }
+
+.table-wrap{ margin:1em 0; overflow-x:auto; }
+.section-body table{
+  border-collapse:collapse; width:100%;
+  font-size:15px;
+}
+.section-body th,.section-body td{
+  border:1px solid var(--line-tbl);
+  padding:7px 11px; text-align:left;
+  vertical-align:middle;
+}
+.section-body th{ background:var(--pale-2); color:var(--deep); font-weight:bold; }
+.section-body tbody tr:nth-child(even) td{ background:#FBFDFD; }
+
+/* ---------- 公式：过长可横向滚动，不撑破版面 ---------- */
+.katex{ font-size:1.05em; }
+.katex-display{
+  margin:1.05em 0;
+  padding:6px 2px;
+  overflow-x:auto;
+  overflow-y:hidden;
+}
+/* 选择器带 .section-body 前缀，是为了压过 KaTeX 自带样式（它在本文件之后加载），
+   min-width:100% 让公式短时居中、长时从最左侧开始，横向滚动时左侧不会被裁掉。 */
+.section-body .katex-display > .katex{
+  display:inline-block;
+  min-width:100%;
+  text-align:center;
+}
+.math-fallback{
+  font-family:Consolas,"Courier New",monospace;
+  font-size:.9em; color:var(--deep);
+  background:var(--panel);
+  border:1px dashed var(--line);
+  border-radius:6px;
+  padding:1px 6px;
+}
+.math-fallback.block{
+  display:block; margin:1em 0; padding:10px 14px;
+  overflow-x:auto; white-space:pre;
+}
+#cdn-warn{
+  display:none;
+  margin:0 0 26px; padding:12px 16px;
+  font-size:14px; color:var(--text-ans);
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-left:4px solid var(--main);
+  border-radius:0 8px 8px 0;
+}
+
+/* ---------- 页脚 / 返回顶部 ---------- */
+.page-foot{
+  margin-top:20px; padding-top:20px;
+  border-top:1px solid var(--line-soft);
+  font-size:13.5px; color:var(--foot);
+  letter-spacing:.06em; text-align:center;
+}
+#toTop{
+  position:fixed; right:26px; bottom:26px; z-index:60;
+  width:46px; height:46px;
+  display:flex; align-items:center; justify-content:center;
+  font-family:inherit; font-size:13px; line-height:1.1;
+  color:#fff; background:var(--main);
+  border:none; border-radius:50%;
+  cursor:pointer;
+  box-shadow:0 4px 12px rgba(14,107,107,.22);
+  opacity:0; pointer-events:none;
+  transition:opacity .22s, background .18s, transform .18s;
+}
+#toTop.show{ opacity:1; pointer-events:auto; }
+#toTop:hover{ background:var(--main-dark); transform:translateY(-2px); }
+
+/* ---------- 滚动条美化 ---------- */
+.toc-scroll::-webkit-scrollbar,
+.katex-display::-webkit-scrollbar,
+.table-wrap::-webkit-scrollbar,
+.section-body pre::-webkit-scrollbar{ height:6px; width:6px; }
+.toc-scroll::-webkit-scrollbar-thumb,
+.katex-display::-webkit-scrollbar-thumb,
+.table-wrap::-webkit-scrollbar-thumb,
+.section-body pre::-webkit-scrollbar-thumb{
+  background:var(--line); border-radius:3px;
+}
+.toc-scroll::-webkit-scrollbar-track{ background:transparent; }
+
+/* ---------- 移动端 ---------- */
+@media (max-width:980px){
+  #topbar{ display:flex; }
+  #sidebar{
+    width:300px;
+    transform:translateX(-100%);
+    transition:transform .28s ease;
+    box-shadow:0 0 24px rgba(14,107,107,.16);
+    z-index:52;
+  }
+  #sidebar.open{ transform:translateX(0); }
+  main{ margin-left:0; }
+  .wrap{ padding:22px 18px 120px; }
+  .page-head h1{ font-size:26px; }
+  .section{ padding:18px 18px 16px; }
+  .section-head h3{ font-size:17.5px; }
+  .section{ scroll-margin-top:66px; }
+  #toTop{ right:16px; bottom:16px; width:42px; height:42px; font-size:12px; }
+}
+
+/* ---------- 打印 ---------- */
+@media print{
+  #sidebar,#topbar,#toTop,#progress,#overlay{ display:none !important; }
+  main{ margin-left:0; }
+  .wrap{ max-width:none; padding:0; }
+  .section{ break-inside:avoid; box-shadow:none; }
+  body{ background:#fff; }
+}
+
+/* ===== 返回首页按钮（左上角） ===== */
+.back-home{
+  position: fixed;
+  top: 18px;
+  left: 18px;
+  z-index: 51;                /* 高于侧栏(50)，低于移动端抽屉展开(52) */
+  display: inline-block;
+  padding: 7px 14px;
+  background: #2A9D8F;
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 14px;
+  letter-spacing: 1px;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(42, 157, 143, .28);
+  transition: background .2s ease, transform .2s ease, box-shadow .2s ease;
+}
+.back-home:hover{
+  background: #0E6B6B;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(42, 157, 143, .36);
+}
+
+/* 桌面端：目录标题下移，避免被按钮压住 */
+.side-head{ padding-top: 58px; }
+
+@media (max-width: 980px){
+  .back-home{
+    top: 11px;
+    left: 12px;
+    font-size: 13px;
+    padding: 6px 11px;
+  }
+  /* 移动端顶栏给按钮让出位置 */
+  #topbar{ padding-left: 92px; }
+}
+
+</style>
+</head>
+
+<body>
+<div id="progress"></div>
+
+<a class="back-home" href="index.html">← 返回</a>
+
+<!-- 移动端顶栏 -->
+<div id="topbar">
+  <button id="menuBtn" type="button">目录</button>
+  <span id="topbar-title"></span>
+</div>
+<div id="overlay"></div>
+
+<!-- 左侧目录（自动生成） -->
+<aside id="sidebar">
+  <div class="side-head">
+    <p class="side-title" id="side-title"></p>
+    <p class="side-sub" id="side-sub"></p>
+  </div>
+  <div class="side-search">
+    <input id="tocSearch" type="search" placeholder="搜索小节…" autocomplete="off">
+  </div>
+  <nav class="toc-scroll">
+    <div id="toc-list"></div>
+    <p id="toc-empty">没有匹配的小节</p>
+  </nav>
+</aside>
+
+<!-- 右侧正文（自动生成） -->
+<main>
+  <div class="wrap">
+    <header class="page-head">
+      <h1 id="page-title"></h1>
+      <p class="sub" id="page-sub"></p>
+    </header>
+    <div id="cdn-warn"></div>
+    <div id="notes-root"><p class="loading">正在加载公式与 Markdown 渲染引擎…</p></div>
+    <footer class="page-foot" id="page-foot"></footer>
+  </div>
+</main>
+
+<button id="toTop" type="button">顶部</button>
+
+<script>
+/* ==========================================================================
+   以下为渲染代码，正常情况下不需要修改。
+   逻辑：加载 marked + KaTeX → 遍历 notes → 生成章节/小节/目录 → 绑定交互
+   ========================================================================== */
+(function () {
+  'use strict';
+
+  /* ---------------- 0. 渲染引擎依赖（多个 CDN 依次回退） ---------------- */
+  var CDN = {
+    katexCss: [
+      'https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css',
+      'https://unpkg.com/katex@0.16.9/dist/katex.min.css',
+      'https://lib.baomitu.com/KaTeX/0.16.9/katex.min.css',
+      'https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css'
+    ],
+    katexJs: [
+      'https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js',
+      'https://unpkg.com/katex@0.16.9/dist/katex.min.js',
+      'https://lib.baomitu.com/KaTeX/0.16.9/katex.min.js',
+      'https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js'
+    ],
+    markedJs: [
+      'https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js',
+      'https://unpkg.com/marked@12.0.2/marked.min.js',
+      'https://lib.baomitu.com/marked/12.0.2/marked.min.js',
+      'https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js'
+    ]
+  };
+
+  var state = { katex: false, marked: false };
+
+  // 依次尝试 CDN，全部失败则 reject
+  function loadAsset(urls, isCss) {
+    return new Promise(function (resolve, reject) {
+      var i = 0;
+      (function next() {
+        if (i >= urls.length) { reject(new Error('asset failed')); return; }
+        var url = urls[i++];
+        var el;
+        if (isCss) {
+          el = document.createElement('link');
+          el.rel = 'stylesheet';
+          el.href = url;
+        } else {
+          el = document.createElement('script');
+          el.src = url;
+          el.async = false;
+        }
+        el.onload = function () { resolve(url); };
+        el.onerror = function () {
+          if (el.parentNode) { el.parentNode.removeChild(el); }
+          next();
+        };
+        document.head.appendChild(el);
+      })();
+    });
+  }
+
+  function race(promise, ms) {
+    return Promise.race([
+      promise,
+      new Promise(function (_, rej) { setTimeout(function () { rej(new Error('timeout')); }, ms); })
+    ]);
+  }
+
+  /* ---------------- 1. 基础工具 ---------------- */
+  function escapeHtml(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+
+  // 把源码切成「行」「块」，供 Markdown 兜底解析使用
+  function splitLines(src) { return String(src).replace(/\r\n?/g, '\n').split('\n'); }
+
+  /* ---------------- 2. 保护代码块（避免代码里的 $ 被当成公式） ---------------- */
+  function protectCode(src, store) {
+    // 围栏代码块 ```lang ... ```
+    src = src.replace(/```([^\n`]*)\n?([\s\S]*?)```/g, function (_, lang, body) {
+      store.push({ lang: String(lang).trim(), body: body });
+      return '@@CODE' + (store.length - 1) + '@@';
+    });
+    // 行内代码 `...`
+    src = src.replace(/`([^`\n]+)`/g, function (_, body) {
+      store.push({ lang: null, body: body });
+      return '@@CODE' + (store.length - 1) + '@@';
+    });
+    return src;
+  }
+
+  /* ---------------- 3. 抽取公式（先抽出来，避免 Markdown 破坏 LaTeX） ---------------- */
+  function extractMath(src, store) {
+    // 块级 $$ ... $$（允许跨行）
+    src = src.replace(/\$\$([\s\S]+?)\$\$/g, function (_, tex) {
+      store.push({ tex: tex, display: true });
+      return '@@MATH' + (store.length - 1) + '@@';
+    });
+    // 行内 $ ... $（不跨行；前面是反斜杠的 \$ 不触发）
+    src = src.replace(/(^|[^\\$])\$([^\n$]+?)\$/g, function (_, pre, tex) {
+      store.push({ tex: tex, display: false });
+      return pre + '@@MATH' + (store.length - 1) + '@@';
+    });
+    return src;
+  }
+
+  // 渲染单条公式；KaTeX 不可用时降级为原始 LaTeX 文本
+  function renderMath(tex, display) {
+    if (state.katex && typeof katex !== 'undefined') {
+      try {
+        return katex.renderToString(tex, {
+          displayMode: !!display,
+          throwOnError: false,
+          strict: false,
+          output: 'htmlAndMathml'
+        });
+      } catch (e) { /* 降级 */ }
+    }
+    var raw = (display ? '$$' : '$') + String(tex).trim() + (display ? '$$' : '$');
+    return display
+      ? '<div class="math-fallback block">' + escapeHtml(raw) + '</div>'
+      : '<span class="math-fallback">' + escapeHtml(raw) + '</span>';
+  }
+
+  /* ---------------- 4. Markdown 兜底解析（CDN 不可用时也能读） ---------------- */
+  function miniInline(s) {
+    return s
+      .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+      .replace(/(^|[^*])\*([^*]+)\*/g, '$1<em>$2</em>');
+  }
+  function miniMarkdown(src) {
+    var lines = splitLines(src);
+    var html = '', listType = null, buf = [];
+    function flushP() { if (buf.length) { html += '<p>' + buf.join('<br>') + '</p>'; buf = []; } }
+    function closeList() { if (listType) { html += '</' + listType + '>'; listType = null; } }
+    lines.forEach(function (raw) {
+      var line = raw.trim(), m;
+      if (!line) { flushP(); closeList(); return; }
+      if ((m = line.match(/^(#{1,6})\s+(.*)$/))) {
+        flushP(); closeList();
+        var lv = Math.min(m[1].length + 2, 6);
+        html += '<h' + lv + '>' + miniInline(m[2]) + '</h' + lv + '>';
+        return;
+      }
+      if (/^(-{3,}|\*{3,}|_{3,})$/.test(line)) { flushP(); closeList(); html += '<hr>'; return; }
+      if ((m = line.match(/^[-*+]\s+(.*)$/))) {
+        flushP();
+        if (listType !== 'ul') { closeList(); html += '<ul>'; listType = 'ul'; }
+        html += '<li>' + miniInline(m[1]) + '</li>';
+        return;
+      }
+      if ((m = line.match(/^\d+[.)]\s+(.*)$/))) {
+        flushP();
+        if (listType !== 'ol') { closeList(); html += '<ol>'; listType = 'ol'; }
+        html += '<li>' + miniInline(m[1]) + '</li>';
+        return;
+      }
+      if ((m = line.match(/^>\s?(.*)$/))) {
+        flushP(); closeList();
+        html += '<blockquote><p>' + miniInline(m[1]) + '</p></blockquote>';
+        return;
+      }
+      closeList();
+      buf.push(miniInline(line));
+    });
+    flushP(); closeList();
+    return html;
+  }
+
+  /* ---------------- 5. 单节内容渲染：Markdown → 公式 → 还原代码 ---------------- */
+  function renderContent(src) {
+    src = String(src == null ? '' : src);
+
+    var codeStore = [], mathStore = [];
+    src = protectCode(src, codeStore);
+    src = extractMath(src, mathStore);
+
+    // Markdown 解析
+    var html;
+    if (state.marked && typeof marked !== 'undefined') {
+      try {
+        html = String(marked.parse(src, { gfm: true, breaks: true }));
+      } catch (e) {
+        html = miniMarkdown(src);
+      }
+    } else {
+      html = miniMarkdown(src);
+    }
+
+    // 独占一段的块级公式 / 代码块：把外层 <p> 去掉，避免嵌套异常
+    html = html.replace(/<p>\s*@@MATH(\d+)@@\s*<\/p>/g, function (_, i) {
+      return mathStore[+i] && mathStore[+i].display ? '\n@@MATH' + i + '@@\n' : '<p>@@MATH' + i + '@@</p>';
+    });
+    html = html.replace(/<p>\s*@@CODE(\d+)@@\s*<\/p>/g, function (_, i) {
+      return codeStore[+i] && codeStore[+i].lang !== null ? '\n@@CODE' + i + '@@\n' : '<p>@@CODE' + i + '@@</p>';
+    });
+
+    // 公式先还原，代码后还原（顺序反了会让代码里的占位符被误替换）
+    html = html.replace(/@@MATH(\d+)@@/g, function (_, i) {
+      var it = mathStore[+i];
+      return it ? renderMath(it.tex, it.display) : '';
+    });
+    html = html.replace(/@@CODE(\d+)@@/g, function (_, i) {
+      var it = codeStore[+i];
+      if (!it) { return ''; }
+      if (it.lang === null) { return '<code>' + escapeHtml(it.body) + '</code>'; }
+      var cls = it.lang ? ' class="lang-' + escapeHtml(it.lang) + '"' : '';
+      return '<pre><code' + cls + '>' + escapeHtml(String(it.body).replace(/\n$/, '')) + '</code></pre>';
+    });
+
+    // 表格加一层横向滚动容器
+    html = html.replace(/<table>/g, '<div class="table-wrap"><table>')
+               .replace(/<\/table>/g, '</table></div>');
+
+    return html;
+  }
+
+  /* ---------------- 6. 生成整站内容 + 目录 ---------------- */
+var tocLinks = [], sectionEls = [];
+var lastActiveChapter = null;   // 记录上一次展开的章节 id
+
+  function buildNotes() {
+    var root = document.getElementById('notes-root');
+    var tocList = document.getElementById('toc-list');
+    var chapters = Array.isArray(notes) ? notes : [];
+
+    var html = [], toc = [], secTotal = 0;
+
+    chapters.forEach(function (ch, ci) {
+      var chId = 'ch-' + (ch.id || (ci + 1));
+      var secs = Array.isArray(ch.sections) ? ch.sections : [];
+
+      html.push('<section class="chapter" id="' + chId + '">');
+      html.push(
+        '<div class="chapter-head">' +
+          '<h2>' + escapeHtml(ch.chapter) + '</h2>' +
+          '<span class="chapter-meta">' + secs.length + ' 节</span>' +
+        '</div>'
+      );
+
+toc.push('<div class="toc-ch" data-ch="' + chId + '">');
+toc.push(
+  '<a class="toc-ch-link" href="#' + chId + '" data-target="' + chId + '" data-ch="' + chId + '">' +
+    '<span class="toc-arrow">▶</span>' +
+    '<span class="toc-ch-text">' + escapeHtml(ch.chapter) + '</span>' +
+  '</a>'
+);
+toc.push('<ul class="toc-secs">');
+
+      secs.forEach(function (sec, si) {
+        var sid = 'sec-' + (sec.id || ((ci + 1) + '-' + (si + 1)));
+        secTotal++;
+
+        html.push('<article class="section" id="' + sid + '">');
+        html.push('<div class="section-head"><h3>' + escapeHtml(sec.title) + '</h3></div>');
+        html.push('<div class="section-body">' + renderContent(sec.content) + '</div>');
+        html.push('</article>');
+
+        toc.push(
+          '<li><a class="toc-sec-link" href="#' + sid + '" data-target="' + sid + '">' +
+          escapeHtml(sec.title) + '</a></li>'
+        );
+      });
+
+      toc.push('</ul></div>');
+      html.push('</section>');
+    });
+
+    root.innerHTML = html.join('');
+    tocList.innerHTML = toc.join('');
+
+    // 缓存节点，供滚动高亮使用
+    tocLinks = Array.prototype.slice.call(document.querySelectorAll('#toc-list a[data-target]'));
+    sectionEls = Array.prototype.slice.call(document.querySelectorAll('.section, .chapter'));
+
+    // 页脚统计
+    var foot = document.getElementById('page-foot');
+    foot.textContent = chapters.length + ' 章 · ' + secTotal + ' 节' + (PAGE_FOOTER ? '　|　' + PAGE_FOOTER : '');
+
+    bindTocClicks();
+    updateActive();
+  }
+
+  /* ---------------- 7. 交互：目录点击 / 高亮 / 返回顶部 / 搜索 ---------------- */
+function bindTocClicks() {
+  tocLinks.forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      var target = a.getAttribute('data-target');
+      var el = document.getElementById(target);
+      if (!el) { return; }
+      e.preventDefault();
+
+      var chId = a.getAttribute('data-ch');
+
+      /* —— 章节链接：切换展开，展开时顺便滚到本章 —— */
+      if (chId) {
+        var tocCh = document.querySelector('#toc-list .toc-ch[data-ch="' + chId + '"]');
+        if (tocCh) {
+          var wasOpen = tocCh.classList.contains('open');
+          tocCh.classList.toggle('open', !wasOpen);
+          if (!wasOpen) {
+            el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            lastActiveChapter = chId;
+          }
+        }
+        if (history.replaceState) { history.replaceState(null, '', '#' + target); }
+        setActive(target, true);
+        closeSidebar();
+        return;
+      }
+
+      /* —— 小节链接：正常滚动 —— */
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      if (history.replaceState) { history.replaceState(null, '', '#' + target); }
+      setActive(target, true);
+      closeSidebar();
+    });
+  });
+}
+
+  function setActive(id, scrollIntoViewInToc) {
+    tocLinks.forEach(function (a) {
+      var on = a.getAttribute('data-target') === id;
+      a.classList.toggle('active', on);
+      if (on && scrollIntoViewInToc && a.scrollIntoView) {
+        a.scrollIntoView({ block: 'nearest' });
+      }
+    });
+  }
+
+ function updateActive() {
+  if (!sectionEls.length) { return; }
+  var offset = window.innerWidth <= 980 ? 96 : 28;
+  var current = sectionEls[0].id;
+  for (var i = 0; i < sectionEls.length; i++) {
+    if (sectionEls[i].getBoundingClientRect().top - offset <= 0) { current = sectionEls[i].id; }
+    else { break; }
+  }
+  // 若当前是章节标题，取其后第一个小节
+  var cur = document.getElementById(current);
+  if (cur && cur.classList.contains('chapter')) {
+    var next = cur.querySelector('.section');
+    if (next) { current = next.id; }
+  }
+  setActive(current, false);
+
+  /* —— 自动展开当前小节所属章节 —— */
+  var curSec = document.getElementById(current);
+  if (curSec && curSec.classList) {
+    var chEl = curSec.closest ? curSec.closest('.chapter') : null;
+    if (chEl && chEl.id !== lastActiveChapter) {
+      lastActiveChapter = chEl.id;
+      var tocChs = document.querySelectorAll('#toc-list .toc-ch');
+      var activeTocCh = document.querySelector('#toc-list .toc-ch[data-ch="' + chEl.id + '"]');
+      if (activeTocCh) {
+        Array.prototype.forEach.call(tocChs, function (c) {
+          c.classList.toggle('open', c === activeTocCh);
+        });
+      }
+    }
+  }
+}
+
+
+  function onScroll() {
+    var y = window.pageYOffset || document.documentElement.scrollTop || 0;
+    var doc = document.documentElement;
+    var max = (doc.scrollHeight - window.innerHeight);
+    document.getElementById('progress').style.width = (max > 0 ? (y / max) * 100 : 0) + '%';
+    document.getElementById('toTop').classList.toggle('show', y > 420);
+    updateActive();
+  }
+
+  function closeSidebar() {
+    document.getElementById('sidebar').classList.remove('open');
+    document.getElementById('overlay').classList.remove('show');
+  }
+  function openSidebar() {
+    document.getElementById('sidebar').classList.add('open');
+    document.getElementById('overlay').classList.add('show');
+  }
+
+  function bindUI() {
+    document.getElementById('toTop').addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    document.getElementById('menuBtn').addEventListener('click', function () {
+      var open = document.getElementById('sidebar').classList.contains('open');
+      open ? closeSidebar() : openSidebar();
+    });
+    document.getElementById('overlay').addEventListener('click', closeSidebar);
+
+    window.addEventListener('resize', function () {
+      if (window.innerWidth > 980) { closeSidebar(); }
+    });
+
+    // 目录搜索：过滤左侧小节条目
+    var search = document.getElementById('tocSearch');
+    search.addEventListener('input', function () {
+      var q = search.value.trim().toLowerCase();
+      var total = 0;
+      Array.prototype.forEach.call(document.querySelectorAll('#toc-list .toc-ch'), function (group) {
+        var shown = 0;
+        Array.prototype.forEach.call(group.querySelectorAll('li'), function (li) {
+          var hit = !q || li.textContent.toLowerCase().indexOf(q) >= 0;
+          li.style.display = hit ? '' : 'none';
+          if (hit) { shown++; }
+        });
+var chHit = !q || group.querySelector('.toc-ch-link').textContent.toLowerCase().indexOf(q) >= 0;
+var show = !q || shown > 0 || chHit;
+group.style.display = show ? '' : 'none';
+/* 搜索时把命中的章节自动展开 */
+if (q && show && (shown > 0 || chHit)) {
+  group.classList.add('open');
+}
+total += shown;
+      });
+      document.getElementById('toc-empty').style.display = (q && total === 0) ? 'block' : 'none';
+    });
+
+    window.addEventListener('scroll', function () {
+      if (window.requestAnimationFrame) { window.requestAnimationFrame(onScroll); }
+      else { onScroll(); }
+    }, { passive: true });
+
+    window.addEventListener('hashchange', function () {
+      var id = location.hash.replace('#', '');
+      if (id && document.getElementById(id)) { setActive(id, true); }
+    });
+  }
+
+  /* ---------------- 8. 启动 ---------------- */
+  function renderAll() {
+    // 页头文字
+    document.title = PAGE_TITLE;
+    document.getElementById('page-title').textContent = PAGE_TITLE;
+    document.getElementById('page-sub').textContent = PAGE_SUBTITLE;
+    document.getElementById('side-title').textContent = PAGE_TITLE;
+    document.getElementById('side-sub').textContent = PAGE_SUBTITLE;
+    document.getElementById('topbar-title').textContent = PAGE_TITLE;
+
+    buildNotes();
+
+    // CDN 加载失败提示
+    var warn = document.getElementById('cdn-warn');
+    if (!state.marked || !state.katex) {
+      var miss = [];
+      if (!state.marked) { miss.push('Markdown'); }
+      if (!state.katex) { miss.push('公式'); }
+      warn.innerHTML = '未能加载 ' + miss.join(' 与 ') +
+        ' 渲染引擎（可能是当前网络无法访问 CDN）。页面内容仍可阅读，' +
+        '公式将显示为原始 LaTeX 代码。联网后刷新页面即可正常渲染。';
+      warn.style.display = 'block';
+    }
+
+    onScroll();
+  }
+
+  function boot() {
+    var css = loadAsset(CDN.katexCss, true).catch(function () {});
+    var jsKatex = loadAsset(CDN.katexJs, false)
+      .then(function () { state.katex = (typeof katex !== 'undefined'); })
+      .catch(function () { state.katex = false; });
+    var jsMarked = loadAsset(CDN.markedJs, false)
+      .then(function () { state.marked = (typeof marked !== 'undefined'); })
+      .catch(function () { state.marked = false; });
+
+    var rendered = false;
+    function firstRender() {
+      if (rendered) { return; }
+      rendered = true;
+      renderAll();
+    }
+
+    // 最多等 5 秒；超时先用降级方案渲染，保证打开即有内容
+    setTimeout(firstRender, 5000);
+
+    Promise.all([css, jsKatex, jsMarked]).then(function () {
+      if (rendered) {
+        // 引擎姗姗来迟：重绘一次，把公式升级为 KaTeX
+        if (state.katex || state.marked) { renderAll(); }
+      } else {
+        firstRender();
+      }
+    });
+  }
+
+  bindUI();
+  boot();
+})();
+</script>
+</body>
+</html>
