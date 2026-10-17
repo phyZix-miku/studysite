@@ -921,7 +921,7 @@ $$\frac{d}{dz} \left( \sum_{k=1}^{\infty} f_k(z) \right) = \sum_{k=1}^{\infty} f
       },
       {
         id: "3-2",
-        title: "3.2 幂级数 (Power series)",
+        title: "3.2 幂级数 (**Power series**)",
         content: String.raw`
 形如
 
@@ -966,7 +966,7 @@ $|z-b|=R$ 是收敛圆，$R$ 是收敛半径
       },
       {
         id: "3-3",
-        title: "3.3泰勒级数(Taylor series)",
+        title: "3.3泰勒级数(**Taylor series**)",
         content: String.raw`
 **1.设 $f(z)$ 在以 $b$ 点为中心的单连通圆形区域 $\sigma：|z-b|<R$ 内解析，则 $f(z)$ 在 $\sigma$ 内可展开为形如**
 
@@ -1017,7 +1017,7 @@ $$R = |a - b|$$
       },
       {
         id: "3-4",
-        title: "3.4 洛朗级数（Laurent series）",
+        title: "3.4 洛朗级数（**Laurent series**）",
         content: String.raw`
 上节泰勒级数解决了单连通圆域内解析函数展开问题，但我们还需要研究包含奇点的区域的函数展开，所以下面介绍洛朗级数展开：
 
@@ -1357,6 +1357,280 @@ $z=1$ 是二阶极点
 ***谢谢你看到这里orz***
 
 2026.10.10
+`
+      }
+    ]
+  },
+  {
+    chapter: "第四章 解析延拓 $\\mathbf{\\Gamma}$ 函数 $\\mathbf{B}$ 函数",
+    sections: [
+      {
+        id: "4-1",
+        title: "4.1解析延拓(analytic extension)",
+        content: String.raw`
+**1\. 解析延拓**
+
+解析延拓是指将已知区域内解析的函数推广到更大的区域，即将解析函数的定义域加以扩大。
+
+普遍方法：利用泰勒级数进行解析延拓。 考虑一个用幂级数定义的解析函数：
+
+$$f_1(z) = \sum_{k=0}^{\infty} z^k, \quad |z| < 1\qquad (4.1.1)$$
+
+其解析区域为 $\sigma_1: |z|<1$，在 $|z|=1$ 处级数发散。利用该级数可算出 $|z|<1$ 中任意一点的函数值及各阶导数值。
+
+示例计算： 在 $z=\frac{i}{2}$ 点，有：
+
+$$f_1\left(\frac{i}{2}\right) = 1 + \frac{i}{2} + \left(\frac{i}{2}\right)^2 + \cdots = \frac{1}{1-\frac{i}{2}}$$
+
+$$f_1'\left(\frac{i}{2}\right) = 1 + 2\frac{i}{2} + 3\left(\frac{i}{2}\right)^2 + \cdots = \frac{1}{\left(1-\frac{i}{2}\right)^2}$$
+
+以此类推：
+
+$$f_1^{(k)}\left(\frac{i}{2}\right) = \frac{k!}{\left(1-\frac{i}{2}\right)^{k+1}},\;k=0,1,2,\cdots$$
+
+由此得到 $f_1(z)$ 在 $z=\frac{i}{2}$ 的泰勒级数： $$\sum_{k=0}^{\infty} \frac{f_1^{(k)}\left(\frac{i}{2}\right)}{k!} \left(z-\frac{i}{2}\right)^k = \sum_{k=0}^{\infty} \frac{1}{\left(1-\frac{i}{2}\right)^{k+1}} \left(z-\frac{i}{2}\right)^k$$
+
+记为 $f_2(z)$，即：
+
+$$f_2(z) = \sum_{k=0}^{\infty} \frac{1}{\left(1-\frac{i}{2}\right)^{k+1}} \left(z-\frac{i}{2}\right)^k \tag{4.1.2}$$
+
+  
+
+这时候可以看到 $f_2(z)$ 的收敛半径为 $\left|1-\frac{i}{2}\right| = \frac{\sqrt{5}}{2}$，故其解析区域为 $\sigma_2: \left|z-\frac{i}{2}\right| < \frac{\sqrt{5}}{2}$。该区域超出了原来 $f_1(z)$ 的解析区域 $|z|<1$.见图 4.1。$f_2(z)$称为$f_1(z)$ 在区域$\left|z-\frac{i}{2}\right| < \frac{\sqrt{5}}{2}$内的解析延拓。
+
+![图4.1](images/023.jpg)
+
+已知一个函数 $f_1(z)$ 在区域 $\sigma_1$ 中解析。如果存在与 $\sigma_1$ 有重叠部分 $\sigma_{12}$ 的另一区域 $\sigma_2$ 内的解析函数 $f_2(z)$，且在 $\sigma_{12}$ 中 $f_2(z) \equiv f_1(z)$，则称 $f_2(z)$ 为 $f_1(z)$ 在 $\sigma_2$ 中的解析延拓；同样，$f_1(z)$ 也称为 $f_2(z)$ 在 $\sigma_1$ 中的**解析延拓**。
+
+用幂级数表达式作解析延拓，将得到有不同收敛圆的许多幂级数，这些幂级数的全体代表一个解析函数 $f(z)$：
+
+$$f(z) \equiv \begin{cases} f_1(z), & z \in \sigma_1 \\ f_2(z), & z \in \sigma_2 \\ f_3(z), & z \in \sigma_3 \\ \cdots \end{cases}$$
+
+解析区域从区域 $\sigma_1$ 扩大为 $\sigma = \sigma_1 + \sigma_2 + \sigma_3 + \cdots$。
+
+但是解析延拓始终不能包含奇点。解析延拓并非总能进行。 例如函数 $f(z) \equiv 1 + \displaystyle\sum_{k=1}^{\infty} z^{2^k}$ 在圆域 $|z|<1$ 内收敛、解析，但这级数在 $|z|=1$ 上是处处发散的，在 $|z|=1$ 上处处是 $f(z)$ 的奇点，因而解析延拓不能超过这圆周（这被称为自然边界）。
+
+用泰勒展开进行解析延拓是普遍的方法，但计算较繁。通常采用特殊方法（如函数关系、施瓦茨反射原理来进行解析延拓，但必须首先证明解析延拓是唯一的。证明详见书P70.
+
+**2\. 施瓦茨反射原理（Schwarz Reflection Principle）**
+
+设 $f(z)$ 在上半平面包括实轴上的一段是解析的，而且在这段实轴上 $f(z)$ 取实数值。则 $\overline{f(\bar{z})}$ 是 $f(z)$ 在下半平面的解析延拓。
+
+简单证明:
+
+提示：设 $f(z) = u(x,y) + iv(x,y)$（$y \ge 0$），则 $\overline{f(\bar{z})} = u(x, -y) - iv(x, -y) = \xi(x,y) + i\eta(x,y)$，然后用C-R条件证明。
+
+> 详细证明过程：  
+> 设 $f(z) = u(x,y) + iv(x,y)$，其中 $y \ge 0$。因为 $f(z)$ 在上半平面解析，所以满足 C-R 条件： $$\frac{\partial u}{\partial x} = \frac{\partial v}{\partial y}, \quad \frac{\partial u}{\partial y} = -\frac{\partial v}{\partial x}$$  
+> 定义下半平面的函数 $F(z) = \overline{f(\bar{z})}$。令 $z = x + iy$（$y < 0$），则 $\bar{z} = x - iy$。由于 $y < 0$，$-y > 0$，此时 $\bar{z}$ 位于上半平面。  
+> 代入表达式：$F(z) = \overline{f(x - iy)} = \overline{u(x, -y) + iv(x, -y)} = u(x, -y) - iv(x, -y)$。  
+> 令 $F(z) = \xi(x,y) + i\eta(x,y)$，则有： $$\xi(x,y) = u(x, -y), \quad \eta(x,y) = -v(x, -y)$$  
+> 对 $\xi$ 和 $\eta$ 求偏导： $$\frac{\partial \xi}{\partial x} = \frac{\partial u}{\partial x}(x, -y)$$  
+>   
+> $$\frac{\partial \xi}{\partial y} = \frac{\partial u}{\partial (-y)} \cdot (-1) = -\frac{\partial u}{\partial y}(x, -y)$$  
+> $$\frac{\partial \eta}{\partial x} = -\frac{\partial v}{\partial x}(x, -y)$$  
+> $$\frac{\partial \eta}{\partial y} = -\frac{\partial v}{\partial (-y)} \cdot (-1) = \frac{\partial v}{\partial y}(x, -y)$$  
+> 因为 $f$ 在上半平面满足 C-R 条件，即 $\frac{\partial u}{\partial x} = \frac{\partial v}{\partial y}$ 和 $\frac{\partial u}{\partial y} = -\frac{\partial v}{\partial x}$，代入上述结果： $$\frac{\partial \xi}{\partial x} = \frac{\partial v}{\partial y}(x, -y) = \frac{\partial \eta}{\partial y}$$  
+> $$\frac{\partial \xi}{\partial y} = -\left(-\frac{\partial v}{\partial x}(x, -y)\right) = \frac{\partial v}{\partial x}(x, -y) = -\frac{\partial \eta}{\partial x}$$  
+> 因此，$\xi$ 和 $\eta$ 在 $y < 0$ 时满足 C-R 条件，说明 $\overline{f(\bar{z})}$ 在下半平面解析。  
+> 在实轴（$y=0$）上，$\bar{z} = x$，由题设 $f(x)$ 取实数值，故 $\overline{f(x)} = f(x)$。上下两半平面的解析函数在实轴上连续且相等，根据解析延拓的唯一性，$\overline{f(\bar{z})}$ 就是 $f(z)$ 在下半平面的解析延拓。
+
+**例**： 已知函数 $f(z) = \frac{1}{1-z}$ 在上半平面解析，且在实轴（$z=x$，且 $x \neq 1$）上取实数值。利用施瓦茨反射原理求其在下半平面的解析延拓表达式。
+
+**解：**验证条件： 函数 $f(z) = \frac{1}{1-z}$ 在 $z \neq 1$ 处解析。上半平面（$y > 0$）不含 $z=1$，因此在上半平面解析。 在实轴上，当 $z = x$（$x \neq 1$）时，$f(x) = \frac{1}{1-x}$ 显然是一个实数。满足施瓦茨反射原理的条件。
+
+应用反射原理： 根据定理，其在下半平面的解析延拓 $F(z)$ 应满足 $F(z) = \overline{f(\bar{z})}$。
+
+计算延拓表达式： 已知 $f(z) = \frac{1}{1-z}$。 将其自变量换成 $\bar{z}$，得到 $f(\bar{z}) = \frac{1}{1-\bar{z}}$。 再取复共轭： $$F(z) = \overline{f(\bar{z})} = \overline{\left(\frac{1}{1-\bar{z}}\right)} = \frac{1}{\overline{(1-\bar{z})}} = \frac{1}{1-z}$$
+
+结论： 因此，$f(z) = \frac{1}{1-z}$ 在下半平面的解析延拓仍然是它自身。这意味着 $f(z) = \frac{1}{1-z}$ 实际上可以通过施瓦茨反射原理延拓到整个复平面（除去奇点 $z=1$）。
+
+2026.10.12
+`
+      },
+      {
+        id: "4-2",
+        title: "4.2 $\\mathbf{\\Gamma}$函数",
+        content: String.raw`
+高数中,对于实变函数 $\Gamma$函数定义为：
+
+$$\Gamma(x) = \int_0^{\infty} e^{-t}\, t^{x-1}\, dt, \qquad (x > 0)$$
+
+拓展到复平面：
+
+$$\Gamma(z) = \int_0^{\infty} e^{-t}\, t^{z-1}\, dt, \qquad (\text{收敛条件: } \operatorname{Re} z > 0)$$
+
+**1.** $\Gamma$**函数的基本性质的性质：**
+
+1.  $\Gamma(1) = 1$
+2.  $\Gamma(z+1) = z\Gamma(z)\Rightarrow\Gamma(n+1) = n!,\ n \in \mathbb{N}$
+3.  $\Gamma(z)\,\Gamma(1-z) = \dfrac{\pi}{\sin \pi z}$；当 $z = \dfrac{1}{2}$，$\Gamma\left(\dfrac{1}{2}\right) = \sqrt{\pi}$
+4.  $\Gamma(2z) = \Gamma(z)\,\Gamma\left(z+\dfrac{1}{2}\right) \dfrac{2^{2z-1}}{\sqrt{\pi}}$
+
+证明详见书P73。上面四种性质最后一种不常见。
+
+**2\. $\Gamma$ 函数是半纯函数(meromorphic function) ，它可解析延拓至整个复平面**
+
+在有限区域中除极点外别无其他奇点的函数称为半纯函数，下证 $\Gamma(z)$ 是一个半纯函数.
+
+**证：**解析延拓方法，递推法：
+
+$$\Gamma(z) = \frac{\Gamma(z+1)}{z} = \frac{\Gamma(z+2)}{z(z+1)} = \cdots$$
+
+$$= \frac{\Gamma(z+n+1)}{z(z+1)\cdots(z+n)} = \cdots$$
+
+$\Gamma(z)$ 的定义域在虚轴的右边（$\operatorname{Re} z > 0$），见图4.2；
+
+![图4.2](images/024.jpg)
+
+第一次解析延拓， $\frac{\Gamma(z+1)}{z}$ 定义域为
+
+$$\begin{cases} \operatorname{Re} z > -1 \\ z \neq 0\  \end{cases}$$
+
+同时出现了一个一阶极点，见图4.3；
+
+![图4.3](images/025.jpg)
+
+第二次解析延拓， $\frac{\Gamma(z+2)}{z(z+1)}$ 定义域为
+
+$$\begin{cases} \operatorname{Re} z > -2 \\ z \neq 0, -1\  \end{cases}$$
+
+出现了两个极点;见图4.4；
+
+![图4.4](images/026.jpg)
+
+第$n$ 次解析延拓：
+
+$$\begin{cases} \operatorname{Re} z > -(n+1) \\ z \neq 0, -1, \cdots, -n\  \end{cases}$$
+
+出现了 $n$ 个极点，见图4.5.
+
+![图4.5](images/027.jpg)
+
+当$n \to \infty$，$\Gamma(z)$ 就被解析延拓到整个复平面，且只有 $z = 0, -1, \cdots, -n$ 是一阶极点，而别无其他奇点。
+
+**3.$\Gamma(z)$的等价变表达式**
+
+$$\Gamma(x) = \int_0^{\infty} e^{-t}\, t^{x-1}\, dt, \qquad \text{令 } t = r^2\ ,\ r \in (0, +\infty)$$
+
+$$\Gamma(x) = \int_0^{\infty} e^{-r^2}\, r^{2x-2}\, 2r\, dr = 2\int_0^{\infty} e^{-r^2}\, r^{2x-1}\, dr$$
+
+设 $2x - 1 = p$，$x = \dfrac{p+1}{2}$，则 $\Gamma\left(\dfrac{p+1}{2}\right) = 2\displaystyle\int_0^{\infty} e^{-r^2}\, r^p\, dr$
+
+$$\int_0^{\infty} r^p\, e^{-r^2}\, dr = \frac{\Gamma\left(\dfrac{p+1}{2}\right)}{2}\ , \;\operatorname{Re}\frac{p+1}{2} > 0 \Rightarrow\operatorname{Re} p > -1$$
+
+有了这个公式，若 $p \in \mathbb{N}$，那么统计物理中这种积分就再也不怕了。
+
+令 $p = 0$,得到一维高斯积分：
+
+
+
+$$\int_0^{\infty} r^0\, e^{-r^2}\, dr = \int_0^{\infty} e^{-r^2}\, dr = \frac{\Gamma\left(\dfrac{1}{2}\right)}{2} = \frac{\sqrt{\pi}}{2}$$
+`
+      },
+      {
+        id: "4-3",
+        title: "**4.3 $\\mathrm{B}$ 函数**",
+        content: String.raw`
+**1.定义**
+
+$$B(p, q) = \int_0^1 t^{p-1} (1-t)^{q-1}\, dt, \quad \operatorname{Re} p > 0\ ;\ \operatorname{Re} q > 0$$
+
+若令 $t = \sin^2\varphi$，则 $1-t = \cos^2\varphi$，代入上式可得$\mathrm{B}$函数另一表达式：
+
+$$B(p, q) = 2\int_0^{\frac{\pi}{2}} \sin^{2p-1}\varphi \cos^{2q-1}\varphi\, d\varphi$$
+
+$\mathrm{B}$ 函数与 $\Gamma$ 函数有如下关系 $$B(p, q) = \frac{\Gamma(p)\,\Gamma(q)}{\Gamma(p+q)}$$
+
+**证**
+
+$$\Gamma(p) = 2\int_0^{\infty} e^{-x^2}\, x^{2p-1}\, dx \ ;$$
+
+$$\Gamma(q) = 2\int_0^{\infty} e^{-y^2}\, y^{2q-1}\, dy.$$
+
+$$\Gamma(p)\,\Gamma(q) \;\xlongequal[\ y = \rho\sin\varphi\ ]{\ x = \rho\cos\varphi\ }\$$
+
+$$4\int_0^{\infty}\!\!\int_0^{\infty} e^{-\rho^2} (\rho\cos\varphi)^{2p-1} (\rho\sin\varphi)^{2q-1}\, \rho\, d\rho\, d\varphi$$
+
+$$= 4\int_0^{\infty} e^{-\rho^2}\, \rho^{2(p+q)-1}\, d\rho \int_0^{\frac{\pi}{2}} \cos^{2p-1}\varphi\, \sin^{2q-1}\varphi\, d\varphi$$
+
+$$= \Gamma(p+q)\, B(p, q)$$
+
+故有
+
+$$B(p, q) = \frac{\Gamma(p)\,\Gamma(q)}{\Gamma(p+q)}$$
+
+且易得 $B(p, q)= B(q, p)$
+
+**例** 计算
+
+$$\int_{-1}^{1} (1-x)^p (1+x)^q\, dx$$
+
+**解** 注意到 $\frac{1-x}{2} + \frac{1+x}{2} = 1$
+
+令 $\dfrac{1-x}{2} = t$，则$\dfrac{1+x}{2} = 1-t$，当 $x \in (-1, 1)$，$t \in (0, 1)$
+
+下面自己计算
+
+**2\. $n$ 维空间中超球体的体积和面积**
+
+> *“学了上面两个函数，我们的思想就可以翱翔在超出三维的 $n$ 维空间中”*
+
+n 维空间的超球体的体积$V_n:\ x_1^2 + x_2^2 + \cdots + x_n^2 = R^2$
+
+$$V_n = \int dx_1 \int dx_2 \cdots \int dx_n$$
+
+$$= \idotsint\limits_{V_n:\ \sum_{R=1}^{n} x_R^2 \le R^2} dx_1 dx_2 \cdots dx_n$$ 把$n$维直角坐标系转化成$n$维球坐标系，$n$维球坐标变换：
+
+$$\begin{cases} x_1 = r \cos\varphi_1 \\ x_2 = r \sin\varphi_1 \cos\varphi_2 \\ \ \ \vdots \\ x_{n-1} = r \sin\varphi_1 \cdots \sin\varphi_{n-2} \cos\theta \\ x_n = r \sin\varphi_1 \cdots \sin\varphi_{n-2} \sin\theta \end{cases}$$ 其中 $r \in [0, +\infty)$，$\varphi_1, \cdots, \varphi_{n-2} \in [0, \pi]$，$\theta \in [0, 2\pi]$
+
+Jacobi行列式： $$J(r,\varphi_1,\varphi_2,\cdots,\varphi_{n-1})$$
+
+$$= r^{n-1} \sin^{n-2}\varphi_1\, \sin^{n-3}\varphi_2 \cdots \sin\varphi_{n-2}$$ 所以$$原式= \idotsint\limits_{V_n:\ \sum_{R=1}^{n} x_R^2 \le R^2} J(r,\varphi_1,\varphi_2,\cdots,\varphi_{n-1})d\varphi_1 d\varphi_2 \cdots d\varphi_{n-1}$$ 令 $$J(r,\varphi_1,\varphi_2,\cdots,\varphi_{n-1})=r^{n-1}B(\varphi_1,\varphi_2,\cdots,\varphi_{n-1})$$
+
+得 $$原式=\idotsint\limits_{满区间积分} r^{n-1}B(\varphi_1, \varphi_2, \cdots, \varphi_{n-1})\, d\varphi_1 d\varphi_2 \cdots d\varphi_{n-1} dr$$
+
+$$=\idotsint\limits_{满区间积分} B(\varphi_1, \varphi_2, \cdots, \varphi_{n-1})\, d\varphi_1 d\varphi_2 \cdots d\varphi_{n-1} \int_0^{R} r^{n-1}\, dr$$
+
+  
+
+$$= \frac{R^n}{n}\, B_n$$
+
+> 满区间：以球坐标系为例，$\theta \in [0, 2\pi]$，$\varphi \in [0, \pi]$
+
+其中$B_n$ 为前面那一大坨，下面我们用一种巧妙的方法来算这个 $B_n$ .
+
+先计算 $n$ 维空间的 $n$ 维高斯函数的无穷积分：
+
+$$\int_{-\infty}^{\infty} e^{-x_1^2}\, dx_1 \int_{-\infty}^{\infty} e^{-x_2^2}\, dx_2 \cdots \int_{-\infty}^{\infty} e^{-x_n^2}\, dx_n$$
+
+$$= \left( \int_{-\infty}^{+\infty} e^{-x^2}\, dx \right)^n = (\sqrt{\pi})^n = \pi^{\frac{n}{2}}$$
+
+$$= \idotsint\limits_{-\infty}^{\infty} e^{-(x_1^2 + x_2^2 + \cdots + x_n^2)}\, dx_1 dx_2 \cdots dx_n$$
+
+令 $\displaystyle\sum_{R=1}^{n} x_R^2 = r^2$，$r \in (0, \infty)$
+
+$$原式 = \idotsint\limits_{-\infty}^{\infty} e^{-r^2}\, dx_1 dx_2 \cdots dx_n$$ 同样是球坐标变换
+
+$$= \idotsint\limits_{-\infty}^{\infty} e^{-r^2}\,B(\varphi_1, \varphi_2, \cdots, \varphi_{n-1})\, d\varphi_1 d\varphi_2 \cdots d\varphi_{n-1} \int_0^{\infty} r^{n-1}\, dr$$ $$= \idotsint\limits_{-\infty}^{\infty} \,B(\varphi_1, \varphi_2, \cdots, \varphi_{n-1})\, d\varphi_1 d\varphi_2 \cdots d\varphi_{n-1} \int_0^{\infty} e^{-r^2}\cdot r^{n-1}\, dr$$
+
+$$= B_n \int_{-\infty}^{\infty} e^{-r^2}\, r^{n-1}\, dr$$ 根据前面$\Gamma(z)$的等价变表达式，
+
+$$原式= \frac{\Gamma\left(\frac{n}{2}\right)}{2}\, B_n = \pi^{\frac{n}{2}}$$
+
+所以$$B_n = \frac{2\pi^{\frac{n}{2}}}{\Gamma\left(\frac{n}{2}\right)}$$ 把 $B_n$ 代会上面的体积方程，得到
+
+$$V_n = \frac{R^n}{n} \cdot \frac{2\pi^{\frac{n}{2}}}{\Gamma\left(\frac{n}{2}\right)} \ ,\quad n = 1, 2, \cdots, \infty$$ 超球体表面积：
+
+$$A_n = \frac{d}{dR}\, V_n(R) = R^{n-1}\, \frac{2\pi^{\frac{n}{2}}}{\Gamma\left(\frac{n}{2}\right)}, \; n = 1, 2, \cdots, \infty$$
+
+> 这里写得还是不够明了，详见
+
+[https://link.zhihu.com/?target=https%3A//kns.cnki.net/reader/flowpdf%3Finvoice%3DEM0Ta58HmNajeUnSV18AY2BcPjZjpO%252FSFImbzAmLlT3sIPB1jgxf0Loi%252F7SW5rvEsJqaUnJTv%252BnfWY965%252FPPQKVuoJjGJE%252B%252Fd4zIpeybJtM6Ss2NR1ULlKX%252FJ3FYPwwFz54eYgHVlQEG18%252Bmp7laLo8C%252BY35oY0lZpXCUvjkDpU%253D%26platform%3DNZKPT%26sourcetype%3Dnxgp%26product%3DCJFQ%26filename%3DGKWL202103002%26tablename%3Dcjfdlast2021%26type%3DJOURNAL%26scope%3Dtrial%26cflag%3Doverlay%26dflag%3Dpdf%26pages%3D%26language%3DCHS%26trial%3D%26nonce%3D69BF40D369544A4AA2D5B1EB8A668B9B](https://link.zhihu.com/?target=https%3A//kns.cnki.net/reader/flowpdf%3Finvoice%3DEM0Ta58HmNajeUnSV18AY2BcPjZjpO%252FSFImbzAmLlT3sIPB1jgxf0Loi%252F7SW5rvEsJqaUnJTv%252BnfWY965%252FPPQKVuoJjGJE%252B%252Fd4zIpeybJtM6Ss2NR1ULlKX%252FJ3FYPwwFz54eYgHVlQEG18%252Bmp7laLo8C%252BY35oY0lZpXCUvjkDpU%253D%26platform%3DNZKPT%26sourcetype%3Dnxgp%26product%3DCJFQ%26filename%3DGKWL202103002%26tablename%3Dcjfdlast2021%26type%3DJOURNAL%26scope%3Dtrial%26cflag%3Doverlay%26dflag%3Dpdf%26pages%3D%26language%3DCHS%26trial%3D%26nonce%3D69BF40D369544A4AA2D5B1EB8A668B9B)
+
+***谢谢你看到这里orz***
+
+2026.10.13
 `
       }
     ]
@@ -1977,14 +2251,31 @@ main{ margin-left:var(--side-w); min-height:100vh; }
     return src;
   }
 
+  /* KaTeX 没有实现的常见 LaTeX 命令，用宏补上（md 第四章用了 \idotsint） */
+  var KATEX_MACROS = {
+    '\\idotsint': '\\mathop{\\int\\!\\!\\int\\cdots\\int}'
+  };
+
+  /* 清理写坏的公式（只动语法、不动内容）：
+     ① 末尾孤立的反斜杠：本来想写换行 \\，少写一个就成了非法的 \，会让整条公式报错；
+     ② 首尾空白。 */
+  function tidyTex(tex) {
+    var t = String(tex == null ? '' : tex).replace(/^\s+|\s+$/g, '');
+    var m = t.match(/\\+$/);
+    if (m && m[0].length % 2 === 1) { t = t.slice(0, -1).replace(/\s+$/, ''); }
+    return t;
+  }
+
   // 渲染单条公式；KaTeX 不可用时降级为原始 LaTeX 文本
   function renderMath(tex, display) {
+    tex = tidyTex(tex);
     if (state.katex && typeof katex !== 'undefined') {
       try {
         return katex.renderToString(tex, {
           displayMode: !!display,
           throwOnError: false,
           strict: false,
+          macros: Object.assign({}, KATEX_MACROS),
           output: 'htmlAndMathml'
         });
       } catch (e) { /* 降级 */ }
@@ -2095,6 +2386,19 @@ main{ margin-left:var(--side-w); min-height:100vh; }
     return html;
   }
 
+  /* 标题专用渲染：$...$ 行内公式交给 KaTeX（章节名里可能有），**加粗** 照旧 */
+  function renderTitle(s) {
+    var store = [];
+    var out = String(s == null ? '' : s).replace(/\$([^\n$]+?)\$/g, function (_, tex) {
+      store.push(tex);
+      return '@@TITLE' + (store.length - 1) + '@@';
+    });
+    out = miniInline(escapeHtml(out));
+    return out.replace(/@@TITLE(\d+)@@/g, function (_, i) {
+      return renderMath(store[+i], false);
+    });
+  }
+
   /* ---------------- 6. 生成整站内容 + 目录 ---------------- */
 var tocLinks = [], sectionEls = [];
 var lastActiveChapter = null;   // 记录上一次展开的章节 id
@@ -2113,7 +2417,7 @@ var lastActiveChapter = null;   // 记录上一次展开的章节 id
       html.push('<section class="chapter" id="' + chId + '">');
       html.push(
         '<div class="chapter-head">' +
-          '<h2>' + miniInline(escapeHtml(ch.chapter)) + '</h2>' +
+          '<h2>' + renderTitle(ch.chapter) + '</h2>' +
           '<span class="chapter-meta">' + secs.length + ' 节</span>' +
         '</div>'
       );
@@ -2122,7 +2426,7 @@ toc.push('<div class="toc-ch" data-ch="' + chId + '">');
 toc.push(
   '<a class="toc-ch-link" href="#' + chId + '" data-target="' + chId + '" data-ch="' + chId + '">' +
     '<span class="toc-arrow">▶</span>' +
-    '<span class="toc-ch-text">' + miniInline(escapeHtml(ch.chapter)) + '</span>' +
+    '<span class="toc-ch-text">' + renderTitle(ch.chapter) + '</span>' +
   '</a>'
 );
 toc.push('<ul class="toc-secs">');
@@ -2132,13 +2436,13 @@ toc.push('<ul class="toc-secs">');
         secTotal++;
 
         html.push('<article class="section" id="' + sid + '">');
-        html.push('<div class="section-head"><h3>' + miniInline(escapeHtml(sec.title)) + '</h3></div>');
+        html.push('<div class="section-head"><h3>' + renderTitle(sec.title) + '</h3></div>');
         html.push('<div class="section-body">' + renderContent(sec.content) + '</div>');
         html.push('</article>');
 
         toc.push(
           '<li><a class="toc-sec-link" href="#' + sid + '" data-target="' + sid + '">' +
-          miniInline(escapeHtml(sec.title)) + '</a></li>'
+          renderTitle(sec.title) + '</a></li>'
         );
       });
 
