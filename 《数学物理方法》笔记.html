@@ -59,18 +59,24 @@ const PAGE_FOOTER   = "全文由 notes 数组自动生成";
 <script>
 const notes = [
   {
-    chapter: "第一章 解析函数",
+    chapter: "阅读须知",
     sections: [
       {
-        id: "1-0",
-        title: "序 · 课程与教材信息",
+        id: "0-1",
+        title: "课程与教材信息",
         content: String.raw`
 课程：数学物理方法，教材：《数学物理方法》（第四版）姚端正 周国全 贾俊基编著，老师：周国全。
 
 此笔记仅供参考，若有错误恳请各位大佬指正，谢谢！
 `
-      },
-      {
+      }
+    ]
+  },
+ {
+    chapter: "第一章 解析函数",
+    sections: [
+      
+{
         id: "1-1",
         title: "1.1 复数（**Complex Number**）及其运算",
         content: String.raw`
@@ -86,7 +92,7 @@ $x+iy与x-iy互为共轭复数$ ，常在复数上加一 $\bar{ }\left(bar,读�
 
 2)几何形式：在复平面(**Complex Plane**)中，每个复数都对应一个点,故可以用原点到某点 $P\left( x,y \right)$ 的平面向量来表示一个复数，即 $\${\large z=}\vec{OP}{\normalsize  =\left( x,y \right)}\tag{1.1.2}$$称 $\vec{OP}$ 为复向量(**Complex Vector**);
 
-3)三角形式，由而可知复数可以表示为一个向量，我们给这个向量标上长度与方向，用角度来描述方向，得到 $\begin{cases} 	\left|\vec{OP}\right|=\rho= \left| z \right|=\sqrt{x^{2}+y^{2}}\\ 	{\large z}的辐角\left(Argument\right)=Argz=\theta \end{cases}$ ，
+3)三角形式，由而可知复数可以表示为一个向量，我们给这个向量标上长度与方向，用角度来描述方向，得到 $\begin{cases} 	\left|\vec{OP}\right|=\rho= \left| z \right|=\sqrt{x^{2}+y^{2}}\\ 	{\large z}的辐角\left(Argument\right)=Argz=\theta \end{cases}$
 
 ![](images/001.jpg)
 
@@ -111,8 +117,7 @@ $argz\in\left( -\pi,\pi\right]$ 与 $\arctan{\large \frac{y}{x}}\in\left(-\frac{
 
 > 小知识！欧拉恒等式(**Euler's identity**)： \${\large e^{i\pi}+1=0}$  
 > 黎曼球(**Riemann sphere**)，这里不细讲，只用知道球上任一点都对应复平面上一点，所以复平面上的无穷远用**无穷远点**代表。注意！无穷远是一个点！现在提出是为了后面1.4讲多值函数的支点做准备。
-
-![黎曼球](images/002.jpg)
+>![黎曼球](images/002.jpg)
 
 2.复指数运算的较难公式：
 
@@ -141,7 +146,7 @@ $当k=0时,\sqrt[3]{-8}=2e^{i\frac{\pi}{3}}=1+i\sqrt{3;}$ $当k=1时,\sqrt[3]{-8
       },
       {
         id: "1-2",
-        title: "1.2复变函数（function of a complex variable）",
+        title: "1.2复变函数（**function of a complex variable**）",
         content: String.raw`
 1.复变函数的概念
 
@@ -173,7 +178,9 @@ $\${\large \begin{aligned} f(z) & = u(x, y) + i v(x, y) \\ &= u + i v \in \mathb
 
 ![](images/005-note1.png)
 
-3.极限与连续性：和高等数学中的实变函数性质相似，这里只给出书上例题，自行体会 $\mathbf例\hspace{1em}证 f(z) = e^{\frac{1}{z}}在原点不连续.$
+3.极限与连续性：和高等数学中的实变函数性质相似，这里只给出书上例题，自行体会
+
+$\mathbf例\hspace{1em}证 f(z) = e^{\frac{1}{z}}在原点不连续.$
 
 $\mathbf证\hspace{1em}因$ $\lim_{z \to 0} e^{\frac{1}{z}} = 0 \quad (\text{沿负实轴}),$ $\lim_{z \to 0} e^{\frac{1}{z}} = \infty \quad (\text{沿正实轴})$
 
@@ -238,7 +245,7 @@ $\nabla^2 v(x,y) = \frac{\partial^2 v}{\partial x^2} + \frac{\partial^2 v}{\part
 > $$\frac{\partial u}{\partial x} = \frac{\partial v}{\partial y} \; \implies \; \frac{\partial^2 u}{\partial x^2} = \frac{\partial^2 v}{\partial y \partial x}$$ $$\frac{\partial u}{\partial y} = -\frac{\partial v}{\partial x} \; \implies \; \frac{\partial^2 u}{\partial y^2} = -\frac{\partial^2 v}{\partial x \partial y}$$ $$\frac{\partial^2 u}{\partial x^2} + \frac{\partial^2 u}{\partial y^2} = \frac{\partial^2 v}{\partial y \partial x} - \frac{\partial^2 v}{\partial x \partial y} = 0$$*(这里混合偏导数可以交换求导数序。)*  
 > 所以 $u(x,y)$ 为二元调和函数，同理可证 $v(x,y)$ 也为二元调和函数。  
 > 2）解析函数的实部和虚部有一个性质，它们的梯度向量相互正交，或者说两个函数的等值线处处垂直，这里给出两种证法，第一种是周老师上课所讲，第二种是书上证法：  
-> 法(1)：解析函数的 $\frac{\partial u}{\partial x},\frac{\partial v}{\partial y},\frac{\partial u}{\partial y},\frac{\partial v}{\partial x}$ 都存在且唯一。令 $u(x,y)=c_1$ ，两边微分，得 $$\left.\frac{dy}{dx} \right|_{(x,y)} ={\large  -\frac{\frac{\partial u}{\partial x}}{\frac{\partial u}{\partial y}}} = k_1$$ 同理有 $$\left. \frac{dy}{dx} \right|_{(x,y)} ={\large  -\frac{\frac{\partial v}{\partial x}}{\frac{\partial v}{\partial y}}} = k_2$$ $$\Rightarrow k_1 \cdot k_2 = {\large \frac{\frac{\partial u}{\partial x}}{\frac{\partial u}{\partial y}} \cdot \frac{\frac{\partial v}{\partial x}}{\frac{\partial v}{\partial y}} }$$ $\${\large= \frac{\frac{\partial v}{\partial y}}{\frac{\partial v}{\partial x}} \cdot \frac{\frac{\partial v}{\partial x}}{\frac{\partial v}{\partial y}} = -1 }$$ ，得证.  
+> 法(1)：解析函数的 $\frac{\partial u}{\partial x},\frac{\partial v}{\partial y},\frac{\partial u}{\partial y},\frac{\partial v}{\partial x}$ 都存在且唯一。令 $u(x,y)=c_1$ ，两边微分，得 $$\left.\frac{dy}{dx} \right|_{(x,y)} ={\large  -\frac{\frac{\partial u}{\partial x}}{\frac{\partial u}{\partial y}}} = k_1$$ 同理有 $$\left. \frac{dy}{dx} \right|_{(x,y)} ={\large  -\frac{\frac{\partial v}{\partial x}}{\frac{\partial v}{\partial y}}} = k_2$$ $$\Rightarrow k_1 \cdot k_2 = {\large \frac{\frac{\partial u}{\partial x}}{\frac{\partial u}{\partial y}} \cdot \frac{\frac{\partial v}{\partial x}}{\frac{\partial v}{\partial y}} }$$ $\${\large= \frac{\frac{\partial v}{\partial y}}{\frac{\partial v}{\partial x}} \cdot \frac{\frac{\partial v}{\partial x}}{\frac{\partial v}{\partial y}} = -1 }$$得证.  
 > 法(2)：将C-R条件两个等式交叉相乘，有 $\frac{\partial u}{\partial x} \cdot \frac{\partial v}{\partial x} = - \frac{\partial v}{\partial y} \cdot \frac{\partial u}{\partial y}$,即 $\frac{\partial u}{\partial x} \cdot \frac{\partial v}{\partial x} + \frac{\partial u}{\partial y} \cdot \frac{\partial v}{\partial y} = 0$，亦即 $\nabla u \cdot \nabla v = 0$.
 
 $\frac{\partial^2 u}{\partial x^2} + \frac{\partial^2 u}{\partial y^2} = -\varphi(x,y)$ 称为**二维泊松(Poisson)方程**； $\frac{\partial^2 u}{\partial x^2} + \frac{\partial^2 u}{\partial y^2} + \lambda u = 0$ 称为**二维亥姆霍兹（Helmholtz）方程**.
@@ -266,22 +273,15 @@ $\nabla^2 U= -\frac{1}{\varepsilon_0} \rho \quad$
 > 这里给出书上例题：  
 > $例 5 \quad 已知  u = x^3 - 3xy^2，求v.$
 
-$解 \quad \frac{\partial u}{\partial x} = 3x^2 - 3y^2, \quad \frac{\partial u}{\partial y} = -6xy$
-
-由(1.3.1)式有 $v = \int 6xy\,dx + (3x^2 - 3y^2)\,dy + C$ $\quad = \int d(3x^2y - y^3) + C$ $\quad = 3x^2y - y^3 + C$
-
+>$解 \quad \frac{\partial u}{\partial x} = 3x^2 - 3y^2, \quad \frac{\partial u}{\partial y} = -6xy$
+>由(1.3.1)式有 $v = \int 6xy\,dx + (3x^2 - 3y^2)\,dy + C$ $\quad = \int d(3x^2y - y^3) + C$ $\quad = 3x^2y - y^3 + C$
 > 也可由(1.3.2)式和(1.3.3)式得
-
-$v = \int (3x^2 - 3y^2)\,dy + \varphi(x) = 3x^2y - y^3 + \varphi(x)$ $\frac{\partial v}{\partial x} = 6xy + \varphi'(x) = -\frac{\partial u}{\partial y} = 6xy$
-
+>$v = \int (3x^2 - 3y^2)\,dy + \varphi(x) = 3x^2y - y^3 + \varphi(x)$ $\frac{\partial v}{\partial x} = 6xy + \varphi'(x) = -\frac{\partial u}{\partial y} = 6xy$
 > 所以$\hspace{1em} \varphi'(x) = 0, \quad \varphi(x) = C$ ,  
 > 于是 $\hspace{1em} v = 3x^2y - y^3 + C$ ,
-
-故得解析函数 $f(z) = u + iv$
-
+>故得解析函数 $f(z) = u + iv$
 > $= x^3 - 3xy^2 + i(3x^2y - y^3 + C)$
-
-$= (x + iy)^3 + iC = z^3 + iC$
+>$= (x + iy)^3 + iC = z^3 + iC$
 
 2026.9.11
 `
@@ -299,12 +299,10 @@ $f(z)=z^n,\quad n\in \mathbb Z$
 当 $n=-1,-2,-3,...,f(z)$ 有一个奇点 $z=0$
 
 > 衍生函数：(1)多项式函数(**polynomial** **func.**)
-
-$f(z)=P_n(z)= a_{n}z^{n}+a_{n-1}z^{n-1}+...+a_{1}z+a_{0}$
+>$f(z)=P_n(z)= a_{n}z^{n}+a_{n-1}z^{n-1}+...+a_{1}z+a_{0}$
 
 > (2)有理分式函数(**rational fraction func.**)
-
-$f(z)=\frac{P_n(z)}{Q_m(z)},\quad m>n,\quad m,n\in \mathbb N$
+>$f(z)=\frac{P_n(z)}{Q_m(z)},\quad m>n,\quad m,n\in \mathbb N$
 
 2.指数函数(**exponential function**)
 
@@ -377,15 +375,11 @@ $f(z) = \sqrt[n]{z},\quad n=2,3,...$
 > 例1： $f(z) = \sqrt[3]{(z-a)(z-b)}, \quad (a \neq b, a, b \in \mathbb{R})$ 的支点有 $(a,0)(b,0)$ 和无穷远点。  
 > 解 设： $z - a = \rho_1 e^{i\theta_1};$ $z - b = \rho_2 e^{i\theta_2}$  
 > 所以有
-
-$(z-a)(z-b) = \rho_1 \rho_2 e^{i(\theta_1 + \theta_2)}$
+>$(z-a)(z-b) = \rho_1 \rho_2 e^{i(\theta_1 + \theta_2)}$
 
 > 所以有
-
-$f(z) = \sqrt[3]{\rho_1 \rho_2 e^{i(\theta_1 + \theta_2)}}$ $= (\rho_1 \rho_2)^{\frac{1}{3}} e^{i \frac{\theta_1 + \theta_2 + 2k\pi}{3}},\quad k = 0, 1, 2$ $$= \begin{cases} f_1(z) = (\rho_1 \rho_2)^{\frac{1}{3}} e^{i \frac{\theta_1 + \theta_2}{3}}, \hspace{2.7em} C1\\ f_2(z) = (\rho_1 \rho_2)^{\frac{1}{3}} e^{i \frac{\theta_1 + \theta_2}{3}} e^{i \frac{2\pi}{3}}, \quad C2\\ f_3(z) = (\rho_1 \rho_2)^{\frac{1}{3}} e^{i \frac{\theta_1 + \theta_2}{3}} e^{i \frac{4\pi}{3}},\quad C3 \end{cases}$$
-
-![](images/008.jpg)
-
+>$f(z) = \sqrt[3]{\rho_1 \rho_2 e^{i(\theta_1 + \theta_2)}}$ $= (\rho_1 \rho_2)^{\frac{1}{3}} e^{i \frac{\theta_1 + \theta_2 + 2k\pi}{3}},\quad k = 0, 1, 2$ $$= \begin{cases} f_1(z) = (\rho_1 \rho_2)^{\frac{1}{3}} e^{i \frac{\theta_1 + \theta_2}{3}}, \hspace{2.7em} C1\\ f_2(z) = (\rho_1 \rho_2)^{\frac{1}{3}} e^{i \frac{\theta_1 + \theta_2}{3}} e^{i \frac{2\pi}{3}}, \quad C2\\ f_3(z) = (\rho_1 \rho_2)^{\frac{1}{3}} e^{i \frac{\theta_1 + \theta_2}{3}} e^{i \frac{4\pi}{3}},\quad C3 \end{cases}$$
+>![](images/008.jpg)
 > $C_3$ 包围所有支点，发现函数值跳到了 $f_3(z)$ ,所以无穷远点也是支点。  
 > 例2： $\sqrt[3]{(z-a)(z-b)(z-c)}$ ,自行判断.  
 > 笔者在写作业的时候被题目困住了，思索良久，结合上课内容总结出解根式函数的一般步骤，不保证正确性和严谨性；  
@@ -449,9 +443,7 @@ $f(z)=z^s,\quad s\in \mathbb{C}$
 > 例1 问函数 $w=z^2$ 将 $z$ 平面的直线 $y=x$ 变成了 $w$ 平面的何种图形？  
 > 解 $w=z^2=(x+iy)(x+iy)=x^2-y^2+i2xy$  
 > 所以 $u=x^2-y^2, \quad v=2xy$ 当 $y=x$ 时 $u=0, v=2x^2 \geqslant 0, \quad -\infty < x < \infty$ 故 $w=z^2$ 将 $z$ 平面的直线 $y=x$ 变成了 $w$ 平面上半虚轴。
-
-![](images/011.png)
-
+>![](images/011.png)
 > 记住这道例题
 
 下面正式开讲：
@@ -525,20 +517,13 @@ $u_{\xi\xi} + u_{\eta\eta}+ \frac{\lambda u}{|f'(z)|^2} = 0$
 > 例二 求两个具有相等电势 $v_0$ 的互相垂直的很大的导电平板周围的等势面和电场线的分布  
 > 解 由于问题的对称性，只考虑如图所示 $z$ 平面的第一象限情况.  
 > 为使边界形状简化，选变换(还记得例题1吗？)
-
-$w=z^2$
-
+>$w=z^2$
 > 则图中的直角区域变成了图中$w$平面的上半平面，而在实轴 $\eta=0$ 上其电势为 $v_0$ . 且有$\eta=$常数；而电场线则平行于虚轴，且有$\xi=$ 常数. 回到$z$平面，由$w=z^2$有
-
-$\xi + i\eta = (x+iy)^2 = x^2 - y^2 + i2xy$
-
+>$\xi + i\eta = (x+iy)^2 = x^2 - y^2 + i2xy$
 > 所以等势线和电场线的方程分别为
-
-$\eta = 2xy = C$（常数） $\xi = x^2 - y^2 = C$（常数）
-
+>$\eta = 2xy = C$（常数） $\xi = x^2 - y^2 = C$（常数）
 > 这是$z$平面中的两族互相正交的双曲线(坐标轴旋转 $45°$ ,详见理论力学笔记导学)，分别用实线和虚线在图中画出.
-
-![](images/014.jpg)
+>![](images/014.jpg)
 
 ***谢谢你看到这里orz***
 
@@ -571,9 +556,7 @@ $\eta = 2xy = C$（常数） $\xi = x^2 - y^2 = C$（常数）
 复积分 $\int_lf(z)\,dz$ 存在的条件和两个实线积分 $\int_{l}\,(udx-vdy)$ 与 $\int_l(\,udy+vdx)$ 存在的条件相同。显然复积分可以化为两个实积分来计算。下面给出三个书上例题：
 
 > **例1**  计算 $\int_l \operatorname{Rez} dz$ 其中 $l$ 如图2.2所示分别为：(1) 连接 $O$ 点到$2+i$点的直线段；(2) 连接$O$点到 22 再到$2+i$的折线.
-
-![图2.2](images/002.png)
-
+>![图2.2](images/002.png)
 > **解**  $\int_l \operatorname{Rez} dz = \int_l x(dx + i dy)$  
 > (1)此时 $x=2y, \,y:0\to 1$ ,
 > 故 $\int_l \operatorname{Rez} dz = \int_{OA} x(dx + i dy)$ $= \int_0^1 2y(2+i) dy = 2+i$
@@ -583,7 +566,6 @@ $\eta = 2xy = C$（常数） $\xi = x^2 - y^2 = C$（常数）
 由此看出，积分路径不同，有些函数的积分的结果也不同。  
 >   
 > **例2**  计算 $\int_l z^2 dz$ ，其中 $l$ 是与上例相同的两条路径.
-
 > **解**  $z^2 = x^2 - y^2 + i2xy,$ ，故 $\int_l z^2 dz = \int_l (x^2 - y^2) dx - 2xy dy$ $+ i \int_l 2xy dx + (x^2 - y^2) dy$
 > (1) $\int_l z^2 dz = \int_0^1 [2(4y^2 - y^2) - 4y^2] dy$ $+ i \int_0^1 [8y^2 + (4y^2 - y^2)] dy = \frac{2}{3} + \frac{11}{3}i$
 > (2) $\int_l z^2 dz = \int_{OB} z^2 dz + \int_{BA} z^2 dz$ $= \int_0^2 x^2 dx + \int_0^1 (-4y) dy + i \int_0^1 (4 - y^2) dy$ $= \frac{2}{3} + \frac{11}{3}i$
@@ -623,7 +605,7 @@ $$= \iint\limits_\Sigma\left( -\frac{\partial v}{\partial x} - \frac{\partial u}
 > $$\oint_lf(z)=\int_{l_1} f(z)\,dz+\int_{-l_2}f(z)\,dz =\int_{l_1} f(z)\,dz-\int_{l_2}f(z)\,dz=0$$
 > 得
 > $$\int_{l_1} f(z)\,dz=\int_{l_2}f(z)\,dz$$
-![图 2.3](images/003.png)
+>![图 2.3](images/003.png)
 
 2)$f(z)$ 在其解析单连通区域 $\sigma$ 内存在一个不定积分的原函数
 
@@ -636,7 +618,6 @@ $$\int f(z)\,dz=F(z)\Leftrightarrow F'(z)=f(z) \int z^n dz = \frac{1}{n+1} z^{n+
 3.复连通区域的柯西定理
 
 函数 $f(z)$ 在复连通区域 $\sigma$ 内解析，有 $\bar{\sigma}=\sigma +L+\mathop{\Sigma}\limits_{k=1}^{n}l_k$ ,其中 $l_k$ 包围了奇点。则复连通区域柯西定理：
-
 ![](images/004.png)
 
 或
@@ -646,9 +627,7 @@ $$\oint_L f(z) dz = \sum_{k=1}^n \oint_{l_k} f(z) dz$$
 ![图2.4](images/005.png)
 
 > **证**： 如图2.5，在区域上剪 $n$ 刀（做割线），使 $\sigma$ 外和 $\sigma$ 包围的的洞连通，这样就把复连通区域变成了单连通区域(更准确地说，这里加的割线是人为的，是为了构造一个单连通区域，使得割线一来一回贡献为零方便计算，而不是把复连通区域变成单连通区域)。这样边界相对区域 $\sigma$ 都变成了逆时针的走向。而多出来的这几条线加起来都等于零。
-
-![图2.5](images/006.png)
-
+>![图2.5](images/006.png)
 > 再运用单连通区域柯西定理，得到复连通区域的柯西定理。  
 > **应用**：  
 > (1)计算 $\oint_l \frac{dz}{(z-a)^n} ,n\in\mathbb{Z}$  
@@ -656,9 +635,7 @@ $$\oint_L f(z) dz = \sum_{k=1}^n \oint_{l_k} f(z) dz$$
  $$=\begin{cases} 2\pi i,\quad n=1\\ 0,\qquad n\ne1 \end{cases}$$  
 > (2)计算 $\oint_l \frac{dz}{z^2-1} \quad(l:|z=0|=a>2)$  
 > 解：在两个奇点处做两个小圆(以后都用 $C$ 来代指圆周，角标一般为半径,这里至两个不同的圆周)互不交叠：
-
-![图2.6](images/007.jpg)
-
+>![图2.6](images/007.jpg)
 > 由复连通区域柯西定理$\oint_l \frac{dz}{z^2-1} = \oint_{C_1} \frac{dz}{z^2-1} + \oint_{C_2} \frac{dz}{z^2-1}$
 > 又$\frac{1}{z^2-1} = \frac{1}{2} \left( \frac{1}{z-1} - \frac{1}{z+1} \right)$  
 > 结合单连通区域柯西定理和2.2.2例3得$$\oint_{C_1} \frac{dz}{z^2-1} = \frac{1}{2} \left( \oint_{C_1} \frac{1}{z-1} - \oint_{C_1} \frac{1}{z+1} \right) = \frac{1}{2} (2\pi i - 0) = \pi i$$ $\oint_{C_2} \frac{dz}{z^2-1} = \frac{1}{2} \left( \oint_{C_2} \frac{1}{z-1} - \oint_{C_2} \frac{1}{z+1} \right) = -\pi i$  
@@ -689,8 +666,7 @@ $$\oint_l \frac{f(z)}{z-a}dz =2\pi if(a)\Leftrightarrow f(a)=\frac{1}{2\pi i}\oi
 > 所以取 $\rho \to 0$ ,（简单点说就是当圆的半径$\rho$ 趋于 0, 点z趋于点a，他们的函数值之差就趋于零，只不过为了数学严谨性不能直接等于0，要等于一个足够小的值。）便有  
 > $$\left| \oint_{C_\rho} \frac{f(z)-f(a)}{z-a} dz \right| \le \oint_{C_\rho} \frac{|f(z)-f(a)|}{|z-a|} |dz|< 2\pi \rho \frac{\varepsilon}{\rho} = 2\pi \varepsilon \to 0$$
 柯西积分公式的更一般的形式,把 $a$ 换成 $z$ ，把 $z$ 换成 $\zeta$ ，得到
-
-$$f(z)=\frac{1}{2\pi i}\oint_l \frac{f(\zeta)}{\zeta-z} d\zeta$$
+>$$f(z)=\frac{1}{2\pi i}\oint_l \frac{f(\zeta)}{\zeta-z} d\zeta$$
 
 这个公式的意义在于：一个解析函数$f(z)$在区域$\sigma$内的值由它在该区域边界上的值$f(\zeta)$所确定.
 
@@ -1362,11 +1338,11 @@ $z=1$ 是二阶极点
     ]
   },
   {
-    chapter: "第四章 解析延拓  $\\mathbf{\\Gamma}$ 函数 $\\mathbf{B}$ 函数",
+    chapter: "第四章 解析延拓 $\\mathbf{\\Gamma}$ 函数 $\\mathbf{B}$ 函数",
     sections: [
       {
         id: "4-1",
-        title: "4.1解析延拓(**analytic extension**)",
+        title: "4.1解析延拓(analytic extension)",
         content: String.raw`
 **1\. 解析延拓**
 
@@ -1450,7 +1426,7 @@ $$f(z) \equiv \begin{cases} f_1(z), & z \in \sigma_1 \\ f_2(z), & z \in \sigma_2
       },
       {
         id: "4-2",
-        title: "4.2 $\\mathbf{\\Gamma}$函数",
+        title: "4.2 $\\mathrm{\\Gamma}$函数",
         content: String.raw`
 高数中,对于实变函数 $\Gamma$函数定义为：
 
@@ -1530,7 +1506,7 @@ $$\int_0^{\infty} r^0\, e^{-r^2}\, dr = \int_0^{\infty} e^{-r^2}\, dr = \frac{\G
       },
       {
         id: "4-3",
-        title: "4.3 $\\mathrm{B}$ 函数",
+        title: "4.3 **$\\mathrm{B}$ **函数",
         content: String.raw`
 **1.定义**
 
@@ -1626,11 +1602,541 @@ $$A_n = \frac{d}{dR}\, V_n(R) = R^{n-1}\, \frac{2\pi^{\frac{n}{2}}}{\Gamma\left(
 
 > 这里写得还是不够明了，详见
 
-[https://link.zhihu.com/?target=https%3A//kns.cnki.net/reader/flowpdf%3Finvoice%3DEM0Ta58HmNajeUnSV18AY2BcPjZjpO%252FSFImbzAmLlT3sIPB1jgxf0Loi%252F7SW5rvEsJqaUnJTv%252BnfWY965%252FPPQKVuoJjGJE%252B%252Fd4zIpeybJtM6Ss2NR1ULlKX%252FJ3FYPwwFz54eYgHVlQEG18%252Bmp7laLo8C%252BY35oY0lZpXCUvjkDpU%253D%26platform%3DNZKPT%26sourcetype%3Dnxgp%26product%3DCJFQ%26filename%3DGKWL202103002%26tablename%3Dcjfdlast2021%26type%3DJOURNAL%26scope%3Dtrial%26cflag%3Doverlay%26dflag%3Dpdf%26pages%3D%26language%3DCHS%26trial%3D%26nonce%3D69BF40D369544A4AA2D5B1EB8A668B9B](https://link.zhihu.com/?target=https%3A//kns.cnki.net/reader/flowpdf%3Finvoice%3DEM0Ta58HmNajeUnSV18AY2BcPjZjpO%252FSFImbzAmLlT3sIPB1jgxf0Loi%252F7SW5rvEsJqaUnJTv%252BnfWY965%252FPPQKVuoJjGJE%252B%252Fd4zIpeybJtM6Ss2NR1ULlKX%252FJ3FYPwwFz54eYgHVlQEG18%252Bmp7laLo8C%252BY35oY0lZpXCUvjkDpU%253D%26platform%3DNZKPT%26sourcetype%3Dnxgp%26product%3DCJFQ%26filename%3DGKWL202103002%26tablename%3Dcjfdlast2021%26type%3DJOURNAL%26scope%3Dtrial%26cflag%3Doverlay%26dflag%3Dpdf%26pages%3D%26language%3DCHS%26trial%3D%26nonce%3D69BF40D369544A4AA2D5B1EB8A668B9B)
+<div class="link-card-wrap"><a class="link-card" href="https://kns.cnki.net/reader/flowpdf?invoice=JXzbZDfbFeSFLiz13tdqC4nNtMT3JFqxXIY5JkYnU2DERk2yKh7CH4brauX8BE3k5pNO3qejPfHky3y0y5lp%2FREVCAgjy1gb%2F8F7m0ad%2FXHTQDw%2BeiFjf5wGgahPnwpJbTLRZPIFHQLdStncwJ%2BM5SZPg6xyoGJWJZ3QhQkborU%3D&platform=NZKPT&sourcetype=nxgp&product=CJFQ&filename=GKWL202103002&tablename=cjfdlast2021&type=JOURNAL&scope=trial&cflag=overlay&dflag=&pages=&language=CHS&trial=&nonce=61BE58EEBB294AE88CBE50CB184BB85F" target="_blank" rel="noopener">《若干重要积分的间接方法》</a></div>
 
 ***谢谢你看到这里orz***
 
 2026.10.13
+`
+      }
+    ]
+  },
+  {
+    chapter: "第五章 留数理论",
+    sections: [
+      {
+        id: "5-1",
+        title: "5.1留数定理(**residue theorem**)",
+        content: String.raw`
+> 留数定理，是前面柯西定理，柯西公式，洛朗级数等理论的集大成者。
+
+先来回顾前面的定理(详见第二章)
+
+柯西定理：
+
+$$\oint_l f(z)\,dz = 0$$
+
+  
+
+柯西积分公式：
+
+$$\oint_l f(z)\,dz = \oint_l \frac{\varphi(z)}{z-b}\,dz = 2\pi i\,\varphi(b)$$
+
+其推论：
+
+$$\oint_l f(z)\,dz = \frac{n!}{2\pi i}\oint_l \frac{\varphi(z)}{(z-b)^{n+1}}\,dz = \varphi^{(n)}(b)$$
+
+或
+
+$$\frac{(n-1)!}{2\pi i}\oint_l \frac{\varphi(z)}{(z-b)^n}\,dz = \varphi^{(n-1)}(b)$$
+
+**1.留数定理**
+
+若 $f(z)$ 在围道 $l$ 所围区域 $\sigma$ 内除了有限 $n$ 个孤立奇点 $b_k$（$k=1,2,\cdots,n$）之外单值解析，则有
+
+$$\oint_l f(z)\,dz = 2\pi i \sum_{k=1}^{n} \mathrm{res}\, f(b_k)$$其中：$\operatorname{res} f(b_k)$ 表示 $f(z)$ 在孤立奇点 $b_k$ 的某（去心）邻域内的洛朗展开的负一次幂 $\dfrac{1}{z-b_k}$ 的系数，记作
+
+$$\operatorname{res} f(b_k) = C_{-1}(b_k)$$
+
+称作 $f(z)$ 在其孤立奇点 $b_k$ 处的留数。
+
+**证：**如图5.1做小圆包围各个孤立奇点，各个圆相离。
+
+![图5.1](images/028.jpg)
+
+由复连通区域柯西定理：
+
+$$\oint_l f(z)\,dz = \sum_{k=1}^{n}\oint_{l_k} f(z)\,dz$$ 将 $f(z)$ 在 $b_k$ 的去心邻域展开为洛朗级数
+
+$$f(z) = \sum_{m=-\infty}^{\infty} C_m (z-b_k)^m$$
+
+所以
+
+$$\oint_{l_k} f(z)\,dz=\sum_{m=-\infty}^{\infty}  C_m \oint_{l_k}(z-b_k)^m \mathrm {d}z$$ 对于积分 $\oint_{l_k}(z-b_k)^m$ ，只有 $m=-1$ 的那一项不为零(详见第二章复通区域柯西定理)，所以
+
+$$\oint_{l_k} f(z)\,dz=2\pi i\,C_{-1}(b_k)$$ 最后得到
+
+$$\oint_l f(z)\,dz = \sum_{k=1}^{N}\oint_{l_k} f(z)\,dz = 2\pi i \sum_{k=1}^{n} C_{-1}(b_k)$$
+
+即 $$\oint_l f(z)\,dz=2\pi i \sum_{k=1}^{n} resf(b_k)$$ 得证.
+
+> 小知识！residue：the part that is left after the main part has gone or been taken away, or a substance that remains after a chemical process such as evaporation.剩余部分，残留物。可谓非常形象，留数意即留下来的数
+
+**2.求留数的方法**
+
+1)定义法
+
+和上面证明过程一样，在奇点的去心邻域洛朗展开，取负一次幂项的系数。常常被用来求本性奇点的留数。
+
+但是不常用，应用上更重要的是极点的留数，而且更简单。
+
+2)一阶极点 $b$ 的留数
+
+$f(z) = \frac{\varphi(z)}{z-b}, \;\varphi(z)\ \text{处处解析}$
+
+$$\oint_l f(z)\,dz = 2\pi i\,\varphi(b) = 2\pi i\,\operatorname{res} f(b)$$
+
+$$\operatorname{res} f(b) = \varphi(b) = \lim_{z\to b}\left[(z-b)f(z)\right]$$
+
+若 $f(z) = \dfrac{\varphi(z)}{\psi(z)}$，$z=b$ 是 $f(z)$ 的单极点，是 $\psi(b)$ 的一阶零点，且 $\varphi(b)\neq 0$
+
+$(\psi(b)=0,\psi'(b)\neq 0)$
+
+则
+
+$$\operatorname{res} f(b) = \frac{\varphi(b)}{\psi'(b)}$$
+
+3) $n$ 阶极点 $b$ 的留数
+
+$f(z) = \dfrac{\varphi(z)}{(z-b)^n},\;\varphi(b)\neq 0,\;\varphi(z)解析$
+
+  
+
+$$\frac{(n-1)!}{2\pi i}\oint_l \frac{\varphi(z)}{(z-b)^n}\,dz = \left.\frac{d^{\,n-1}\varphi(z)}{dz^{\,n-1}}\right|_{z=b}$$
+
+$$\oint f(z)\,dz = \oint_l \frac{\varphi(z)}{(z-b)^n}\,dz = 2\pi i\left(\frac{1}{(n-1)!}\cdot\left.\frac{d^{\,n-1}\varphi(z)}{dz^{\,n-1}}\right|_{z=b}\right)$$
+
+$$\oint_l f(z)\,dz = 2\pi i\left[\frac{1}{(n-1)!}\,\varphi^{(n-1)}(b)\right] = 2\pi i\,\operatorname{res} f(b)$$
+
+$$\varphi(z) = (z-b)^n f(z)$$
+
+$$\operatorname{res} f(b) = \frac{1}{(n-1)!}\left.\cdot\frac{d^{\,n-1}}{dz^{\,n-1}} \left [ (z-b)^n f(z) \right ] \right|_{z=b}$$
+
+若$$f(z)=\frac{\varphi(a)}{(z-a)^n},\:\varphi(z)\ne 0$$ 则 $$\operatorname{res}f(a)=\frac{1}{(n-1)!}\varphi^{(n-1)}(a)$$
+
+**3.无穷远点的留数**
+
+$$f(z) = \sum C_k\, z^k$$
+
+在 $\infty$ 处展开，$k = 1,\ 2,\ \cdots,\ n,\ \cdots,\ \infty$，对于 $\infty$ 点，要使邻域始终在围道的左侧，则在复平面上顺时针才为正方向
+
+![](images/029.jpg)
+
+  
+
+$$\oint_{l_\infty} f(z)\,dz = 2\pi i\, C_{-1}(\infty)$$
+
+结合 $$resf(b_k)=\frac{1}{2\pi i}\oint_{l_k} f(z)\,dz,k=1,2,\cdots.n$$ $$resf(\infty)=-\frac{1}{2\pi i}\oint_l f(z)\,dz$$ 可得**全平面的留数之和为零.**
+
+下面给出例题
+
+**P80 例5** 计算
+
+$$I = \oint_{|z|=1} \frac{dz}{\varepsilon z^2 + 2z + \varepsilon}, \qquad 0 < \varepsilon < 1$$
+
+$\Delta = 4(1-\varepsilon^2) > 0$，分母有两个实根，即 $\varepsilon z^2 + 2z + \varepsilon = \varepsilon(z - z_1)(z - z_2)$
+
+$$\begin{cases} z_1 z_2 = 1 \\ z_1 + z_2 = -\dfrac{2}{\varepsilon} < 0 \end{cases}$$
+
+$|z_1||z_2| = 1,$ 不妨令 $|z_1| < 1,$ 则 $|z_2| > 1,$ 即 $z_1$ 在圆 $|z|<1$ 内，$z_2$ 在圆外。
+
+> 算围道内留数要看围道内的奇点
+
+$$f(z) = \frac{1}{\varepsilon(z - z_1)(z - z_2)} \Rightarrow \operatorname{res} f(z_1)$$
+
+$$= \lim_{z \to z_1}\left[(z - z_1)f(z)\right] = \lim_{z \to z_1}\frac{1}{\varepsilon(z - z_2)}$$
+
+$$= \frac{1}{\varepsilon(z_1 - z_2)}$$ 求根公式得
+
+$$z_1 - z_2 = \frac{2\sqrt{1-\varepsilon^2}}{\varepsilon}$$
+
+$$\therefore\ I = 2\pi i \cdot \operatorname{res} f(z_1) = \dfrac{\pi i}{\sqrt{1-\varepsilon^2}}$$
+
+2026.10.15
+`
+      },
+      {
+        id: "5-2",
+        title: "5.2利用留数定理计算实积分",
+        content: String.raw`
+> 在研究物理学问题时，常需要计算一些实积分，这些积分，用高数中的计算方法相当麻烦，但是将之视为复积分中的一部分，再利用留数定理来计算就会方便许多。
+
+**1.计算无穷实积分：**
+
+> 有理分式的无穷积分
+
+$$\int_{-\infty}^{\infty} f(x)\,dx = \int_{-\infty}^{\infty} \frac{Q_n(x)}{P_m(x)}\,dx,$$
+
+$$\;m, n \in \mathbb{N},\ m > n,\ m - n \geq 1$$
+
+> 确保收敛
+
+设上半平面 $f(z)$ 有孤立奇点 $b_1, b_2, \cdots, b_n$，实轴上无奇点，且 $m - n \geq 2$，则
+
+$$\int_{-\infty}^{\infty} f(x)\,dx = 2\pi i \sum_{k=1}^{n} \operatorname{res} f(b_k)$$
+
+**证：**取如图5.2所示半圆周 $\cup(-\infty, +\infty)$（$R \to \infty$）
+
+![图5.2](images/030.jpg)
+
+因为 $f(z)$ 收敛，所以
+
+$$\lim_{R \to \infty}| \int_{C_R^+} f(z)\,dz = 0|\le \lim_{R \to \infty} \int_{C_R^+}|z f(z)|\,\frac{|dz|}{|z|}$$
+
+$$\le \lim_{R \to \infty}\,\operatorname{max}|zf(z)|\frac{\pi R}{R}=0$$
+
+则
+
+$$\lim_{R \to \infty} \oint_{C_R^+ \cup (-R, +R)} f(z)\,dz = \int_{-\infty}^{\infty} f(x)\,dx + 0$$
+
+即得 $$\int_{-\infty}^{\infty} f(x)\,dx =\lim_{R \to \infty} \oint_{C_R^+ \cup (-R, +R)} f(z)\,dz=2\pi i\sum_{k=1}^{n} \operatorname {res}f(b_k)$$
+
+**2.计算含有三角函数的无穷积分**
+
+$$\displaystyle\int_{-\infty}^\infty f(x) \left\{\begin{matrix} \sin px\\ \cos px \end{matrix}\right\}dx$$
+
+在计算上面的积分前，还需要了解一个小定理：
+
+**若尔当引理(Jordan lemma)**
+
+取如图5.2的围道 $l:C_R^+\cup(-R,R)$
+
+设当 $|z|\to \infty$ 时函数 $f(z)$ 在包括实轴的上半平面 $(0\le \operatorname {arg}z\le \pi )$ 中一致趋于零，则 $$\lim_{R\to \infty} \int_{C_R^+}f(z)e^{ipz}\mathrm{d}z=0$$
+
+> **证**　在 $C_R$ 上，令 $z = R\mathrm{e}^{i\theta}$，则  
+> $\left|\int_{C_R} f(z)\mathrm{e}^{ipz}\,\mathrm{d}z\right| \leqslant \int_0^{\pi} \left|\, f(z)\,\right|\ \left|\ \mathrm{e}^{ipR\cos\theta - pR\sin\theta}\ \right|\ \left|\ R\mathrm{e}^{i\theta}\mathrm{i}\,\mathrm{d}\theta\ \right|$  
+> $$= \int_0^{\pi} \left|\, f(z)\,\right|\ \mathrm{e}^{-pR\sin\theta} R\,\mathrm{d}\theta$$  
+> $$\leqslant \max\ \left|\ f(z)\ \right|\ \cdot\ R\int_0^{\pi} \mathrm{e}^{-pR\sin\theta}\,\mathrm{d}\theta$$  
+> $$= \int_0^{\frac{\pi}{2}} \mathrm{e}^{-pR\sin\theta}\,\mathrm{d}\theta + \int_0^{\frac{\pi}{2}} \mathrm{e}^{-pR\sin\theta'}\,\mathrm{d}\theta'\ (\text{设}\ \theta' = \pi - \theta) \quad (5.2.15)$$  
+> 又  
+> $$\int_0^{\pi} \mathrm{e}^{-pR\sin\theta}\,\mathrm{d}\theta = \int_0^{\frac{\pi}{2}} \mathrm{e}^{-pR\sin\theta}\,\mathrm{d}\theta + \int_{\frac{\pi}{2}}^{\pi} \mathrm{e}^{-pR\sin\theta}\,\mathrm{d}\theta$$  
+> $$= \int_0^{\frac{\pi}{2}} \mathrm{e}^{-pR\sin\theta}\,\mathrm{d}\theta + \int_{\frac{\pi}{2}}^{0} \mathrm{e}^{-pR\sin(\pi-\theta)}\,\mathrm{d}\left[-(\pi-\theta)\right]$$  
+> $$= 2\int_0^{\frac{\pi}{2}} \mathrm{e}^{-pR\sin\theta}\,\mathrm{d}\theta$$
+![图5.3](images/031.jpg)
+> 而在 $\left[\ 0,\ \dfrac{\pi}{2}\ \right]$ 上，如图5.3所示，$\sin\theta \geqslant \dfrac{2}{\pi}\theta$，注意 $p>0,\ R>0$，所以有  
+> $$\int_0^{\pi} \mathrm{e}^{-pR\sin\theta}\,\mathrm{d}\theta \leqslant 2\int_0^{\frac{\pi}{2}} \mathrm{e}^{-pR\frac{2}{\pi}\theta}\,\mathrm{d}\theta = \frac{\pi}{pR}\left(1 - \mathrm{e}^{-pR}\right)$$  
+> 代入 (5.2.15) 式并注意由题设当 $\left|\ z\ \right| \to \infty$ 时 $f(z)$ 在 $0 \leqslant \arg z \leqslant \pi$ 中一致趋于零，便可证得若尔当引理。  
+> 来自书P86二维码。
+
+下面正式来求 $\displaystyle\int_{-\infty}^\infty f(x) \left\{\begin{matrix} \sin px\\ \cos px \end{matrix}\right\}dx$
+
+设 $f(z)$ 在实轴上无奇点，在上半平面除了有限个孤立奇点 $z_k$ 外处处解析.根据留数定理
+
+$$\lim_{R\to \infty}\oint_l f(z)e^{ipx}dx$$
+
+$$=\int_{-\infty}^{\infty} f(x)e^{ipx}dx + \lim_{R\to\infty}\int_{C_R^+} f(z)e^{ipz}dz$$
+
+$$= 2\pi i \sum_{k=1}^{N} \operatorname{res}\left[f(z)e^{ipz},\ z=z_k\right]$$ 根据若尔当引理,上式整理为
+
+$$\int_{-\infty}^{\infty} f(x)e^{ipx}dx=2\pi i \sum_{k=1}^{n} \operatorname{res}\left[f(z)e^{ipz},\ z=z_k\right]$$
+
+上式右边的实部对应 $e^{ipx}$ 展开$\cos px$积分部分，虚部对应 $\sin px$积分部分
+
+> 聪明的你应该已经知道我在说什么了
+
+一般来讲 $f(x)$ 非奇非偶，只要其在上半平面一致趋于零，就能求上面的积分。
+
+但没法求 $\displaystyle\int_0^\infty f(x)e^{ipx}dx$
+
+除非1)当 $f(x)$ 为偶函数时，$\displaystyle\int_0^\infty f(x)\cos px\,dx$ 可求，即变为
+
+$$\frac{1}{2}\int_{-\infty}^{\infty} f(x)e^{ipx}dx$$
+
+> 奇函数 $f(x)\sin px$ 在对称区间积分为0
+
+即 $$\int_{0}^{\infty} f(x)\cos{px}\,\mathrm{d}x=\pi \sum_{k=1}^{n} \operatorname{res}\left[f(z)e^{ipz},\ z=z_k\right]$$
+
+2)当 $f(x)$ 为奇函数时，$\displaystyle\int_0^\infty f(x)\sin px\,dx$ 可求
+
+$$= \frac{1}{2i}\int_{-\infty}^{\infty} f(x)e^{ipx}dx$$
+
+> 奇函数 $f(x)\cos px$ 积分为0
+
+即
+
+$$\int_{0}^{\infty} f(x)\sin{px}\,\mathrm{d}x=\pi \sum_{k=1}^{n} \operatorname{res}\left[f(z)e^{ipz},\ z=z_k\right]$$
+
+  
+
+**例题** 求积分
+
+$$\int_{-\infty}^{\infty} \frac{\sin x}{x^2+4x+20}\,dx \ ，\quad \int_{-\infty}^{\infty} \frac{\cos x}{x^2+4x+20}\,dx$$
+
+**解** 相当于求$$\int_{-\infty}^{\infty} \frac{e^{ipx}}{x^2+4x+20}\,dx$$
+
+取上半平面半圆围道，后面不用说了
+
+> 若分母分别为偶函数?为奇函数？
+
+**3.计算三角函数有理式积分**
+
+$$\int_0^{2\pi} R(\cos\theta, \sin\theta)\,d\theta$$
+
+> 或 $\int_{-\pi}^\pi R\mathrm{d}\theta, \;\int_{0}^\pi R\mathrm{d}\theta,\;\int_{0}^{\frac{\pi}{2}} R\mathrm{d}\theta$ (如果对称性足够强)  
+> 式中 $R(\cos\theta, \sin\theta)$ 表示由 $\cos\theta,\sin\theta$ 构成的有理分式
+
+令 $e^{i\theta} = z$ ，则
+
+$\mathrm{d}z = ie^{i\theta}\mathrm{d}\theta = iz\mathrm{d}\theta,d\theta = \frac{1}{iz}dz$
+
+$$\int_0^{2\pi} R(\cos\theta, \sin\theta)\,d\theta = \oint_{|z|=1} \frac{1}{iz}R\left(\frac{z+z^{-1}}{2},\ \frac{z-z^{-1}}{2}\right){\mathrm{d}z}$$
+
+根据留数定理
+
+$$\oint_{|z|=1} f(z)\mathrm{d}z=2\pi i \sum_{k=1}^n \mathrm{res}[f(z),z=z_k]$$其中 $$f(z)=\frac{1}{iz}R\left(\frac{z+z^{-1}}{2},\ \frac{z-z^{-1}}{2}\right)$$
+
+所以 $$\int_0^{2\pi} R(\cos\theta, \sin\theta)\,d\theta=2\pi i \sum_{k=1}^n \mathrm{res}[f(z),z=z_k]$$
+`
+      },
+      {
+        id: "5-3",
+        title: "5.3 物理问题中的若干积分",
+        content: String.raw`
+**1.狄里克雷积分**
+
+$$\displaystyle\int_0^\infty \frac{\sin x}{x}\,dx$$
+
+> 依旧三角函数积分奇偶性
+
+$$\displaystyle\int_0^\infty \frac{\sin x}{x}\,dx= \frac{1}{2}\int_{-\infty}^{\infty} \frac{\sin x}{x}\,dx$$
+
+$$= \frac{1}{2i}\int_{-\infty}^{\infty} \frac{i\sin x + \cos x}{x}\,dx = \frac{1}{2i}\int_{-\infty}^{\infty} \frac{e^{ix}}{x}\,dx$$
+
+只需计算 $\displaystyle\int_{-\infty}^{\infty} \frac{e^{ix}}{x}\,dx$
+
+$$\lim\oint_{C_R^+\cup(-\infty,+\infty)} \frac{e^{ix}}{x}\,dx$$
+
+对于积分路径上有一阶极点的情况可以用**小圆弧引理**.(二阶以上极点则无法解)
+
+**小圆弧引理(small arc lemma)**
+
+![图5.4](images/032.jpg)
+
+如图5.4，设 $f(z)$ 沿圆弧 $C_r: z - a = r\mathrm{e}^{i\theta}$（$\theta_1 \leqslant \theta \leqslant \theta_2$，$r$ 充分小）上连续且 $\displaystyle\lim_{r\to 0}\left[(z-a)f(z)\right] = \lambda$（$\lambda$ 为常数，包括 0）在 $C_r$ 上一致成立，则
+
+$$\lim_{r\to 0}\int_{C_r} f(z)\,\mathrm{d}z = \mathrm{i}(\theta_2 - \theta_1)\lambda$$
+
+特别是若 $a$ 为 $f(z)$ 的一阶极点，则
+
+$$\lim_{r\to 0}\int_{C_r} f(z)\,\mathrm{d}z = \mathrm{i}(\theta_2 - \theta_1)\operatorname{res} f(a)$$
+
+或
+
+$$\lim_{r\to 0}\int_{C_r} f(z)\,\mathrm{d}z = \mathrm{i}(\theta_2 - \theta_1)\psi(a)$$
+
+其中，积分沿逆时针方向进行(图5.4)，$\psi(z) = (z-a)f(z)$ 在 $a$ 的邻域中解析，且 $\psi(a)\neq 0$。
+
+下面来算后续积分
+
+![图5.5](images/033.jpg)
+
+取如图5.5所示围道，运用留数定理
+
+$$\lim_{\substack{r\to 0 \\ R\to\infty}} \int_r^R \frac{e^{ix}}{x}\,dx + \int_{C_{R\to \infty}^+} \frac{e^{iz}}{z}\,dz$$
+
+$$+ \lim_{\substack{r\to 0 \\ R\to\infty}} \int_{-R}^{-r} \frac{e^{ix}}{x}\,dx + \int_{C_{r\to 0}} \frac{e^{iz}}{z}\,dz = 0$$
+
+> 围道内为解析，所以留数为0
+
+根据若尔当引理　$\displaystyle\int_{C_R^+} \frac{e^{iz}}{z}\,dz = 0$　和小弧引理
+
+$$\int_{C_{r\to 0}} \frac{e^{iz}}{z}\,dz = i\,\operatorname{res}\left[ \frac{e^{iz}}{z},\ z=0 \right ]\,(0-\pi)=-i\pi$$
+
+所以
+
+$$\int_{-\infty}^{\infty} \frac{e^{ix}}{x}\,dx = 2i\int_0^\infty \frac{\sin x}{x}\,dx = 0 - (-i\pi) = i\pi$$
+
+所以
+
+$$\int_0^\infty \frac{\sin x}{x}\,dx = \frac{\pi}{2}$$
+
+**2.菲涅耳积分(Fresnel integral)**
+
+**$\displaystyle\int_0^\infty \begin{Bmatrix} \sin(x^2) \\ \cos(x^2) \end{Bmatrix} dx$**
+
+取围道 $l$ 如图5.6， $C_R$ 表示45度圆弧，围道 $l$ 内无奇点。
+
+![图5.6](images/034.jpg)
+
+> 为什么选取的是一个45度的扇形，这点书上也已讲明，先是仿照前面取半圆，但是发现在 $\frac{\pi}{2}<\theta<\pi$ 函数不收敛，然后经过摸索得出要画这么一个围道。同样是遇到三角函数，构造幂指数函数.  
+> 实际上，若 45° 圆弧在上半平面且$f(z)$在弧上一致趋于 0，则若尔当引理仍成立，详细自行查阅，于是有$$\lim_{R\to\infty}\int_{C_R} e^{iz^2}\,\mathrm{d}z$$
+
+在斜边上，$z$ 表示为 $re^{i\frac{\pi}{4}},r$ 为 $z$ 到原点的距离，根据留数定理
+
+$$\oint_l e^{iz^2}\mathrm{d}z =\lim_{R\to\infty}\int_{C_R} e^{iz^2}\,\mathrm{d}z + \lim_{R\to\infty}\int_0^R e^{ix^2}\,\mathrm{d}x$$
+
+$$+ \int_R^0 e^{i\left(re^{i\frac{\pi}{4}}\right)^2}\,d\left(re^{i\frac{\pi}{4}}\right)=0$$ 其中 $$\lim_{R\to\infty}\int_{C_R} e^{iz^2}\,\mathrm{d}z=0$$ $$\int_R^0 e^{i\left(re^{i\frac{\pi}{4}}\right)^2}\,d\left(re^{i\frac{\pi}{4}}\right)=-e^{i\frac{\pi}{4}}\int_0^{R\to\infty} e^{-r^2}\,dr$$
+
+高斯积分 $$\int_0^R e^{-r^2}\,dr = \frac{\sqrt{\pi}}{2}$$ 所以 $$\int_R^0 e^{i\left(re^{i\frac{\pi}{4}}\right)^2}\,d\left(re^{i\frac{\pi}{4}}\right)=-e^{i\frac{\pi}{4}}\cdot \frac{\sqrt{\pi}}{2}$$ 则
+
+$$\int_0^\infty e^{ix^2}\,dx = \int_0^\infty \cos(x^2)\,dx + i\int_0^\infty \sin(x^2)\,dx = \frac{\sqrt{\pi}}{2}e^{i\frac{\pi}{4}}$$
+
+$$= \frac{\sqrt{\pi}}{2}\left(\frac{\sqrt{2}}{2} + i\frac{\sqrt{2}}{2}\right)$$ 实部对实部，虚部对虚部得到
+
+$$\int_0^\infty \cos(x^2)\,dx = \int_0^\infty \sin(x^2)\,dx = \frac{\sqrt{2\pi}}{4}$$
+
+**3\. 热传导问题中的积分**
+
+$$\int_0^\infty \mathrm{e}^{-ax^2}\cos bx\,\mathrm{d}x \quad (a>0,\ b\ \text{是任意实数})$$
+
+显然，这不能用5.2.2节的 $\cos{px}$ 那条公式来求，因为当 $|z|\to\infty$ 时 $\mathrm{e}^{-az^2}$ 在半圆 $C_R$ 上不一致趋于零。
+
+作如下变换
+
+$$\int_0^\infty \mathrm{e}^{-ax^2}\cos bx\,\mathrm{d}x = \int_0^\infty \mathrm{e}^{-ax^2}\frac{\mathrm{e}^{ibx} + \mathrm{e}^{-ibx}}{2}\,\mathrm{d}x$$
+
+$$= \frac{1}{2}\int_{-\infty}^{\infty} \mathrm{e}^{-ax^2-ibx}\,\mathrm{d}x= \frac{1}{2}\mathrm{e}^{-\frac{b^2}{4a}}\int_{-\infty}^{\infty} \mathrm{e}^{-a\left(x+\frac{ib}{2a}\right)^2}\,\mathrm{d}x$$
+
+$$= \frac{1}{2}\mathrm{e}^{-\frac{b^2}{4a}}\int_{l_1'} \mathrm{e}^{-az^2}\,\mathrm{d}z \qquad (5.3.5)$$
+
+![图5.7](images/035.jpg)
+
+其中积分路线 $l_1'$ 是与实轴平行、相距为 $\frac{b}{2a}$ 的由 $\mathrm{Re}z = x = -\infty$ 到 $x = +\infty$ 的无限长直线。考虑 $\mathrm{e}^{-az^2}$ 沿如图 5.7所示的回路积分，则
+
+$$\oint_l \mathrm{e}^{-az^2}\,\mathrm{d}z = \int_{l_1} \mathrm{e}^{-az^2}\,\mathrm{d}z + \int_{b/2a}^{0} \mathrm{e}^{-a(R+iy)^2}\,\mathrm{d}(\mathrm{i}y)$$
+
+$$+ \int_{R}^{-R} \mathrm{e}^{-ax^2}\,\mathrm{d}x + \int_{0}^{b/2a} \mathrm{e}^{-a(-R+iy)^2}\,\mathrm{d}(\mathrm{i}y) = 0 \quad (5.3.6)$$
+
+其中，$l_1$ 为从 $\left(-R, \dfrac{b}{2a}\right)$ 到 $\left(R, \dfrac{b}{2a}\right)$ 的直线段。于是
+
+$$\lim_{R\to\infty}\int_{l_1} \mathrm{e}^{-az^2}\,\mathrm{d}z = \int_{l_1'} \mathrm{e}^{-az^2}\,\mathrm{d}z$$
+
+$$\left|\int_0^{\frac{b}{2a}} \mathrm{e}^{-a(-R+iy)^2}\,\mathrm{i}\,\mathrm{d}y\right| \leqslant \mathrm{e}^{-aR^2}\int_0^{\frac{b}{2a}} \mathrm{e}^{ay^2}\,\mathrm{d}y \xrightarrow{R\to\infty} 0$$
+
+同理
+
+$$\left|\int_0^{\frac{b}{2a}} \mathrm{e}^{-a(R+iy)^2}\,\mathrm{i}\,\mathrm{d}y\right| \xrightarrow{R\to\infty} 0$$
+
+而
+
+$$\int_{R}^{-R} \mathrm{e}^{-ax^2}\,\mathrm{d}x \xrightarrow{R\to\infty} -\int_{-\infty}^{\infty} \mathrm{e}^{-ax^2}\,\mathrm{d}x$$
+
+$$= -\frac{1}{\sqrt{a}}\int_{-\infty}^{\infty} \mathrm{e}^{-(\sqrt{a}x)^2}\,\mathrm{d}(\sqrt{a}x) = -\sqrt{\frac{\pi}{a}}$$
+
+将这些结果一并代入 (5.3.6) 式得
+
+$$\int_{l_1'} \mathrm{e}^{-az^2}\,\mathrm{d}z = \sqrt{\frac{\pi}{a}}$$
+
+故由 (5.3.5) 式得
+
+$$\int_0^\infty \mathrm{e}^{-ax^2}\cos bx\,\mathrm{d}x = \frac{1}{2}\mathrm{e}^{-\frac{b^2}{4a}}\sqrt{\frac{\pi}{a}}\ ,\qquad a>0$$
+
+另外的方法详见
+
+<div class="link-card-wrap"><a class="link-card" href="https://kns.cnki.net/reader/flowpdf?invoice=JXzbZDfbFeSFLiz13tdqC4nNtMT3JFqxXIY5JkYnU2DERk2yKh7CH4brauX8BE3k5pNO3qejPfHky3y0y5lp%2FREVCAgjy1gb%2F8F7m0ad%2FXHTQDw%2BeiFjf5wGgahPnwpJbTLRZPIFHQLdStncwJ%2BM5SZPg6xyoGJWJZ3QhQkborU%3D&platform=NZKPT&sourcetype=nxgp&product=CJFQ&filename=GKWL202103002&tablename=cjfdlast2021&type=JOURNAL&scope=trial&cflag=overlay&dflag=&pages=&language=CHS&trial=&nonce=61BE58EEBB294AE88CBE50CB184BB85F" target="_blank" rel="noopener">《若干重要积分的间接方法》</a></div>
+
+
+2026.10.19
+`
+      },
+      {
+        id: "5-4",
+        title: "5.4 多值函数的积分",
+        content: String.raw`
+多值函数积分一般有下面两种
+
+**1.梅林型积分** $\int_0^\infty x^\alpha f(x)\,dx$，$0<\alpha<1$
+
+**2.对数型积分** $\int_0^\infty f(x)\ln x\,dx$
+
+这里每种分别举一例：
+
+1)梅林型积分之欧拉积分 $$\displaystyle\int_0^\infty \frac{x^{\alpha-1}}{1+x}\,dx,\quad0<a<1$$
+
+计算 $\displaystyle\oint_l \frac{z^{\alpha-1}}{1+z}\,dz$
+
+$z_1=-1$　一阶极点
+
+$z_0=0$　 支点
+
+![图5.8](images/036.jpg)
+
+如图5.8，从 0 到 $+\infty$ 作支割线，并取积分围道.运用留数定理得
+
+$$\oint_l \frac{z^{\alpha-1}}{1+z}\,dz = \lim_{\substack{\varepsilon\to 0\\ R\to\infty}}\int_\varepsilon^R \frac{x^{\alpha-1}}{1+x}\,dx + \lim_{R\to\infty}\oint_{C_R} \frac{z^\alpha}{1+z}\,dz$$
+
+$$+ \lim_{\substack{\varepsilon\to 0\\ R\to\infty}}\int_R^\varepsilon \frac{x^{\alpha-1}}{1+x}\,dx + \lim_{\varepsilon\to 0}\oint_{C_\varepsilon} \frac{z^\alpha}{1+z}\,dz$$
+
+$$= 2\pi i\,\operatorname{res}\left[f(z),\ z=-1\right] = 2\pi i\,e^{(\alpha-1)i\pi}$$
+
+  
+
+现在来算左边各个式子的值： $$\displaystyle\int_{C_R} \frac{z^{\alpha-1}}{1+z}\,dz = 0$$
+
+> 因为分母幂次大于分子，且差值大于 1，也就是 $zf(z)$ 一致趋于零
+
+$$\lim_{\varepsilon\to 0}\int_{C_\varepsilon} \frac{z^{\alpha-1}}{1+z}\,dz  = i\,\operatorname{res}\left[f(z),\ z=0\right](0-2\pi)$$
+
+> 用小弧引理
+
+$$\operatorname{res}\left[f(z),\ z=0\right] = \lim_{z\to 0} (z-0)f(z) = \lim_{z\to 0} \frac{z^\alpha}{1+z} = 0$$
+
+故$$\lim_{\varepsilon\to 0}\int_{C_\varepsilon} \frac{z^{\alpha-1}}{1+z}\,dz = 0$$
+
+$$\lim_{\substack{\varepsilon\to 0\\ R\to\infty}}\int_R^\varepsilon \frac{x^{\alpha-1}}{1+x}\,dx = \int_\infty^0 \frac{(xe^{i2\pi})^{\alpha-1}}{1+xe^{i2\pi}}\,d(xe^{i2\pi})$$
+
+$$= -\left(\int_0^\infty \frac{x^{\alpha-1}}{1+x}\,dx\right) e^{i2\pi(\alpha-1)}$$
+
+> 注意:图中可以看出，实轴下面的积分路径上 $z$ 的辐角为 $2\pi$ 而其幂次是分数，所以要表现出来
+
+  
+
+所以结果为
+
+$$\lim_{\substack{\varepsilon\to 0\\ R\to\infty}}\int_\varepsilon^R \frac{x^{\alpha-1}}{1+x}\,dx + \lim_{\substack{\varepsilon\to 0\\ R\to\infty}}\int_R^\varepsilon \frac{z^{\alpha-1}}{1+x}\,dx$$
+
+$$= \left(1-e^{i2\pi(\alpha-1)}\right)\int_0^\infty \frac{x^{\alpha-1}}{1+x}\,dx = 2\pi i\,e^{i(\alpha-1)\pi}$$
+
+得到欧拉积分
+
+$$\int_0^\infty \frac{x^{\alpha-1}}{1+x}\,dx = \frac{2\pi i\,e^{(\alpha+1)i\pi}}{1-e^{i2\pi(\alpha-1)}} = \frac{-2\pi i\,e^{i\alpha\pi}}{e^{i\alpha\pi}\left(e^{-i\alpha\pi}-e^{i\alpha\pi}\right)}$$
+
+$$= \frac{-2\pi i}{-2i\sin(\pi\alpha)} = \frac{\pi}{\sin\alpha\pi}$$
+
+2)含对数函数的积分 $$\displaystyle\int_0^\infty \frac{\ln x}{(1+x^2)^2}\,dx$$
+
+$z=\pm i$ 为其二阶极点
+
+![图5.9](images/037.jpg)
+
+取围道如图5.9，运用留数定理得
+
+$$\oint_\ell \frac{\ln z}{(1+z^2)^2}\,dz = \lim_{\substack{\varepsilon\to 0\\ R\to\infty}}\int_\varepsilon^R \frac{\ln x}{(1+x^2)^2}\,dx$$
+
+$$+ \lim_{R\to\infty}\int_{C_R} \frac{\ln z}{(1+z^2)^2}\,dz + \int_R^\varepsilon \frac{\ln\left(xe^{i\pi}\right)}{\left[1+(xe^{i\pi})^2\right]^2}\,d(xe^{i\pi})$$
+
+$$+ \lim_{\varepsilon\to 0}\int_{C_\varepsilon} \frac{\ln z}{(1+z^2)^2}\,dz = 2\pi i\,\operatorname{res}\left[f(z),\ z=i\right]$$
+
+$$= 2\pi i\ \frac{1}{1!}\ \frac{d}{dz}\left[(z-i)^2\ \frac{\ln z}{(1+z^2)^2}\right]\Bigg|_{z=i}$$
+
+$$= -\frac{\pi}{2} + \frac{\pi^2 i}{4}$$
+
+算左边各式：$$\displaystyle\lim_{R\to\infty}\int_{C_R} \frac{\ln z}{(1+z^2)^2}\,dz = 0$$$$\displaystyle\lim_{\varepsilon\to 0}\int_{C_\varepsilon} \frac{\ln z}{(1+z^2)^2}\,dz = 0$$
+
+  
+
+$$\lim_{\substack{\varepsilon\to 0\\ R\to\infty}}\int_R^\varepsilon \frac{\ln\left(xe^{i\pi}\right)}{\left[1+(xe^{i\pi})^2\right]^2}\,d(xe^{i\pi}) = \int_0^\infty \frac{\ln\left(xe^{i\pi}\right)}{\left[1+(xe^{i\pi})^2\right]^2}\,d(xe^{i\pi})$$
+
+$$=\int_0^\infty \frac{\ln x}{(1+x^2)^2}\,dx+\int_0^\infty \frac{i\pi}{(1+x^2)^2}\,dx$$
+
+所以结果为
+
+$$2\int_0^\infty \frac{\ln x}{(1+x^2)^2}\,dx + \int_0^\infty \frac{i\pi}{(1+x^2)^2}\,dx = -\frac{\pi}{2} + \frac{\pi^2 i}{4}$$
+
+  
+
+故有
+
+$$\int_0^\infty \frac{\ln x}{(1+x^2)^2}\,dx = -\frac{\pi}{4}$$
+
+$$\int_0^\infty \frac{1}{(1+x^2)^2}\,dx = \frac{\pi}{4}$$
+
+
+
+***至此，复变函数论篇章就结束了，后面在期中复习时我会加上一些解题方法的总结。***
+***谢谢你看到这里orz***
+
+2026.10.22
 `
       }
     ]
@@ -1946,7 +2452,68 @@ main{ margin-left:var(--side-w); min-height:100vh; }
   font-size:13.5px; color:var(--muted);
   background:var(--panel);
   border:1px dashed var(--line);
-  border-radius:6px;
+  border-radius:8px;
+}
+
+/* ---------- 外链卡片（超长外链改成可点击的小卡片） ---------- */
+.link-card-wrap{
+  margin:1.9em 0;
+  text-align:center;
+}
+.link-card{
+  display:inline-block;
+  max-width:100%;
+  padding:16px 36px;
+  font-family:"SimSun","宋体","Songti SC","STSong",serif;
+  font-size:17.5px;
+  line-height:1.65;
+  letter-spacing:.1em;
+  text-align:center;
+  color:var(--deep);
+  background:var(--pale);
+  border:1px solid var(--line);
+  border-radius:16px;
+  text-decoration:none;
+  box-shadow:0 2px 8px rgba(14,107,107,.10);
+  transition:background .18s ease, color .18s ease, transform .18s ease, box-shadow .18s ease;
+}
+.link-card:hover{
+  background:var(--pale-2);
+  color:var(--main-dark);
+  transform:translateY(-2px);
+  box-shadow:0 6px 18px rgba(14,107,107,.20);
+}
+
+/* ---------- 没有小节的章节：正文直接铺在章节里 ---------- */
+.chapter-body{
+  background:#fff;
+  border:1px solid var(--line-soft);
+  border-left:4px solid var(--main);
+  border-radius:var(--radius);
+  padding:22px 28px 20px;
+  box-shadow:0 1px 2px rgba(14,107,107,.045);
+}
+/* 正文里的 # / ## / ### 标题（marked 渲染成 h1/h2/h3） */
+.section-body h1{
+  margin:0 0 .6em;
+  font-size:21px; font-weight:bold; letter-spacing:.02em;
+  color:var(--deep);
+}
+.section-body h2{
+  position:relative;
+  margin:1.5em 0 .5em; padding-left:15px;
+  font-size:17.5px; font-weight:bold; color:var(--deep);
+}
+.section-body h2::before{
+  content:"";
+  position:absolute; left:0; top:.58em;
+  width:7px; height:7px;
+  background:var(--main);
+  border-radius:2px;
+}
+.section-body h3{
+  margin:1.2em 0 .45em;
+  font-size:16px; font-weight:bold; color:var(--main-dark);
 }
 
 .table-wrap{ margin:1em 0; overflow-x:auto; }
@@ -2059,7 +2626,7 @@ main{ margin-left:var(--side-w); min-height:100vh; }
   #sidebar,#topbar,#toTop,#progress,#overlay{ display:none !important; }
   main{ margin-left:0; }
   .wrap{ max-width:none; padding:0; }
-  .section{ break-inside:avoid; box-shadow:none; }
+  .section,.chapter-body{ break-inside:avoid; box-shadow:none; }
   body{ background:#fff; }
 }
 
@@ -2413,19 +2980,23 @@ var lastActiveChapter = null;   // 记录上一次展开的章节 id
     chapters.forEach(function (ch, ci) {
       var chId = 'ch-' + (ch.id || (ci + 1));
       var secs = Array.isArray(ch.sections) ? ch.sections : [];
+      var chBody = (ch.content == null) ? '' : String(ch.content);
 
       html.push('<section class="chapter" id="' + chId + '">');
       html.push(
         '<div class="chapter-head">' +
           '<h2>' + renderTitle(ch.chapter) + '</h2>' +
-          '<span class="chapter-meta">' + secs.length + ' 节</span>' +
+          (secs.length ? '<span class="chapter-meta">' + secs.length + ' 节</span>' : '') +
         '</div>'
       );
+      if (chBody) {
+        html.push('<div class="chapter-body section-body">' + renderContent(chBody) + '</div>');
+      }
 
-toc.push('<div class="toc-ch" data-ch="' + chId + '">');
+toc.push('<div class="toc-ch' + (secs.length ? '' : ' no-secs') + '" data-ch="' + chId + '">');
 toc.push(
   '<a class="toc-ch-link" href="#' + chId + '" data-target="' + chId + '" data-ch="' + chId + '">' +
-    '<span class="toc-arrow">▶</span>' +
+    (secs.length ? '<span class="toc-arrow">▶</span>' : '') +
     '<span class="toc-ch-text">' + renderTitle(ch.chapter) + '</span>' +
   '</a>'
 );
@@ -2472,7 +3043,7 @@ toc.push('<ul class="toc-secs">');
 
     // 页脚统计
     var foot = document.getElementById('page-foot');
-    foot.textContent = chapters.length + ' 章 · ' + secTotal + ' 节' + (PAGE_FOOTER ? '　|　' + PAGE_FOOTER : '');
+    foot.textContent = chapters.length + ' 章' + (secTotal ? ' · ' + secTotal + ' 节' : '') + (PAGE_FOOTER ? '　|　' + PAGE_FOOTER : '');
 
     bindTocClicks();
     updateActive();
@@ -2493,11 +3064,17 @@ function bindTocClicks() {
       if (chId) {
         var tocCh = document.querySelector('#toc-list .toc-ch[data-ch="' + chId + '"]');
         if (tocCh) {
-          var wasOpen = tocCh.classList.contains('open');
-          tocCh.classList.toggle('open', !wasOpen);
-          if (!wasOpen) {
+          if (tocCh.classList.contains('no-secs')) {
+            /* 本章没有小节：直接滚到本章，不做展开/收起 */
             el.scrollIntoView({ behavior: 'smooth', block: 'start' });
             lastActiveChapter = chId;
+          } else {
+            var wasOpen = tocCh.classList.contains('open');
+            tocCh.classList.toggle('open', !wasOpen);
+            if (!wasOpen) {
+              el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              lastActiveChapter = chId;
+            }
           }
         }
         if (history.replaceState) { history.replaceState(null, '', '#' + target); }
@@ -2643,6 +3220,7 @@ total += shown;
     var warn = document.getElementById('cdn-warn');
     if (!state.marked || !state.katex) {
       var miss = [];
+
       if (!state.marked) { miss.push('Markdown'); }
       if (!state.katex) { miss.push('公式'); }
       warn.innerHTML = '未能加载 ' + miss.join(' 与 ') +
