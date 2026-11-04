@@ -2140,6 +2140,593 @@ $$\int_0^\infty \frac{1}{(1+x^2)^2}\,dx = \frac{\pi}{4}$$
 `
       }
     ]
+  },
+  {
+    chapter: "第六章 定解问题",
+    sections: [
+      {
+        id: "6-1",
+        title: "6.1 引言",
+        content: String.raw`
+> 符号约定：拉普拉斯算符：$\Delta_n = \nabla_n^2 = \dfrac{\partial^2}{\partial x_1^2} + \dfrac{\partial^2}{\partial x_2^2} + \cdots + \dfrac{\partial^2}{\partial x_n^2}$  
+> $$u_x = \frac{\partial u}{\partial x}\ ,\qquad u_{xx} = \frac{\partial^2 u}{\partial x^2}$$
+
+**1.数学物理方程**
+
+数学物理方程研究的范围挺广，我们学习的内容主要是二阶线性偏微分方程(PDE)，所以我们必须要有常微分方程（ODE）的基础。
+
+数学物理方程一般可分为三类：
+
+1)描述振动和波动特征的**波动方程**
+
+$$u_{tt} = a^2\Delta u + f$$
+
+其中， $u=u(x,y,z;t)$ 代表平衡位置为 $(x,y,z)$ 的点在 $t$ 时刻的位移(未知函数)，$a$ 是波传播的速度，$f=f(x,y,z;t)$ 是与源有关的已知函数。是个双曲型方程。
+
+2)反映输运过程的**扩散（或热传导）方程**
+
+$$u_t = D\Delta u + f$$
+
+其中 $u$ 为物质的浓度（或物体的温度），$D$ 是扩散（或热传导）系数，$f$ 是与源有关的已知量。是个抛物型方程
+
+3)描绘稳定过程（或状态）的**泊松方程**
+
+$$\Delta u = -h$$
+
+其中 $u=u(x,y,z)$ 是表示稳定现象特征的物理量，如静电场中的电势等，$h=h(x,y,z)$ 是与源有关的已知量。是个椭圆型方程。
+
+> 以静电场为例：麦克斯韦方程有：$\nabla\cdot\vec{D} = \rho_0$，又有 $\vec{D} = \varepsilon\vec{E}$，所以 $\nabla\cdot\vec{E} = \dfrac{1}{\varepsilon}\rho_0$，  
+> 因为 $\vec{E} = -\nabla U$，所以有 $\nabla^2 U = -\dfrac{1}{\varepsilon}\rho_0$.
+
+可以发现上面三个方程的未知函数 $u$ 最高只有二阶偏微商，且 $u$ 及其各阶偏微商都是线性相关的（只有一次项）。
+
+**2.用数理方程研究物理问题的步骤**
+
+1)提出定解问题。
+
+包括泛定方程（数理方程）和定解条件（包括边界条件、初始条件和其他条件）。
+
+2)求解。
+
+二阶线性偏微分方程常用方法：
+
+1.公式法 2.分离变量法 3.积分变换法 4.格林函数法 5.变分法 6.路径积分法
+
+3)分析解答
+
+分析解的存在性，唯一性和稳定性。（稳定性指当定解条件有微小改变时，解也只有微小变化的性质）这三性统称适定性。
+`
+      },
+      {
+        id: "6-2",
+        title: "6.2 三类数理方程的导出",
+        content: String.raw`
+
+>把书上内容照搬过来了，等期中考后再整理: )
+
+**1.弦的横振动方程**
+
+设有一根细长而柔软的弦线，紧绷于 $A$、$B$ 两点之间，在平衡位置 $AB$ 附近产生振幅极为微小的横振动，求这弦上各点的运动规律。
+
+![图6.1](images/038.jpg)
+
+为了解决这个问题，如图 6.1 所示，我们就将弦的平衡位置选在 $x$ 轴上，并以 $u(x,t)$ 表示弦上 $x$ 点在时刻 $t$ 沿垂直于 $x$ 轴方向的位移。
+
+由于弦是细长的，这就意味着弦可看作是均匀的，其线密度 $\rho(x,t)$ 将不随 $x$ 变化，即 $\rho(x,t)=\rho(t)$ 且任一小段的重重\[?\]可忽略不计；由于弦紧绷于 $A$、$B$ 两点之间，这说明弦中各相邻部分之间受有拉力即张力；由于弦是柔软的，这就意味着弦没有抗弯力，在放松的情况下，把它弯成任意的形状它都保持不变；而紧绷以后，相邻小段之间的张力总是沿着弦线的切线方向；由于弦作微小横振动，故相邻两点沿振动方向的位移的差别很小，即 $u_x = \dfrac{\partial u}{\partial x}$ 是小量，而 $u_x^2\approx 0$。
+
+现在，我们从弦中任意划出不包括端点（$A$、$B$）的一小段 $\Delta x$，考虑这一小段与邻近部分的相互作用。在振动过程中这一小段 $\Delta x$ 变成了弧 $\widehat{M_1M_2}$，注意
+
+$$\widehat{M_1M_2} = \int_x^{x+\Delta x}\sqrt{1+(u_x)^2}\,\mathrm{d}x \approx \int_x^{x+\Delta x}\mathrm{d}x = \Delta x$$
+
+即这一小段的长度在振动过程中可认为是不变的。因此由胡克（Hooke）定律知张力和线密度也都不随 $t$ 而变，即 $T(x,t)=T(x)$，$\rho(t)=\rho$（常数）。我们来分析 $\widehat{M_1M_2}$ 的受力情况，如图 6.1 所示。
+
+(1)$M_1$ 点受有张力 $T_1$，它在 $y$ 轴方向的分力为 $-T_1\sin\alpha_1$，在 $x$ 轴方向的分力为 $-T_1\cos\alpha_1$；
+
+(2)$M_2$ 点受有张力 $T_2$，它在 $y$ 轴方向的分力为 $T_2\sin\alpha_2$，在 $x$ 轴方向的分力为 $T_2\cos\alpha_2$；
+
+(3)设 $\widehat{M_1M_2}$ 受有沿 $y$ 轴方向的外力 $F(x+\eta_1\Delta x,t)\Delta x$（注意，$\widehat{M_1M_2}=\Delta x$）。其中 $F(x,t)$ 表示单位长度所受的外力，$0<\eta_1\leqslant 1$。
+
+则由牛顿（Newton）第二定律有
+
+$$F(x+\eta_1\Delta x,t)\Delta x + T_2\sin\alpha_2 - T_1\sin\alpha_1$$
+
+$$= (\rho\Delta x)u_{tt}(x+\eta_2\Delta x,t)\ ,\;0<\eta_2\leqslant 1$$
+
+$$T_2\cos\alpha_2 - T_1\cos\alpha_1 = 0$$
+
+注意到 $\sin\alpha = \dfrac{\tan\alpha}{\sqrt{1+\tan^2\alpha}} = \dfrac{u_x}{\sqrt{1+u_x^2}}\approx u_x$，故有
+
+$$\sin\alpha_1\approx u_x(x,t)\ ,\; \sin\alpha_2\approx u_x(x+\Delta x,t)$$
+
+  
+
+$$\cos\alpha_1 = \sqrt{1-\sin^2\alpha_1}\approx 1\ ,\; \cos\alpha_2 = \sqrt{1-\sin^2\alpha_2}\approx 1$$
+
+从而有
+
+$$T_1 = T_2 = T$$
+
+于是
+
+$$(\rho\Delta x)u_{tt}(x+\eta_2\Delta x,t) = F(x+\eta_1\Delta x,t)\Delta x$$
+
+$$+ T\left[u_x(x+\Delta x,t) - u_x(x,t)\right]$$
+
+即
+
+$$u_{tt}(x+\eta_2\Delta x,t) = \frac{T}{\rho}\cdot\frac{u_x(x+\Delta x,t)-u_x(x,t)}{\Delta x}$$
+
+$$+ \frac{F(x+\eta_1\Delta x,t)}{\rho}$$
+
+对上式两边取极限（令 $\Delta x\to 0$）则得
+
+$$u_{tt} = a^2 u_{xx} + f(x,t)$$
+
+其中
+
+$$a^2 = \frac{T}{\rho}\ ,\qquad f(x,t) = \frac{F(x,t)}{\rho}$$
+
+此即**弦的横振动方程**。若 $f=0$，即弦在振动过程中不受外力，则
+
+$$u_{tt} = a^2 u_{xx}$$
+
+它称为**弦的自由振动方程。**
+
+**2.热传导方程**
+
+设有一根横截面积为 $A$ 的均匀细杆，沿杆长方向有温度差，其侧面绝热，考虑其热量传播的过程。
+
+由于杆是均匀而又细的，所以在任何时刻，都可以把杆的横截面上的温度视为相同的；由于其侧面绝热，因此热量只会沿着杆长方向传导。所以，这是一个一维的热传导问题。
+
+![图6.2](images/039.jpg)
+
+为方便起见，如图 6.2 所示，取杆与 $x$ 轴重合，以 $u(x,t)$ 表示杆上 $x$ 点处 $t$ 时刻的温度。现在，仿照上面导出弦振动方程一样，从杆的内部中划出一小段 $\Delta x$，考察这一小段，在时间间隔 $\Delta t$ 内热量流动的情况。
+
+设 $c$ 为杆的比热容（单位物质升高单位温度所需热量，它与物质的材料有关），$\rho$ 为杆的密度，则
+
+(1)在 $\Delta t$ 时间内引起小段 $\Delta x$ 温度升高，所需热量为
+
+$$Q = c(\rho A\Delta x)\left[u(x,t+\Delta t) - u(x,t)\right]$$
+
+故当 $\Delta t\to 0$ 时
+
+$$Q\approx c\rho A u_t\,\Delta x\Delta t$$
+
+而**傅里叶实验定律**告诉我们：当物体内有温度差存在时，热量由温度高处向温度低处流动，单位时间流过单位面积的热量 $q$**(热流密度)**与温度的下降率成正比
+
+$$q = -k\frac{\partial u}{\partial n}$$
+
+其中，$k$ 为**导热率**（与物体的材料有关，且严格说来也与温度有关，但若温度的改变范围不大，可视为与温度无关）；$\dfrac{\partial u}{\partial n}$ 的方向，是所通过曲面的外法线方向；而负号表示由温度高处流向温度低处。故
+
+(2)在 $\Delta t$ 时间内沿 $x$ 轴正向流入 $x$ 处截面的热量为
+
+$$Q_1(x) = -ku_x(x,t)A\Delta t$$
+
+(3)在 $\Delta t$ 时间内由 $x+\Delta x$ 处的截面流出的热量为
+
+$$Q_2(x+\Delta x) = -ku_x(x+\Delta x,t)A\Delta t$$
+
+又设杆内有热源，其**热源强度**为 $F(x,t)$（单位时间内单位体积所放出的热量），则
+
+(4)在 $\Delta t$ 内，杆内热源在 $\Delta x$ 段产生的热量为
+
+$$Q_3 = F(x,t)(A\Delta x)\Delta t$$
+
+根据能量守恒定律，流入 $\Delta x$ 段的总热量与 $\Delta x$ 段中热源产生的热量，应正好是 $\Delta x$ 段温度升高所吸收的热量，即
+
+$$Q = Q_1 - Q_2 + Q_3$$
+
+故有
+
+$$c\rho A u_t\,\Delta x\Delta t = -ku_x(x,t)A\Delta t$$
+
+$$+ ku_x(x+\Delta x,t)A\Delta t + FA\Delta x\Delta t$$
+
+$$c\rho u_t = \frac{k\left[u_x(x+\Delta x,t)-u_x(x,t)\right]}{\Delta x} + F$$
+
+令 $\Delta x\to 0$ 两边取极限
+
+$$u_t = \frac{k}{c\rho}u_{xx} + \frac{F}{c\rho}$$
+
+即
+
+$$u_t = Du_{xx} + f(x,t)$$
+
+其中
+
+$$D = \frac{k}{c\rho}\ ,\qquad f = \frac{F}{c\rho}$$
+
+此即一维的**热传导方程**。用类似的方法可推出一维的扩散方程也是这个方程，当然也可推出三维的热传导（扩散）方程。
+
+**3.泊松方程**
+
+设在充满了介电常数 $\varepsilon$ 的介质区域中有体密度为 $\rho(x,y,z)$ 的电荷，试研究这个区域中的静电场。
+
+由于静电场中存在一势函数 $V(x,y,z)$
+
+$$E = -\nabla V$$
+
+其中 $E$ 为电场强度。故要研究此问题，只需研究此区域中电势函数 $V$ 所遵循的规律即可。在所要研究的区域中，任作一封闭曲面 $S$，围出一块空间区域 $\tau$，则由电学中奥-高（Oersted-Gauss）定理有
+
+$$\oint_S E\cdot\mathrm{d}S = \frac{1}{\varepsilon}\int_\tau \rho\,\mathrm{d}\tau$$
+
+这里采用的是国际单位制。又由数学中的高斯公式有
+
+$$\oint_S E\cdot\mathrm{d}S = \int_\tau \nabla\cdot E\,\mathrm{d}\tau$$
+
+故有
+
+$$\int_\tau \nabla\cdot E\,\mathrm{d}\tau = \frac{1}{\varepsilon}\int_\tau \rho\,\mathrm{d}\tau$$
+
+由于 $\tau$ 是任意的，因此
+
+$$\nabla\cdot E = \frac{1}{\varepsilon}\rho$$
+
+将 $E = -\nabla V$ 代入上式即得
+
+$$\Delta V = -\frac{1}{\varepsilon}\rho$$
+
+此即**泊松方程**。若在我们所讨论的区域中无电荷，则上式变为
+
+$$\Delta V = 0$$
+
+此即**拉普拉斯方程**。
+
+> 这里第一章第三节讲了一下
+
+不难看出，在三维（或二维）的热传导问题中，若达到了稳定状态，则热量将停止流动，各处温度不再变化，即 $u_t=0$。故此时热传导方程 $u_t = D\Delta u + f$ 将变为 $D\Delta u + f = 0$，即
+
+$$\Delta u = -\frac{f}{D}$$
+
+故稳定温度场亦满足泊松方程。
+
+到此为止，我们已从三个实例出发推导出了物理上的三类典型方程，从以上推导过程我们看出，建立（导出）数理方程一般要经历以下三个步骤：
+
+1)从所研究的系统中划出一小部分，分析邻近部分与这一小部分的相互作用；
+
+2)根据物理学的规律（如前面所用的牛顿第二定律、能量守恒定律、奥-高定理等），以算式表达这个作用；
+
+3)化简、整理，即得数理方程。
+
+当然，以上三类方程，并非能包揽物理中的一切问题，如，量子力学中的**薛定谔(Schrödinger)方程**
+
+$$i\hbar\frac{\partial\psi}{\partial t} = -\frac{\hbar^2}{2\mu}\Delta\psi + U(r)\psi$$
+
+其中，$\hbar$ 是普朗克（Planck）常量，$\mu$ 是粒子质量，$\psi(r,t)$ 是波函数，$U(r)$ 是势函数；还有反映孤波问题的 $\mathbf{KdV}$ **方程**
+
+$$u_t + \sigma uu_x + u_{xxx} = 0$$
+
+（其中，$\sigma$ 为常数，$u(x,t)$ 为位移）等，均不属这三类方程。我们将在本篇第十二章中介绍。
+`
+      },
+      {
+        id: "6-3",
+        title: "6.3 定解条件",
+        content: String.raw`
+**1.初始条件（initial conditions, IC）**
+
+对于波动方程，初始条件给出的是初始位移和初始速度：
+
+$$u(x,y,z;t)|_{t=0} = \varphi(x,y,z)$$
+
+$$u_t(x,y,z;t)|_{t=0} = \psi(x,y,z)$$
+
+例如，一根长为 $\ell$、两端固定的弦，将其中点横向拨开距离 $h$，如图 6.3
+
+![图6.3](images/040.jpg)
+
+则其初始条件为
+
+$$u(x,t)|_{t=0} = \begin{cases}  \frac{2h}{l} x\ , & 0\leqslant x\leqslant \frac{l}{2}\\ \frac{2h}{l}(l-x)\ , & \frac{l}{2} \leqslant x\leqslant l \end{cases}$$
+
+$$u_t(x,t)|_{t=0} = 0$$
+
+对于扩散（热传导）方程，给出的是初始浓度（温度）分布
+
+$$u|_{t=0} = \varphi(x,y,z)$$
+
+例如：热传导问题若物体起始时刻处于 0℃，则初始条件为
+
+$$u(x,y,z;t)|_{t=t_0} = 0$$
+
+对于不含时间 $t$ 的方程，则无需给出初始条件，如拉普拉斯方程或泊松方程。
+
+**2.边界条件（boundary conditions, BC）**
+
+1)第一类边界条件，也叫狄利克雷（Dirichlet）条件
+
+给出了未知函数在边界 $\Gamma$ 上的值，即
+
+$$u|_\Gamma = f(M,t)$$
+
+其中，$M$ 代表 $\Gamma$ 上的变点，$f(M,t)$ 是已知函数
+
+2)第二类边界条件，也叫诺伊曼（Neumann）条件
+
+给出了未知函数在边界 $\Gamma$ 上的法线方向上的导数的值，即
+
+$$u_n|_\Gamma = f(M,t)$$
+
+3)第三类边界条件，也叫混合边界条件
+
+给出了未知函数和它的法线方向上的导数的线性组合在边界上的值，即
+
+$$\left.(u + h u_n)\right|_\Gamma = f(M,t)$$
+
+其中，$h$ 为常数。
+
+以上三类边界条件，若 $f=0$，则称为齐次边界条件，反之为非齐次边界条件。
+
+**3.其他条件**
+
+1)自然边界条件
+
+根据物理意义人为给的限制，要求解为单值、有限，比如，欧拉方程
+
+$$x^2y'' + 2xy' -  l( l+1)y = 0 \;(  = 0,1,2,\cdots)$$
+
+的通解是 $y = Ax^ l + Bx^{-( l+1)}$，在 $[0,a]$ 中，由于受在物理上要求解有限，
+
+故有自然边界条件　$y|_{x=0}\to 有限$ ，所以在 $[0,a]$ 中其解应表示为 $y = Ax^ l$
+
+2)衔接条件
+
+即不同介质界面处的条件，在静电场问题中，两种电介质 $\varepsilon_1,\varepsilon_2$ 的交界面 $S$ 上，电势应当相等，电势移矢量的法向分量也应当相等，因而有衔接条件
+
+$$\begin{cases} u_1|_S = u_2|_S \\ \varepsilon_1\dfrac{\partial u_1}{\partial n}\Big|_S = \varepsilon_2\dfrac{\partial u_2}{\partial n}\Big|_S \end{cases}$$
+
+3)周期性边界条件
+
+球坐标系中，有
+
+$$u(r,\theta,\varphi+2\pi) = u(r,\theta,\varphi)$$***谢谢你看到这里orz***
+
+2026.10.26
+`
+      }
+    ]
+  },
+  {
+    chapter: "第七章 行波法",
+    sections: [
+      {
+        id: "7-1",
+        title: "PDE定解问题分类",
+        content: String.raw`
+-   狄利克雷问题：只需边界条件，无需初始条件（稳定场）
+-   柯西问题：只需初始条件，无需边界条件（无界问题）
+-   混合问题：既要边界条件，也要初始条件
+`
+      },
+      {
+        id: "7-2",
+        title: "7.1 一维无界弦的自由振动 达朗贝尔公式",
+        content: String.raw`
+定解问题
+
+$$\begin{cases} u_{tt}-a^{2}u_{xx}=0, & (7.1.1)\\ u(x,0)=\varphi(x),\quad x\in(-\infty,+\infty) & (7.1.2)\\ u_{t}(x,0)=\psi(x), & (7.1.3) \end{cases}$$
+
+**1.求通解**
+
+式 (7.1.1) 对算子因式分解得
+
+$$\left(\frac{\partial}{\partial t}+a\frac{\partial}{\partial x}\right)\left(\frac{\partial}{\partial t}-a\frac{\partial}{\partial x}\right)u=0$$
+
+所以只要找到两个微分算子
+
+$$\frac{\partial}{\partial \xi}=A\left(\frac{\partial}{\partial t}+a\frac{\partial}{\partial x}\right),\quad \frac{\partial}{\partial \eta}=B\left(\frac{\partial}{\partial t}-a\frac{\partial}{\partial x}\right);$$
+
+就能由 $u_{\xi\eta}=0$ 找出通解 $u=f_{1}(\xi)+f_{2}(\eta)$
+
+> 注：$\dfrac{\partial^{2}u}{\partial \xi \,\partial\eta}=\dfrac{\partial}{\partial\eta}\left(\dfrac{\partial u}{\partial \xi}\right)=0$，$\therefore\ \dfrac{\partial u}{\partial \xi}=f(\xi)$，两边积分，$u=\displaystyle\int f(s)\,ds+f_{2}(\eta)$  
+> $即u=f_{1}(\xi)+f_{2}(\eta)$
+
+设
+
+$$\begin{cases} t=c_{11}\xi+c_{12}\eta\\ x=c_{21}\xi+c_{22}\eta \end{cases}$$
+
+由链式法则得
+
+$$\begin{cases} \dfrac{\partial}{\partial \xi}=\dfrac{\partial}{\partial t}\dfrac{\partial t}{\partial \xi}+\dfrac{\partial}{\partial x}\dfrac{\partial x}{\partial \xi}=\dfrac{\partial}{\partial t}+a\dfrac{\partial}{\partial x}\\[2ex] \dfrac{\partial}{\partial \eta}=\dfrac{\partial}{\partial t}\dfrac{\partial t}{\partial \eta}+\dfrac{\partial}{\partial x}\dfrac{\partial x}{\partial \eta}=\dfrac{\partial}{\partial t}-a\dfrac{\partial}{\partial x} \end{cases}$$
+
+$$\Rightarrow \begin{cases} \dfrac{\partial t}{\partial \xi}=1=c_{11}\\[1ex] \dfrac{\partial x}{\partial \xi}=a=c_{21} \end{cases}, \quad \begin{cases} \dfrac{\partial t}{\partial \eta}=1=c_{12}\\[1ex] \dfrac{\partial x}{\partial \eta}=-a=c_{22} \end{cases}$$
+
+所以 $\begin{cases} t=\xi+\eta\\ x=a\xi-a\eta \end{cases}$ ,得 $\begin{cases} \xi=t+\dfrac{1}{a}x\\[1ex] \eta=t-\dfrac{1}{a}x \end{cases}$ .
+
+对特征变量乘非零常数，通解不变，为方便起见，将上述变换改为
+
+$$\begin{cases} \xi=x+at\\ \eta=x-at \end{cases}$$
+
+由 $u(\xi,\eta)=f_{1}(\xi)+f_{2}(\eta)$ 得
+
+$$u(x,t)=f_{1}(x+at)+f_{2}(x-at) \quad （通解）$$
+
+**2.利用定解条件式(7.1.2)和(7.1.3)求特解**
+
+由通解得
+
+$$u(x,0)=f_{1}(x)+f_{2}(x)=\varphi(x) \quad (7.1.4)$$
+
+$$u_{t}(x,0)=af_{1}'(x)-af_{2}'(x)=\psi(x) \quad (7.1.5)$$
+
+对式(7.1.5)两边积分，得
+
+$$af_{1}(x)-af_{2}(x)=\int\psi(\alpha)\,d\alpha+C \quad (7.1.6)$$
+
+由式(7.1.4)和(7.1.6)得
+
+$$f_{1}(x)=\frac{1}{2}\varphi(x)+\frac{1}{2a}\int\psi(\alpha)\,d\alpha+\frac{C}{2}$$
+
+$$f_{2}(x)=\frac{1}{2}\varphi(x)-\frac{1}{2a}\int\psi(\alpha)\,d\alpha-\frac{C}{2}$$
+
+将 $x$ 分别换成 $x+at$ 和 $x-at$，代入通解，得
+
+$$u(x,t)=\frac{1}{2}\left[\varphi(x+at)+\varphi(x-at)\right]+\frac{1}{2a}\int_{x-at}^{x+at}\psi(\alpha)\,d\alpha$$
+
+这就是**达朗贝尔公式**或**达朗贝尔解**，是无界弦自由振动的特解
+
+可以证明达朗贝尔解是适定的（详见书 P114）
+
+**3.达朗贝尔解的物理意义**
+
+先讨论只有 $u(x,0)=\varphi(x)$ 下的物理意义.
+
+$$u(x,t)=\frac{1}{2}\left[\varphi(x+at)+\varphi(x-at)\right]$$
+
+对第二项，$t=0$ 时，$x=c$ 处观察者看到的波形为 $\varphi(c)$
+
+而后观察者以速度 $a$ 沿 $x$ 轴正向运动，则 $t$ 时刻在 $x=c+at$ 处看到的波形仍为 $\varphi(c)$，所以观察者相对波静止，即波形以速度 $a$ 沿 $x$ 轴正向传播.所以 $\varphi(x-at)$ 代表正行波，同理 $\varphi(x+at)$ 代表反行波.
+
+再讨论只有 $u_{t}(x,0)=\psi(x)$，
+
+$$u(x,t)=\frac{1}{2a}\int_{x-at}^{x+at}\psi(\alpha)\,d\alpha$$
+
+设 $\Psi(x)=\dfrac{1}{2a}\displaystyle\int\psi(\alpha)\,d\alpha$，则此时有
+
+$$u(x,t)=\Psi(x+at)-\Psi(x-at)$$
+
+同上.
+
+综上所述，**达朗贝尔解表示正行波和反行波的叠加**。
+
+2026.10.29
+`
+      },
+      {
+        id: "7-3",
+        title: "7.2 无界弦的强迫振动",
+        content: String.raw`
+定解问题（纯强迫振动）
+
+$$\begin{cases} u_{tt}-a^{2}u_{xx}=f(x,t) & (7.2.1)\\ u|_{t=0}=0 & (7.2.2)\\ u_{t}|_{t=0}=0 & (7.2.3) \end{cases}$$
+
+这时泛定方程是非齐次的，若能将非齐项消除，即可利用达朗贝尔公式得到特解.
+
+为此引入冲量原理（**impulse principle**）
+
+**1.冲量原理**
+
+式 (7.2.1) 中 $f(x,t)=\dfrac{F(x,t)}{\rho}$ 是单位质量的弦上所受外力，这是从 $t=0$ 持续到 $t$ 的作用力.
+
+设 $f(x,\tau)$ 为 $\tau$ 时刻 $(0\leqslant\tau\leqslant t)$ 的瞬时力，可以认为 $f(x,t)$ 引起的振动 $u(x,t)$ 为 $f(x,\tau)$ 在 $\tau$ 时刻发出，同时在 $\Delta\tau$ 内引起的振动 $w(x,t;\tau)$ 的叠加，即
+
+$$u(x,t)=\lim_{\Delta\tau\to0}\sum_{\tau=0}^{t}w(x,t;\tau)$$
+
+冲量 $Ft=mv$，有 $f(x,\tau)\Delta\tau=w_{t}(x,t;\tau)$，所以有定解问题
+
+$$\begin{cases} w_{tt}-a^{2}w_{xx}=0\\ w|_{t=\tau}=0\\ w_{t}|_{t=\tau}=f(x,\tau)\Delta\tau \end{cases}$$
+
+> 这里我们假定在时间 $\Delta \tau$ 内得到的速度变化量是在 $t=\tau$ 时刻的一瞬间集中得到的，而在 $\Delta \tau$ 的其余时间没有外力作用。
+
+为方便表示，令 $w(x,t;\tau)=v(x,t;\tau)\Delta\tau$
+
+所以有
+
+$$\begin{cases} v_{tt}-a^{2}v_{xx}=0 & (7.2.4)\\ v|_{t=\tau}=0 & (7.2.5)\\ v_{t}|_{t=\tau}=f(x,\tau) & (7.2.6) \end{cases}$$
+
+并发现
+
+$$u(x,t)=\lim_{\Delta\tau\to0}\sum_{\tau=0}^{t}w(x,t;\tau)\Delta\tau=\int_{0}^{t}v(x,t;\tau)\,d\tau \quad (7.2.7)$$
+
+以上这种用瞬时冲量的叠加代替持续作用力的方法叫**冲量原理**
+
+冲量原理的合理性，也可以在数学上证明：
+
+$$u_{t}=\frac{\partial}{\partial t}\left(\int_{0}^{t}v\,d\tau\right)=\int_{0}^{t}v_{t}\,d\tau+v(x,t;\tau)|_{\tau=t}=\int_{0}^{t}v_{t}\,d\tau$$
+
+$$u_{tt}=\int_{0}^{t}v_{tt}\,d\tau+v_{t}|_{t=t}=\int_{0}^{t}v_{tt}\,d\tau+f(x,t)$$
+
+$$u_{xx}=\int_{0}^{t}v_{xx}\,d\tau$$
+
+> 小知识！含参变量积分的求导公式：  
+> $$\frac{\partial }{\partial t} \int_{x+at}^{x-at}\psi \left ( \alpha  \right )  \mathrm{d}\alpha = \int_{x+at}^{x-at} \frac{\partial \psi }{\partial t}   \mathrm{d}\alpha+$$ $$\psi \left ( x+at \right )\frac{\mathrm{d} \left ( x+at \right ) }{\mathrm{d} t}  -\psi \left ( x-at \right )\frac{\mathrm{d} \left ( x-at \right ) }{\mathrm{d} t}$$
+
+**2\. 求式 (7.2.4)–(7.2.6) 的解**
+
+观察这三条式子的形式，发现和自由振动的定解问题很像，所以作时间平移，令 $T=t-\tau$，则有
+
+$$\begin{cases} v_{TT}-a^{2}v_{xx}=0\\ v|_{T=0}=0\\ v_{T}|_{T=0}=f(x,\tau) \end{cases} ，$$
+
+由达朗贝尔公式，有
+
+$$v(x,t;\tau)=\frac{1}{2a}\int_{x-aT}^{x+aT}f(\alpha,\tau)\,d\alpha$$
+
+$$=\frac{1}{2a}\int_{x-a(t-\tau)}^{x+a(t-\tau)}f(\alpha,\tau)\,d\alpha$$
+
+代入式 (7.2.7)，得
+
+$$u(x,t)=\frac{1}{2a}\int_{0}^{t}\int_{x-a(t-\tau)}^{x+a(t-\tau)}f(\alpha,\tau)\,d\alpha\,d\tau$$
+
+这就是无界弦纯强迫振动的解.
+
+**3\. 一般强迫振动**
+
+定解问题
+
+$$\begin{cases} u_{tt}-a^{2}u_{xx}=f(x,t) \\ u|_{t=0}=\varphi(x)\\ u_{t}|_{t=0}=\psi(x) \end{cases}$$
+
+由于泛定方程和定解条件都是线性的，故可以把 $u(x,t)$ 看成两个振动的叠加
+
+令 $u=u^{\mathrm{I}}+u^{\mathrm{II}}$
+
+其中
+
+$$\begin{cases} u^{\mathrm{I}}_{tt}-a^{2}u^{\mathrm{I}}_{xx}=0\\ u^{\mathrm{I}}(x,0)=\varphi(x)\\ u^{\mathrm{I}}_{t}(x,0)=\psi(x) \end{cases} ， \quad \begin{cases} u^{\mathrm{II}}_{tt}-a^{2}u^{\mathrm{II}}_{xx}=f(x,t)\\ u^{\mathrm{II}}(x,0)=0\\ u^{\mathrm{II}}_{t}(x,0)=0 \end{cases}$$
+
+由达朗贝尔公式和纯强迫振动的解,可得
+
+$$u^{\mathrm{I}}=\frac{1}{2}\left[\varphi(x+at)+\varphi(x-at)\right]+\frac{1}{2a}\int_{x-at}^{x+at}\psi(\alpha)\,d\alpha$$
+
+$$u^{\mathrm{II}}=\frac{1}{2a}\int_{0}^{t}\int_{x-a(t-\tau)}^{x+a(t-\tau)}f(\alpha,\tau)\,d\alpha\,d\tau$$
+
+故
+
+$$u(x,t)=\frac{1}{2}\left[\varphi(x+at)+\varphi(x-at)\right]+\frac{1}{2a}\int_{x-at}^{x+at}\psi(\alpha)\,d\alpha$$
+
+$$+\frac{1}{2a}\int_{0}^{t}\int_{x-a(t-\tau)}^{x+a(t-\tau)}f(\alpha,\tau)\,d\alpha\,d\tau$$
+`
+      },
+      {
+        id: "7-4",
+        title: "7.3\\*三维无界空间的自由振动 泊松公式",
+        content: String.raw`
+不做考试要求，推导过程见下图或详见书 P122-125
+
+![](images/041.jpg)![](images/042.jpg)
+
+**泊松公式：**
+
+$$u(M,t)=\frac{1}{4\pi a}\left[\frac{\partial}{\partial t}\iint_{S^{M}_{at}}\frac{\varphi(M')}{at}\,ds+\iint_{S^{M}_{at}}\frac{\psi(M')}{at}\,ds\right]$$
+
+式中 $M'$ 表示以 $M$ 为中心 $at$ 为半径的球面 $S^{M}_{at}$ 上的动点.
+`
+      },
+      {
+        id: "7-5",
+        title: "7.4\\*三维无界空间的受迫振动 推迟势（**retarded potential**）",
+        content: String.raw`
+不做考试要求，推导过程详见书 P127-129
+
+定解问题(零值初始条件的有源空间波)
+
+$$\begin{cases} u_{tt}-a^{2}\Delta u=f(M,t) \\ u|_{t=0}=0\\ u_{t}|_{t=0}=0 \end{cases}$$
+
+仿照第7.2节，做积分变换，运用泊松公式，再引入变量代换 $r=a(t-\tau)$
+
+可得其解为
+
+$$u(M,t)=\frac{1}{4\pi a^{2}}\iiint_{T^{M}_{at}}\frac{f\left(M',t-\frac{r}{a}\right)}{r}\,dv$$
+
+式中 $M'$ 为以 $M$ 为球心 $at$ 为半径的球体 $T^{M}_{at}$ 中的变点，积分在 $T^{M}_{at}$ 中进行.
+
+若记 $[f]=f\left(M',t-\frac{r}{a}\right)$，则 $$u(M,t)=\dfrac{1}{4\pi a^{2}}\displaystyle\iiint_{T^{M}_{at}}\frac{[f]}{r}\,dv$$并称之为推迟势.
+
+***谢谢你看到这里orz***
+
+2026.11.3
+`
+      }
+    ]
   }
 
 ];
@@ -2961,6 +3548,8 @@ main{ margin-left:var(--side-w); min-height:100vh; }
       return '@@TITLE' + (store.length - 1) + '@@';
     });
     out = miniInline(escapeHtml(out));
+    // 标题里的 Markdown 反斜杠转义（例如 7.3\*三维…、\_）还原成普通字符
+    out = out.replace(/\\([\\`*_{}\[\]()#+\-.!>~|])/g, '$1');
     return out.replace(/@@TITLE(\d+)@@/g, function (_, i) {
       return renderMath(store[+i], false);
     });
